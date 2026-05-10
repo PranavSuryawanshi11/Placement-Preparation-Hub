@@ -22,9 +22,7 @@ The main goal of the project is to make placement preparation simple, organized,
 - Online Code Compiler
 - AI-Based Doubt Solving Assistant
 - Company-Wise Preparation
-- Resume Builder
 - Mock Interview Preparation
-- Progress Tracking Dashboard
 - Curated YouTube Learning Resources
 - Core Subject Preparation
   - DSA
@@ -34,15 +32,6 @@ The main goal of the project is to make placement preparation simple, organized,
   - Operating System
 
 ---
-
-## 👨‍💼 Admin Features
-- Manage Students
-- Add/Edit/Delete Questions
-- Upload Learning Materials
-- Manage Mock Tests
-- Manage Videos & Resources
-- Track Student Performance
-- Manage Placement Content
 
 ---
 
@@ -76,8 +65,6 @@ The main goal of the project is to make placement preparation simple, organized,
 - 🤖 AI-Based Doubt Solving
 - 💻 Integrated Online Compiler
 - 📺 Curated YouTube Learning Resources
-- 📊 Student Progress Tracking
-- 📝 Resume Builder
 - 🎯 Company-Wise Placement Preparation
 - 📚 Core Subject Learning Modules
 
@@ -92,11 +79,8 @@ The main goal of the project is to make placement preparation simple, organized,
 5. Coding Practice Module  
 6. Online Compiler Module  
 7. AI Doubt Solving Module  
-8. Resume Builder Module  
-9. Mock Interview Module  
-10. YouTube Learning Module  
-11. Result Analysis Module  
-12. Admin Management Module  
+8. Mock Interview Module  
+9. YouTube Learning Module  
 
 ---
 
@@ -106,7 +90,6 @@ The main goal of the project is to make placement preparation simple, organized,
 - Improve technical and aptitude skills of students
 - Help students practice coding directly online
 - Provide instant doubt-solving support using AI
-- Track student performance and preparation progress
 - Make learning easier with curated resources
 
 ---
@@ -117,9 +100,7 @@ The main goal of the project is to make placement preparation simple, organized,
 - Resume ATS Score Checker
 - Leaderboard System
 - Real-Time Chat Support
-- Mobile Application
 - Email Notifications
-- Placement Prediction System
 
 ---
 
