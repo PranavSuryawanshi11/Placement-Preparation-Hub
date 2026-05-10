@@ -97,8 +97,6 @@ The main goal of the project is to make placement preparation simple, organized,
 # 🔮 Future Enhancements
 
 - AI Mock Interview Bot
-- Resume ATS Score Checker
-- Leaderboard System
 - Real-Time Chat Support
 - Email Notifications
 
