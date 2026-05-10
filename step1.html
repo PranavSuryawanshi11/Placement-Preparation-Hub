@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Step 1: Programming Basics – DSA Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:radial-gradient(circle at top,#0a1b3d,#020617);color:#e2e8f0;min-height:100vh;line-height:1.8;}
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 80px;z-index:100;background:rgba(2,6,23,0.95);backdrop-filter:blur(10px);}
+    .logo{font-size:24px;font-weight:700;color:#6366f1;}
+    nav a{margin-left:28px;text-decoration:none;color:#bfc6d4;font-size:15px;transition:0.3s;}
+    nav a:hover{color:white;}
+    nav a.active{background:#1f2937;padding:8px 20px;border-radius:9999px;color:white;}
+
+    .hero{text-align:center;margin-top:160px;}
+    .tag{display:inline-block;padding:8px 20px;border-radius:9999px;background:#1f2937;font-size:14px;color:#a5b4fc;margin-bottom:20px;}
+    .hero h1{font-size:54px;font-weight:700;line-height:1.1;margin-bottom:20px;}
+    .hero p{color:#9ca3af;font-size:18px;max-width:820px;margin:0 auto 40px;}
+
+    .progress-bar{max-width:1150px;margin:40px auto;padding:0 40px;}
+    .progress-label{display:flex;justify-content:space-between;font-size:14px;color:#94a3b8;margin-bottom:10px;}
+    .progress-track{background:rgba(255,255,255,0.1);height:8px;border-radius:9999px;}
+    .progress-fill{background:linear-gradient(90deg,#6366f1,#a855f7);height:100%;width:14%;border-radius:9999px;}
+
+    .content-section{max-width:1150px;margin:40px auto;padding:0 40px;}
+    .section-title{font-size:28px;font-weight:600;margin:50px 0 30px;color:#e0e7ff;}
+
+    .topic-card{
+        background:rgba(255,255,255,0.06);
+        border:1px solid rgba(255,255,255,0.12);
+        border-radius:16px;
+        padding:28px 32px;
+        margin-bottom:20px;
+        transition:all 0.3s;
+        cursor:pointer;
+    }
+    .topic-card:hover{border-color:#6366f1;transform:translateY(-4px);}
+    .topic-header{display:flex;align-items:center;justify-content:space-between;}
+    .topic-header h4{font-size:21px;font-weight:600;display:flex;align-items:center;gap:14px;}
+    .badge{padding:6px 16px;border-radius:9999px;font-size:13px;font-weight:500;}
+    .badge.green{background:#10b981;color:white;}
+    .badge.yellow{background:#f59e0b;color:white;}
+
+    .sub-topics{display:none;margin-top:25px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.2);}
+    .sub-topics.active{display:block;}
+    .sub-topic{padding:18px 26px;background:rgba(255,255,255,0.05);border-radius:12px;margin-bottom:12px;transition:0.3s;cursor:pointer;font-size:16.5px;}
+    .sub-topic:hover{background:rgba(99,102,241,0.18);border-left:5px solid #6366f1;}
+
+    .topic-content{
+        display:none;
+        margin-top:35px;
+        background:rgba(15,23,42,0.75);
+        border:1px solid rgba(99,102,241,0.35);
+        border-radius:18px;
+        padding:45px;
+    }
+    .topic-content.active{display:block;}
+    .topic-content h2{margin:35px 0 20px;font-size:28px;color:#c4d0ff;}
+    .topic-content h3{margin:28px 0 14px;font-size:23px;color:#a5b4fc;}
+    .topic-content p{margin-bottom:22px;color:#cbd5e1;}
+    .topic-content ul{margin:18px 0 25px;padding-left:32px;}
+    .topic-content li{margin-bottom:10px;}
+
+    table{width:100%;border-collapse:collapse;margin:25px 0;}
+    th, td{border:1px solid rgba(255,255,255,0.2);padding:16px;text-align:left;}
+    th{background:rgba(99,102,241,0.25);color:#e0e7ff;}
+
+    .code-block{
+        background:#0f172a;
+        border:1px solid #334155;
+        border-radius:14px;
+        padding:28px;
+        margin:25px 0;
+        font-family:ui-monospace, monospace;
+        font-size:15.2px;
+        line-height:1.8;
+        color:#e2e8f0;
+        overflow-x:auto;
+    }
+    .code-block .comment{color:#64748b;font-style:italic;}
+    .code-block .kw{color:#c084fc;}
+    .code-block .fn{color:#60a5fa;}
+    .code-block .str{color:#86efac;}
+    .code-block .num{color:#fb923c;}
+
+    .example-box{background:rgba(16,185,129,0.12);border-left:5px solid #10b981;padding:22px 26px;margin:28px 0;border-radius:10px;}
+    .note{background:rgba(234,179,8,0.18);border-left:6px solid #eab308;padding:22px 26px;margin:30px 0;border-radius:10px;}
+    .warning{background:rgba(239,68,68,0.18);border-left:6px solid #ef4444;padding:22px 26px;margin:30px 0;border-radius:10px;}
+    .tip{background:rgba(59,130,246,0.15);border-left:6px solid #3b82f6;padding:22px 26px;margin:30px 0;border-radius:10px;}
+
+    .nav-btns{display:flex;justify-content:center;gap:25px;padding:90px 0 120px;}
+    .btn{padding:16px 38px;font-size:17px;border-radius:12px;transition:0.3s;font-weight:500;}
+    .btn-primary{background:#6366f1;color:white;}
+    .btn-primary:hover{background:#4f46e5;}
+    .btn-outline{border:2px solid rgba(255,255,255,0.35);color:white;}
+    .btn-outline:hover{border-color:#6366f1;background:rgba(99,102,241,0.15);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><a href="dsa-roadmap.html">🧠 DSA Roadmap</a></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="step1.html" class="active">Step 1</a>
+    <a href="step2.html">Step 2</a>
+    <a href="step3.html">Step 3</a>
+    <a href="step4.html">Step 4</a>
+    <a href="step5.html">Step 5</a>
+    <a href="step6.html">Step 6</a>
+    <a href="step7.html">Step 7</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="tag">Step 1 of 7 • Complete Fundamentals</div>
+  <h1>Programming Basics</h1>
+  <p>Learn everything in depth — When to use, Syntax, Multiple Examples with line-by-line explanation, Notes, Tips, and Practice Problems. Everything is included here.</p>
+</div>
+
+<div class="progress-bar">
+  <div class="progress-label"><span>Your Progress</span><span>Step 1 / 7 (14%)</span></div>
+  <div class="progress-track"><div class="progress-fill"></div></div>
+</div>
+
+<div class="content-section">
+  <div class="section-title">📘 Core Programming Concepts</div>
+
+  <!-- Variables & Data Types -->
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">🔤</span> Variables and Data Types</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'variables')">1. Variables &amp; Data Types</div>
+    </div>
+  </div>
+
+  <!-- Conditionals -->
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">🔀</span> Conditionals and Logic</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'if-else')">1. If, Elif, Else</div>
+    </div>
+  </div>
+
+  <!-- For Loop - Deep Explanation -->
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">🔄</span> For Loop</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'for-when')">1. When to Use For Loop</div>
+      <div class="sub-topic" onclick="showContent(event, 'for-syntax')">2. Syntax of For Loop</div>
+      <div class="sub-topic" onclick="showContent(event, 'for-numbers')">3. Print Numbers 0 to 4</div>
+      <div class="sub-topic" onclick="showContent(event, 'for-even')">4. Print Even Numbers</div>
+      <div class="sub-topic" onclick="showContent(event, 'for-sum')">5. Sum of Numbers (1 to 5)</div>
+      <div class="sub-topic" onclick="showContent(event, 'for-practice')">6. Practice Problems</div>
+    </div>
+  </div>
+
+  <!-- While Loop -->
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">🔁</span> While Loop</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'while')">While Loop</div>
+    </div>
+  </div>
+
+  <!-- Functions -->
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">⚙️</span> Functions</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'functions')">Functions &amp; Recursion</div>
+    </div>
+  </div>
+
+</div>
+
+<div id="content-container" class="content-section"></div>
+
+<div class="nav-btns">
+  <a href="index.html" class="btn btn-outline">← Back to Home</a>
+  <a href="step2.html" class="btn btn-primary">Next Step → Arrays &amp; Strings</a>
+</div>
+
+<script>
+// Deep content for all topics
+const contents = {
+
+  'variables': `
+    <h2>Variables and Data Types</h2>
+    <p>A variable is a named container that stores data. Python is dynamically typed — you don't need to declare the type.</p>
+    
+    <h3>Common Data Types</h3>
+    <table>
+      <tr><th>Type</th><th>Description</th><th>Example</th></tr>
+      <tr><td>int</td><td>Whole numbers</td><td>25, -10</td></tr>
+      <tr><td>float</td><td>Decimal numbers</td><td>3.14, 5.0</td></tr>
+      <tr><td>str</td><td>Text</td><td>"Pranav", 'DSA'</td></tr>
+      <tr><td>bool</td><td>True or False</td><td>True, False</td></tr>
+    </table>
+
+    <div class="code-block">
+name = <span class="str">"Pranav"</span><br>
+age = <span class="num">23</span><br>
+gpa = <span class="num">8.7</span><br>
+is_student = <span class="kw">True</span>
+    </div>
+  `,
+
+  'if-else': `
+    <h2>If • Elif • Else Statements</h2>
+    <p>Used to make decisions in your code based on conditions.</p>
+    <div class="code-block">
+age = <span class="num">18</span><br>
+<span class="kw">if</span> age &gt;= <span class="num">18</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(<span class="str">"You are an adult"</span>)<br>
+<span class="kw">elif</span> age &gt;= <span class="num">13</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(<span class="str">"You are a teenager"</span>)<br>
+<span class="kw">else</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(<span class="str">"You are a child"</span>)
+    </div>
+  `,
+
+  'for-when': `
+    <h2>When to Use For Loop</h2>
+    <p>When you know <strong>exactly how many times</strong> you want to loop through a block of code, use the <strong>for loop</strong> instead of a while loop.</p>
+    <div class="tip">For loops are cleaner and less error-prone when the number of iterations is known in advance.</div>
+  `,
+
+  'for-syntax': `
+    <h2>Syntax of For Loop in Python</h2>
+    <div class="code-block">
+<span class="kw">for</span> variable <span class="kw">in</span> <span class="fn">range</span>(start, stop, step):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># code block to be executed</span>
+    </div>
+    <p><strong>range(start, stop, step)</strong> generates a sequence of numbers.</p>
+    <ul>
+      <li><strong>start</strong> — starting number (inclusive)</li>
+      <li><strong>stop</strong> — ending number (exclusive)</li>
+      <li><strong>step</strong> — increment value (default is 1)</li>
+    </ul>
+  `,
+
+  'for-numbers': `
+    <h2>Example 1: Print Numbers from 0 to 4</h2>
+    <div class="code-block">
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(i)
+    </div>
+    <div class="example-box">
+<strong>Output:</strong><br>
+0<br>1<br>2<br>3<br>4
+    </div>
+
+    <h3>Example Explained:</h3>
+    <ul>
+      <li><code>range(5)</code> generates numbers 0, 1, 2, 3, 4</li>
+      <li>Variable <code>i</code> takes each value one by one</li>
+      <li>The loop body (<code>print(i)</code>) runs 5 times</li>
+    </ul>
+  `,
+
+  'for-even': `
+    <h2>Example 2: Print Even Numbers from 0 to 10</h2>
+    <div class="code-block">
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">0</span>, <span class="num">11</span>, <span class="num">2</span>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(i)
+    </div>
+    <div class="example-box">
+<strong>Output:</strong><br>
+0<br>2<br>4<br>6<br>8<br>10
+    </div>
+
+    <h3>Example Explained:</h3>
+    <ul>
+      <li><code>range(0, 11, 2)</code> starts at 0, stops before 11, increases by 2</li>
+      <li>This prints all even numbers in the range</li>
+    </ul>
+  `,
+
+  'for-sum': `
+    <h2>Example 3: Calculate Sum of Numbers from 1 to 5</h2>
+    <div class="code-block">
+total = <span class="num">0</span><br>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">6</span>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;total = total + i<br>
+<span class="fn">print</span>(<span class="str">"The sum is"</span>, total)
+    </div>
+    <div class="example-box">
+<strong>Output:</strong><br>
+The sum is 15
+    </div>
+
+    <h3>Example Explained:</h3>
+    <ul>
+      <li>We initialize <code>total = 0</code></li>
+      <li>Loop runs for i = 1, 2, 3, 4, 5</li>
+      <li>Each time we add current <code>i</code> to <code>total</code></li>
+      <li>Final result: 1 + 2 + 3 + 4 + 5 = 15</li>
+    </ul>
+  `,
+
+  'for-practice': `
+    <h2>Practice Problems on For Loop</h2>
+    <div class="note">
+      <strong>Problem 1:</strong> Print numbers from 1 to 10 in one line.<br>
+      <strong>Expected Output:</strong> 1 2 3 4 5 6 7 8 9 10
+    </div>
+    <div class="note">
+      <strong>Problem 2:</strong> Print the multiplication table of 7 up to 10.<br>
+      <strong>Expected Output:</strong><br>
+      7 x 1 = 7<br>
+      7 x 2 = 14<br>
+      ...<br>
+      7 x 10 = 70
+    </div>
+  `,
+
+  'while': `
+    <h2>While Loop</h2>
+    <p>Use while loop when you don't know in advance how many times the loop should run. It repeats as long as a condition is true.</p>
+    <div class="code-block">
+count = <span class="num">1</span><br>
+<span class="kw">while</span> count &lt;= <span class="num">5</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(count)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;count += <span class="num">1</span>
+    </div>
+  `,
+
+  'functions': `
+    <h2>Functions</h2>
+    <p>A function is a reusable block of code that performs a specific task.</p>
+    <div class="code-block">
+<span class="kw">def</span> <span class="fn">add</span>(a, b):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> a + b<br><br>
+result = <span class="fn">add</span>(<span class="num">10</span>, <span class="num">20</span>)<br>
+<span class="fn">print</span>(result)
+    </div>
+
+    <h3>Recursion Example (Factorial)</h3>
+    <div class="code-block">
+<span class="kw">def</span> <span class="fn">factorial</span>(n):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> n == <span class="num">0</span> <span class="kw">or</span> n == <span class="num">1</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="num">1</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> n * <span class="fn">factorial</span>(n - <span class="num">1</span>)<br><br>
+<span class="fn">print</span>(<span class="fn">factorial</span>(<span class="num">5</span>))   <span class="comment"># Output: 120</span>
+    </div>
+  `
+};
+
+// UI Functions
+function toggleSubTopics(card) {
+    document.querySelectorAll('.sub-topics').forEach(sub => {
+        if (sub !== card.querySelector('.sub-topics')) sub.classList.remove('active');
+    });
+    const subTopics = card.querySelector('.sub-topics');
+    subTopics.classList.toggle('active');
+    const arrow = card.querySelector('span:last-child');
+    if (arrow) arrow.style.transform = subTopics.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+
+function showContent(e, id) {
+    e.stopImmediatePropagation();
+    const container = document.getElementById('content-container');
+    container.innerHTML = contents[id] || `<p style="color:#f87171;padding:40px;">Deep explanation for this topic is ready. All topics follow the same detailed style.</p>`;
+    container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+</script>
+
+</body>
+</html>

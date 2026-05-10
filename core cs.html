@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Core CS Subjects – Placement Prep Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:radial-gradient(circle at top,#0a1b3d,#020617);color:#e2e8f0;min-height:100vh;line-height:1.7;}
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 70px;z-index:100;background:rgba(2,6,23,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(99,102,241,0.3);}
+    .logo a{font-size:26px;font-weight:800;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent;text-decoration:none;}
+    nav a{margin-left:28px;text-decoration:none;color:#bfc6d4;font-size:15px;font-weight:500;transition:0.3s;padding:6px 12px;border-radius:8px;}
+    nav a:hover{color:white;background:rgba(99,102,241,0.2);}
+    .hero{text-align:center;margin-top:140px;padding:0 20px;}
+    .tag{display:inline-block;padding:8px 24px;border-radius:9999px;background:rgba(99,102,241,0.2);font-size:14px;color:#a5b4fc;margin-bottom:20px;border:1px solid rgba(99,102,241,0.4);}
+    .hero h1{font-size:56px;font-weight:800;background:linear-gradient(135deg,#e0e7ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:20px;line-height:1.2;}
+    .hero p{color:#9ca3af;font-size:18px;max-width:800px;margin:0 auto 30px;}
+    .progress-container{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .progress-stats{display:flex;justify-content:space-between;margin-bottom:12px;font-size:14px;color:#94a3b8;}
+    .progress-track{background:rgba(255,255,255,0.1);height:10px;border-radius:10px;overflow:hidden;}
+    .progress-fill{background:linear-gradient(90deg,#6366f1,#a855f7);height:100%;width:0%;transition:width 0.5s ease;border-radius:10px;}
+    .steps-nav{max-width:1100px;margin:30px auto;padding:0 30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+    .step-btn{padding:12px 28px;background:rgba(255,255,255,0.05);border:2px solid rgba(99,102,241,0.3);border-radius:12px;color:#cbd5e1;font-weight:600;cursor:pointer;transition:all 0.3s;font-size:15px;}
+    .step-btn:hover{border-color:#6366f1;background:rgba(99,102,241,0.1);transform:translateY(-2px);}
+    .step-btn.active{background:linear-gradient(135deg,#6366f1,#a855f7);border-color:transparent;color:white;box-shadow:0 4px 15px rgba(99,102,241,0.3);}
+    .step-btn.completed{border-color:#10b981;background:rgba(16,185,129,0.1);color:#10b981;}
+    .content-section{max-width:1100px;margin:40px auto;padding:0 30px;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .step-content{animation:fadeIn 0.5s ease;}
+    .step-header{margin-bottom:40px;padding-bottom:20px;border-bottom:2px solid rgba(99,102,241,0.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+    .step-header h2{font-size:36px;font-weight:700;color:#e0e7ff;margin-bottom:12px;}
+    .step-header p{color:#9ca3af;font-size:16px;}
+    .topic-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 28px;margin-bottom:20px;transition:all 0.3s;cursor:pointer;}
+    .topic-card:hover{border-color:#6366f1;transform:translateY(-3px);background:rgba(99,102,241,0.05);}
+    .topic-header{display:flex;align-items:center;justify-content:space-between;}
+    .topic-header h3{font-size:22px;font-weight:600;display:flex;align-items:center;gap:12px;}
+    .topic-icon{font-size:28px;}.arrow{font-size:28px;transition:transform 0.3s;}
+    .sub-topics{display:none;margin-top:20px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.2);}
+    .sub-topics.active{display:block;}
+    .sub-topic{padding:14px 22px;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:10px;transition:0.3s;cursor:pointer;border-left:3px solid transparent;}
+    .sub-topic:hover{background:rgba(99,102,241,0.15);border-left-color:#6366f1;transform:translateX(5px);}
+    .detail-container{margin-top:40px;background:rgba(15,23,42,0.7);border:1px solid rgba(99,102,241,0.3);border-radius:24px;padding:40px;backdrop-filter:blur(8px);}
+    .detail-container h2{font-size:28px;margin-bottom:20px;color:#c4b5fd;}
+    .detail-container h3{font-size:22px;margin:25px 0 15px;color:#a5b4fc;}
+    .detail-container p{margin-bottom:18px;color:#cbd5e1;line-height:1.8;}
+    .detail-container ul,.detail-container ol{margin:18px 0 25px;padding-left:32px;}
+    .detail-container li{margin-bottom:10px;}
+    .code-block{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:24px;margin:25px 0;font-family:'Courier New',monospace;font-size:14px;overflow-x:auto;color:#e2e8f0;white-space:pre;}
+    .tip-box{background:rgba(59,130,246,0.1);border-left:5px solid #3b82f6;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .example-box{background:rgba(16,185,129,0.1);border-left:5px solid #10b981;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .note-box{background:rgba(234,179,8,0.1);border-left:5px solid #eab308;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    table{width:100%;border-collapse:collapse;margin:25px 0;}
+    th,td{border:1px solid rgba(255,255,255,0.2);padding:12px;text-align:left;}
+    th{background:rgba(99,102,241,0.2);color:#a5b4fc;}
+    .nav-buttons{display:flex;justify-content:space-between;gap:20px;margin-top:50px;padding:40px 0 60px;}
+    .nav-btn{padding:14px 32px;border-radius:12px;font-weight:600;transition:0.3s;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;border:none;font-size:16px;}
+    .nav-btn.prev{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;}
+    .nav-btn:hover{transform:translateY(-2px);opacity:0.9;}
+    .complete-step-btn{background:rgba(16,185,129,0.2);border:2px solid #10b981;color:#10b981;padding:12px 28px;border-radius:12px;font-weight:600;cursor:pointer;transition:0.3s;font-size:14px;}
+    .complete-step-btn:hover{background:#10b981;color:white;}
+    .completed-badge{color:#10b981;font-weight:600;display:flex;align-items:center;gap:8px;}
+    .ml-section{max-width:1100px;margin:0 auto 60px;padding:0 30px;}
+    .ml-box{background:rgba(15,23,42,0.8);border:1px solid rgba(99,102,241,0.4);border-radius:24px;padding:36px;}
+    .ml-box h2{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:8px;}
+    .ml-box p{color:#9ca3af;margin-bottom:24px;}
+    .ml-input-row{display:flex;gap:12px;flex-wrap:wrap;}
+    .ml-input{flex:1;min-width:220px;padding:14px 20px;background:rgba(255,255,255,0.05);border:1px solid rgba(99,102,241,0.3);border-radius:12px;color:#e2e8f0;font-size:15px;font-family:'Poppins',sans-serif;}
+    .ml-input:focus{outline:none;border-color:#6366f1;}
+    .ml-btn{padding:14px 32px;background:linear-gradient(135deg,#6366f1,#a855f7);border:none;border-radius:12px;color:white;font-weight:700;font-size:15px;cursor:pointer;transition:0.3s;font-family:'Poppins',sans-serif;}
+    .ml-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,0.4);}
+    .ml-results{margin-top:28px;display:none;}
+    .ml-results h3{font-size:18px;color:#a5b4fc;margin-bottom:16px;}
+    .ml-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:18px 22px;margin-bottom:12px;display:flex;align-items:center;gap:16px;transition:0.3s;}
+    .ml-card:hover{border-color:#6366f1;background:rgba(99,102,241,0.08);}
+    .ml-score-bar{flex:1;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;}
+    .ml-score-fill{height:100%;background:linear-gradient(90deg,#6366f1,#a855f7);border-radius:4px;}
+    .ml-topic-name{font-weight:600;color:#e0e7ff;min-width:200px;}
+    .ml-pct{color:#a5b4fc;font-size:14px;min-width:45px;text-align:right;}
+    .ml-why{font-size:13px;color:#64748b;margin-top:4px;}
+    .pdf-section{max-width:1100px;margin:0 auto 80px;padding:0 30px;}
+    .pdf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+    .pdf-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px;transition:all 0.3s;text-align:center;}
+    .pdf-card:hover{border-color:#6366f1;transform:translateY(-3px);}
+    .pdf-card h4{font-size:17px;font-weight:600;margin:12px 0 8px;color:#e0e7ff;}
+    .pdf-card p{color:#9ca3af;font-size:14px;margin-bottom:16px;}
+    .pdf-btn{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;border:none;padding:10px 24px;border-radius:9999px;font-size:14px;font-weight:600;cursor:pointer;transition:0.3s;text-decoration:none;display:inline-block;}
+    .pdf-btn:hover{opacity:0.85;transform:translateY(-2px);}
+    .section-title{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:24px;}
+    @media(max-width:768px){header{padding:15px 20px;}nav a{margin-left:10px;font-size:12px;}.hero h1{font-size:32px;}.ml-input-row{flex-direction:column;}}
+</style>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="index.html">🚀 Placement Prep</a></div>
+    <nav><a href="index.html">Home</a><a href="subjects.html">Subjects</a></nav>
+</header>
+<div class="hero">
+    <div class="tag">📚 Step 3 of 6 • Core CS Subjects</div>
+    <h1>Core Computer<br>Science Subjects</h1>
+    <p>Master DBMS, Operating Systems, Computer Networks and OOP — the theoretical backbone tested in every campus placement written round.</p>
+</div>
+<div class="progress-container">
+    <div class="progress-stats"><span>📊 Your Progress</span><span id="progressPercent">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+<div class="steps-nav">
+    <button class="step-btn active" data-step="1">Step 1: DBMS</button>
+    <button class="step-btn" data-step="2">Step 2: Operating Systems</button>
+    <button class="step-btn" data-step="3">Step 3: Computer Networks</button>
+    <button class="step-btn" data-step="4">Step 4: OOP Concepts</button>
+</div>
+<div class="content-section" id="contentSection"></div>
+<div class="ml-section">
+    <div class="ml-box">
+        <h2>🤖 AI Topic Recommender <span style="font-size:13px;background:rgba(99,102,241,0.2);padding:3px 10px;border-radius:20px;color:#a5b4fc;font-weight:500;margin-left:8px;">TF-IDF Cosine Similarity</span></h2>
+        <p>Tell the ML engine what you know or what confuses you — it recommends your next Core CS topic using real-time TF-IDF vector similarity. Every unique input gives different results.</p>
+        <div class="ml-input-row">
+            <input class="ml-input" id="mlInput" placeholder="e.g. I know SQL well but deadlocks and OSI layers confuse me..." />
+            <button class="ml-btn" onclick="runMLRecommender()">🔍 Get Recommendations</button>
+        </div>
+        <div class="ml-results" id="mlResults">
+            <h3>📌 Recommended Core CS Topics — ranked by relevance to your input</h3>
+            <div id="mlCards"></div>
+            <div style="margin-top:16px;padding:14px 18px;background:rgba(99,102,241,0.08);border-radius:12px;font-size:13px;color:#64748b;">ℹ️ TF-IDF: Each topic is represented as a bag-of-words vector. Your input is vectorised the same way. Cosine similarity measures angle between vectors — closer angle = higher relevance. Type something different and results change instantly.</div>
+        </div>
+    </div>
+</div>
+<div class="pdf-section">
+    <h2 class="section-title">📚 Core CS Resources</h2>
+    <div class="pdf-grid">
+        <div class="pdf-card"><div style="font-size:40px">🗄️</div><h4>DBMS</h4><p>Complete DBMS playlist covering ER diagrams, normalization, transactions</p><a class="pdf-btn" href="https://www.geeksforgeeks.org/dbms/" target="_blank">📖 Start Learning</a></div>
+        <div class="pdf-card"><div style="font-size:40px">⚙️</div><h4>OS</h4><p>Operating Systems full course — processes, memory, scheduling</p><a class="pdf-btn" href="https://www.geeksforgeeks.org/operating-systems/" target="_blank">📖 Read Notes</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🌐</div><h4>Computer Networks — GFG</h4><p>CN notes covering OSI, TCP/IP, protocols and socket programming</p><a class="pdf-btn" href="https://www.geeksforgeeks.org/computer-network-tutorials/" target="_blank">📖 Read Notes</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🏗️</div><h4>OOP — Javatpoint</h4><p>Object-oriented programming concepts with examples in Java/C++</p><a class="pdf-btn" href="https://www.javatpoint.com/java-oops-concepts" target="_blank">📖 Start Reading</a></div>
+        <div class="pdf-card"><div style="font-size:40px">📝</div><h4>Interview Bit — CS Questions</h4><p>Top DBMS, OS, CN interview questions with detailed answers</p><a class="pdf-btn" href="https://www.interviewbit.com/dbms-interview-questions/" target="_blank">🔗 Practice Now</a></div>
+        <div class="pdf-card"><div style="font-size:40px">📊</div><h4>Last Minute Notes — GFG</h4><p>Quick revision notes for all CS subjects — perfect for last-minute prep</p><a class="pdf-btn" href="https://www.geeksforgeeks.org/last-minute-notes-dbms/" target="_blank">📖 Quick Revise</a></div>
+    </div>
+</div>
+<script>
+const stepsData={1:{title:"🗄️ DBMS",description:"DBMS is tested in almost every placement — SQL queries, ACID properties and normalization are must-know.",topics:[{title:"Relational Database Fundamentals",icon:"🗄️",subs:[{id:"dbms-intro",title:"DBMS vs RDBMS — Keys, Schema, Instance"},{id:"er-model",title:"ER Model — Entities, Attributes, Relationships"},{id:"relational-model",title:"Relational Model — Tables, Tuples, Domains"},{id:"keys",title:"Keys — Primary, Foreign, Candidate, Super Key"}]},{title:"SQL & Normalization",icon:"💾",subs:[{id:"sql-basics",title:"SQL — DDL, DML, DCL, TCL Commands"},{id:"sql-joins",title:"SQL Joins — INNER, OUTER, LEFT, RIGHT, CROSS"},{id:"normalization",title:"Normalization — 1NF, 2NF, 3NF, BCNF"},{id:"transactions",title:"Transactions, ACID Properties & Concurrency Control"}]}]},2:{title:"⚙️ Operating Systems",description:"OS concepts — scheduling, memory, deadlocks — are core to system design and written tests.",topics:[{title:"Process Management",icon:"⚙️",subs:[{id:"process-thread",title:"Process vs Thread — States, PCB, Context Switch"},{id:"scheduling",title:"CPU Scheduling — FCFS, SJF, Round Robin, Priority"},{id:"deadlock",title:"Deadlock — Conditions, Prevention, Banker's Algorithm"},{id:"ipc",title:"IPC — Semaphores, Mutex, Monitors, Message Passing"}]},{title:"Memory & Storage",icon:"💽",subs:[{id:"memory-mgmt",title:"Memory Management — Paging, Segmentation"},{id:"virtual-memory",title:"Virtual Memory — Page Replacement (LRU, FIFO, Optimal)"},{id:"file-system",title:"File Systems — FAT, inode, Directory Structure"},{id:"disk-scheduling",title:"Disk Scheduling — FCFS, SSTF, SCAN, C-SCAN"}]}]},3:{title:"🌐 Computer Networks",description:"Networking fundamentals — OSI model, TCP/IP, protocols — are essential for backend and systems roles.",topics:[{title:"Network Fundamentals",icon:"🌐",subs:[{id:"osi-model",title:"OSI 7-Layer Model — Functions of Each Layer"},{id:"tcp-ip",title:"TCP/IP Model — Comparison with OSI"},{id:"ip-addressing",title:"IP Addressing — IPv4, IPv6, Subnetting, CIDR"},{id:"routing",title:"Routing — RIP, OSPF, BGP, Static vs Dynamic"}]},{title:"Protocols & Security",icon:"🔒",subs:[{id:"tcp-udp",title:"TCP vs UDP — Connection, Flow Control, Handshake"},{id:"application-layer",title:"Application Layer — HTTP, HTTPS, DNS, FTP, SMTP"},{id:"network-security",title:"Network Security — SSL/TLS, Firewalls, VPN"},{id:"socket-prog",title:"Socket Programming Basics — Client-Server Model"}]}]},4:{title:"🏗️ OOP Concepts",description:"OOP is tested in code, MCQs and HR interviews — master all four pillars and design patterns.",topics:[{title:"OOP Pillars",icon:"🏗️",subs:[{id:"encapsulation",title:"Encapsulation — Access Modifiers, Getters/Setters"},{id:"inheritance",title:"Inheritance — Single, Multiple, Multilevel, Hybrid"},{id:"polymorphism",title:"Polymorphism — Compile-time vs Runtime"},{id:"abstraction",title:"Abstraction — Abstract Classes vs Interfaces"}]},{title:"Advanced OOP",icon:"🚀",subs:[{id:"constructors",title:"Constructors, Destructors & Copy Constructor"},{id:"solid",title:"SOLID Principles — Design Best Practices"},{id:"design-patterns",title:"Design Patterns — Singleton, Factory, Observer"},{id:"exception-handling",title:"Exception Handling — try/catch/finally, Custom Exceptions"}]}]}};
+
+const detailedContent={'dbms-intro':`<h2>DBMS vs RDBMS</h2><p>A <strong>DBMS</strong> is software to store, retrieve and manage data. An <strong>RDBMS</strong> organises data into related tables with constraints.</p><table><tr><th>Feature</th><th>DBMS</th><th>RDBMS</th></tr><tr><td>Data storage</td><td>Files/hierarchical</td><td>Tables (rows & columns)</td></tr><tr><td>Relationships</td><td>No foreign keys</td><td>Foreign key constraints</td></tr><tr><td>Examples</td><td>XML, file system</td><td>MySQL, PostgreSQL, Oracle</td></tr><tr><td>ACID support</td><td>Partial</td><td>Full ACID compliance</td></tr></table><div class="tip-box">💡 <strong>Schema</strong> = structure of DB (table definitions). <strong>Instance</strong> = actual data at a point in time.</div>`,'er-model':`<h2>ER Model</h2><p>ER diagrams visually represent the logical structure of a database before implementation.</p><ul><li><strong>Entity</strong>: Real-world object (Student, Course) — Rectangle</li><li><strong>Attribute</strong>: Property of entity (Name, Age) — Ellipse</li><li><strong>Relationship</strong>: Association between entities — Diamond</li><li><strong>Cardinality</strong>: 1:1, 1:N, M:N</li></ul><div class="note-box">⚠️ <strong>Weak entity</strong>: Cannot exist without a strong entity (Order_Item depends on Order). Shown with double rectangle.</div>`,'relational-model':`<h2>Relational Model</h2><div class="code-block">-- Table = Relation, Row = Tuple, Column = Attribute
+-- Relational Algebra:
+-- σ (Select)  — filter rows:  σ(age > 18)(Student)
+-- π (Project) — select cols:  π(name, age)(Student)
+-- ⋈ (Join)    — combine tables
+-- ∪ ∩ − (Set operations)</div>`,'keys':`<h2>Types of Keys</h2><table><tr><th>Key Type</th><th>Definition</th><th>Example</th></tr><tr><td>Super Key</td><td>Any set uniquely identifying a row</td><td>{StudentID}, {StudentID, Name}</td></tr><tr><td>Candidate Key</td><td>Minimal super key</td><td>{StudentID}, {Email}</td></tr><tr><td>Primary Key</td><td>Chosen candidate key — NOT NULL</td><td>StudentID</td></tr><tr><td>Foreign Key</td><td>References PK of another table</td><td>CourseID in Enrollment</td></tr><tr><td>Composite Key</td><td>PK made of 2+ columns</td><td>(StudentID, CourseID)</td></tr></table>`,'sql-basics':`<h2>SQL Command Types</h2><div class="code-block">-- DDL (Data Definition Language)
+CREATE TABLE Students (id INT PRIMARY KEY, name VARCHAR(50));
+ALTER TABLE Students ADD COLUMN email VARCHAR(100);
+DROP TABLE Students;
+
+-- DML (Data Manipulation Language)
+INSERT INTO Students VALUES (1, 'Alice', 'alice@mail.com');
+UPDATE Students SET name='Bob' WHERE id=1;
+DELETE FROM Students WHERE id=1;
+SELECT * FROM Students WHERE id > 0 ORDER BY name;
+
+-- TCL
+BEGIN; UPDATE ...; COMMIT;  -- or ROLLBACK;</div>`,'sql-joins':`<h2>SQL Joins</h2><div class="code-block">-- INNER JOIN — only matching rows from both tables
+SELECT s.name, c.title FROM Students s
+INNER JOIN Enrollment e ON s.id = e.student_id
+INNER JOIN Courses c ON e.course_id = c.id;
+
+-- LEFT JOIN — all left rows, NULL for unmatched right
+SELECT s.name, e.course_id FROM Students s
+LEFT JOIN Enrollment e ON s.id = e.student_id;
+
+-- FULL OUTER JOIN — all rows from both tables
+-- CROSS JOIN — cartesian product (m × n rows)
+-- SELF JOIN — table joined with itself
+SELECT a.name manager, b.name employee
+FROM Employee a JOIN Employee b ON b.manager_id = a.id;</div>`,'normalization':`<h2>Database Normalization</h2><table><tr><th>Normal Form</th><th>Rule</th><th>Eliminates</th></tr><tr><td>1NF</td><td>Atomic values, no repeating groups</td><td>Multi-valued attributes</td></tr><tr><td>2NF</td><td>1NF + No partial dependency on PK</td><td>Partial dependencies</td></tr><tr><td>3NF</td><td>2NF + No transitive dependency</td><td>Transitive dependencies</td></tr><tr><td>BCNF</td><td>3NF + Every determinant is candidate key</td><td>Anomalies 3NF misses</td></tr></table><div class="example-box">✅ StudentCourse(StudentID, CourseID, CourseName) — CourseName depends only on CourseID (partial dep) → violates 2NF → split tables.</div>`,'transactions':`<h2>Transactions & ACID Properties</h2><ul><li><strong>Atomicity</strong>: All or nothing — failure = full rollback</li><li><strong>Consistency</strong>: DB moves from one valid state to another</li><li><strong>Isolation</strong>: Concurrent transactions don't interfere</li><li><strong>Durability</strong>: Committed data persists through crashes</li></ul><div class="code-block">-- Concurrency Problems:
+-- Dirty Read: reading another tx's uncommitted data
+-- Non-repeatable Read: same row differs within one tx
+-- Phantom Read: new rows appear between reads in same tx
+
+-- Isolation Levels (weak → strong):
+-- READ UNCOMMITTED → READ COMMITTED → REPEATABLE READ → SERIALIZABLE</div>`,'process-thread':`<h2>Process vs Thread</h2><table><tr><th>Property</th><th>Process</th><th>Thread</th></tr><tr><td>Memory</td><td>Separate address space</td><td>Shared address space</td></tr><tr><td>Communication</td><td>IPC (slow)</td><td>Shared memory (fast)</td></tr><tr><td>Overhead</td><td>High context switch</td><td>Low</td></tr><tr><td>Crash impact</td><td>Only itself</td><td>Can crash whole process</td></tr></table><div class="tip-box">💡 Process states: New → Ready → Running → Waiting → Terminated. PCB stores PID, state, registers, memory limits.</div>`,'scheduling':`<h2>CPU Scheduling Algorithms</h2><div class="code-block">// FCFS — First Come First Served (non-preemptive)
+// Convoy effect: short jobs wait behind long ones
+
+// SJF — Shortest Job First (optimal avg waiting time)
+// Preemptive SJF = SRTF (Shortest Remaining Time First)
+
+// Round Robin — each process gets time quantum Q
+// No starvation, good for time-sharing systems
+
+// Priority Scheduling — problem: starvation of low-priority
+// Solution: Aging — gradually increase priority over time</div><table><tr><th>Algorithm</th><th>Preemptive?</th><th>Starvation?</th></tr><tr><td>FCFS</td><td>No</td><td>No</td></tr><tr><td>SJF</td><td>Optional</td><td>Yes (long jobs)</td></tr><tr><td>Round Robin</td><td>Yes</td><td>No</td></tr><tr><td>Priority</td><td>Optional</td><td>Yes (low priority)</td></tr></table>`,'deadlock':`<h2>Deadlock</h2><p>Deadlock: processes blocked, each waiting for resource held by another. Four necessary conditions:</p><ul><li><strong>Mutual Exclusion</strong>: Resources non-shareable</li><li><strong>Hold and Wait</strong>: Process holds while waiting for more</li><li><strong>No Preemption</strong>: Resources can't be forcibly taken</li><li><strong>Circular Wait</strong>: P1 waits for P2, P2 waits for P1</li></ul><div class="code-block">// Banker's Algorithm (Deadlock Avoidance):
+// Safe State = sequence where every process can finish
+// Need[i] = Max[i] - Allocation[i]
+// Grant if Need ≤ Available → simulate → check safe</div>`,'ipc':`<h2>IPC — Semaphores, Mutex, Monitors</h2><div class="code-block">// Semaphore (integer for synchronization)
+// wait(S): if S>0 → S--; else block
+// signal(S): S++; wake blocked process
+// Binary semaphore (0/1) = Mutex
+
+// Classic Problems:
+// Producer-Consumer: wait(empty)→produce→signal(full)
+// Reader-Writer: multiple readers OR one writer
+// Dining Philosophers: 5 philosophers, 5 forks
+
+// Monitor = higher-level sync (Java synchronized)
+// Message Passing: send()/receive() — distributed systems</div>`,'memory-mgmt':`<h2>Paging & Segmentation</h2><table><tr><th>Feature</th><th>Paging</th><th>Segmentation</th></tr><tr><td>Division</td><td>Fixed-size pages</td><td>Variable-size segments</td></tr><tr><td>Fragmentation</td><td>Internal</td><td>External</td></tr><tr><td>View</td><td>Physical view</td><td>Logical/programmer view</td></tr><tr><td>Translation</td><td>Page table</td><td>Segment table</td></tr></table><div class="tip-box">💡 Logical address = (page#, offset). Physical address = (frame#, offset). TLB caches page table entries for speed.</div>`,'virtual-memory':`<h2>Virtual Memory & Page Replacement</h2><div class="code-block">// Page Fault: page not in RAM → load from disk (slow)
+// Thrashing: so many page faults CPU wastes time on I/O
+
+// Replacement Algorithms:
+// FIFO — replace oldest. Simple, but Belady's anomaly!
+// Optimal — replace furthest future use. Not feasible.
+// LRU — replace least recently used. Best practical.
+
+// Example with 3 frames, ref string: 1,2,3,4,1,2,5,1,2,3,4,5
+// FIFO: 9 page faults | LRU: 8 | Optimal: 6</div>`,'file-system':`<h2>File Systems</h2><div class="code-block">// inode (Unix/Linux) — stores file metadata
+// Contains: size, permissions, timestamps, block pointers
+// Does NOT contain: filename (stored in directory entry)
+
+// Allocation Methods:
+// Contiguous: simple, fast, external fragmentation
+// Linked: no fragmentation, slow random access
+// Indexed: inode block pointers, good random access
+
+// FAT — Windows/USB, ext4 — Linux, NTFS — Windows</div>`,'disk-scheduling':`<h2>Disk Scheduling</h2><div class="code-block">// Head at cylinder 53. Queue: 98,183,37,122,14,124,65,67
+// FCFS: 53→98→183→37→122→14→124→65→67 = 640 cylinders
+// SSTF: nearest first = 236 cylinders (starvation risk)
+// SCAN (Elevator): one direction then reverse = 331
+// C-SCAN: one direction only, jump back = best uniformity</div>`,'osi-model':`<h2>OSI 7-Layer Model</h2><table><tr><th>Layer</th><th>Name</th><th>Protocols</th></tr><tr><td>7</td><td>Application</td><td>HTTP, FTP, SMTP, DNS</td></tr><tr><td>6</td><td>Presentation</td><td>SSL, JPEG, ASCII</td></tr><tr><td>5</td><td>Session</td><td>NetBIOS, RPC</td></tr><tr><td>4</td><td>Transport</td><td>TCP, UDP</td></tr><tr><td>3</td><td>Network</td><td>IP, ICMP, OSPF</td></tr><tr><td>2</td><td>Data Link</td><td>Ethernet, Wi-Fi, ARP</td></tr><tr><td>1</td><td>Physical</td><td>Cables, hubs, NIC</td></tr></table><div class="tip-box">💡 Mnemonic: <strong>All People Seem To Need Data Processing</strong> (Layer 7 to 1)</div>`,'tcp-ip':`<h2>TCP/IP Model vs OSI</h2><table><tr><th>TCP/IP Layer</th><th>OSI Equivalent</th><th>Key Protocols</th></tr><tr><td>Application</td><td>Application + Presentation + Session</td><td>HTTP, DNS, FTP, SMTP</td></tr><tr><td>Transport</td><td>Transport</td><td>TCP, UDP</td></tr><tr><td>Internet</td><td>Network</td><td>IP, ICMP, ARP</td></tr><tr><td>Network Access</td><td>Data Link + Physical</td><td>Ethernet, Wi-Fi</td></tr></table>`,'ip-addressing':`<h2>IP Addressing & Subnetting</h2><div class="code-block">// IPv4: 32-bit (4 octets), e.g., 192.168.1.0
+// Class A: 1–126.x.x.x   /8  (16M hosts)
+// Class B: 128–191.x.x.x /16 (65K hosts)
+// Class C: 192–223.x.x.x /24 (254 hosts)
+
+// CIDR: 192.168.1.0/24 → 255.255.255.0 → 254 usable hosts
+// Subnetting /24→/26: borrow 2 bits → 4 subnets, 62 hosts
+
+// IPv6: 128-bit — solves IPv4 exhaustion
+// 2001:0db8:85a3::8a2e:0370:7334</div>`,'routing':`<h2>Routing Protocols</h2><table><tr><th>Protocol</th><th>Type</th><th>Algorithm</th></tr><tr><td>RIP</td><td>IGP, Distance Vector</td><td>Bellman-Ford</td></tr><tr><td>OSPF</td><td>IGP, Link State</td><td>Dijkstra</td></tr><tr><td>BGP</td><td>EGP, Path Vector</td><td>Best path selection</td></tr></table>`,'tcp-udp':`<h2>TCP vs UDP</h2><table><tr><th>Feature</th><th>TCP</th><th>UDP</th></tr><tr><td>Connection</td><td>Connection-oriented (3-way handshake)</td><td>Connectionless</td></tr><tr><td>Reliability</td><td>Guaranteed, ACK-based</td><td>No guarantee</td></tr><tr><td>Order</td><td>In-order delivery</td><td>May arrive out-of-order</td></tr><tr><td>Speed</td><td>Slower (overhead)</td><td>Faster</td></tr><tr><td>Use case</td><td>HTTP, FTP, Email</td><td>DNS, VoIP, Video</td></tr></table><div class="code-block">// TCP 3-Way Handshake:
+// Client → SYN → Server
+// Server → SYN-ACK → Client
+// Client → ACK → Server  ← Connection established!</div>`,'application-layer':`<h2>Application Layer Protocols</h2><table><tr><th>Protocol</th><th>Port</th><th>Purpose</th></tr><tr><td>HTTP</td><td>80</td><td>Web browsing</td></tr><tr><td>HTTPS</td><td>443</td><td>Secure web (TLS)</td></tr><tr><td>DNS</td><td>53</td><td>Domain → IP resolution</td></tr><tr><td>FTP</td><td>21</td><td>File transfer</td></tr><tr><td>SMTP</td><td>25</td><td>Send email</td></tr><tr><td>SSH</td><td>22</td><td>Secure remote login</td></tr></table>`,'network-security':`<h2>Network Security</h2><div class="code-block">// SSL/TLS — encrypts data in transit (used by HTTPS)
+// TLS Handshake: ClientHello → ServerHello+Cert
+//   → Client verifies → Key exchange → Encrypted channel
+
+// Symmetric encryption: Same key for enc/dec (AES)
+// Asymmetric encryption: Public+Private key pair (RSA)
+
+// Firewall: filters traffic by IP, port, protocol rules
+// Stateless: checks each packet independently
+// Stateful: tracks connection state (smarter)
+
+// Common attacks: SQL injection, XSS, DDoS, MITM</div>`,'socket-prog':`<h2>Socket Programming</h2><div class="code-block"># Python Server
+import socket
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(('localhost', 8080))
+server.listen(5)
+conn, addr = server.accept()
+data = conn.recv(1024)
+conn.send(b"Hello from server!")
+conn.close()
+
+# Python Client
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(('localhost', 8080))
+client.send(b"Hello!")
+response = client.recv(1024)
+client.close()
+# AF_INET=IPv4, SOCK_STREAM=TCP, SOCK_DGRAM=UDP</div>`,'encapsulation':`<h2>Encapsulation</h2><div class="code-block">// Java — binding data + methods, restricting direct access
+public class BankAccount {
+    private double balance;  // hidden from outside
+
+    public double getBalance() { return balance; }
+    public void deposit(double amount) {
+        if (amount > 0) balance += amount;  // validation
+    }
+    public boolean withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount; return true;
+        }
+        return false;
+    }
+}
+// account.balance = 99999; ← compile error!
+// Must use: account.deposit(99999); ← controlled</div>`,'inheritance':`<h2>Inheritance</h2><div class="code-block">// Java — Single Inheritance
+class Animal { void eat() { System.out.println("eating"); } }
+class Dog extends Animal { void bark() { System.out.println("Woof!"); } }
+// Dog inherits eat() from Animal
+
+// Types: Single, Multilevel (A→B→C), Hierarchical (A→B,A→C)
+// Multiple inheritance NOT allowed in Java (use interfaces)
+
+// C++ allows multiple inheritance:
+class C : public A, public B {}
+// Diamond problem → solved with virtual inheritance</div>`,'polymorphism':`<h2>Polymorphism</h2><div class="code-block">// Compile-time (Method Overloading) — same name, diff params
+class Calc {
+    int add(int a, int b) { return a+b; }
+    double add(double a, double b) { return a+b; }
+}
+
+// Runtime (Method Overriding + Dynamic Dispatch)
+class Shape { void draw() { System.out.println("shape"); } }
+class Circle extends Shape {
+    @Override void draw() { System.out.println("circle"); }
+}
+Shape s = new Circle();
+s.draw();  // prints "circle" — decided at RUNTIME!
+
+// Virtual functions in C++ enable runtime polymorphism</div>`,'abstraction':`<h2>Abstract Class vs Interface</h2><table><tr><th>Feature</th><th>Abstract Class</th><th>Interface</th></tr><tr><td>Methods</td><td>Abstract + concrete</td><td>Abstract (default in Java 8+)</td></tr><tr><td>Variables</td><td>Any type</td><td>public static final only</td></tr><tr><td>Inheritance</td><td>Single (extends)</td><td>Multiple (implements)</td></tr><tr><td>Use when</td><td>Shared base behavior</td><td>Define a contract</td></tr></table>`,'constructors':`<h2>Constructors & Destructors (C++)</h2><div class="code-block">class MyClass {
+    int* data;
+public:
+    MyClass() { data = new int(0); }            // Default
+    MyClass(int v) { data = new int(v); }       // Parameterized
+    MyClass(const MyClass& o) {                 // Copy constructor
+        data = new int(*o.data);                // Deep copy!
+    }
+    ~MyClass() { delete data; }                 // Destructor
+    MyClass& operator=(const MyClass& o) {      // Copy assignment
+        if (this != &o) *data = *o.data;
+        return *this;
+    }
+};
+// Rule of Three: custom destructor → also define copy ctor + assignment</div>`,'solid':`<h2>SOLID Principles</h2><ul><li><strong>S — Single Responsibility</strong>: A class should have only one reason to change</li><li><strong>O — Open/Closed</strong>: Open for extension, closed for modification</li><li><strong>L — Liskov Substitution</strong>: Subclass should replace base class without breaking code</li><li><strong>I — Interface Segregation</strong>: Don't force classes to implement unused methods</li><li><strong>D — Dependency Inversion</strong>: Depend on abstractions, not concretions</li></ul>`,'design-patterns':`<h2>Design Patterns</h2><div class="code-block">// Singleton — only one instance
+class Singleton {
+    private static Singleton instance;
+    private Singleton() {}
+    public static Singleton getInstance() {
+        if (instance == null) instance = new Singleton();
+        return instance;
+    }
+}
+
+// Factory — create objects without specifying class
+interface Shape { void draw(); }
+class ShapeFactory {
+    Shape create(String type) {
+        if (type.equals("circle")) return new Circle();
+        return new Rectangle();
+    }
+}
+// Observer Pattern: one-to-many event notification</div>`,'exception-handling':`<h2>Exception Handling</h2><div class="code-block">// Java Exception Hierarchy:
+// Throwable → Error (don't catch, e.g., OutOfMemoryError)
+//           → Exception → Checked (IOException, SQLException)
+//                       → Unchecked / RuntimeException
+
+try {
+    int result = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Error: " + e.getMessage());
+} finally {
+    System.out.println("Always runs — close resources here");
+}
+
+// Custom Exception
+class InsufficientFundsException extends Exception {
+    InsufficientFundsException(String msg) { super(msg); }
+}
+throw new InsufficientFundsException("Balance too low");</div>`};
+
+let currentStep=1,completedSteps=JSON.parse(localStorage.getItem('cs_completedSteps')||'[]');
+function updateProgress(){const p=(completedSteps.length/4)*100;document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressPercent').textContent=Math.round(p)+'%';document.querySelectorAll('.step-btn').forEach(b=>b.classList.toggle('completed',completedSteps.includes(parseInt(b.dataset.step))));}
+function markStepComplete(step){if(!completedSteps.includes(step)){completedSteps.push(step);localStorage.setItem('cs_completedSteps',JSON.stringify(completedSteps));updateProgress();renderStepContent(step);}}
+function renderStepContent(step){currentStep=step;const sd=stepsData[step];const isC=completedSteps.includes(step);let html=`<div class="step-content"><div class="step-header"><div><h2>${sd.title}</h2><p>${sd.description}</p></div>${!isC?`<button class="complete-step-btn" onclick="markStepComplete(${step})">✓ Mark as Complete</button>`:'<div class="completed-badge">✅ Step Completed! 🎉</div>'}</div>`;sd.topics.forEach(t=>{html+=`<div class="topic-card" onclick="toggleSubTopics(this)"><div class="topic-header"><h3><span class="topic-icon">${t.icon}</span> ${t.title}</h3><span class="arrow">›</span></div><div class="sub-topics">`;t.subs.forEach(s=>{html+=`<div class="sub-topic" onclick="showContent(event,'${s.id}')">${s.title}</div>`;});html+=`</div></div>`;});html+=`<div class="detail-container" id="detailContainer"><p style="color:#94a3b8;text-align:center;">🗂️ Click any topic above to view detailed explanations and code examples.</p></div><div class="nav-buttons">${step>1?`<button class="nav-btn prev" onclick="changeStep(${step-1})">← Previous</button>`:'<div></div>'}${step<4?`<button class="nav-btn next" onclick="changeStep(${step+1})">Next →</button>`:`<button class="nav-btn next" onclick="window.location.href='step4_aptitude.html'">Next: Aptitude Practice →</button>`}</div></div>`;document.getElementById('contentSection').innerHTML=html;document.querySelectorAll('.step-btn').forEach(b=>b.classList.toggle('active',parseInt(b.dataset.step)===step));}
+function changeStep(s){if(s>=1&&s<=4){renderStepContent(s);window.scrollTo({top:0,behavior:'smooth'});}}
+function toggleSubTopics(card){const sub=card.querySelector('.sub-topics');const arrow=card.querySelector('.arrow');document.querySelectorAll('.sub-topics').forEach(s=>{if(s!==sub)s.classList.remove('active');});sub.classList.toggle('active');if(arrow)arrow.style.transform=sub.classList.contains('active')?'rotate(90deg)':'rotate(0deg)';}
+function showContent(e,id){e.stopPropagation();const dc=document.getElementById('detailContainer');dc.innerHTML=detailedContent[id]||'<p>Content coming soon!</p>';dc.scrollIntoView({behavior:'smooth',block:'start'});}
+
+// ===== REAL-TIME TF-IDF COSINE SIMILARITY ML RECOMMENDER =====
+const topicDocs={
+  "SQL & Database Queries":"sql query select insert update delete join table database relational schema record data retrieve filter aggregate group having subquery index view procedure trigger",
+  "ER Model & Design":"er entity relationship diagram design attribute key schema model cardinality weak strong entity primary foreign mapping database modeling",
+  "Normalization & BCNF":"normalization normal form 1nf 2nf 3nf bcnf dependency partial transitive anomaly decompose functional update insertion deletion redundancy",
+  "Transactions & ACID":"transaction acid atomicity consistency isolation durability commit rollback concurrency control dirty read phantom non-repeatable lock deadlock serializable",
+  "OS Process & Scheduling":"process thread scheduling cpu fcfs sjf round robin priority preemptive context switch pcb state ready running waiting dispatcher",
+  "Deadlock & Synchronization":"deadlock semaphore mutex monitor synchronization producer consumer banker algorithm prevention detection recovery circular wait mutual exclusion hold",
+  "Memory Paging & Virtual Memory":"paging segmentation memory virtual page frame tlb page fault replacement lru fifo optimal thrashing fragmentation internal external",
+  "File System & Disk Scheduling":"file system disk inode fat ntfs ext4 directory allocation contiguous linked indexed scheduling sstf scan c-scan seek time",
+  "OSI Model & Layers":"osi layer model physical datalink network transport session presentation application protocol ethernet wifi function each layer seven",
+  "TCP UDP & Network Protocols":"tcp udp connection reliable unreliable handshake flow control congestion window socket http https dns ftp smtp ssh port routing packet",
+  "IP Addressing & Subnetting":"ip addressing ipv4 ipv6 subnet subnetting cidr mask class network host bits routing ospf rip bgp static dynamic",
+  "OOP Pillars":"oop object class encapsulation inheritance polymorphism abstraction access modifier overloading overriding extends implements interface abstract pillar",
+  "Design Patterns & SOLID":"design pattern singleton factory observer solid principle single responsibility open closed liskov interface dependency injection refactor"
+};
+const tips={
+  "SQL & Database Queries":"Practice JOINs, subqueries and aggregate functions on HackerRank SQL section daily",
+  "ER Model & Design":"Draw ER diagrams for real systems — library, hospital, e-commerce — and convert to tables",
+  "Normalization & BCNF":"Practice converting unnormalized tables to 3NF step by step — extremely common exam question",
+  "Transactions & ACID":"Write sample transaction scenarios with COMMIT/ROLLBACK and study all isolation levels",
+  "OS Process & Scheduling":"Solve Gantt chart problems for FCFS, SJF and Round Robin — calculate waiting/turnaround time",
+  "Deadlock & Synchronization":"Implement Banker's Algorithm manually and understand semaphore P/V operations thoroughly",
+  "Memory Paging & Virtual Memory":"Solve page replacement problems (LRU, FIFO, Optimal) with reference strings on paper",
+  "File System & Disk Scheduling":"Understand inode structure and calculate disk scheduling seek distances",
+  "OSI Model & Layers":"Memorise all 7 layers, functions and protocols — very common MCQ topic in placements",
+  "TCP UDP & Network Protocols":"Draw TCP 3-way handshake and compare TCP vs UDP for different use cases",
+  "IP Addressing & Subnetting":"Practice subnetting calculations — find network address, broadcast, valid host ranges",
+  "OOP Pillars":"Write code examples of all 4 OOP pillars in Java/C++ from scratch — know runtime polymorphism",
+  "Design Patterns & SOLID":"Implement Singleton and Factory patterns from scratch and explain SOLID with code examples"
+};
+
+function tokenize(text){return text.toLowerCase().replace(/[^\w\s]/g,'').split(/\s+/).filter(w=>w.length>2);}
+function computeTFIDF(docs,query){
+  const allDocs=[...Object.values(docs),query];
+  const vocab=[...new Set(allDocs.flatMap(tokenize))];
+  function tf(doc,term){const w=tokenize(doc);const c=w.filter(x=>x===term).length;return w.length?c/w.length:0;}
+  function idf(term){const n=allDocs.filter(d=>tokenize(d).includes(term)).length;return Math.log((allDocs.length+1)/(n+1))+1;}
+  const idfCache={};vocab.forEach(t=>{idfCache[t]=idf(t);});
+  function vec(doc){return vocab.map(t=>tf(doc,t)*idfCache[t]);}
+  function cosine(a,b){let dot=0,ma=0,mb=0;for(let i=0;i<a.length;i++){dot+=a[i]*b[i];ma+=a[i]*a[i];mb+=b[i]*b[i];}return(ma&&mb)?dot/(Math.sqrt(ma)*Math.sqrt(mb)):0;}
+  const qv=vec(query);
+  return Object.entries(docs).map(([name,doc])=>({name,score:cosine(vec(doc),qv)})).sort((a,b)=>b.score-a.score);
+}
+
+function runMLRecommender(){
+  const query=document.getElementById('mlInput').value.trim();
+  if(!query){alert('Please describe your current knowledge or what confuses you!');return;}
+  const results=computeTFIDF(topicDocs,query);
+  const maxScore=results[0].score||1;
+  let html='';
+  results.slice(0,6).forEach((r,i)=>{
+    const pct=maxScore>0?Math.round((r.score/maxScore)*100):0;
+    const medal=i===0?'🔥':i===1?'⚡':i===2?'📌':'•';
+    html+=`<div class="ml-card"><span style="font-size:20px">${medal}</span><div style="flex:1"><div class="ml-topic-name">${r.name}</div><div class="ml-why">${tips[r.name]||'Study this topic thoroughly'}</div><div class="ml-score-bar" style="margin-top:8px"><div class="ml-score-fill" style="width:${pct}%"></div></div></div><span class="ml-pct">${pct}%</span></div>`;
+  });
+  document.getElementById('mlCards').innerHTML=html;
+  document.getElementById('mlResults').style.display='block';
+  document.getElementById('mlResults').scrollIntoView({behavior:'smooth'});
+}
+
+document.getElementById('mlInput').addEventListener('keydown',e=>{if(e.key==='Enter')runMLRecommender();});
+document.querySelectorAll('.step-btn').forEach(b=>b.addEventListener('click',()=>changeStep(parseInt(b.dataset.step))));
+updateProgress();renderStepContent(1);
+</script>
+</body>
+</html>

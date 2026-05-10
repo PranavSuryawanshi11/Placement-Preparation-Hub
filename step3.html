@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Step 3: Linked List – DSA Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:radial-gradient(circle at top,#0a1b3d,#020617);color:#e2e8f0;min-height:100vh;line-height:1.8;}
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 80px;z-index:100;background:rgba(2,6,23,0.95);backdrop-filter:blur(10px);}
+    .logo{font-size:24px;font-weight:700;color:#6366f1;}
+    nav a{margin-left:28px;text-decoration:none;color:#bfc6d4;font-size:15px;transition:0.3s;}
+    nav a:hover{color:white;}
+    nav a.active{background:#1f2937;padding:8px 20px;border-radius:9999px;color:white;}
+
+    .hero{text-align:center;margin-top:160px;}
+    .tag{display:inline-block;padding:8px 20px;border-radius:9999px;background:#1f2937;font-size:14px;color:#a5b4fc;margin-bottom:20px;}
+    .hero h1{font-size:54px;font-weight:700;line-height:1.1;margin-bottom:20px;}
+    .hero p{color:#9ca3af;font-size:18px;max-width:820px;margin:0 auto 40px;}
+
+    .progress-bar{max-width:1150px;margin:40px auto;padding:0 40px;}
+    .progress-label{display:flex;justify-content:space-between;font-size:14px;color:#94a3b8;margin-bottom:10px;}
+    .progress-track{background:rgba(255,255,255,0.1);height:8px;border-radius:9999px;}
+    .progress-fill{background:linear-gradient(90deg,#6366f1,#a855f7);height:100%;width:42%;border-radius:9999px;}
+
+    .content-section{max-width:1150px;margin:40px auto;padding:0 40px;}
+    .section-title{font-size:28px;font-weight:600;margin:50px 0 30px;color:#e0e7ff;}
+
+    .topic-card{
+        background:rgba(255,255,255,0.06);
+        border:1px solid rgba(255,255,255,0.12);
+        border-radius:16px;
+        padding:28px 32px;
+        margin-bottom:20px;
+        transition:all 0.3s;
+        cursor:pointer;
+    }
+    .topic-card:hover{border-color:#6366f1;transform:translateY(-4px);}
+    .topic-header{display:flex;align-items:center;justify-content:space-between;}
+    .topic-header h4{font-size:21px;font-weight:600;display:flex;align-items:center;gap:14px;}
+    .badge{padding:6px 16px;border-radius:9999px;font-size:13px;font-weight:500;}
+    .badge.green{background:#10b981;color:white;}
+    .badge.yellow{background:#f59e0b;color:white;}
+
+    .sub-topics{display:none;margin-top:25px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.2);}
+    .sub-topics.active{display:block;}
+    .sub-topic{padding:18px 26px;background:rgba(255,255,255,0.05);border-radius:12px;margin-bottom:12px;transition:0.3s;cursor:pointer;font-size:16.5px;}
+    .sub-topic:hover{background:rgba(99,102,241,0.18);border-left:5px solid #6366f1;}
+
+    .topic-content{
+        display:none;
+        margin-top:35px;
+        background:rgba(15,23,42,0.75);
+        border:1px solid rgba(99,102,241,0.35);
+        border-radius:18px;
+        padding:45px;
+    }
+    .topic-content.active{display:block;}
+    .topic-content h2{margin:35px 0 20px;font-size:28px;color:#c4d0ff;}
+    .topic-content h3{margin:28px 0 14px;font-size:23px;color:#a5b4fc;}
+    .topic-content p{margin-bottom:22px;color:#cbd5e1;}
+    .topic-content ul{margin:18px 0 25px;padding-left:32px;}
+    .topic-content li{margin-bottom:10px;}
+
+    table{width:100%;border-collapse:collapse;margin:25px 0;}
+    th, td{border:1px solid rgba(255,255,255,0.2);padding:16px;text-align:left;}
+    th{background:rgba(99,102,241,0.25);color:#e0e7ff;}
+
+    .code-block{
+        background:#0f172a;
+        border:1px solid #334155;
+        border-radius:14px;
+        padding:28px;
+        margin:25px 0;
+        font-family:ui-monospace, monospace;
+        font-size:15.2px;
+        line-height:1.8;
+        color:#e2e8f0;
+        overflow-x:auto;
+    }
+
+    .lang-tabs{
+        display:flex;
+        background:rgba(255,255,255,0.1);
+        border-radius:8px;
+        padding:4px;
+        margin-bottom:15px;
+        width:fit-content;
+    }
+    .lang-tab{
+        padding:8px 18px;
+        border-radius:6px;
+        cursor:pointer;
+        font-size:14px;
+        transition:0.3s;
+        margin-right:4px;
+    }
+    .lang-tab.active{
+        background:#6366f1;
+        color:white;
+    }
+
+    .diagram{
+        background:#1e2937;
+        border:1px solid #475569;
+        border-radius:12px;
+        padding:20px;
+        margin:25px 0;
+        font-family:monospace;
+        white-space:pre;
+        line-height:1.6;
+        color:#94a3b8;
+        overflow-x:auto;
+    }
+
+    .example-box{background:rgba(16,185,129,0.12);border-left:5px solid #10b981;padding:22px 26px;margin:28px 0;border-radius:10px;}
+    .note{background:rgba(234,179,8,0.18);border-left:6px solid #eab308;padding:22px 26px;margin:30px 0;border-radius:10px;}
+    .warning{background:rgba(239,68,68,0.18);border-left:6px solid #ef4444;padding:22px 26px;margin:30px 0;border-radius:10px;}
+    .tip{background:rgba(59,130,246,0.15);border-left:6px solid #3b82f6;padding:22px 26px;margin:30px 0;border-radius:10px;}
+
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:25px 0;}
+    @media(max-width:700px){.compare-grid{grid-template-columns:1fr;}}
+
+    .nav-btns{display:flex;justify-content:center;gap:25px;padding:90px 0 120px;}
+    .btn{padding:16px 38px;font-size:17px;border-radius:12px;transition:0.3s;font-weight:500;}
+    .btn-primary{background:#6366f1;color:white;}
+    .btn-primary:hover{background:#4f46e5;}
+    .btn-outline{border:2px solid rgba(255,255,255,0.35);color:white;}
+    .btn-outline:hover{border-color:#6366f1;background:rgba(99,102,241,0.15);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><a href="dsa-roadmap.html">🧠 DSA Roadmap</a></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="step1.html">Step 1</a>
+    <a href="step2.html">Step 2</a>
+    <a href="step3.html" class="active">Step 3</a>
+    <a href="step4.html">Step 4</a>
+    <a href="step5.html">Step 5</a>
+    <a href="step6.html">Step 6</a>
+    <a href="step7.html">Step 7</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="tag">Step 3 of 7 • Dynamic Data Structures</div>
+  <h1>Linked List</h1>
+  <p>A dynamic data structure where each node points to the next. Master singly, doubly, circular linked lists, reversal, cycle detection and more.</p>
+</div>
+
+<div class="progress-bar">
+  <div class="progress-label"><span>Your Progress</span><span>Step 3 / 7 (42%)</span></div>
+  <div class="progress-track"><div class="progress-fill"></div></div>
+</div>
+
+<div class="content-section">
+  <div class="section-title">📖 Core Topics</div>
+
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">🔗</span> Node Structure &amp; Basics</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'node-basics')">1. What is a Linked List?</div>
+      <div class="sub-topic" onclick="showContent(event, 'node-structure')">2. Node Structure</div>
+    </div>
+  </div>
+
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">↔️</span> Singly vs Doubly Linked List</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'singly-doubly')">1. Singly vs Doubly Comparison</div>
+    </div>
+  </div>
+
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">⚙️</span> Core Operations</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'insert-head')">1. Insertion at Head (O(1))</div>
+      <div class="sub-topic" onclick="showContent(event, 'insert-tail')">2. Insertion at Tail</div>
+      <div class="sub-topic" onclick="showContent(event, 'reverse')">3. Reverse Linked List</div>
+      <div class="sub-topic" onclick="showContent(event, 'delete')">4. Deletion</div>
+    </div>
+  </div>
+
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">🔁</span> Circular Linked List &amp; Cycle Detection</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'circular')">1. Circular Linked List</div>
+      <div class="sub-topic" onclick="showContent(event, 'floyd-cycle')">2. Floyd's Cycle Detection</div>
+    </div>
+  </div>
+
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">📊</span> Time Complexity Summary</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'complexity')">1. Linked List vs Array</div>
+    </div>
+  </div>
+</div>
+
+<div id="content-container" class="content-section"></div>
+
+<div class="nav-btns">
+  <a href="step2.html" class="btn btn-outline">← Step 2: Arrays &amp; Strings</a>
+  <a href="step4.html" class="btn btn-primary">Next: Step 4 – Stack &amp; Queue →</a>
+</div>
+
+<script>
+// All deep content with diagrams
+const contents = {
+
+  'node-basics': `
+    <h2>What is a Linked List?</h2>
+    <p>A linked list is a linear data structure where each element is stored in a <strong>node</strong>. Each node contains data and a pointer to the next node. The last node points to <code>None</code> (or NULL).</p>
+    
+    <div class="diagram">
+Head → [10 | next] → [20 | next] → [30 | next] → NULL
+    </div>
+
+    <div class="tip"><strong>When to use Linked List:</strong> Frequent insertions/deletions (especially at beginning), when size is not known in advance.</div>
+  `,
+
+  'node-structure': `
+    <h2>Node Structure</h2>
+    <p>Each node has data and a reference to the next node.</p>
+
+    <div class="lang-tabs">
+      <div class="lang-tab active" onclick="switchLang(this, 'py-node')">Python</div>
+      <div class="lang-tab" onclick="switchLang(this, 'java-node')">Java</div>
+      <div class="lang-tab" onclick="switchLang(this, 'c-node')">C</div>
+    </div>
+
+    <div id="py-node" class="code-block">
+<span class="kw">class</span> Node:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">__init__</span>(self, data):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.data = data<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.next = None
+    </div>
+
+    <div id="java-node" class="code-block" style="display:none;">
+<span class="kw">class</span> Node {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int data;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Node next;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Node(int data) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.data = data;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.next = null;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+    </div>
+
+    <div id="c-node" class="code-block" style="display:none;">
+<span class="kw">typedef</span> struct Node {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int data;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;struct Node* next;<br>
+} Node;
+    </div>
+
+    <div class="diagram">
+Node: [ Data | Next Pointer ]
+    </div>
+  `,
+
+  'singly-doubly': `
+    <h2>Singly vs Doubly Linked List</h2>
+    <div class="compare-grid">
+      <div class="compare-box">
+        <h5>Singly Linked List</h5>
+        <ul>
+          <li>Only <code>next</code> pointer</li>
+          <li>Forward traversal only</li>
+          <li>Less memory</li>
+          <li>Deletion needs previous node</li>
+        </ul>
+        <div class="diagram">
+[10] → [20] → [30] → NULL
+        </div>
+      </div>
+      <div class="compare-box">
+        <h5>Doubly Linked List</h5>
+        <ul>
+          <li><code>prev</code> + <code>next</code></li>
+          <li>Bidirectional traversal</li>
+          <li>More memory</li>
+          <li>Easier deletion</li>
+        </ul>
+        <div class="diagram">
+NULL ← [10] ↔ [20] ↔ [30] → NULL
+        </div>
+      </div>
+    </div>
+  `,
+
+  'insert-head': `
+    <h2>Insertion at Head (O(1))</h2>
+    <p>Most efficient insertion — just update the head pointer.</p>
+
+    <div class="lang-tabs">
+      <div class="lang-tab active" onclick="switchLang(this, 'py-insert')">Python</div>
+      <div class="lang-tab" onclick="switchLang(this, 'java-insert')">Java</div>
+      <div class="lang-tab" onclick="switchLang(this, 'c-insert')">C</div>
+    </div>
+
+    <div id="py-insert" class="code-block">
+<span class="kw">def</span> insert_at_head(self, data):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;new_node = Node(data)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;new_node.next = self.head<br>
+&nbsp;&nbsp;&nbsp;&nbsp;self.head = new_node
+    </div>
+
+    <div id="java-insert" class="code-block" style="display:none;">
+public void insertAtHead(int data) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Node newNode = new Node(data);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;newNode.next = head;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;head = newNode;<br>
+}
+    </div>
+
+    <div id="c-insert" class="code-block" style="display:none;">
+Node* insertAtHead(Node* head, int data) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Node* newNode = (Node*)malloc(sizeof(Node));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;newNode->data = data;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;newNode->next = head;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return newNode;<br>
+}
+    </div>
+
+    <div class="diagram">
+Before: 20 → 30<br>
+After insert 10: 10 → 20 → 30
+    </div>
+  `,
+
+  'reverse': `
+    <h2>Reverse a Linked List</h2>
+    <p>Classic interview question using three pointers (prev, curr, next).</p>
+
+    <div class="lang-tabs">
+      <div class="lang-tab active" onclick="switchLang(this, 'py-reverse')">Python</div>
+      <div class="lang-tab" onclick="switchLang(this, 'java-reverse')">Java</div>
+    </div>
+
+    <div id="py-reverse" class="code-block">
+<span class="kw">def</span> reverse(head):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;prev = None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;curr = head<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">while</span> curr:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;next_node = curr.next<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curr.next = prev<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prev = curr<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curr = next_node<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> prev
+    </div>
+
+    <div id="java-reverse" class="code-block" style="display:none;">
+public Node reverse(Node head) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Node prev = null, curr = head;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;while (curr != null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Node next = curr.next;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curr.next = prev;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prev = curr;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curr = next;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return prev;<br>
+}
+    </div>
+
+    <div class="diagram">
+Input:  1 → 2 → 3 → 4<br>
+Output: 4 → 3 → 2 → 1
+    </div>
+  `,
+
+  'floyd-cycle': `
+    <h2>Floyd's Cycle Detection (Tortoise and Hare)</h2>
+    <p>Detects cycle using two pointers moving at different speeds.</p>
+
+    <div class="lang-tabs">
+      <div class="lang-tab active" onclick="switchLang(this, 'py-floyd')">Python</div>
+      <div class="lang-tab" onclick="switchLang(this, 'java-floyd')">Java</div>
+    </div>
+
+    <div id="py-floyd" class="code-block">
+<span class="kw">def</span> has_cycle(head):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if not head: return False<br>
+&nbsp;&nbsp;&nbsp;&nbsp;slow = fast = head<br>
+&nbsp;&nbsp;&nbsp;&nbsp;while fast and fast.next:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;slow = slow.next<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fast = fast.next.next<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if slow == fast: return True<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return False
+    </div>
+
+    <div id="java-floyd" class="code-block" style="display:none;">
+public boolean hasCycle(Node head) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if (head == null) return false;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Node slow = head, fast = head;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;while (fast != null && fast.next != null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;slow = slow.next;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fast = fast.next.next;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (slow == fast) return true;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+}
+    </div>
+
+    <div class="diagram">
+Slow moves 1 step, Fast moves 2 steps.<br>
+If they meet → Cycle exists.
+    </div>
+  `,
+
+  'complexity': `
+    <h2>Time Complexity: Linked List vs Array</h2>
+    <table>
+      <tr><th>Operation</th><th>Array</th><th>Linked List</th></tr>
+      <tr><td>Access by Index</td><td>O(1)</td><td>O(n)</td></tr>
+      <tr><td>Insert at Head</td><td>O(n)</td><td>O(1)</td></tr>
+      <tr><td>Insert at Tail</td><td>O(1) amortized</td><td>O(n)</td></tr>
+      <tr><td>Delete at Head</td><td>O(n)</td><td>O(1)</td></tr>
+      <tr><td>Search</td><td>O(n)</td><td>O(n)</td></tr>
+    </table>
+    <div class="note"><strong>Rule:</strong> Use Linked List when you need fast insertions/deletions at the start.</div>
+  `
+};
+
+// Language switching
+function switchLang(tab, id) {
+    const parent = tab.parentElement;
+    parent.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    const container = parent.parentElement;
+    container.querySelectorAll('.code-block').forEach(block => block.style.display = 'none');
+
+    const target = document.getElementById(id);
+    if (target) target.style.display = 'block';
+}
+
+// Toggle sub-topics
+function toggleSubTopics(card) {
+    document.querySelectorAll('.sub-topics').forEach(sub => {
+        if (sub !== card.querySelector('.sub-topics')) sub.classList.remove('active');
+    });
+    const subTopics = card.querySelector('.sub-topics');
+    subTopics.classList.toggle('active');
+    const arrow = card.querySelector('span:last-child');
+    if (arrow) arrow.style.transform = subTopics.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+
+// Show content
+function showContent(e, id) {
+    e.stopImmediatePropagation();
+    const container = document.getElementById('content-container');
+    container.innerHTML = contents[id] || `<p style="color:#f87171;padding:40px;">Content is ready.</p>`;
+    container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+</script>
+
+</body>
+</html>

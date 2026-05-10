@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Programming Basics – Placement Prep Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:radial-gradient(circle at top,#0a1b3d,#020617);color:#e2e8f0;min-height:100vh;line-height:1.7;}
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 70px;z-index:100;background:rgba(2,6,23,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(99,102,241,0.3);}
+    .logo a{font-size:26px;font-weight:800;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent;text-decoration:none;}
+    nav a{margin-left:28px;text-decoration:none;color:#bfc6d4;font-size:15px;font-weight:500;transition:0.3s;padding:6px 12px;border-radius:8px;}
+    nav a:hover{color:white;background:rgba(99,102,241,0.2);}
+    .hero{text-align:center;margin-top:140px;padding:0 20px;}
+    .tag{display:inline-block;padding:8px 24px;border-radius:9999px;background:rgba(99,102,241,0.2);font-size:14px;color:#a5b4fc;margin-bottom:20px;border:1px solid rgba(99,102,241,0.4);}
+    .hero h1{font-size:56px;font-weight:800;background:linear-gradient(135deg,#e0e7ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:20px;line-height:1.2;}
+    .hero p{color:#9ca3af;font-size:18px;max-width:800px;margin:0 auto 30px;}
+    .progress-container{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .progress-stats{display:flex;justify-content:space-between;margin-bottom:12px;font-size:14px;color:#94a3b8;}
+    .progress-track{background:rgba(255,255,255,0.1);height:10px;border-radius:10px;overflow:hidden;}
+    .progress-fill{background:linear-gradient(90deg,#6366f1,#a855f7);height:100%;width:0%;transition:width 0.5s ease;border-radius:10px;}
+    .steps-nav{max-width:1100px;margin:30px auto;padding:0 30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+    .step-btn{padding:12px 28px;background:rgba(255,255,255,0.05);border:2px solid rgba(99,102,241,0.3);border-radius:12px;color:#cbd5e1;font-weight:600;cursor:pointer;transition:all 0.3s;font-size:15px;}
+    .step-btn:hover{border-color:#6366f1;background:rgba(99,102,241,0.1);transform:translateY(-2px);}
+    .step-btn.active{background:linear-gradient(135deg,#6366f1,#a855f7);border-color:transparent;color:white;box-shadow:0 4px 15px rgba(99,102,241,0.3);}
+    .step-btn.completed{border-color:#10b981;background:rgba(16,185,129,0.1);color:#10b981;}
+    .content-section{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .step-content{display:none;animation:fadeIn 0.5s ease;}
+    .step-content.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .step-header{margin-bottom:40px;padding-bottom:20px;border-bottom:2px solid rgba(99,102,241,0.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+    .step-header h2{font-size:36px;font-weight:700;color:#e0e7ff;margin-bottom:12px;}
+    .step-header p{color:#9ca3af;font-size:16px;}
+    .topic-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 28px;margin-bottom:20px;transition:all 0.3s;cursor:pointer;}
+    .topic-card:hover{border-color:#6366f1;transform:translateY(-3px);background:rgba(99,102,241,0.05);}
+    .topic-header{display:flex;align-items:center;justify-content:space-between;}
+    .topic-header h3{font-size:22px;font-weight:600;display:flex;align-items:center;gap:12px;}
+    .topic-icon{font-size:28px;}
+    .arrow{font-size:28px;transition:transform 0.3s;}
+    .sub-topics{display:none;margin-top:20px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.2);}
+    .sub-topics.active{display:block;}
+    .sub-topic{padding:14px 22px;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:10px;transition:0.3s;cursor:pointer;border-left:3px solid transparent;}
+    .sub-topic:hover{background:rgba(99,102,241,0.15);border-left-color:#6366f1;transform:translateX(5px);}
+    .detail-container{margin-top:40px;background:rgba(15,23,42,0.7);border:1px solid rgba(99,102,241,0.3);border-radius:24px;padding:40px;backdrop-filter:blur(8px);}
+    .detail-container h2{font-size:28px;margin-bottom:20px;color:#c4b5fd;}
+    .detail-container h3{font-size:22px;margin:25px 0 15px;color:#a5b4fc;}
+    .detail-container p{margin-bottom:18px;color:#cbd5e1;line-height:1.8;}
+    .detail-container ul,.detail-container ol{margin:18px 0 25px;padding-left:32px;}
+    .detail-container li{margin-bottom:10px;}
+    .code-block{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:24px;margin:25px 0;font-family:'Courier New',monospace;font-size:14px;overflow-x:auto;color:#e2e8f0;white-space:pre;}
+    .example-box{background:rgba(16,185,129,0.1);border-left:5px solid #10b981;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .note-box{background:rgba(234,179,8,0.1);border-left:5px solid #eab308;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .tip-box{background:rgba(59,130,246,0.1);border-left:5px solid #3b82f6;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .warning-box{background:rgba(239,68,68,0.1);border-left:5px solid #ef4444;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    table{width:100%;border-collapse:collapse;margin:25px 0;}
+    th,td{border:1px solid rgba(255,255,255,0.2);padding:12px;text-align:left;}
+    th{background:rgba(99,102,241,0.2);color:#a5b4fc;}
+    .nav-buttons{display:flex;justify-content:space-between;gap:20px;margin-top:50px;padding:40px 0 60px;}
+    .nav-btn{padding:14px 32px;border-radius:12px;font-weight:600;transition:0.3s;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;border:none;font-size:16px;}
+    .nav-btn.prev{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;}
+    .nav-btn:hover{transform:translateY(-2px);opacity:0.9;}
+    .complete-step-btn{background:rgba(16,185,129,0.2);border:2px solid #10b981;color:#10b981;padding:12px 28px;border-radius:12px;font-weight:600;cursor:pointer;transition:0.3s;font-size:14px;}
+    .complete-step-btn:hover{background:#10b981;color:white;}
+    .completed-badge{color:#10b981;font-weight:600;display:flex;align-items:center;gap:8px;}
+    /* ML Recommender */
+    .ml-section{max-width:1100px;margin:0 auto 60px;padding:0 30px;}
+    .ml-box{background:rgba(15,23,42,0.8);border:1px solid rgba(99,102,241,0.4);border-radius:24px;padding:36px;}
+    .ml-box h2{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:8px;}
+    .ml-box p{color:#9ca3af;margin-bottom:24px;}
+    .ml-input-row{display:flex;gap:12px;flex-wrap:wrap;}
+    .ml-input{flex:1;min-width:220px;padding:14px 20px;background:rgba(255,255,255,0.05);border:1px solid rgba(99,102,241,0.3);border-radius:12px;color:#e2e8f0;font-size:15px;font-family:'Poppins',sans-serif;}
+    .ml-input:focus{outline:none;border-color:#6366f1;}
+    .ml-btn{padding:14px 32px;background:linear-gradient(135deg,#6366f1,#a855f7);border:none;border-radius:12px;color:white;font-weight:700;font-size:15px;cursor:pointer;transition:0.3s;font-family:'Poppins',sans-serif;}
+    .ml-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,0.4);}
+    .ml-results{margin-top:28px;display:none;}
+    .ml-results h3{font-size:18px;color:#a5b4fc;margin-bottom:16px;}
+    .ml-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:18px 22px;margin-bottom:12px;display:flex;align-items:center;gap:16px;transition:0.3s;}
+    .ml-card:hover{border-color:#6366f1;background:rgba(99,102,241,0.08);}
+    .ml-score-bar{flex:1;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;}
+    .ml-score-fill{height:100%;background:linear-gradient(90deg,#6366f1,#a855f7);border-radius:4px;transition:width 0.8s ease;}
+    .ml-topic-name{font-weight:600;color:#e0e7ff;min-width:200px;}
+    .ml-pct{color:#a5b4fc;font-size:14px;min-width:45px;text-align:right;}
+    .ml-why{font-size:13px;color:#64748b;margin-top:4px;}
+    .pdf-section{max-width:1100px;margin:0 auto 80px;padding:0 30px;}
+    .pdf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+    .pdf-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px;transition:all 0.3s;text-align:center;}
+    .pdf-card:hover{border-color:#6366f1;transform:translateY(-3px);}
+    .pdf-card h4{font-size:17px;font-weight:600;margin:12px 0 8px;color:#e0e7ff;}
+    .pdf-card p{color:#9ca3af;font-size:14px;margin-bottom:16px;}
+    .pdf-btn{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;border:none;padding:10px 24px;border-radius:9999px;font-size:14px;font-weight:600;cursor:pointer;transition:0.3s;text-decoration:none;display:inline-block;}
+    .pdf-btn:hover{opacity:0.85;transform:translateY(-2px);}
+    .section-title{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:24px;}
+    @media(max-width:768px){header{padding:15px 20px;}nav a{margin-left:10px;font-size:12px;}.hero h1{font-size:32px;}.ml-input-row{flex-direction:column;}}
+</style>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="index.html">🚀 Placement Prep</a></div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="subjects.html">Subjects</a>
+        
+    </nav>
+</header>
+
+<div class="hero">
+    <div class="tag">💻 Step 1 of 6 • Programming Basics Mastery</div>
+    <h1>Build Strong<br>Programming Basics</h1>
+    <p>Master C++, Java, or Python from scratch — variables, loops, functions, OOP, and problem-solving patterns used in every placement test and interview.</p>
+</div>
+
+<div class="progress-container">
+    <div class="progress-stats"><span>📊 Your Progress</span><span id="progressPercent">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="steps-nav">
+    <button class="step-btn active" data-step="1">Step 1: Language Fundamentals</button>
+    <button class="step-btn" data-step="2">Step 2: Control Flow & Functions</button>
+    <button class="step-btn" data-step="3">Step 3: OOP Concepts</button>
+    <button class="step-btn" data-step="4">Step 4: Problem Solving Patterns</button>
+    <button class="step-btn" data-step="5">Step 5: Practice & Competitive Coding</button>
+</div>
+
+<div class="content-section" id="contentSection"></div>
+
+<!-- ML Recommender -->
+<div class="ml-section">
+    <div class="ml-box">
+        <h2>🤖 AI Topic Recommender <span style="font-size:13px;background:rgba(99,102,241,0.2);padding:3px 10px;border-radius:20px;color:#a5b4fc;font-weight:500;margin-left:8px;">TF-IDF Cosine Similarity</span></h2>
+        <p>Describe your current skill level or what you already know — the ML engine will identify which topics to study next using real TF-IDF vector similarity.</p>
+        <div class="ml-input-row">
+            <input class="ml-input" id="mlInput" placeholder="e.g. I know basic loops and variables but struggle with recursion and OOP..." />
+            <button class="ml-btn" onclick="runMLRecommender()">🔍 Get Recommendations</button>
+        </div>
+        <div class="ml-results" id="mlResults">
+            <h3>📌 Recommended Topics for You — ranked by relevance</h3>
+            <div id="mlCards"></div>
+            <div style="margin-top:16px;padding:14px 18px;background:rgba(99,102,241,0.08);border-radius:12px;font-size:13px;color:#64748b;">
+                ℹ️ Algorithm: Each topic is represented as a TF-IDF vector. Your input is also vectorised. Cosine similarity (dot product / product of magnitudes) ranks how closely your profile matches each topic's knowledge requirements.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pdf-section">
+    <h2 class="section-title">📚 Programming Resources</h2>
+    <div class="pdf-grid">
+        <div class="pdf-card"><div style="font-size:40px">🐍</div><h4>Python for Beginners</h4><p>Complete Python tutorial from GFG — syntax to OOP</p><a class="pdf-btn" href="https://www.geeksforgeeks.org/python-programming-language-tutorial/" target="_blank">📖 Start Learning</a></div>
+        <div class="pdf-card"><div style="font-size:40px">☕</div><h4>Java Programming Guide</h4><p>Java fundamentals — data types, loops, OOP, collections</p><a class="pdf-btn" href="https://www.geeksforgeeks.org/java/" target="_blank">📖 Start Learning</a></div>
+        <div class="pdf-card"><div style="font-size:40px">⚙️</div><h4>C++ Complete Guide</h4><p>C++ from basics to STL — ideal for competitive programming</p><a class="pdf-btn" href="https://www.geeksforgeeks.org/c-plus-plus/" target="_blank">📖 Start Learning</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🏆</div><h4>LeetCode Easy Problems</h4><p>Start solving easy problems to build confidence and speed</p><a class="pdf-btn" href="https://leetcode.com/problemset/?difficulty=EASY" target="_blank">🔗 Solve Now</a></div>
+        <div class="pdf-card"><div style="font-size:40px">📋</div><h4>HackerRank Practice</h4><p>Structured programming challenges from beginner level</p><a class="pdf-btn" href="https://www.hackerrank.com/domains/tutorials/30-days-of-code" target="_blank">🔗 Practice</a></div>
+        <div class="pdf-card"><div style="font-size:40px">📊</div><h4>Big-O Cheat Sheet</h4><p>Time & space complexity for all common algorithms</p><a class="pdf-btn" href="https://www.bigocheatsheet.com/" target="_blank">📖 View Sheet</a></div>
+    </div>
+</div>
+
+<script>
+const stepsData = {
+    1: { title: "💻 Language Fundamentals", description: "Master variables, data types, operators, and I/O in C++, Java, or Python.", topics: [
+        { title: "Variables & Data Types", icon: "📦", subs: [
+            {id:"datatypes", title:"Primitive Data Types (int, float, char, bool)"},
+            {id:"variables", title:"Variable Declaration & Scope"},
+            {id:"typecasting", title:"Type Casting & Conversion"},
+            {id:"operators", title:"Operators: Arithmetic, Relational, Logical, Bitwise"}
+        ]},
+        { title: "Input/Output & Strings", icon: "🖨️", subs: [
+            {id:"io", title:"Standard Input/Output"},
+            {id:"strings", title:"String Operations & Methods"},
+            {id:"formatting", title:"String Formatting & Parsing"}
+        ]}
+    ]},
+    2: { title: "🔄 Control Flow & Functions", description: "Loops, conditionals, functions, and recursion — the backbone of every program.", topics: [
+        { title: "Control Flow", icon: "🔀", subs: [
+            {id:"conditionals", title:"if / else / switch-case"},
+            {id:"loops", title:"for, while, do-while Loops"},
+            {id:"break-continue", title:"break, continue, return"},
+            {id:"nested-loops", title:"Nested Loops & Patterns"}
+        ]},
+        { title: "Functions", icon: "🔧", subs: [
+            {id:"functions", title:"Function Definition, Call, Return"},
+            {id:"params", title:"Parameters: Pass by Value vs Reference"},
+            {id:"recursion-basics", title:"Recursion — Base Case & Recursive Case"},
+            {id:"lambda", title:"Lambda / Anonymous Functions"}
+        ]}
+    ]},
+    3: { title: "🏛️ OOP Concepts", description: "Object-Oriented Programming: classes, objects, inheritance, polymorphism and more.", topics: [
+        { title: "Core OOP", icon: "🧱", subs: [
+            {id:"classes-objects", title:"Classes & Objects"},
+            {id:"encap-oop", title:"Encapsulation with Access Modifiers"},
+            {id:"inheritance-oop", title:"Inheritance — Types & Usage"},
+            {id:"polymorphism-oop", title:"Polymorphism — Overloading & Overriding"}
+        ]},
+        { title: "Advanced OOP", icon: "⚡", subs: [
+            {id:"abstraction-oop", title:"Abstraction — Abstract Classes & Interfaces"},
+            {id:"constructor-oop", title:"Constructors, Destructors, this keyword"},
+            {id:"static-methods", title:"Static Methods & Class Variables"},
+            {id:"design-principles", title:"SOLID Design Principles"}
+        ]}
+    ]},
+    4: { title: "🧩 Problem Solving Patterns", description: "Learn the most common coding patterns used in 80% of placement problems.", topics: [
+        { title: "Fundamental Patterns", icon: "🎯", subs: [
+            {id:"two-pointer", title:"Two Pointer Technique"},
+            {id:"sliding-window", title:"Sliding Window Pattern"},
+            {id:"prefix-sum", title:"Prefix Sum / Running Sum"},
+            {id:"hashing-pattern", title:"Hashing for O(1) Lookups"}
+        ]},
+        { title: "Advanced Patterns", icon: "🚀", subs: [
+            {id:"divide-conquer", title:"Divide and Conquer"},
+            {id:"greedy-intro", title:"Greedy Approach"},
+            {id:"dp-intro", title:"Dynamic Programming Introduction"},
+            {id:"backtracking-intro", title:"Backtracking Basics"}
+        ]}
+    ]},
+    5: { title: "🏆 Practice & Competitive Coding", description: "Convert knowledge into speed — the key to cracking placement tests.", topics: [
+        { title: "Competitive Programming", icon: "⚔️", subs: [
+            {id:"cp-setup", title:"Environment Setup: Online Judges"},
+            {id:"stl-collections", title:"STL / Collections — must-know methods"},
+            {id:"time-management", title:"Time Management in Coding Tests"},
+            {id:"contest-strategy", title:"Test-Taking Strategy & Common Mistakes"}
+        ]},
+        { title: "Interview Coding", icon: "🎤", subs: [
+            {id:"whiteboard", title:"Whiteboard Coding Approach"},
+            {id:"think-aloud", title:"Thinking Aloud Technique"},
+            {id:"code-quality", title:"Writing Clean, Readable Code"},
+            {id:"edge-cases", title:"Handling Edge Cases & Corner Cases"}
+        ]}
+    ]}
+};
+
+const detailedContent = {
+    'datatypes': `<h2>Primitive Data Types</h2><p>Every programming language has built-in primitive types. Knowing sizes and ranges prevents overflow bugs — a common interview trap.</p>
+<table><tr><th>Type</th><th>C++</th><th>Java</th><th>Python</th><th>Size</th></tr>
+<tr><td>Integer</td><td>int</td><td>int</td><td>int</td><td>4 bytes</td></tr>
+<tr><td>Long</td><td>long long</td><td>long</td><td>int (unlimited)</td><td>8 bytes</td></tr>
+<tr><td>Float</td><td>float</td><td>float</td><td>float</td><td>4 bytes</td></tr>
+<tr><td>Double</td><td>double</td><td>double</td><td>float</td><td>8 bytes</td></tr>
+<tr><td>Character</td><td>char</td><td>char</td><td>str (len 1)</td><td>1/2 bytes</td></tr>
+<tr><td>Boolean</td><td>bool</td><td>boolean</td><td>bool</td><td>1 byte</td></tr></table>
+<div class="warning-box">⚠️ Integer overflow is a common bug: 2^31 - 1 = 2,147,483,647. If result can exceed this, use <code>long long</code> in C++ or <code>long</code> in Java.</div>
+<div class="tip-box">💡 In Python, integers have unlimited precision — no overflow! But float precision is still limited (~15-17 significant digits).</div>`,
+
+    'variables': `<h2>Variable Declaration & Scope</h2><p>Scope determines where a variable can be accessed. Understanding scope prevents bugs and is tested in interviews.</p>
+<div class="code-block">// C++
+int globalVar = 10;  // global scope
+void function() {
+    int localVar = 5;  // local scope — only inside this function
+    {
+        int blockVar = 3;  // block scope
+    }
+    // blockVar not accessible here
+}
+
+# Python
+x = 10  # module scope
+def func():
+    y = 5   # local scope
+    global x  # access global x
+    x = 20</div>
+<div class="note-box">📝 Rule: Variables declared inside a block { } are destroyed when the block ends. This is called <strong>block scope</strong>.</div>`,
+
+    'typecasting': `<h2>Type Casting & Conversion</h2><p>Converting one data type to another — critical for avoiding precision loss and runtime errors.</p>
+<div class="code-block">// C++ — Explicit casting
+int a = 5, b = 2;
+double result = (double)a / b;  // 2.5 (not 2!)
+// Without cast: 5/2 = 2 (integer division — loses decimal!)
+
+// Java
+int x = (int) 3.99;  // x = 3 (truncates)
+double d = (double) 5 / 2;  // 2.5
+
+# Python — dynamic typing
+x = int("42")    # string to int
+y = float(7)     # int to float  
+z = str(100)     # int to string</div>
+<div class="warning-box">⚠️ Integer division truncates decimals. Always cast to float/double before division when you need decimal results.</div>`,
+
+    'operators': `<h2>Operators: Complete Guide</h2>
+<table><tr><th>Type</th><th>Operators</th><th>Example</th></tr>
+<tr><td>Arithmetic</td><td>+ - * / % **</td><td>10 % 3 = 1</td></tr>
+<tr><td>Relational</td><td>== != > < >= <=</td><td>5 > 3 → true</td></tr>
+<tr><td>Logical</td><td>&& || !</td><td>true && false → false</td></tr>
+<tr><td>Bitwise</td><td>& | ^ ~ << >></td><td>5 & 3 = 1</td></tr>
+<tr><td>Assignment</td><td>= += -= *= /=</td><td>x += 5</td></tr>
+<tr><td>Ternary</td><td>? :</td><td>x > 0 ? "pos" : "neg"</td></tr></table>
+<div class="tip-box">💡 Bitwise tricks: Check if even → n & 1 == 0. Multiply by 2 → n << 1. Divide by 2 → n >> 1. These are O(1) and faster than arithmetic.</div>`,
+
+    'io': `<h2>Standard Input / Output</h2>
+<div class="code-block">// C++
+#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int n; string name;
+    cin >> n >> name;          // read int and string
+    cout << "Hello " << name << endl;
+    return 0;
+}
+
+// Java
+import java.util.Scanner;
+Scanner sc = new Scanner(System.in);
+int n = sc.nextInt();
+String s = sc.next();  // next() for word, nextLine() for full line
+
+# Python
+n = int(input())           # read and convert to int
+name = input()             # read string
+a, b = map(int, input().split())  # read two integers on one line</div>
+<div class="tip-box">💡 Fast I/O in C++: Add <code>ios_base::sync_with_stdio(false); cin.tie(NULL);</code> at the start of main() — reduces I/O time by ~10x in competitive programming.</div>`,
+
+    'strings': `<h2>String Operations & Methods</h2><p>Strings are one of the most commonly tested topics in placement exams. Master these operations:</p>
+<div class="code-block">// C++ (std::string)
+string s = "Hello World";
+s.length();         // 11
+s.substr(6, 5);     // "World"
+s.find("World");    // 6
+s.replace(0,5,"Hi"); // "Hi World"
+reverse(s.begin(), s.end());
+
+// Java
+String s = "Hello";
+s.length(); s.charAt(0); s.substring(1,3);
+s.toLowerCase(); s.toUpperCase();
+s.split(" ");  // String array
+StringBuilder sb = new StringBuilder(s); // for mutability
+
+# Python
+s = "hello world"
+s.upper(); s.lower(); s.split()
+s.replace("hello","hi"); s.strip()
+s[::-1]   # reverse
+"".join(reversed(s))  # reverse alternate</div>`,
+
+    'formatting': `<h2>String Formatting & Parsing</h2>
+<div class="code-block"># Python (most readable)
+name, age = "Alice", 25
+print(f"Name: {name}, Age: {age}")       # f-string (Python 3.6+)
+print("Name: %s, Age: %d" % (name, age)) # old style
+print("Score: {:.2f}".format(3.14159))   # 3.14
+
+// Java
+String.format("Name: %s, Age: %d", name, age);
+System.out.printf("%.2f%n", 3.14159);
+
+// C++
+printf("Name: %s, Age: %d\\n", name.c_str(), age);
+// Or use cout with setprecision:
+cout << fixed << setprecision(2) << 3.14159; // 3.14</div>`,
+
+    'conditionals': `<h2>Conditionals: if / else / switch</h2>
+<div class="code-block">// if-else ladder (C++/Java)
+if (score >= 90) grade = 'A';
+else if (score >= 80) grade = 'B';
+else if (score >= 70) grade = 'C';
+else grade = 'F';
+
+// switch-case (C++/Java) — faster for many fixed values
+switch (day) {
+    case 1: cout << "Monday"; break;
+    case 2: cout << "Tuesday"; break;
+    default: cout << "Other";
+}
+
+# Python — no switch, use dict or match (3.10+)
+grades = {90:'A', 80:'B', 70:'C'}
+grade = next((v for k,v in grades.items() if score>=k), 'F')</div>
+<div class="tip-box">💡 Short-circuit evaluation: In <code>A && B</code>, if A is false, B is not evaluated. Use this to prevent null pointer errors: <code>if (arr != null && arr.length > 0)</code></div>`,
+
+    'loops': `<h2>for, while, do-while Loops</h2>
+<div class="code-block">// for loop — when count is known
+for (int i = 0; i < n; i++) { /* body */ }
+
+// while loop — when count is unknown
+while (condition) { /* body */ }
+
+// do-while — executes body at least once
+do { /* body */ } while (condition);
+
+// Range-based for (C++11 / Java enhanced for)
+for (int x : arr) cout << x;
+
+# Python
+for i in range(n): print(i)
+for i in range(0, n, 2): print(i)  # step=2
+while condition: ...
+
+# List comprehension (Python) — very fast
+squares = [x**2 for x in range(10)]</div>
+<div class="note-box">📝 Common loop patterns: Sum of array, find max/min, count occurrences, check if sorted, two-pointer in array.</div>`,
+
+    'break-continue': `<h2>break, continue, return</h2>
+<table><tr><th>Keyword</th><th>Effect</th><th>Use Case</th></tr>
+<tr><td>break</td><td>Exit the loop immediately</td><td>Found target, stop searching</td></tr>
+<tr><td>continue</td><td>Skip current iteration</td><td>Skip invalid/unwanted values</td></tr>
+<tr><td>return</td><td>Exit function, optionally return value</td><td>Early exit from function</td></tr></table>
+<div class="code-block">// Find first negative number
+for (int i = 0; i < n; i++) {
+    if (arr[i] < 0) {
+        cout << "First negative: " << arr[i];
+        break;  // stop searching
+    }
+}
+// Skip even numbers, sum only odds
+int sum = 0;
+for (int x : arr) {
+    if (x % 2 == 0) continue; // skip even
+    sum += x;
+}</div>`,
+
+    'nested-loops': `<h2>Nested Loops & Patterns</h2><p>Nested loops are O(n²) — use carefully. They're used in matrix operations, bubble sort, and pattern printing.</p>
+<div class="code-block">// Print star triangle
+for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= i; j++) cout << "*";
+    cout << "\n";
+}
+
+// Matrix traversal
+for (int i = 0; i < rows; i++)
+    for (int j = 0; j < cols; j++)
+        cout << mat[i][j] << " ";
+
+// Bubble Sort (O(n²))
+for (int i = 0; i < n-1; i++)
+    for (int j = 0; j < n-i-1; j++)
+        if (arr[j] > arr[j+1]) swap(arr[j], arr[j+1]);</div>`,
+
+    'functions': `<h2>Function Definition, Call & Return</h2>
+<div class="code-block">// C++
+int add(int a, int b) { return a + b; }
+void printHello() { cout << "Hello!"; }  // void = no return
+
+// Java
+public static int multiply(int a, int b) { return a * b; }
+
+# Python
+def greet(name):
+    return f"Hello, {name}!"
+
+def multi_return():
+    return 1, 2, 3  # returns a tuple
+
+a, b, c = multi_return()  # unpacking</div>
+<div class="tip-box">💡 Functions should do ONE thing (Single Responsibility). If a function is longer than 20 lines, consider splitting it. Clean code = better interviews.</div>`,
+
+    'params': `<h2>Pass by Value vs Pass by Reference</h2>
+<table><tr><th>Concept</th><th>Pass by Value</th><th>Pass by Reference</th></tr>
+<tr><td>What's passed</td><td>Copy of value</td><td>Memory address</td></tr>
+<tr><td>Original changed?</td><td>No</td><td>Yes</td></tr>
+<tr><td>Use case</td><td>Read-only data</td><td>Modify data / large objects</td></tr></table>
+<div class="code-block">// C++ — explicit reference with &
+void doubleIt(int &x) { x *= 2; }  // modifies original
+void noChange(int x) { x *= 2; }   // only changes copy
+
+// Java — primitives always pass by value; objects pass reference copy
+// Python — everything is pass by reference (object reference)</div>`,
+
+    'recursion-basics': `<h2>Recursion — Base Case & Recursive Case</h2><p>Recursion is calling a function inside itself. Every recursive function MUST have a base case to stop infinite recursion.</p>
+<div class="code-block">// Factorial: n! = n × (n-1)!
+int factorial(int n) {
+    if (n == 0 || n == 1) return 1;  // BASE CASE
+    return n * factorial(n - 1);     // RECURSIVE CASE
+}
+
+// Fibonacci
+int fib(int n) {
+    if (n <= 1) return n;            // base case
+    return fib(n-1) + fib(n-2);     // O(2^n) — use memoization!
+}
+
+// Sum of array
+int sum(int arr[], int n) {
+    if (n == 0) return 0;
+    return arr[n-1] + sum(arr, n-1);
+}</div>
+<div class="warning-box">⚠️ Without a base case → StackOverflowError. Recursion depth in Java/C++ is ~1000–5000 calls. For large n, use iteration or memoization.</div>`,
+
+    'lambda': `<h2>Lambda / Anonymous Functions</h2>
+<div class="code-block">// C++ lambda
+auto add = [](int a, int b) { return a + b; };
+sort(arr, arr+n, [](int a, int b) { return a > b; }); // sort descending
+
+// Java lambda (Java 8+)
+Comparator&lt;Integer&gt; cmp = (a, b) -> b - a;  // reverse sort
+List.stream().filter(x -> x > 0).collect(Collectors.toList());
+
+# Python lambda
+square = lambda x: x**2
+sorted_list = sorted(lst, key=lambda x: -x)  # sort descending
+evens = list(filter(lambda x: x%2==0, lst))</div>`,
+
+    'classes-objects': `<h2>Classes & Objects</h2><p>A class is a blueprint; an object is an instance of that blueprint.</p>
+<div class="code-block">// C++
+class Car {
+public:
+    string brand;
+    int speed;
+    Car(string b, int s) : brand(b), speed(s) {}
+    void accelerate() { speed += 10; }
+};
+Car myCar("Toyota", 60);
+myCar.accelerate();
+
+# Python
+class Car:
+    def __init__(self, brand, speed):
+        self.brand = brand
+        self.speed = speed
+    def accelerate(self):
+        self.speed += 10
+
+my_car = Car("Toyota", 60)</div>`,
+
+    'encap-oop': `<h2>Encapsulation with Access Modifiers</h2>
+<table><tr><th>Modifier</th><th>Same Class</th><th>Same Package</th><th>Subclass</th><th>Everywhere</th></tr>
+<tr><td>private</td><td>✅</td><td>❌</td><td>❌</td><td>❌</td></tr>
+<tr><td>protected</td><td>✅</td><td>✅</td><td>✅</td><td>❌</td></tr>
+<tr><td>public</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr></table>
+<div class="code-block">class BankAccount {
+private:
+    double balance;  // cannot be directly accessed outside
+public:
+    void deposit(double amount) {
+        if (amount > 0) balance += amount;  // validation inside
+    }
+    double getBalance() { return balance; }  // controlled access
+};</div>`,
+
+    'inheritance-oop': `<h2>Inheritance — Types & Usage</h2>
+<div class="code-block">// Single Inheritance
+class Animal { public: void eat() { cout << "Eating"; } };
+class Dog : public Animal { public: void bark() { cout << "Woof"; } };
+Dog d; d.eat(); d.bark();  // Dog inherits eat() from Animal
+
+// Multilevel: A → B → C
+class C : public B { };  // C inherits from B which inherits from A
+
+// Java — extends keyword
+class Dog extends Animal { ... }
+
+# Python
+class Dog(Animal):
+    def __init__(self):
+        super().__init__()  # call parent constructor</div>
+<div class="warning-box">⚠️ C++ supports multiple inheritance (class C : public A, public B). Java does NOT — use interfaces instead. This avoids the diamond problem.</div>`,
+
+    'polymorphism-oop': `<h2>Polymorphism</h2>
+<table><tr><th>Type</th><th>Compile-time</th><th>Runtime</th></tr>
+<tr><td>Also called</td><td>Static / Method Overloading</td><td>Dynamic / Method Overriding</td></tr>
+<tr><td>How</td><td>Same name, different parameters</td><td>Same signature, different class</td></tr>
+<tr><td>Resolved by</td><td>Compiler</td><td>JVM/Runtime</td></tr></table>
+<div class="code-block">// Overloading (compile-time)
+int add(int a, int b) { return a+b; }
+double add(double a, double b) { return a+b; }
+
+// Overriding (runtime)
+class Animal { virtual void speak() { cout << "..."; } };
+class Dog : Animal { void speak() override { cout << "Woof"; } };
+Animal* a = new Dog();
+a->speak();  // calls Dog's speak() — runtime polymorphism!</div>`,
+
+    'abstraction-oop': `<h2>Abstraction — Abstract Classes & Interfaces</h2>
+<table><tr><th>Feature</th><th>Abstract Class</th><th>Interface</th></tr>
+<tr><td>Can have concrete methods</td><td>Yes</td><td>Java 8+: default methods</td></tr>
+<tr><td>Constructor</td><td>Yes</td><td>No</td></tr>
+<tr><td>Multiple inheritance</td><td>No (Java)</td><td>Yes</td></tr>
+<tr><td>State (fields)</td><td>Yes</td><td>Only static final</td></tr></table>`,
+
+    'constructor-oop': `<h2>Constructors, Destructors & this</h2>
+<div class="code-block">// C++
+class Dog {
+    string name;
+public:
+    Dog(string n) : name(n) {}        // constructor
+    Dog(const Dog& d) : name(d.name) {} // copy constructor
+    ~Dog() { cout << "Destroyed"; }   // destructor
+    void setName(string n) { this->name = n; } // this pointer
+};
+
+// Java — no destructor, garbage collected
+class Dog {
+    private String name;
+    public Dog(String name) { this.name = name; }
+    // finalize() is deprecated
+}</div>`,
+
+    'static-methods': `<h2>Static Methods & Class Variables</h2>
+<div class="code-block">class Counter {
+    static int count = 0;  // shared across all instances
+    Counter() { count++; }
+    static int getCount() { return count; }  // can call without object
+};
+Counter a, b, c;
+Counter::getCount();  // 3
+
+// Java
+class MathUtils {
+    public static int square(int n) { return n * n; }
+}
+int result = MathUtils.square(5);  // no object needed!</div>
+<div class="note-box">📝 Static methods cannot use <code>this</code> — they belong to the class, not an instance. Static variables are shared memory across all objects.</div>`,
+
+    'design-principles': `<h2>SOLID Design Principles</h2>
+<ul>
+<li><strong>S — Single Responsibility:</strong> A class should have only one reason to change.</li>
+<li><strong>O — Open/Closed:</strong> Open for extension, closed for modification.</li>
+<li><strong>L — Liskov Substitution:</strong> Subclasses must be usable wherever parent is used.</li>
+<li><strong>I — Interface Segregation:</strong> Don't force classes to implement unused methods.</li>
+<li><strong>D — Dependency Inversion:</strong> Depend on abstractions, not concrete classes.</li>
+</ul>
+<div class="tip-box">💡 In interviews, mentioning SOLID principles when discussing design decisions signals senior-level thinking and stands out strongly.</div>`,
+
+    'two-pointer': `<h2>Two Pointer Technique</h2><p>Two pointers move through an array from different positions. Reduces O(n²) to O(n) for many problems.</p>
+<div class="code-block">// Check if pair sums to target (sorted array)
+int left = 0, right = n - 1;
+while (left < right) {
+    int sum = arr[left] + arr[right];
+    if (sum == target) return true;
+    else if (sum < target) left++;
+    else right--;
+}
+// Time: O(n), Space: O(1)
+
+// Reverse a string
+void reverse(string &s) {
+    int l = 0, r = s.length() - 1;
+    while (l < r) swap(s[l++], s[r--]);
+}</div>`,
+
+    'sliding-window': `<h2>Sliding Window Pattern</h2><p>Maintain a window of elements and slide it across the array. Avoids redundant computation.</p>
+<div class="code-block">// Maximum sum subarray of size k
+int maxSum(int arr[], int n, int k) {
+    int windowSum = 0;
+    for (int i = 0; i < k; i++) windowSum += arr[i];  // first window
+    int maxSum = windowSum;
+    for (int i = k; i < n; i++) {
+        windowSum += arr[i] - arr[i-k];  // slide: add new, remove old
+        maxSum = max(maxSum, windowSum);
+    }
+    return maxSum;
+}
+// Time: O(n), Space: O(1) — much better than O(nk) brute force!</div>`,
+
+    'prefix-sum': `<h2>Prefix Sum / Running Sum</h2>
+<div class="code-block">// Build prefix sum array
+int prefix[n];
+prefix[0] = arr[0];
+for (int i = 1; i < n; i++) prefix[i] = prefix[i-1] + arr[i];
+
+// Sum of range [l, r] in O(1):
+int rangeSum = prefix[r] - (l > 0 ? prefix[l-1] : 0);
+// Without prefix: O(n) per query. With prefix: O(1)!
+
+# Python
+from itertools import accumulate
+prefix = list(accumulate(arr))</div>`,
+
+    'hashing-pattern': `<h2>Hashing for O(1) Lookups</h2>
+<div class="code-block">// Count frequencies
+unordered_map&lt;int,int&gt; freq;
+for (int x : arr) freq[x]++;
+
+// Check if element exists
+if (freq.count(target)) cout << "Found!";
+
+// Two Sum problem using hash map
+unordered_map&lt;int,int&gt; seen;
+for (int i = 0; i < n; i++) {
+    int complement = target - arr[i];
+    if (seen.count(complement)) return {seen[complement], i};
+    seen[arr[i]] = i;
+}
+// Time: O(n), Space: O(n) — beats O(n²) brute force</div>`,
+
+    'divide-conquer': `<h2>Divide and Conquer</h2><p>Split problem into sub-problems, solve each, combine results. Classic examples: Merge Sort, Quick Sort, Binary Search.</p>
+<div class="code-block">// Merge Sort — O(n log n)
+void mergeSort(int arr[], int l, int r) {
+    if (l >= r) return;               // base case
+    int mid = (l + r) / 2;
+    mergeSort(arr, l, mid);           // divide left
+    mergeSort(arr, mid+1, r);         // divide right
+    merge(arr, l, mid, r);            // conquer (merge)
+}</div>`,
+
+    'greedy-intro': `<h2>Greedy Approach</h2><p>Make the locally optimal choice at each step, hoping it leads to the global optimum. Works when the greedy choice property and optimal substructure hold.</p>
+<ul><li>Activity Selection Problem — pick the activity that finishes earliest</li><li>Fractional Knapsack — take item with highest value/weight ratio first</li><li>Huffman Coding — build optimal prefix code</li></ul>
+<div class="tip-box">💡 Greedy doesn't always work (0/1 Knapsack needs DP). Prove greedy works before using it.</div>`,
+
+    'dp-intro': `<h2>Dynamic Programming Introduction</h2><p>DP = Recursion + Memoization (top-down) OR Tabulation (bottom-up). Solves overlapping subproblems optimally.</p>
+<div class="code-block">// Fibonacci with memoization (top-down DP)
+int memo[1001] = {-1};
+int fib(int n) {
+    if (n <= 1) return n;
+    if (memo[n] != -1) return memo[n];
+    return memo[n] = fib(n-1) + fib(n-2);  // O(n) now!
+}
+
+// Bottom-up tabulation
+int dp[n+1];
+dp[0] = 0; dp[1] = 1;
+for (int i = 2; i <= n; i++) dp[i] = dp[i-1] + dp[i-2];</div>`,
+
+    'backtracking-intro': `<h2>Backtracking Basics</h2><p>Try all possibilities, undo (backtrack) if a path doesn't work. Used in: N-Queens, Sudoku, permutations, subsets.</p>
+<div class="code-block">// Generate all permutations
+void permute(vector&lt;int&gt; &arr, int start, vector&lt;vector&lt;int&gt;&gt; &result) {
+    if (start == arr.size()) { result.push_back(arr); return; }
+    for (int i = start; i < arr.size(); i++) {
+        swap(arr[start], arr[i]);       // choose
+        permute(arr, start+1, result);  // explore
+        swap(arr[start], arr[i]);       // unchoose (backtrack)
+    }
+}</div>`,
+
+    'cp-setup': `<h2>Online Judge Setup</h2><ul>
+<li><strong>LeetCode:</strong> Best for placements & FAANG — focus here first</li>
+<li><strong>HackerRank:</strong> Used by TCS, Infosys, Wipro for assessments directly</li>
+<li><strong>CodeChef:</strong> Monthly contests to improve speed</li>
+<li><strong>Codeforces:</strong> Competitive programming — tough problems</li>
+<li><strong>GeeksforGeeks:</strong> Best for concept learning + company-tagged problems</li>
+</ul>
+<div class="tip-box">💡 Strategy: 2 weeks on LeetCode Easy → 4 weeks on Medium → mock tests on HackerRank. This mirrors the actual placement pattern for service companies.</div>`,
+
+    'stl-collections': `<h2>STL / Collections — Must Know</h2>
+<div class="code-block">// C++ STL
+vector&lt;int&gt; v;       // dynamic array
+stack&lt;int&gt; st;       // LIFO
+queue&lt;int&gt; q;        // FIFO
+priority_queue&lt;int&gt; pq;  // max-heap
+map&lt;int,int&gt; m;      // sorted key-value
+unordered_map&lt;int,int&gt; um;  // O(1) avg hash map
+set&lt;int&gt; s;          // unique sorted
+
+// Java Collections
+ArrayList, LinkedList, Stack, Queue, PriorityQueue
+HashMap, TreeMap, HashSet, TreeSet
+
+# Python
+list, tuple, dict, set, collections.deque
+from heapq import heappush, heappop  # min-heap</div>`,
+
+    'time-management': `<h2>Time Management in Coding Tests</h2>
+<ul>
+<li>Read ALL problems first (30 seconds each) — identify easy ones</li>
+<li>Solve easiest problems first — secure partial/full marks</li>
+<li>If stuck for 10 minutes, move on — come back later</li>
+<li>Leave 10% of time for review and edge cases</li>
+</ul>
+<div class="note-box">📝 TCS NQT allocates 75 minutes for 26 questions. That's under 3 minutes per question. Practice speed with timed mock tests.</div>`,
+
+    'contest-strategy': `<h2>Test-Taking Strategy</h2>
+<ul>
+<li><strong>Read examples carefully</strong> — they reveal hidden constraints</li>
+<li><strong>Think before coding</strong> — 2 minutes planning saves 10 minutes debugging</li>
+<li><strong>Handle edge cases:</strong> empty input, n=0, n=1, negative numbers, overflow</li>
+<li><strong>Start with brute force</strong> — then optimize if time allows</li>
+<li><strong>Comment your approach</strong> — shows thinking even if code is incomplete</li>
+</ul>`,
+
+    'whiteboard': `<h2>Whiteboard Coding Approach</h2>
+<ol>
+<li><strong>Clarify:</strong> Ask about constraints, input size, edge cases</li>
+<li><strong>Example:</strong> Draw a small example to understand the problem</li>
+<li><strong>Approach:</strong> Explain your approach before coding</li>
+<li><strong>Code:</strong> Write clean code, narrate as you go</li>
+<li><strong>Test:</strong> Trace through your code with the example</li>
+<li><strong>Complexity:</strong> State time and space complexity</li>
+</ol>`,
+
+    'think-aloud': `<h2>Thinking Aloud Technique</h2><p>Interviewers want to understand your thought process, not just the answer. Narrate as you think.</p>
+<div class="example-box">✅ Good: "So I'm thinking about this — if I sort the array first, then I can use binary search to find pairs. The sort is O(n log n) and binary search is O(log n), giving total O(n log n). But wait, two pointers after sorting gives O(n) for the search part, so total is O(n log n) which is the same but simpler to code..."</div>`,
+
+    'code-quality': `<h2>Writing Clean, Readable Code</h2>
+<ul>
+<li>Use meaningful variable names: <code>maxProfit</code> not <code>x</code></li>
+<li>Add brief comments for non-obvious logic</li>
+<li>Consistent indentation (2 or 4 spaces)</li>
+<li>Extract repeated logic into helper functions</li>
+<li>Avoid magic numbers: <code>const int MAXN = 1e5 + 5;</code></li>
+</ul>`,
+
+    'edge-cases': `<h2>Handling Edge Cases</h2>
+<ul>
+<li><strong>Empty input:</strong> arr = [], n = 0, s = ""</li>
+<li><strong>Single element:</strong> n = 1</li>
+<li><strong>All same elements:</strong> [5, 5, 5, 5]</li>
+<li><strong>Negative numbers:</strong> [-3, -1, -5]</li>
+<li><strong>Integer overflow:</strong> sum of large numbers</li>
+<li><strong>Sorted / reverse sorted input</strong></li>
+</ul>
+<div class="tip-box">💡 Always test your solution with: minimum size input, maximum size input, and the examples given. Interviewers specifically watch for edge case awareness.</div>`
+};
+
+let currentStep = 1;
+let completedSteps = JSON.parse(localStorage.getItem('prog_completedSteps') || '[]');
+
+function updateProgress() {
+    const pct = (completedSteps.length / 5) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPercent').textContent = Math.round(pct) + '%';
+    document.querySelectorAll('.step-btn').forEach(b => b.classList.toggle('completed', completedSteps.includes(parseInt(b.dataset.step))));
+}
+
+function markStepComplete(step) {
+    if (!completedSteps.includes(step)) {
+        completedSteps.push(step);
+        localStorage.setItem('prog_completedSteps', JSON.stringify(completedSteps));
+        updateProgress(); renderStepContent(step);
+    }
+}
+
+function renderStepContent(step) {
+    currentStep = step;
+    const sd = stepsData[step];
+    const isC = completedSteps.includes(step);
+    let html = `<div class="step-content active"><div class="step-header"><div><h2>${sd.title}</h2><p>${sd.description}</p></div>${!isC ? `<button class="complete-step-btn" onclick="markStepComplete(${step})">✓ Mark as Complete</button>` : '<div class="completed-badge">✓ Step Completed! 🎉</div>'}</div>`;
+    sd.topics.forEach(t => {
+        html += `<div class="topic-card" onclick="toggleSubTopics(this)"><div class="topic-header"><h3><span class="topic-icon">${t.icon}</span> ${t.title}</h3><span class="arrow">›</span></div><div class="sub-topics">`;
+        t.subs.forEach(s => { html += `<div class="sub-topic" onclick="showContent(event,'${s.id}')">${s.title}</div>`; });
+        html += `</div></div>`;
+    });
+    html += `<div class="detail-container" id="detailContainer"><p style="color:#94a3b8;text-align:center;">💻 Click on any topic above to view detailed explanations and code examples.</p></div>
+    <div class="nav-buttons">${step > 1 ? `<button class="nav-btn prev" onclick="changeStep(${step - 1})">← Previous</button>` : '<div></div>'}${step < 5 ? `<button class="nav-btn next" onclick="changeStep(${step + 1})">Next →</button>` : `<button class="nav-btn next" onclick="window.location.href='step2_dsa.html'">Next: DSA →</button>`}</div></div>`;
+    document.getElementById('contentSection').innerHTML = html;
+    document.querySelectorAll('.step-btn').forEach(b => b.classList.toggle('active', parseInt(b.dataset.step) === step));
+}
+
+function changeStep(s) { if (s >= 1 && s <= 5) { renderStepContent(s); window.scrollTo({ top: 0, behavior: 'smooth' }); } }
+function toggleSubTopics(card) { const sub = card.querySelector('.sub-topics'); const arrow = card.querySelector('.arrow'); document.querySelectorAll('.sub-topics').forEach(s => { if (s !== sub) s.classList.remove('active'); }); sub.classList.toggle('active'); if (arrow) arrow.style.transform = sub.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)'; }
+function showContent(e, id) { e.stopPropagation(); const dc = document.getElementById('detailContainer'); dc.innerHTML = detailedContent[id] || '<p>Content coming soon!</p>'; dc.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+
+// ============================================================
+// ML RECOMMENDER — TF-IDF Cosine Similarity (pure JS)
+// ============================================================
+const topicDocs = {
+    "Variables & Data Types": "variables datatypes int float char bool primitive type casting operators arithmetic relational logical bitwise scope declaration",
+    "Strings & I/O": "string input output format parsing split join reverse length substring method character",
+    "Control Flow": "if else switch while for loop break continue nested condition branch iteration",
+    "Functions & Recursion": "function recursion base case call stack return parameter pass value reference lambda anonymous",
+    "OOP — Classes & Objects": "class object instance constructor destructor this keyword encapsulation access modifier private public",
+    "OOP — Inheritance & Polymorphism": "inheritance extends polymorphism overloading overriding parent child subclass super virtual interface abstract",
+    "Problem Solving Patterns": "two pointer sliding window prefix sum hashing pattern algorithm technique array optimization",
+    "Dynamic Programming": "dp dynamic programming memoization tabulation recursion overlapping subproblems fibonacci knapsack",
+    "Competitive Programming": "leetcode hackerrank competitive coding contest time complexity speed stl collections map set vector",
+    "Whiteboard & Interview Coding": "whiteboard interview think aloud edge case clean code quality readable approach explain"
+};
+
+function tfidf(docs, query) {
+    const all = [...Object.values(docs), query];
+    const vocab = [...new Set(all.flatMap(d => d.toLowerCase().split(/\s+/)))];
+    function tf(doc, term) { const words = doc.toLowerCase().split(/\s+/); return words.filter(w => w === term).length / words.length; }
+    function idf(term) { const n = all.filter(d => d.toLowerCase().includes(term)).length; return Math.log((all.length + 1) / (n + 1)) + 1; }
+    function vec(doc) { return vocab.map(t => tf(doc, t) * idf(t)); }
+    function cosine(a, b) {
+        const dot = a.reduce((s, v, i) => s + v * b[i], 0);
+        const ma = Math.sqrt(a.reduce((s, v) => s + v * v, 0));
+        const mb = Math.sqrt(b.reduce((s, v) => s + v * v, 0));
+        return ma && mb ? dot / (ma * mb) : 0;
+    }
+    const qv = vec(query);
+    return Object.entries(docs).map(([name, doc]) => ({ name, score: cosine(vec(doc), qv) }))
+        .sort((a, b) => b.score - a.score);
+}
+
+const topicTips = {
+    "Variables & Data Types": "Review int/float sizes and type casting rules",
+    "Strings & I/O": "Practice string manipulation and fast I/O in C++",
+    "Control Flow": "Master loop patterns and short-circuit evaluation",
+    "Functions & Recursion": "Write 10 recursive functions with clear base cases",
+    "OOP — Classes & Objects": "Build a small class hierarchy (e.g., Vehicle system)",
+    "OOP — Inheritance & Polymorphism": "Implement all 4 OOP pillars in a single project",
+    "Problem Solving Patterns": "Solve 5 two-pointer and 5 sliding window problems",
+    "Dynamic Programming": "Start with Fibonacci → coin change → LCS",
+    "Competitive Programming": "Participate in one timed contest per week",
+    "Whiteboard & Interview Coding": "Do 3 mock interviews focusing on communication"
+};
+
+function runMLRecommender() {
+    const query = document.getElementById('mlInput').value.trim();
+    if (!query) { alert('Please describe your skill level first!'); return; }
+    const results = tfidf(topicDocs, query);
+    const maxScore = results[0].score || 1;
+    let html = '';
+    results.slice(0, 6).forEach((r, i) => {
+        const pct = maxScore > 0 ? Math.round((r.score / maxScore) * 100) : 0;
+        const medal = i === 0 ? '🔥' : i === 1 ? '⚡' : i === 2 ? '📌' : '•';
+        html += `<div class="ml-card">
+            <span style="font-size:20px">${medal}</span>
+            <div style="flex:1">
+                <div class="ml-topic-name">${r.name}</div>
+                <div class="ml-why">${topicTips[r.name] || 'Review this topic'}</div>
+                <div class="ml-score-bar" style="margin-top:8px"><div class="ml-score-fill" style="width:${pct}%"></div></div>
+            </div>
+            <span class="ml-pct">${pct}%</span>
+        </div>`;
+    });
+    document.getElementById('mlCards').innerHTML = html;
+    document.getElementById('mlResults').style.display = 'block';
+    document.getElementById('mlResults').scrollIntoView({ behavior: 'smooth' });
+}
+
+document.getElementById('mlInput').addEventListener('keydown', e => { if (e.key === 'Enter') runMLRecommender(); });
+document.querySelectorAll('.step-btn').forEach(b => b.addEventListener('click', () => changeStep(parseInt(b.dataset.step))));
+updateProgress(); renderStepContent(1);
+</script>
+</body>
+</html>

@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Build Projects – Placement Prep Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:radial-gradient(circle at top,#0a1b3d,#020617);color:#e2e8f0;min-height:100vh;line-height:1.7;}
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 70px;z-index:100;background:rgba(2,6,23,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(99,102,241,0.3);}
+    .logo a{font-size:26px;font-weight:800;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent;text-decoration:none;}
+    nav a{margin-left:28px;text-decoration:none;color:#bfc6d4;font-size:15px;font-weight:500;transition:0.3s;padding:6px 12px;border-radius:8px;}
+    nav a:hover{color:white;background:rgba(99,102,241,0.2);}
+    .hero{text-align:center;margin-top:140px;padding:0 20px;}
+    .tag{display:inline-block;padding:8px 24px;border-radius:9999px;background:rgba(99,102,241,0.2);font-size:14px;color:#a5b4fc;margin-bottom:20px;border:1px solid rgba(99,102,241,0.4);}
+    .hero h1{font-size:56px;font-weight:800;background:linear-gradient(135deg,#e0e7ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:20px;line-height:1.2;}
+    .hero p{color:#9ca3af;font-size:18px;max-width:800px;margin:0 auto 30px;}
+    .progress-container{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .progress-stats{display:flex;justify-content:space-between;margin-bottom:12px;font-size:14px;color:#94a3b8;}
+    .progress-track{background:rgba(255,255,255,0.1);height:10px;border-radius:10px;overflow:hidden;}
+    .progress-fill{background:linear-gradient(90deg,#6366f1,#a855f7);height:100%;transition:width 0.5s ease;border-radius:10px;}
+    .steps-nav{max-width:1100px;margin:30px auto;padding:0 30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+    .step-btn{padding:12px 28px;background:rgba(255,255,255,0.05);border:2px solid rgba(99,102,241,0.3);border-radius:12px;color:#cbd5e1;font-weight:600;cursor:pointer;transition:all 0.3s;font-size:15px;}
+    .step-btn:hover{border-color:#6366f1;background:rgba(99,102,241,0.1);transform:translateY(-2px);}
+    .step-btn.active{background:linear-gradient(135deg,#6366f1,#a855f7);border-color:transparent;color:white;box-shadow:0 4px 15px rgba(99,102,241,0.3);}
+    .step-btn.completed{border-color:#10b981;background:rgba(16,185,129,0.1);color:#10b981;}
+    .content-section{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .step-content{display:none;animation:fadeIn 0.5s ease;}
+    .step-content.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .step-header{margin-bottom:40px;padding-bottom:20px;border-bottom:2px solid rgba(99,102,241,0.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+    .step-header h2{font-size:36px;font-weight:700;color:#e0e7ff;margin-bottom:12px;}
+    .step-header p{color:#9ca3af;font-size:16px;}
+    .topic-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 28px;margin-bottom:20px;transition:all 0.3s;}
+    .topic-card:hover{border-color:#6366f1;transform:translateY(-3px);background:rgba(99,102,241,0.05);}
+    .topic-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
+    .topic-header h3{font-size:22px;font-weight:600;display:flex;align-items:center;gap:12px;}
+    .topic-icon{font-size:28px;}.arrow{font-size:28px;transition:transform 0.3s;}
+    .sub-topics{display:none;margin-top:20px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.2);}
+    .sub-topics.active{display:block;}
+    .sub-topic{padding:14px 22px;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:10px;transition:0.3s;cursor:pointer;border-left:3px solid transparent;}
+    .sub-topic:hover{background:rgba(99,102,241,0.15);border-left-color:#6366f1;transform:translateX(5px);}
+    .detail-container{margin-top:40px;background:rgba(15,23,42,0.7);border:1px solid rgba(99,102,241,0.3);border-radius:24px;padding:40px;backdrop-filter:blur(8px);}
+    .detail-container h2{font-size:28px;margin-bottom:20px;color:#c4b5fd;}
+    .detail-container h3{font-size:22px;margin:25px 0 15px;color:#a5b4fc;}
+    .detail-container p{margin-bottom:18px;color:#cbd5e1;line-height:1.8;}
+    .detail-container ul,.detail-container ol{margin:18px 0 25px;padding-left:32px;}
+    .detail-container li{margin-bottom:10px;}
+    .code-block{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:24px;margin:25px 0;font-family:'Courier New',monospace;font-size:14px;overflow-x:auto;color:#e2e8f0;white-space:pre;}
+    .tip-box{background:rgba(59,130,246,0.1);border-left:5px solid #3b82f6;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .example-box{background:rgba(16,185,129,0.1);border-left:5px solid #10b981;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .note-box{background:rgba(234,179,8,0.1);border-left:5px solid #eab308;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .warning-box{background:rgba(239,68,68,0.1);border-left:5px solid #ef4444;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    table{width:100%;border-collapse:collapse;margin:25px 0;}
+    th,td{border:1px solid rgba(255,255,255,0.2);padding:12px;text-align:left;}
+    th{background:rgba(99,102,241,0.2);color:#a5b4fc;}
+    .nav-buttons{display:flex;justify-content:space-between;gap:20px;margin-top:50px;padding:40px 0 60px;}
+    .nav-btn{padding:14px 32px;border-radius:12px;font-weight:600;transition:0.3s;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;border:none;font-size:16px;}
+    .nav-btn.prev{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;}
+    .nav-btn:hover{transform:translateY(-2px);opacity:0.9;}
+    .complete-step-btn{background:rgba(16,185,129,0.2);border:2px solid #10b981;color:#10b981;padding:12px 28px;border-radius:12px;font-weight:600;cursor:pointer;transition:0.3s;font-size:14px;}
+    .complete-step-btn:hover{background:#10b981;color:white;}
+    .completed-badge{color:#10b981;font-weight:600;display:flex;align-items:center;gap:8px;}
+
+    /* Project Cards Grid */
+    .project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin:30px 0;}
+    .project-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:24px;transition:all 0.3s;cursor:pointer;}
+    .project-card:hover{border-color:#6366f1;transform:translateY(-4px);background:rgba(99,102,241,0.07);}
+    .project-card .difficulty{display:inline-block;padding:4px 14px;border-radius:9999px;font-size:12px;font-weight:600;margin-bottom:12px;}
+    .diff-beginner{background:rgba(16,185,129,0.2);color:#10b981;}
+    .diff-intermediate{background:rgba(234,179,8,0.2);color:#eab308;}
+    .diff-advanced{background:rgba(239,68,68,0.2);color:#ef4444;}
+    .project-card h4{font-size:18px;font-weight:700;color:#e0e7ff;margin-bottom:8px;}
+    .project-card p{font-size:14px;color:#9ca3af;margin-bottom:14px;}
+    .project-tags{display:flex;flex-wrap:wrap;gap:8px;}
+    .ptag{background:rgba(99,102,241,0.15);color:#a5b4fc;padding:4px 12px;border-radius:9999px;font-size:12px;}
+
+    /* ML Recommender */
+    .ml-section{max-width:1100px;margin:0 auto 60px;padding:0 30px;}
+    .ml-box{background:rgba(15,23,42,0.8);border:1px solid rgba(99,102,241,0.4);border-radius:24px;padding:36px;}
+    .ml-box h2{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:8px;}
+    .ml-box p{color:#9ca3af;margin-bottom:24px;}
+    .ml-input-row{display:flex;gap:12px;flex-wrap:wrap;}
+    .ml-input{flex:1;min-width:220px;padding:14px 20px;background:rgba(255,255,255,0.05);border:1px solid rgba(99,102,241,0.3);border-radius:12px;color:#e2e8f0;font-size:15px;font-family:'Poppins',sans-serif;}
+    .ml-input:focus{outline:none;border-color:#6366f1;}
+    .ml-btn{padding:14px 32px;background:linear-gradient(135deg,#6366f1,#a855f7);border:none;border-radius:12px;color:white;font-weight:700;font-size:15px;cursor:pointer;transition:0.3s;font-family:'Poppins',sans-serif;}
+    .ml-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,0.4);}
+    .ml-results{margin-top:28px;display:none;}
+    .ml-results h3{font-size:18px;color:#a5b4fc;margin-bottom:16px;}
+    .ml-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:18px 22px;margin-bottom:12px;display:flex;align-items:center;gap:16px;transition:0.3s;}
+    .ml-card:hover{border-color:#6366f1;background:rgba(99,102,241,0.08);}
+    .ml-score-bar{flex:1;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;}
+    .ml-score-fill{height:100%;background:linear-gradient(90deg,#6366f1,#a855f7);border-radius:4px;}
+    .ml-topic-name{font-weight:600;color:#e0e7ff;min-width:220px;}
+    .ml-pct{color:#a5b4fc;font-size:14px;min-width:45px;text-align:right;}
+    .ml-why{font-size:13px;color:#64748b;margin-top:4px;}
+
+    /* Resources */
+    .pdf-section{max-width:1100px;margin:0 auto 80px;padding:0 30px;}
+    .pdf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+    .pdf-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px;transition:all 0.3s;text-align:center;}
+    .pdf-card:hover{border-color:#6366f1;transform:translateY(-3px);}
+    .pdf-card h4{font-size:17px;font-weight:600;margin:12px 0 8px;color:#e0e7ff;}
+    .pdf-card p{color:#9ca3af;font-size:14px;margin-bottom:16px;}
+    .pdf-btn{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;border:none;padding:10px 24px;border-radius:9999px;font-size:14px;font-weight:600;cursor:pointer;transition:0.3s;text-decoration:none;display:inline-block;}
+    .pdf-btn:hover{opacity:0.85;transform:translateY(-2px);}
+    .section-title{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:24px;}
+    @media(max-width:768px){header{padding:15px 20px;}nav a{margin-left:10px;font-size:12px;}.hero h1{font-size:32px;}.ml-input-row{flex-direction:column;}}
+</style>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="index.html">🚀 Placement Prep</a></div>
+    <nav><a href="index.html">Home</a><a href="subjects.html">Subjects</a></nav>
+</header>
+
+<div class="hero">
+    <div class="tag">🛠️ Step 5 of 6 • Build Projects</div>
+    <h1>Build Real<br>Projects</h1>
+    <p>Create portfolio-worthy projects that demonstrate your skills to recruiters and get your resume noticed — the fastest path from student to hired.</p>
+</div>
+
+<div class="progress-container">
+    <div class="progress-stats"><span>📊 Your Progress</span><span id="progressPercent">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="steps-nav">
+    <button class="step-btn active" data-step="1">Step 1: Beginner Projects</button>
+    <button class="step-btn" data-step="2">Step 2: Intermediate Projects</button>
+    <button class="step-btn" data-step="3">Step 3: Advanced Projects</button>
+    <button class="step-btn" data-step="4">Step 4: Resume & GitHub</button>
+</div>
+
+<div class="content-section" id="contentSection"></div>
+
+<div class="ml-section">
+    <div class="ml-box">
+        <h2>🤖 AI Project Recommender <span style="font-size:13px;background:rgba(99,102,241,0.2);padding:3px 10px;border-radius:20px;color:#a5b4fc;font-weight:500;margin-left:8px;">TF-IDF Cosine Similarity</span></h2>
+        <p>Describe your skills, tech stack, or what you want to build — the ML engine recommends the most relevant projects using real TF-IDF vector similarity.</p>
+        <div class="ml-input-row">
+            <input class="ml-input" id="mlInput" placeholder="e.g. I know React and Node.js but haven't built a full-stack app yet..." />
+            <button class="ml-btn" onclick="runMLRecommender()">🔍 Get Recommendations</button>
+        </div>
+        <div class="ml-results" id="mlResults">
+            <h3>📌 Recommended Projects — ranked by relevance to your input</h3>
+            <div id="mlCards"></div>
+            <div style="margin-top:16px;padding:14px 18px;background:rgba(99,102,241,0.08);border-radius:12px;font-size:13px;color:#64748b;">ℹ️ TF-IDF: Each project is a bag-of-words vector. Your input is vectorised the same way. Cosine similarity measures the angle between vectors — smaller angle = higher relevance.</div>
+        </div>
+    </div>
+</div>
+
+<div class="pdf-section">
+    <h2 class="section-title">📚 Project Building Resources</h2>
+    <div class="pdf-grid">
+        <div class="pdf-card"><div style="font-size:40px">🐙</div><h4>GitHub Student Pack</h4><p>Free tools, hosting and domains for students building projects</p><a class="pdf-btn" href="https://education.github.com/pack" target="_blank">🔗 Get Pack</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🎨</div><h4>Figma — Free UI Design</h4><p>Design your project UI before coding — free for students</p><a class="pdf-btn" href="https://figma.com" target="_blank">🔗 Open Figma</a></div>
+        <div class="pdf-card"><div style="font-size:40px">☁️</div><h4>Vercel / Netlify Deploy</h4><p>Deploy frontend projects for free in under 2 minutes</p><a class="pdf-btn" href="https://vercel.com" target="_blank">🔗 Deploy Now</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🎯</div><h4>roadmap.sh</h4><p>Visual roadmaps for full-stack, backend, DevOps and more</p><a class="pdf-btn" href="https://roadmap.sh" target="_blank">🔗 View Roadmaps</a></div>
+        <div class="pdf-card"><div style="font-size:40px">📹</div><h4>The Odin Project</h4><p>Free full-stack curriculum with real project-based learning</p><a class="pdf-btn" href="https://www.theodinproject.com/" target="_blank">🔗 Start Learning</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🏗️</div><h4>Project Ideas — GitHub</h4><p>500+ project ideas categorised by difficulty and tech stack</p><a class="pdf-btn" href="https://github.com/florinpop17/app-ideas" target="_blank">🔗 Browse Ideas</a></div>
+    </div>
+</div>
+
+<script>
+const stepsData = {
+    1:{title:"🌱 Beginner Projects",description:"Start with these essential projects — every fresher needs at least 2-3 of these on their resume.",topics:[
+        {title:"Web Development Basics",icon:"🌐",subs:[
+            {id:"portfolio",title:"Personal Portfolio Website"},
+            {id:"todo-app",title:"To-Do List App with Local Storage"},
+            {id:"calculator",title:"Scientific Calculator"},
+            {id:"weather-app",title:"Weather App using Public API"}
+        ]},
+        {title:"Core Programming Projects",icon:"💻",subs:[
+            {id:"bank-system",title:"Bank Management System (Console)"},
+            {id:"student-db",title:"Student Database CRUD App"},
+            {id:"quiz-app",title:"Quiz Application with Score Tracking"},
+            {id:"number-guess",title:"Number Guessing Game with AI Hints"}
+        ]}
+    ]},
+    2:{title:"⚡ Intermediate Projects",description:"These projects demonstrate real engineering skill and stand out to interviewers at product companies.",topics:[
+        {title:"Full-Stack Web Apps",icon:"🔗",subs:[
+            {id:"blog-platform",title:"Blog Platform with Auth (MERN/MEAN)"},
+            {id:"ecommerce",title:"E-Commerce Store with Cart & Payments"},
+            {id:"chat-app",title:"Real-Time Chat App with WebSockets"},
+            {id:"url-shortener",title:"URL Shortener with Analytics Dashboard"}
+        ]},
+        {title:"Data & Backend Projects",icon:"📊",subs:[
+            {id:"expense-tracker",title:"Expense Tracker with Charts & Reports"},
+            {id:"api-server",title:"RESTful API Server with JWT Auth"},
+            {id:"file-manager",title:"Cloud File Manager (Upload, Download, Share)"},
+            {id:"job-board",title:"Job Board with Filters & Applications"}
+        ]}
+    ]},
+    3:{title:"🚀 Advanced Projects",description:"These projects put you in the top 5% of applicants — especially for product and service companies.",topics:[
+        {title:"AI/ML Projects",icon:"🤖",subs:[
+            {id:"sentiment",title:"Sentiment Analysis Web App"},
+            {id:"face-detect",title:"Face Detection & Recognition System"},
+            {id:"chatbot",title:"Custom Chatbot with NLP"},
+            {id:"recommender",title:"Movie/Product Recommendation Engine"}
+        ]},
+        {title:"System & DevOps Projects",icon:"⚙️",subs:[
+            {id:"docker-app",title:"Dockerised Microservices Application"},
+            {id:"ci-cd",title:"CI/CD Pipeline with GitHub Actions"},
+            {id:"load-balancer",title:"Load Balancer Simulation"},
+            {id:"monitoring",title:"Application Monitoring Dashboard"}
+        ]}
+    ]},
+    4:{title:"📄 Resume & GitHub",description:"A great project means nothing if it isn't presented well — learn to showcase your work effectively.",topics:[
+        {title:"GitHub Best Practices",icon:"🐙",subs:[
+            {id:"readme",title:"Writing a Killer README.md"},
+            {id:"git-flow",title:"Git Workflow — Branching & PRs"},
+            {id:"github-profile",title:"GitHub Profile README Setup"},
+            {id:"open-source",title:"Contributing to Open Source"}
+        ]},
+        {title:"Resume Writing",icon:"📝",subs:[
+            {id:"resume-format",title:"Resume Format for Tech Placements"},
+            {id:"project-desc",title:"How to Describe Projects on Resume"},
+            {id:"ats-resume",title:"ATS-Friendly Resume Tips"},
+            {id:"linkedin",title:"LinkedIn Profile Optimisation"}
+        ]}
+    ]}
+};
+
+// FIX 1: Added missing 'project-desc' content entry
+const detailedContent = {
+    'portfolio':`<h2>Personal Portfolio Website</h2>
+<p>Your portfolio is your digital resume. It should load fast, look professional, and clearly show who you are and what you've built.</p>
+<h3>Must-Have Sections</h3>
+<ul>
+<li><strong>Hero:</strong> Name, title (e.g. "Full-Stack Developer"), and a CTA button linking to projects</li>
+<li><strong>About:</strong> 3-4 lines about yourself, your stack, and your goals</li>
+<li><strong>Projects:</strong> 3-5 best projects with live demo + GitHub links</li>
+<li><strong>Skills:</strong> Tech stack icons — keep it honest</li>
+<li><strong>Contact:</strong> Email + LinkedIn + GitHub</li>
+</ul>
+<div class="tip-box">💡 Deploy on GitHub Pages (free) or Vercel. Custom domain via Namecheap (~₹800/yr). A live URL is 10x more impressive than a GitHub repo link alone.</div>
+<h3>Tech Stack Options</h3>
+<table><tr><th>Stack</th><th>Best For</th><th>Time to Build</th></tr>
+<tr><td>HTML/CSS/JS</td><td>Beginners</td><td>1-2 days</td></tr>
+<tr><td>React + Tailwind</td><td>Intermediate</td><td>2-3 days</td></tr>
+<tr><td>Next.js</td><td>Full-stack showcase</td><td>3-5 days</td></tr></table>`,
+
+    'todo-app':`<h2>To-Do List App with Local Storage</h2>
+<p>Simple but teaches core concepts: DOM manipulation, event handling, CRUD operations, and browser storage.</p>
+<div class="code-block">// Save tasks to localStorage
+function saveTasks(tasks) {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+// Load tasks on page load
+function loadTasks() {
+  return JSON.parse(localStorage.getItem('tasks')) || [];
+}
+
+// Add a task
+function addTask(text) {
+  const tasks = loadTasks();
+  tasks.push({ id: Date.now(), text, done: false });
+  saveTasks(tasks);
+  renderTasks();
+}
+
+// Toggle done
+function toggleTask(id) {
+  const tasks = loadTasks().map(t =>
+    t.id === id ? { ...t, done: !t.done } : t
+  );
+  saveTasks(tasks);
+  renderTasks();
+}</div>
+<div class="example-box">✅ <strong>Extend it:</strong> Add categories, due dates, drag-to-reorder, and a dark/light toggle. This turns a basic app into something resume-worthy.</div>`,
+
+    'weather-app':`<h2>Weather App using Public API</h2>
+<div class="code-block">// Using OpenWeatherMap API (free tier)
+const API_KEY = 'your_key_here';
+const BASE = 'https://api.openweathermap.org/data/2.5';
+
+async function getWeather(city) {
+  const res = await fetch(
+    BASE + '/weather?q=' + city + '&appid=' + API_KEY + '&units=metric'
+  );
+  const data = await res.json();
+  return {
+    temp: data.main.temp,
+    feels: data.main.feels_like,
+    humidity: data.main.humidity,
+    desc: data.weather[0].description,
+    icon: data.weather[0].icon
+  };
+}
+// Extend: 5-day forecast, geolocation, animated weather icons</div>`,
+
+    'bank-system':`<h2>Bank Management System</h2>
+<p>Classic OOP project that demonstrates encapsulation, inheritance, and file handling. Great for Java/C++ beginners.</p>
+<div class="code-block">class BankAccount {
+    private:
+        string accNo, name;
+        double balance;
+    public:
+        BankAccount(string n, double b) : name(n), balance(b) {
+            accNo = generateAccNo();
+        }
+        void deposit(double amt) {
+            if (amt > 0) balance += amt;
+        }
+        bool withdraw(double amt) {
+            if (amt > balance) return false;
+            balance -= amt; return true;
+        }
+        void display() const {
+            cout &lt;&lt; "Acc: " &lt;&lt; accNo &lt;&lt; " | " &lt;&lt; name
+                 &lt;&lt; " | Balance: Rs." &lt;&lt; balance &lt;&lt; endl;
+        }
+};</div>
+<div class="tip-box">💡 Add file I/O to persist data between runs. Add a SavingsAccount subclass with interest calculation. This becomes a solid OOP project.</div>`,
+
+    'student-db':`<h2>Student Database CRUD App</h2>
+<p>Build a full CRUD (Create, Read, Update, Delete) application. Use this to learn SQL + backend basics.</p>
+<div class="code-block">-- SQLite schema
+CREATE TABLE students (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  roll_no TEXT UNIQUE,
+  branch TEXT,
+  cgpa REAL,
+  email TEXT
+);
+
+-- Python + SQLite3
+import sqlite3
+conn = sqlite3.connect('students.db')
+cursor = conn.cursor()
+
+def add_student(name, roll, branch, cgpa, email):
+    cursor.execute(
+        "INSERT INTO students VALUES (?,?,?,?,?,?)",
+        (None, name, roll, branch, cgpa, email)
+    )
+    conn.commit()</div>`,
+
+    'blog-platform':`<h2>Blog Platform — MERN Stack</h2>
+<p>Full-stack project with authentication, rich text editor, image upload, and comments. This is the gold standard beginner-to-intermediate project.</p>
+<h3>Architecture</h3>
+<table><tr><th>Layer</th><th>Tech</th><th>Responsibility</th></tr>
+<tr><td>Frontend</td><td>React + React Router</td><td>UI, routing, state</td></tr>
+<tr><td>Backend</td><td>Node.js + Express</td><td>REST API, auth</td></tr>
+<tr><td>Database</td><td>MongoDB + Mongoose</td><td>Users, posts, comments</td></tr>
+<tr><td>Auth</td><td>JWT + bcrypt</td><td>Login, register, sessions</td></tr>
+<tr><td>Storage</td><td>Cloudinary</td><td>Image uploads</td></tr>
+<tr><td>Deploy</td><td>Vercel + MongoDB Atlas</td><td>Free hosting</td></tr></table>
+<div class="example-box">✅ <strong>Resume bullet:</strong> "Built a full-stack blog platform with JWT authentication, image upload via Cloudinary, and deployed on Vercel with MongoDB Atlas — 50+ API endpoints, 95+ Lighthouse score."</div>`,
+
+    'chat-app':`<h2>Real-Time Chat App with WebSockets</h2>
+<div class="code-block">// Server — Node.js + Socket.io
+const io = require('socket.io')(server);
+io.on('connection', (socket) => {
+  console.log('User connected:', socket.id);
+
+  socket.on('join_room', (room) => {
+    socket.join(room);
+    socket.to(room).emit('user_joined', socket.id);
+  });
+
+  socket.on('send_message', ({ room, message, user }) => {
+    io.to(room).emit('receive_message', { message, user, time: Date.now() });
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected:', socket.id);
+  });
+});</div>
+<div class="tip-box">💡 Add: typing indicators, read receipts, emoji reactions, file sharing. Store messages in MongoDB for persistent history.</div>`,
+
+    'expense-tracker':`<h2>Expense Tracker with Charts</h2>
+<p>Teaches data visualisation, date handling, and category-based filtering. Use Chart.js or Recharts for graphs.</p>
+<div class="code-block">// Data model
+const expense = {
+  id: crypto.randomUUID(),
+  title: "Lunch",
+  amount: 150,
+  category: "Food",
+  date: new Date().toISOString(),
+  type: "expense"  // or "income"
+};
+
+// Calculate monthly summary
+const monthlySummary = expenses
+  .filter(e => isSameMonth(e.date, selectedMonth))
+  .reduce((acc, e) => {
+    acc[e.category] = (acc[e.category] || 0) + e.amount;
+    return acc;
+  }, {});</div>`,
+
+    'api-server':`<h2>RESTful API Server with JWT Auth</h2>
+<div class="code-block">// Express + JWT middleware
+const jwt = require('jsonwebtoken');
+
+const authMiddleware = (req, res, next) => {
+  const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null;
+  if (!token) return res.status(401).json({ error: 'No token' });
+  try {
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch {
+    res.status(403).json({ error: 'Invalid token' });
+  }
+};
+
+// Protected route
+app.get('/api/profile', authMiddleware, (req, res) => {
+  res.json({ user: req.user });
+});
+// Rate limiting: use express-rate-limit
+// Validation: use express-validator or zod</div>`,
+
+    'sentiment':`<h2>Sentiment Analysis Web App</h2>
+<p>ML project using Python (Flask/FastAPI) backend with a React frontend. Classifies text as positive/negative/neutral.</p>
+<div class="code-block">from transformers import pipeline
+
+# Using HuggingFace pre-trained model (no training needed)
+sentiment_pipeline = pipeline("sentiment-analysis",
+    model="distilbert-base-uncased-finetuned-sst-2-english")
+
+@app.route('/analyze', methods=['POST'])
+def analyze():
+    text = request.json.get('text', '')
+    result = sentiment_pipeline(text[:512])[0]
+    return jsonify({
+        'label': result['label'],
+        'score': round(result['score'] * 100, 2)
+    })
+# Deploy backend on Render (free), frontend on Vercel</div>`,
+
+    'chatbot':`<h2>Custom Chatbot with NLP</h2>
+<div class="code-block">// Rule-based + intent matching (no API needed)
+const intents = [
+  { patterns: ['hello', 'hi', 'hey'], response: 'Hello! How can I help?' },
+  { patterns: ['help', 'support'], response: 'I can help with...' },
+  { patterns: ['bye', 'goodbye'], response: 'Goodbye! Have a great day!' }
+];
+
+function getResponse(userInput) {
+  const input = userInput.toLowerCase();
+  for (const intent of intents) {
+    if (intent.patterns.some(p => input.includes(p))) {
+      return intent.response;
+    }
+  }
+  return "I didn't understand that. Can you rephrase?";
+}
+// Upgrade: Use cosine similarity on TF-IDF vectors for fuzzy matching</div>`,
+
+    'docker-app':`<h2>Dockerised Microservices App</h2>
+<div class="code-block"># docker-compose.yml — 3 microservices
+version: '3.8'
+services:
+  auth-service:
+    build: ./auth
+    ports: ["3001:3001"]
+    environment:
+      - JWT_SECRET=mysecret
+      - DB_URL=mongodb://mongo:27017/auth
+
+  product-service:
+    build: ./products
+    ports: ["3002:3002"]
+    depends_on: [auth-service, mongo]
+
+  nginx:
+    image: nginx:alpine
+    ports: ["80:80"]
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on: [auth-service, product-service]
+
+  mongo:
+    image: mongo:6
+    volumes: [mongo_data:/data/db]
+volumes:
+  mongo_data:</div>`,
+
+    'readme':`<h2>Writing a Killer README.md</h2>
+<div class="code-block"># Project Name
+
+&gt; One-line description of what this project does.
+
+![Demo GIF or Screenshot]
+
+## Features
+- Feature 1 — with measurable impact
+- Feature 2
+- Feature 3
+
+## Tech Stack
+| Layer    | Tech              |
+|----------|-------------------|
+| Frontend | React, TailwindCSS|
+| Backend  | Node.js, Express  |
+| Database | MongoDB           |
+| Deploy   | Vercel, Railway   |
+
+## Getting Started
+  git clone https://github.com/you/project
+  cd project
+  npm install
+  cp .env.example .env
+  npm run dev
+
+## Screenshots
+[Add screenshots here]
+
+## Contributing
+PRs welcome!
+
+## License
+MIT</div>
+<div class="tip-box">💡 Add a GIF demo (use Loom or ScreenToGif). Recruiters spend 10 seconds on a repo — make those 10 seconds count.</div>`,
+
+    'resume-format':`<h2>Resume Format for Tech Placements</h2>
+<table><tr><th>Section</th><th>Content</th><th>Length</th></tr>
+<tr><td>Header</td><td>Name, email, phone, LinkedIn, GitHub, portfolio</td><td>3-4 lines</td></tr>
+<tr><td>Education</td><td>Degree, college, CGPA, year</td><td>2-3 lines</td></tr>
+<tr><td>Skills</td><td>Languages, frameworks, tools, databases</td><td>3-4 lines</td></tr>
+<tr><td>Projects</td><td>3 best projects with tech + impact</td><td>8-10 lines</td></tr>
+<tr><td>Experience</td><td>Internships (if any)</td><td>4-5 lines</td></tr>
+<tr><td>Achievements</td><td>Hackathons, LeetCode, certifications</td><td>3-4 lines</td></tr></table>
+<div class="example-box">✅ <strong>Project bullet formula:</strong> "Built [what] using [tech] that [impact/metric]."<br>Example: "Built a real-time chat app using Socket.io and React with 99.9% message delivery rate, supporting 100+ concurrent users."</div>`,
+
+    /* FIX 1: Added the missing 'project-desc' content */
+    'project-desc':`<h2>How to Describe Projects on Resume</h2>
+<p>The way you describe a project matters as much as building it. Recruiters scan resumes in seconds — your project bullet must immediately convey impact.</p>
+<h3>The Formula</h3>
+<div class="example-box">✅ <strong>Built [what] using [tech stack] — [quantified impact or key feature].</strong><br><br>
+❌ Bad: "Made a chat app using Node.js"<br>
+✅ Good: "Built a real-time chat application using Socket.io, React and MongoDB supporting 100+ concurrent users with typing indicators and persistent message history."</div>
+<h3>What to Include Per Project</h3>
+<ul>
+<li><strong>What it does</strong> — one clear sentence</li>
+<li><strong>Tech stack</strong> — list the key technologies</li>
+<li><strong>Impact / scale</strong> — users, performance, uptime, requests/sec</li>
+<li><strong>Live demo or GitHub link</strong> — always include at least one</li>
+</ul>
+<h3>Metrics to Use Even Without Real Users</h3>
+<ul>
+<li>Lighthouse score (e.g. "95+ Lighthouse performance score")</li>
+<li>API response time (e.g. "sub-100ms API response times")</li>
+<li>Lines of code / test coverage (e.g. "80% unit test coverage")</li>
+<li>Load tested capacity (e.g. "load tested to 500 concurrent requests")</li>
+</ul>
+<div class="tip-box">💡 Use action verbs: Built, Designed, Developed, Implemented, Optimised, Deployed, Integrated. Never use passive voice on a resume.</div>`,
+
+    'ats-resume':`<h2>ATS-Friendly Resume Tips</h2>
+<ul>
+<li>Use <strong>standard section headings</strong>: Education, Experience, Projects, Skills — ATS can't parse creative section names</li>
+<li>Use <strong>keywords from job descriptions</strong> — match their exact terminology (e.g., "REST API" not "web services")</li>
+<li>Export as <strong>PDF from Word/Google Docs</strong> — not Canva or Figma (ATS can't parse those)</li>
+<li>No tables, columns, headers/footers, or text boxes — ATS parsers read top-to-bottom</li>
+<li>Include tech skills as plain text — not logos or icons</li>
+</ul>
+<div class="warning-box">⚠️ Many companies (TCS, Infosys, Wipro, Accenture) use ATS systems that auto-reject resumes that don't keyword-match the JD. Always tailor your resume per application.</div>`,
+
+    'github-profile':`<h2>GitHub Profile README Setup</h2>
+<div class="code-block">&lt;!-- Create repo: github.com/yourusername/yourusername --&gt;
+&lt;!-- Add README.md with: --&gt;
+
+# Hi, I'm [Name]
+B.Tech CSE @ [College] | India
+Building: [current project]
+Learning: [current tech]
+Ask me about: React, Node.js, DSA
+
+## Tech Stack
+React | Node.js | MongoDB | Python
+
+## GitHub Stats
+(Add github-readme-stats card here)
+
+## Top Projects
+| Project  | Tech       | Live        |
+|----------|------------|-------------|
+| Blog App | MERN       | [Demo](link)|
+| Chat App | Socket.io  | [Demo](link)|</div>`,
+
+    'linkedin':`<h2>LinkedIn Profile Optimisation</h2>
+<ul>
+<li><strong>Headline:</strong> "Final Year CSE Student | Full-Stack Developer | React · Node.js · DSA" — NOT just "Student at XYZ College"</li>
+<li><strong>About:</strong> 3-5 sentences: who you are, what you build, what you're looking for</li>
+<li><strong>Featured:</strong> Pin your portfolio link, best project, or GitHub</li>
+<li><strong>Experience:</strong> Add internships, freelance projects, and academic projects</li>
+<li><strong>Skills:</strong> Add 10-15 skills and get endorsements from classmates</li>
+<li><strong>Connections:</strong> Connect with seniors, alumni, and recruiters</li>
+</ul>
+<div class="tip-box">💡 Post 1-2 times per week about things you're learning or building. Even a "I built a chat app this weekend — here's what I learned" post can get recruiter attention.</div>`,
+
+    'open-source':`<h2>Contributing to Open Source</h2>
+<ul>
+<li>Start with <strong>good first issue</strong> labels on GitHub — filter by language</li>
+<li>Fix typos and docs first — low barrier, still counts as a contribution</li>
+<li>Great projects to start: freeCodeCamp, EddieHub, First Contributions, GNOME</li>
+<li>Each merged PR is a talking point in interviews: "I contributed to [project] by fixing [issue]"</li>
+</ul>
+<div class="example-box">✅ Even 2-3 merged PRs on any popular repo significantly boosts your GitHub profile and gives you real open-source experience to talk about.</div>`,
+
+    'git-flow':`<h2>Git Workflow — Branching & PRs</h2>
+<div class="code-block"># Good Git workflow for projects
+git checkout -b feature/add-auth      # Create feature branch
+# ... make changes ...
+git add .
+git commit -m "feat: add JWT auth middleware"
+git push origin feature/add-auth
+
+# On GitHub: open Pull Request to main
+# After review: merge and delete branch
+
+# Commit message convention (Conventional Commits)
+# feat: new feature
+# fix: bug fix
+# docs: documentation only
+# refactor: code restructure
+# test: adding tests
+# chore: maintenance
+
+# Useful commands
+git log --oneline --graph             # visual branch history
+git stash                             # save work temporarily
+git rebase main                       # keep branch up to date</div>`,
+
+    'calculator':`<h2>Scientific Calculator</h2>
+<p>Build a fully functional calculator with keyboard support, history, and scientific functions. More challenging than it sounds — great for DOM and event handling practice.</p>
+<div class="code-block">// Handle keyboard input
+document.addEventListener('keydown', (e) => {
+  const displayEl = document.getElementById('display');
+  if (e.key >= '0' && e.key &lt;= '9') displayEl.value += e.key;
+  if (e.key === 'Enter' || e.key === '=') calculate();
+  if (e.key === 'Escape') displayEl.value = '';
+  if (['+','-','*','/'].includes(e.key)) displayEl.value += e.key;
+});
+
+function calculate() {
+  const displayEl = document.getElementById('display');
+  try {
+    // Safe evaluation using Function constructor
+    const result = Function('"use strict"; return (' + displayEl.value + ')')();
+    displayEl.value = result;
+  } catch (err) {
+    displayEl.value = 'Error';
+  }
+}</div>`,
+
+    'quiz-app':`<h2>Quiz Application with Score Tracking</h2>
+<p>Build a multi-category quiz app with timer, leaderboard, and result analysis. Teaches state management and async data fetching.</p>
+<div class="code-block">// Fetch questions from Open Trivia DB (free, no key needed)
+async function fetchQuestions(category, difficulty, amount = 10) {
+  const url = 'https://opentdb.com/api.php?amount=' + amount +
+              '&category=' + category +
+              '&difficulty=' + difficulty + '&type=multiple';
+  const res = await fetch(url);
+  const data = await res.json();
+  return data.results.map(q => ({
+    question: decodeURIComponent(q.question),
+    correct: decodeURIComponent(q.correct_answer),
+    options: shuffleArray([
+      ...q.incorrect_answers.map(decodeURIComponent),
+      decodeURIComponent(q.correct_answer)
+    ])
+  }));
+}
+
+function shuffleArray(arr) {
+  return arr.sort(() => Math.random() - 0.5);
+}</div>`,
+
+    'number-guess':`<h2>Number Guessing Game</h2>
+<div class="code-block">// With adaptive hints
+let secret = Math.floor(Math.random() * 100) + 1;
+let attempts = 0;
+const maxAttempts = 7;
+
+function guess(num) {
+  attempts++;
+  const diff = Math.abs(num - secret);
+  if (num === secret) return { result: 'win', attempts };
+  if (attempts >= maxAttempts) return { result: 'lose', secret };
+  const hint = diff > 30 ? 'Very far' : diff > 15 ? 'Far' : diff > 5 ? 'Close' : 'Very close!';
+  const dir = num &lt; secret ? 'Too low' : 'Too high';
+  return { result: 'continue', hint: dir + ' — ' + hint, left: maxAttempts - attempts };
+}</div>`,
+
+    'ecommerce':`<h2>E-Commerce Store</h2>
+<p>Full-stack e-commerce with product listings, cart, wishlist, and Stripe/Razorpay payments.</p>
+<table><tr><th>Feature</th><th>Tech</th></tr>
+<tr><td>Product catalog</td><td>React + Redux</td></tr>
+<tr><td>Cart & wishlist</td><td>Redux Toolkit + localStorage</td></tr>
+<tr><td>Auth</td><td>NextAuth / JWT</td></tr>
+<tr><td>Payments</td><td>Razorpay (India) / Stripe</td></tr>
+<tr><td>Admin panel</td><td>React + Chart.js</td></tr>
+<tr><td>Database</td><td>MongoDB + Mongoose</td></tr></table>`,
+
+    'url-shortener':`<h2>URL Shortener with Analytics</h2>
+<div class="code-block">// Core shortening logic
+const { nanoid } = require('nanoid');
+
+app.post('/api/shorten', async (req, res) => {
+  const { url, customSlug } = req.body;
+  const slug = customSlug || nanoid(6);
+  await Link.create({ slug, originalUrl: url, clicks: 0, createdAt: new Date() });
+  res.json({ shortUrl: 'https://yourdomain.com/' + slug });
+});
+
+// Redirect + track clicks
+app.get('/:slug', async (req, res) => {
+  const link = await Link.findOneAndUpdate(
+    { slug: req.params.slug },
+    { $inc: { clicks: 1 }, $push: { visits: { ip: req.ip, time: new Date() } } }
+  );
+  if (!link) return res.status(404).send('Not found');
+  res.redirect(link.originalUrl);
+});</div>`,
+
+    'file-manager':`<h2>Cloud File Manager</h2>
+<p>Build a Google Drive clone — upload, organise, share, and preview files using AWS S3 or Cloudinary.</p>
+<div class="code-block">// Multer + AWS S3 upload
+const multer = require('multer');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const upload = multer({ storage: multer.memoryStorage() });
+
+app.post('/upload', upload.single('file'), async (req, res) => {
+  const key = req.user.id + '/' + Date.now() + '-' + req.file.originalname;
+  await s3.send(new PutObjectCommand({
+    Bucket: process.env.S3_BUCKET,
+    Key: key,
+    Body: req.file.buffer,
+    ContentType: req.file.mimetype
+  }));
+  await File.create({
+    userId: req.user.id,
+    key,
+    name: req.file.originalname,
+    size: req.file.size
+  });
+  res.json({ success: true, key });
+});</div>`,
+
+    'job-board':`<h2>Job Board Platform</h2>
+<p>Build a full job board with employer posting, candidate applications, and admin moderation.</p>
+<table><tr><th>Role</th><th>Features</th></tr>
+<tr><td>Employer</td><td>Post jobs, view applicants, shortlist candidates</td></tr>
+<tr><td>Candidate</td><td>Browse jobs, apply, track application status</td></tr>
+<tr><td>Admin</td><td>Approve/reject listings, analytics dashboard</td></tr></table>`,
+
+    'face-detect':`<h2>Face Detection System</h2>
+<div class="code-block">// Using face-api.js (browser-based, no server needed)
+// Load models from CDN or local /models folder
+async function init() {
+  await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
+  await faceapi.nets.faceExpressionNet.loadFromUri('/models');
+
+  const video = document.getElementById('video');
+  const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+  video.srcObject = stream;
+
+  video.addEventListener('play', () => {
+    const canvas = faceapi.createCanvasFromMedia(video);
+    document.body.append(canvas);
+    setInterval(async () => {
+      const detections = await faceapi
+        .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
+        .withFaceExpressions();
+      faceapi.draw.drawDetections(canvas, detections);
+      faceapi.draw.drawFaceExpressions(canvas, detections);
+    }, 100);
+  });
+}
+init();</div>`,
+
+    'recommender':`<h2>Recommendation Engine</h2>
+<div class="code-block"># Collaborative filtering with scikit-learn
+import pandas as pd
+from sklearn.metrics.pairwise import cosine_similarity
+
+# User-item matrix (users x movies with ratings)
+user_movie = df.pivot_table(
+    index='userId', columns='movieId', values='rating'
+).fillna(0)
+
+# Compute similarity between users
+user_sim = cosine_similarity(user_movie)
+user_sim_df = pd.DataFrame(
+    user_sim, index=user_movie.index, columns=user_movie.index
+)
+
+def recommend(user_id, n=5):
+    sim_users = user_sim_df[user_id].sort_values(ascending=False)[1:11]
+    similar_ratings = user_movie.loc[sim_users.index].T.dot(sim_users)
+    already_seen = user_movie.loc[user_id][user_movie.loc[user_id] > 0].index
+    return similar_ratings.drop(already_seen).nlargest(n)</div>`,
+
+    'ci-cd':`<h2>CI/CD Pipeline with GitHub Actions</h2>
+<div class="code-block"># .github/workflows/deploy.yml
+name: CI/CD Pipeline
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with: { node-version: '18' }
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to Vercel
+        run: npx vercel --prod --token=\${{ secrets.VERCEL_TOKEN }}</div>`,
+
+    'load-balancer':`<h2>Load Balancer Simulation</h2>
+<div class="code-block">// Round-robin load balancer in Node.js
+class LoadBalancer {
+  constructor(servers) {
+    this.servers = servers;
+    this.current = 0;
+  }
+
+  getServer() {
+    // Round-robin — cycles through all servers equally
+    const server = this.servers[this.current % this.servers.length];
+    this.current++;
+    return server;
+  }
+
+  // Weighted Round-Robin: assign more requests to powerful servers
+  // Least Connections: route to server with fewest active connections
+  // Health Check: remove unhealthy servers from rotation
+}
+
+const lb = new LoadBalancer(['server1:3001', 'server2:3002', 'server3:3003']);
+console.log(lb.getServer()); // server1:3001
+console.log(lb.getServer()); // server2:3002</div>`,
+
+    'monitoring':`<h2>Application Monitoring Dashboard</h2>
+<p>Build a real-time dashboard that tracks server health, request logs, error rates, and performance metrics.</p>
+<div class="code-block">// Express middleware to log metrics
+const metrics = [];
+
+app.use((req, res, next) => {
+  const start = Date.now();
+  res.on('finish', () => {
+    const entry = {
+      method: req.method,
+      url: req.url,
+      status: res.statusCode,
+      duration: Date.now() - start,
+      timestamp: new Date()
+    };
+    metrics.push(entry);
+    // Keep only last 1000 entries in memory
+    if (metrics.length > 1000) metrics.shift();
+    io.emit('new_metric', entry);
+  });
+  next();
+});</div>`
+};
+
+let currentStep = 1;
+// FIX 2: Guard against invalid JSON in localStorage to prevent crash on load
+let completedSteps = [];
+try {
+    completedSteps = JSON.parse(localStorage.getItem('proj_completedSteps') || '[]');
+    if (!Array.isArray(completedSteps)) completedSteps = [];
+} catch (e) {
+    completedSteps = [];
+}
+
+function updateProgress() {
+    const p = (completedSteps.length / 4) * 100;
+    document.getElementById('progressFill').style.width = p + '%';
+    document.getElementById('progressPercent').textContent = Math.round(p) + '%';
+    document.querySelectorAll('.step-btn').forEach(b => {
+        const stepNum = parseInt(b.dataset.step);
+        b.classList.toggle('completed', completedSteps.includes(stepNum));
+        // Keep active state correct
+        b.classList.toggle('active', stepNum === currentStep);
+    });
+}
+
+function markStepComplete(step) {
+    if (!completedSteps.includes(step)) {
+        completedSteps.push(step);
+        localStorage.setItem('proj_completedSteps', JSON.stringify(completedSteps));
+        updateProgress();
+        renderStepContent(step);
+    }
+}
+
+function renderStepContent(step) {
+    currentStep = step;
+    const sd = stepsData[step];
+    const isC = completedSteps.includes(step);
+    let html = `<div class="step-content active">
+        <div class="step-header">
+            <div><h2>${sd.title}</h2><p>${sd.description}</p></div>
+            ${!isC
+                ? `<button class="complete-step-btn" onclick="markStepComplete(${step})">✓ Mark as Complete</button>`
+                : '<div class="completed-badge">✓ Step Completed! 🎉</div>'
+            }
+        </div>`;
+
+    sd.topics.forEach((t, ti) => {
+        // FIX 3: Move click handler to .topic-header only (not the whole card)
+        // so clicking sub-topics doesn't bubble up and collapse the section
+        html += `<div class="topic-card">
+            <div class="topic-header" onclick="toggleSubTopics(this)">
+                <h3><span class="topic-icon">${t.icon}</span> ${t.title}</h3>
+                <span class="arrow">›</span>
+            </div>
+            <div class="sub-topics">`;
+        t.subs.forEach(s => {
+            html += `<div class="sub-topic" onclick="showContent(event,'${s.id}')">${s.title}</div>`;
+        });
+        html += `</div></div>`;
+    });
+
+    html += `<div class="detail-container" id="detailContainer">
+        <p style="color:#94a3b8;text-align:center;">🛠️ Click any topic to view project details, code and guidance.</p>
+    </div>
+    <div class="nav-buttons">
+        ${step > 1
+            ? `<button class="nav-btn prev" onclick="changeStep(${step - 1})">← Previous</button>`
+            : '<div></div>'
+        }
+        ${step < 4
+            ? `<button class="nav-btn next" onclick="changeStep(${step + 1})">Next →</button>`
+            : `<button class="nav-btn next" onclick="window.location.href='step6_interview_prep.html'">Next: Interview Prep →</button>`
+        }
+    </div></div>`;
+
+    document.getElementById('contentSection').innerHTML = html;
+    // FIX 4: Update step buttons correctly after re-render
+    document.querySelectorAll('.step-btn').forEach(b => {
+        const stepNum = parseInt(b.dataset.step);
+        b.classList.toggle('active', stepNum === step);
+        b.classList.toggle('completed', completedSteps.includes(stepNum));
+    });
+}
+
+function changeStep(s) {
+    if (s >= 1 && s <= 4) {
+        renderStepContent(s);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+// FIX 3 (implementation): toggleSubTopics now receives the header element
+// Click is on .topic-header, so we navigate to .sub-topics via parentElement
+function toggleSubTopics(headerEl) {
+    const card = headerEl.parentElement;
+    const sub = card.querySelector('.sub-topics');
+    const arrow = headerEl.querySelector('.arrow');
+
+    // Close all other open sub-topics
+    document.querySelectorAll('.sub-topics').forEach(s => {
+        if (s !== sub) {
+            s.classList.remove('active');
+            const otherArrow = s.closest('.topic-card').querySelector('.arrow');
+            if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
+        }
+    });
+
+    sub.classList.toggle('active');
+    if (arrow) {
+        arrow.style.transform = sub.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+    }
+}
+
+function showContent(e, id) {
+    e.stopPropagation();
+    const dc = document.getElementById('detailContainer');
+    dc.innerHTML = detailedContent[id] || '<p style="color:#94a3b8;text-align:center;">📝 Content coming soon for this topic!</p>';
+    dc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ─── TF-IDF Cosine Similarity ML Recommender ───────────────────────────────
+const projectDocs = {
+    "Personal Portfolio Website": "portfolio website html css javascript deploy static hosting personal brand resume showcase frontend design responsive",
+    "To-Do List App": "todo task list crud local storage javascript dom manipulation beginner web app simple productivity",
+    "Weather App": "weather api fetch async rest openweathermap geolocation frontend javascript public api data display",
+    "Bank Management System": "bank account oop class object java cpp console crud file io object oriented programming encapsulation inheritance",
+    "Blog Platform (MERN)": "mern blog fullstack react nodejs express mongodb auth jwt login register crud rest api fullstack",
+    "Real-Time Chat App": "chat websocket socket realtime messaging rooms nodejs express react emit broadcast live communication",
+    "Expense Tracker": "expense income money budget chart visualization recharts data finance tracker monthly report category",
+    "RESTful API Server": "rest api jwt auth backend nodejs express middleware authentication authorization route endpoint server",
+    "E-Commerce Store": "ecommerce shop product cart payment razorpay stripe redux fullstack react nodejs shopping order",
+    "URL Shortener": "url shortener analytics link redirect click tracking slug nanoid backend nodejs database",
+    "Sentiment Analysis": "sentiment nlp machine learning python flask fastapi huggingface transformers text classification ai ml",
+    "Chatbot with NLP": "chatbot nlp natural language processing intent response python ai bot conversation rule based",
+    "Movie Recommendation Engine": "recommendation engine collaborative filtering cosine similarity sklearn pandas machine learning movies users ratings",
+    "Face Detection System": "face detection recognition opencv python javascript faceapi ml image webcam computer vision ai",
+    "Dockerised Microservices": "docker microservices container compose kubernetes devops nginx deployment backend scaling architecture",
+    "CI/CD Pipeline": "cicd github actions pipeline deploy test automation devops workflow yaml build continuous integration delivery",
+    "Monitoring Dashboard": "monitoring dashboard metrics logs performance realtime socket server health request analytics visualization",
+    "GitHub Profile & README": "github profile readme markdown badges stats open source contribution git version control showcase",
+    "ATS Resume Writing": "resume ats format placement job application keywords recruiter technical freshers template word pdf",
+    "LinkedIn Optimisation": "linkedin profile networking recruiter job search headline about featured skills connections social professional"
+};
+
+const projectTips = {
+    "Personal Portfolio Website": "Use React + Tailwind and deploy on Vercel for the best recruiter impression",
+    "To-Do List App": "Extend with categories and due dates to make it more impressive",
+    "Weather App": "Add 5-day forecast and geolocation for extra polish",
+    "Bank Management System": "Add file persistence and inheritance (SavingsAccount) to demonstrate OOP",
+    "Blog Platform (MERN)": "Use MongoDB Atlas + Vercel for free full-stack hosting",
+    "Real-Time Chat App": "Add typing indicators and message history with MongoDB",
+    "Expense Tracker": "Integrate Chart.js for beautiful monthly spending visualisations",
+    "RESTful API Server": "Add rate limiting, input validation and Swagger docs",
+    "E-Commerce Store": "Integrate Razorpay (India) for real payment simulation",
+    "URL Shortener": "Add click analytics dashboard with daily/weekly graphs",
+    "Sentiment Analysis": "Use HuggingFace free tier — no GPU needed for inference",
+    "Chatbot with NLP": "Upgrade to TF-IDF cosine similarity for fuzzy intent matching",
+    "Movie Recommendation Engine": "Use MovieLens dataset (free, 100k ratings) for training",
+    "Face Detection System": "face-api.js runs entirely in browser — no server needed",
+    "Dockerised Microservices": "Deploy on Render or Railway free tier for live demo",
+    "CI/CD Pipeline": "Pair with a MERN project to show full DevOps workflow",
+    "Monitoring Dashboard": "Use Socket.io + Chart.js for real-time metric streaming",
+    "GitHub Profile & README": "Add GitHub Stats card and streak tracker for visual appeal",
+    "ATS Resume Writing": "Match exact keywords from each job description for best results",
+    "LinkedIn Optimisation": "Post weekly build updates — even small posts get recruiter eyes"
+};
+
+function tfidf(docs, query) {
+    const all = [...Object.values(docs), query];
+    const vocab = [...new Set(all.flatMap(d => d.toLowerCase().split(/\s+/)))];
+
+    function tf(doc, term) {
+        const words = doc.toLowerCase().split(/\s+/);
+        return words.filter(x => x === term).length / words.length;
+    }
+    function idf(term) {
+        const n = all.filter(d => d.toLowerCase().includes(term)).length;
+        return Math.log((all.length + 1) / (n + 1)) + 1;
+    }
+    function vec(doc) {
+        return vocab.map(t => tf(doc, t) * idf(t));
+    }
+    function cosine(a, b) {
+        const dot = a.reduce((s, v, i) => s + v * b[i], 0);
+        const ma = Math.sqrt(a.reduce((s, v) => s + v * v, 0));
+        const mb = Math.sqrt(b.reduce((s, v) => s + v * v, 0));
+        return (ma && mb) ? dot / (ma * mb) : 0;
+    }
+
+    const qv = vec(query);
+    return Object.entries(docs)
+        .map(([name, doc]) => ({ name, score: cosine(vec(doc), qv) }))
+        .sort((a, b) => b.score - a.score);
+}
+
+function runMLRecommender() {
+    const query = document.getElementById('mlInput').value.trim();
+    if (!query) {
+        alert('Please describe your skills or what you want to build!');
+        return;
+    }
+    const results = tfidf(projectDocs, query);
+    const maxScore = results[0].score || 1;
+    let html = '';
+    results.slice(0, 6).forEach((r, i) => {
+        const pct = maxScore > 0 ? Math.round((r.score / maxScore) * 100) : 0;
+        const medal = i === 0 ? '🔥' : i === 1 ? '⚡' : i === 2 ? '📌' : '•';
+        html += `<div class="ml-card">
+            <span style="font-size:20px">${medal}</span>
+            <div style="flex:1">
+                <div class="ml-topic-name">${r.name}</div>
+                <div class="ml-why">${projectTips[r.name] || 'Build this project next'}</div>
+                <div class="ml-score-bar" style="margin-top:8px">
+                    <div class="ml-score-fill" style="width:${pct}%"></div>
+                </div>
+            </div>
+            <span class="ml-pct">${pct}%</span>
+        </div>`;
+    });
+    document.getElementById('mlCards').innerHTML = html;
+    document.getElementById('mlResults').style.display = 'block';
+    document.getElementById('mlResults').scrollIntoView({ behavior: 'smooth' });
+}
+
+document.getElementById('mlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') runMLRecommender();
+});
+
+document.querySelectorAll('.step-btn').forEach(b => {
+    b.addEventListener('click', () => changeStep(parseInt(b.dataset.step)));
+});
+
+updateProgress();
+renderStepContent(1);
+</script>
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aptitude Practice – Placement Prep Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:radial-gradient(circle at top,#0a1b3d,#020617);color:#e2e8f0;min-height:100vh;line-height:1.7;}
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 70px;z-index:100;background:rgba(2,6,23,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(99,102,241,0.3);}
+    .logo a{font-size:26px;font-weight:800;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent;text-decoration:none;}
+    nav a{margin-left:28px;text-decoration:none;color:#bfc6d4;font-size:15px;font-weight:500;transition:0.3s;padding:6px 12px;border-radius:8px;}
+    nav a:hover{color:white;background:rgba(99,102,241,0.2);}
+    .hero{text-align:center;margin-top:140px;padding:0 20px;}
+    .tag{display:inline-block;padding:8px 24px;border-radius:9999px;background:rgba(99,102,241,0.2);font-size:14px;color:#a5b4fc;margin-bottom:20px;border:1px solid rgba(99,102,241,0.4);}
+    .hero h1{font-size:56px;font-weight:800;background:linear-gradient(135deg,#e0e7ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:20px;line-height:1.2;}
+    .hero p{color:#9ca3af;font-size:18px;max-width:800px;margin:0 auto 30px;}
+    .progress-container{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .progress-stats{display:flex;justify-content:space-between;margin-bottom:12px;font-size:14px;color:#94a3b8;}
+    .progress-track{background:rgba(255,255,255,0.1);height:10px;border-radius:10px;overflow:hidden;}
+    .progress-fill{background:linear-gradient(90deg,#6366f1,#a855f7);height:100%;width:0%;transition:width 0.5s ease;border-radius:10px;}
+    .steps-nav{max-width:1100px;margin:30px auto;padding:0 30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+    .step-btn{padding:12px 28px;background:rgba(255,255,255,0.05);border:2px solid rgba(99,102,241,0.3);border-radius:12px;color:#cbd5e1;font-weight:600;cursor:pointer;transition:all 0.3s;font-size:15px;}
+    .step-btn:hover{border-color:#6366f1;background:rgba(99,102,241,0.1);transform:translateY(-2px);}
+    .step-btn.active{background:linear-gradient(135deg,#6366f1,#a855f7);border-color:transparent;color:white;box-shadow:0 4px 15px rgba(99,102,241,0.3);}
+    .step-btn.completed{border-color:#10b981;background:rgba(16,185,129,0.1);color:#10b981;}
+    .content-section{max-width:1100px;margin:40px auto;padding:0 30px;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .step-content{animation:fadeIn 0.5s ease;}
+    .step-header{margin-bottom:40px;padding-bottom:20px;border-bottom:2px solid rgba(99,102,241,0.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+    .step-header h2{font-size:36px;font-weight:700;color:#e0e7ff;margin-bottom:12px;}
+    .step-header p{color:#9ca3af;font-size:16px;}
+    .topic-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 28px;margin-bottom:20px;transition:all 0.3s;cursor:pointer;}
+    .topic-card:hover{border-color:#6366f1;transform:translateY(-3px);background:rgba(99,102,241,0.05);}
+    .topic-header{display:flex;align-items:center;justify-content:space-between;}
+    .topic-header h3{font-size:22px;font-weight:600;display:flex;align-items:center;gap:12px;}
+    .topic-icon{font-size:28px;}.arrow{font-size:28px;transition:transform 0.3s;}
+    .sub-topics{display:none;margin-top:20px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.2);}
+    .sub-topics.active{display:block;}
+    .sub-topic{padding:14px 22px;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:10px;transition:0.3s;cursor:pointer;border-left:3px solid transparent;}
+    .sub-topic:hover{background:rgba(99,102,241,0.15);border-left-color:#6366f1;transform:translateX(5px);}
+    .detail-container{margin-top:40px;background:rgba(15,23,42,0.7);border:1px solid rgba(99,102,241,0.3);border-radius:24px;padding:40px;backdrop-filter:blur(8px);}
+    .detail-container h2{font-size:28px;margin-bottom:20px;color:#c4b5fd;}
+    .detail-container h3{font-size:22px;margin:25px 0 15px;color:#a5b4fc;}
+    .detail-container p{margin-bottom:18px;color:#cbd5e1;line-height:1.8;}
+    .detail-container ul,.detail-container ol{margin:18px 0 25px;padding-left:32px;}
+    .detail-container li{margin-bottom:10px;}
+    .formula-box{background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.4);border-radius:16px;padding:20px 24px;margin:25px 0;font-family:'Courier New',monospace;font-size:15px;}
+    .example-box{background:rgba(16,185,129,0.1);border-left:5px solid #10b981;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .tip-box{background:rgba(59,130,246,0.1);border-left:5px solid #3b82f6;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .trick-box{background:rgba(234,179,8,0.1);border-left:5px solid #eab308;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    table{width:100%;border-collapse:collapse;margin:25px 0;}
+    th,td{border:1px solid rgba(255,255,255,0.2);padding:12px;text-align:left;}
+    th{background:rgba(99,102,241,0.2);color:#a5b4fc;}
+    .nav-buttons{display:flex;justify-content:space-between;gap:20px;margin-top:50px;padding:40px 0 60px;}
+    .nav-btn{padding:14px 32px;border-radius:12px;font-weight:600;transition:0.3s;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;border:none;font-size:16px;}
+    .nav-btn.prev{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;}
+    .nav-btn:hover{transform:translateY(-2px);opacity:0.9;}
+    .complete-step-btn{background:rgba(16,185,129,0.2);border:2px solid #10b981;color:#10b981;padding:12px 28px;border-radius:12px;font-weight:600;cursor:pointer;transition:0.3s;font-size:14px;}
+    .complete-step-btn:hover{background:#10b981;color:white;}
+    .completed-badge{color:#10b981;font-weight:600;display:flex;align-items:center;gap:8px;}
+    .ml-section{max-width:1100px;margin:0 auto 60px;padding:0 30px;}
+    .ml-box{background:rgba(15,23,42,0.8);border:1px solid rgba(99,102,241,0.4);border-radius:24px;padding:36px;}
+    .ml-box h2{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:8px;}
+    .ml-box p{color:#9ca3af;margin-bottom:24px;}
+    .ml-input-row{display:flex;gap:12px;flex-wrap:wrap;}
+    .ml-input{flex:1;min-width:220px;padding:14px 20px;background:rgba(255,255,255,0.05);border:1px solid rgba(99,102,241,0.3);border-radius:12px;color:#e2e8f0;font-size:15px;font-family:'Poppins',sans-serif;}
+    .ml-input:focus{outline:none;border-color:#6366f1;}
+    .ml-btn{padding:14px 32px;background:linear-gradient(135deg,#6366f1,#a855f7);border:none;border-radius:12px;color:white;font-weight:700;font-size:15px;cursor:pointer;transition:0.3s;font-family:'Poppins',sans-serif;}
+    .ml-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,0.4);}
+    .ml-results{margin-top:28px;display:none;}
+    .ml-results h3{font-size:18px;color:#a5b4fc;margin-bottom:16px;}
+    .ml-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:18px 22px;margin-bottom:12px;display:flex;align-items:center;gap:16px;transition:0.3s;}
+    .ml-card:hover{border-color:#6366f1;background:rgba(99,102,241,0.08);}
+    .ml-score-bar{flex:1;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;}
+    .ml-score-fill{height:100%;background:linear-gradient(90deg,#6366f1,#a855f7);border-radius:4px;}
+    .ml-topic-name{font-weight:600;color:#e0e7ff;min-width:200px;}
+    .ml-pct{color:#a5b4fc;font-size:14px;min-width:45px;text-align:right;}
+    .ml-why{font-size:13px;color:#64748b;margin-top:4px;}
+    .pdf-section{max-width:1100px;margin:0 auto 80px;padding:0 30px;}
+    .pdf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+    .pdf-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px;transition:all 0.3s;text-align:center;}
+    .pdf-card:hover{border-color:#6366f1;transform:translateY(-3px);}
+    .pdf-card h4{font-size:17px;font-weight:600;margin:12px 0 8px;color:#e0e7ff;}
+    .pdf-card p{color:#9ca3af;font-size:14px;margin-bottom:16px;}
+    .pdf-btn{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;border:none;padding:10px 24px;border-radius:9999px;font-size:14px;font-weight:600;cursor:pointer;transition:0.3s;text-decoration:none;display:inline-block;}
+    .pdf-btn:hover{opacity:0.85;transform:translateY(-2px);}
+    .section-title{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:24px;}
+    @media(max-width:768px){header{padding:15px 20px;}nav a{margin-left:10px;font-size:12px;}.hero h1{font-size:32px;}.ml-input-row{flex-direction:column;}}
+</style>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="index.html">🚀 Placement Prep</a></div>
+    <nav><a href="index.html">Home</a><a href="subjects.html">Subjects</a></nav>
+</header>
+<div class="hero">
+    <div class="tag">🧮 Step 4 of 6 • Aptitude Practice</div>
+    <h1>Aptitude &<br>Reasoning Mastery</h1>
+    <p>Sharpen your quantitative aptitude, logical reasoning and verbal ability — the gatekeepers of every placement written exam.</p>
+</div>
+<div class="progress-container">
+    <div class="progress-stats"><span>📊 Your Progress</span><span id="progressPercent">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+<div class="steps-nav">
+    <button class="step-btn active" data-step="1">Step 1: Quantitative Aptitude</button>
+    <button class="step-btn" data-step="2">Step 2: Logical Reasoning</button>
+    <button class="step-btn" data-step="3">Step 3: Verbal Ability</button>
+    <button class="step-btn" data-step="4">Step 4: Speed & Strategy</button>
+</div>
+<div class="content-section" id="contentSection"></div>
+<div class="ml-section">
+    <div class="ml-box">
+        <h2>🤖 AI Topic Recommender <span style="font-size:13px;background:rgba(99,102,241,0.2);padding:3px 10px;border-radius:20px;color:#a5b4fc;font-weight:500;margin-left:8px;">TF-IDF Cosine Similarity</span></h2>
+        <p>Describe your aptitude strengths and weaknesses — the ML engine recommends which topic to focus on next using real-time TF-IDF similarity. Different inputs → different recommendations.</p>
+        <div class="ml-input-row">
+            <input class="ml-input" id="mlInput" placeholder="e.g. I struggle with time-speed problems and number series but reading comprehension is fine..." />
+            <button class="ml-btn" onclick="runMLRecommender()">🔍 Get Recommendations</button>
+        </div>
+        <div class="ml-results" id="mlResults">
+            <h3>📌 Recommended Aptitude Topics — ranked by relevance to your input</h3>
+            <div id="mlCards"></div>
+            <div style="margin-top:16px;padding:14px 18px;background:rgba(99,102,241,0.08);border-radius:12px;font-size:13px;color:#64748b;">ℹ️ TF-IDF vectorises your text and each topic document. Cosine similarity finds the most relevant topics to what you described. Type a completely different sentence and rankings change.</div>
+        </div>
+    </div>
+</div>
+<div class="pdf-section">
+    <h2 class="section-title">📚 Aptitude Resources</h2>
+    <div class="pdf-grid">
+        <div class="pdf-card"><div style="font-size:40px">📘</div><h4>IndiaBix — Free Practice</h4><p>Thousands of aptitude MCQs with detailed solutions — quant, reasoning, verbal</p><a class="pdf-btn" href="https://www.indiabix.com/" target="_blank">🔗 Practice Now</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🏆</div><h4>PrepInsta — Company Wise</h4><p>Company-specific aptitude questions for TCS, Infosys, Wipro and more</p><a class="pdf-btn" href="https://prepinsta.com/" target="_blank">🔗 Start Prep</a></div>
+        <div class="pdf-card"><div style="font-size:40px">📊</div><h4>RS Aggarwal — Quantitative</h4><p>The gold standard book for quantitative aptitude — chapters with exercises</p><a class="pdf-btn" href="https://www.geeksforgeeks.org/quantitative-aptitude/" target="_blank">📖 Read Notes</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🧩</div><h4>Logical Reasoning — GFG</h4><p>Logical reasoning topics with solved examples and practice questions</p><a class="pdf-btn" href="https://www.geeksforgeeks.org/logical-reasoning/" target="_blank">📖 Start Learning</a></div>
+        <div class="pdf-card"><div style="font-size:40px">⚡</div><h4>Shortcut Tricks</h4><p>Speed math tricks — Vedic maths, approximation and mental math techniques</p><a class="pdf-btn" href="https://www.easycalculation.com/funny/tricks/tricks.php" target="_blank">🔗 Learn Tricks</a></div>
+        <div class="pdf-card"><div style="font-size:40px">📝</div><h4>Mock Tests — TestBook</h4><p>Full-length mock aptitude tests with timer — simulate real exam conditions</p><a class="pdf-btn" href="https://testbook.com/placement-aptitude/test-series" target="_blank">🔗 Take Mock Test</a></div>
+    </div>
+</div>
+<script>
+const stepsData={1:{title:"🔢 Quantitative Aptitude",description:"Quant is in every placement test — master formulas, shortcuts and practice daily.",topics:[{title:"Arithmetic Fundamentals",icon:"➕",subs:[{id:"percentages",title:"Percentages — Formulas, Tricks & Word Problems"},{id:"profit-loss",title:"Profit & Loss — Cost Price, Selling Price, Discount"},{id:"ratio-proportion",title:"Ratio, Proportion & Mixture Problems"},{id:"average-mean",title:"Average, Weighted Average & Mean"}]},{title:"Advanced Quant",icon:"📐",subs:[{id:"time-work",title:"Time & Work — Pipes, Cisterns, Efficiency"},{id:"time-speed",title:"Time, Speed & Distance — Trains, Boats, Relative Speed"},{id:"interest",title:"Simple & Compound Interest Formulas"},{id:"permutation-combination",title:"Permutation, Combination & Probability"}]}]},2:{title:"🧩 Logical Reasoning",description:"Logical reasoning tests your ability to detect patterns and draw conclusions under time pressure.",topics:[{title:"Pattern & Series",icon:"🔢",subs:[{id:"number-series",title:"Number Series — Find the Missing Term"},{id:"letter-series",title:"Letter & Alphabet Series"},{id:"coding-decoding",title:"Coding-Decoding — Letter Shifts, Number Codes"},{id:"analogy",title:"Analogies — Word Pairs & Relationships"}]},{title:"Critical Reasoning",icon:"🧠",subs:[{id:"syllogism",title:"Syllogism — All/Some/No — Venn Diagrams"},{id:"blood-relations",title:"Blood Relations — Family Tree Problems"},{id:"seating",title:"Seating Arrangement — Linear & Circular"},{id:"puzzles",title:"Logical Puzzles — Ranking, Direction, Scheduling"}]}]},3:{title:"📖 Verbal Ability",description:"Verbal ability tests reading speed, grammar and comprehension — key for TCS, Accenture and others.",topics:[{title:"Grammar & Vocabulary",icon:"📝",subs:[{id:"grammar",title:"Grammar — Articles, Tenses, Subject-Verb Agreement"},{id:"vocabulary",title:"Vocabulary — Synonyms, Antonyms, Idioms"},{id:"sentence-correction",title:"Sentence Correction & Error Spotting"},{id:"fill-blanks",title:"Fill in the Blanks — Cloze Test"}]},{title:"Reading & Comprehension",icon:"📚",subs:[{id:"reading-comprehension",title:"Reading Comprehension — Passage Analysis Techniques"},{id:"para-jumbles",title:"Para Jumbles — Sentence Rearrangement"},{id:"critical-reasoning-verbal",title:"Critical Reasoning — Inference, Assumption, Conclusion"},{id:"verbal-analogy",title:"Verbal Analogies — Word Relationships"}]}]},4:{title:"⚡ Speed & Strategy",description:"Aptitude tests are time-limited — strategy and mental math speed are as important as knowledge.",topics:[{title:"Speed Math Techniques",icon:"⚡",subs:[{id:"vedic-math",title:"Vedic Math Tricks — Multiply Fast, Squares, Cubes"},{id:"approximation",title:"Approximation & Estimation Techniques"},{id:"tables-squares",title:"Tables, Squares & Cubes to Memorise"},{id:"fractions-decimals",title:"Fast Fraction & Decimal Conversions"}]},{title:"Exam Strategy",icon:"🎯",subs:[{id:"time-management",title:"Time Management — Triage & Attempt Strategy"},{id:"elimination",title:"Elimination Method — Rule Out Wrong Answers"},{id:"mock-tests",title:"Mock Test Analysis — Track Weak Areas"},{id:"company-patterns",title:"Company-Specific Patterns — TCS, Infosys, Wipro"}]}]}};
+
+const detailedContent={
+'percentages':`<h2>Percentages</h2><div class="formula-box">Percentage = (Part / Whole) × 100
+x% of y = (x/100) × y
+Percentage Change = [(New - Old) / Old] × 100
+Increase by x% → multiply by (1 + x/100)
+Decrease by x% → multiply by (1 - x/100)</div>
+<div class="example-box">✅ If a price increases from ₹400 to ₹500, what is the % increase?<br>= (500-400)/400 × 100 = <strong>25%</strong></div>
+<div class="trick-box">⚡ Shortcut: x% of y = y% of x<br>So 75% of 32 = 32% of 75 = 24 (easier to compute)</div>`,
+'profit-loss':`<h2>Profit & Loss</h2><div class="formula-box">Profit = SP - CP (if SP > CP)
+Loss = CP - SP (if CP > SP)
+Profit % = (Profit / CP) × 100
+Loss % = (Loss / CP) × 100
+SP = CP × (1 + Profit%/100)
+CP = SP / (1 + Profit%/100)
+Discount = Marked Price - SP
+Discount % = (Discount / Marked Price) × 100</div>
+<div class="example-box">✅ An item bought at ₹500 sold at ₹600. Profit %?<br>Profit = 100, Profit% = (100/500)×100 = <strong>20%</strong></div>`,
+'ratio-proportion':`<h2>Ratio, Proportion & Mixture</h2><div class="formula-box">Ratio a:b = a/b
+If a:b = c:d → a×d = b×c (cross multiplication)
+Mean Proportion of a and b = √(a×b)
+Mixture: If m₁ of C₁ is mixed with m₂ of C₂
+→ Resultant Concentration = (m₁C₁ + m₂C₂)/(m₁+m₂)</div>
+<div class="trick-box">⚡ Alligation Method: for mixing two solutions<br>Cheaper : Costlier = (Mean - Cheaper) : (Costlier - Mean)<br>Wait... Ratio = (Costlier - Mean) : (Mean - Cheaper)</div>`,
+'average-mean':`<h2>Average & Weighted Average</h2><div class="formula-box">Average = Sum of all values / Count
+If one value changes by x → Average changes by x/n
+Weighted Average = Σ(weight × value) / Σ(weights)</div>
+<div class="example-box">✅ If avg of 5 numbers is 20 and one number changes from 10 to 20:<br>New Sum = (20×5) - 10 + 20 = 110<br>New Avg = 110/5 = <strong>22</strong></div>`,
+'time-work':`<h2>Time & Work</h2><div class="formula-box">If A does work in a days → A's 1-day work = 1/a
+Combined rate = 1/a + 1/b + ...
+Time taken together = 1 / (1/a + 1/b)
+Pipe fills in a hrs, drains in b hrs → Net = 1/a - 1/b</div>
+<div class="example-box">✅ A can do a job in 10 days, B in 15 days. Together?<br>Combined = 1/10 + 1/15 = 3/30 + 2/30 = 5/30 = 1/6<br>Time = <strong>6 days</strong></div>
+<div class="trick-box">⚡ Use LCM method: LCM(10,15)=30 total units. A does 3/day, B does 2/day. Together 5/day. Days = 30/5 = 6.</div>`,
+'time-speed':`<h2>Time, Speed & Distance</h2><div class="formula-box">Speed = Distance / Time
+Distance = Speed × Time
+Relative Speed (same dir) = |S₁ - S₂|
+Relative Speed (opp dir) = S₁ + S₂
+Train crossing: Time = (Length of train + Length of object) / Speed
+Average Speed = 2S₁S₂/(S₁+S₂) (for equal distances)</div>
+<div class="trick-box">⚡ Convert km/h to m/s: multiply by 5/18<br>Convert m/s to km/h: multiply by 18/5</div>`,
+'interest':`<h2>Simple & Compound Interest</h2><div class="formula-box">Simple Interest (SI) = P × R × T / 100
+Compound Interest (CI) = P × (1 + R/100)^T - P
+Amount (SI) = P + SI = P(1 + RT/100)
+Amount (CI) = P × (1 + R/100)^T
+CI - SI (for 2 years) = P(R/100)²
+CI - SI (for 3 years) = P(R/100)²(3 + R/100)</div>
+<div class="example-box">✅ ₹5000 at 10% for 2 years: CI vs SI<br>SI = 5000×10×2/100 = ₹1000<br>CI = 5000×(1.1)² - 5000 = 6050-5000 = <strong>₹1050</strong></div>`,
+'permutation-combination':`<h2>Permutation, Combination & Probability</h2><div class="formula-box">P(n,r) = n! / (n-r)!   ← Order matters
+C(n,r) = n! / [r!(n-r)!] ← Order doesn't matter
+Probability = Favorable outcomes / Total outcomes
+P(A∪B) = P(A) + P(B) - P(A∩B)
+P(A') = 1 - P(A)</div>
+<div class="trick-box">⚡ Mnemonic: Permutation = Placement (order matters). Combination = Committee (order doesn't).</div>`,
+'number-series':`<h2>Number Series</h2><p>Common patterns in placement exams:</p><ul><li><strong>Arithmetic</strong>: 2, 5, 8, 11, __ (add 3)</li><li><strong>Geometric</strong>: 3, 6, 12, 24, __ (multiply 2)</li><li><strong>Squares</strong>: 1, 4, 9, 16, 25, __ (n²)</li><li><strong>Fibonacci</strong>: 1, 1, 2, 3, 5, 8, 13, __ (sum of prev two)</li><li><strong>Prime</strong>: 2, 3, 5, 7, 11, __ (next prime)</li><li><strong>Difference of differences</strong>: 2, 6, 14, 26, __ (diff: 4,8,12 → next diff 16 → ans 42)</li></ul>
+<div class="tip-box">💡 Always check: differences, ratios, squares, cubes, and alternating patterns first.</div>`,
+'coding-decoding':`<h2>Coding-Decoding</h2><p>Common types:</p><ul><li><strong>Letter shift</strong>: A=1, B=2... or reverse Z=1, Y=2...</li><li><strong>Number code</strong>: CAT = 3+1+20 = 24</li><li><strong>Substitution</strong>: APPLE coded as BQQMF (each letter +1)</li><li><strong>Mirror code</strong>: A↔Z, B↔Y, C↔X (a+z=27)</li></ul>
+<div class="trick-box">⚡ First find the pattern: check if letters are shifted by same amount. Then apply to the question word.</div>`,
+'syllogism':`<h2>Syllogism</h2><p>Use Venn diagrams to visualise All/Some/No statements.</p><ul><li><strong>All A are B</strong>: A circle fully inside B</li><li><strong>Some A are B</strong>: A and B circles overlap</li><li><strong>No A are B</strong>: A and B circles don't touch</li><li><strong>Some A are not B</strong>: Part of A is outside B</li></ul>
+<div class="tip-box">💡 Check all possible diagrams — if conclusion holds in ALL valid diagrams → definitely true. If only sometimes → possibly true but not definitely.</div>`,
+'seating':`<h2>Seating Arrangement</h2><p>Strategy for seating problems:</p><ol><li>Read all clues once to get overall picture</li><li>Start with the most definite clue (exact position given)</li><li>Use elimination — if X is not at the ends, mark only middle seats</li><li>For circular: fix one person, arrange others relative to them</li></ol>
+<div class="trick-box">⚡ Draw the table/circle on paper. Fill definite positions first. Then use negative clues to eliminate.</div>`,
+'blood-relations':`<h2>Blood Relations</h2><div class="tip-box">💡 Always draw a family tree. Standard notation: □ = Male, ○ = Female, = married, | children</div>
+<p>Key terms: Maternal = mother's side, Paternal = father's side<br>
+Son's wife = Daughter-in-law<br>
+Wife's brother = Brother-in-law<br>
+Mother's brother = Uncle (Maternal Uncle)</p>
+<div class="trick-box">⚡ For coded blood relation questions: first decode who "+" means (e.g., A+B means A is father of B), then draw tree.</div>`,
+'puzzles':`<h2>Logical Puzzles — Direction & Ranking</h2><p><strong>Directions:</strong> North is up, East is right. After turning:<br>Left turn from North → West | Right turn from North → East<br>After 180° = opposite direction</p>
+<p><strong>Ranking:</strong> If A is 5th from top and 7th from bottom in a class → Total = 5+7-1 = 11</p>
+<div class="trick-box">⚡ For direction problems: always draw compass at start. Track each turn explicitly. Never assume — redraw after each move.</div>`,
+'grammar':`<h2>Grammar Essentials</h2><ul><li><strong>Subject-Verb Agreement</strong>: Singular subject → singular verb (He runs, They run)</li><li><strong>Articles</strong>: 'a' before consonant sound, 'an' before vowel sound</li><li><strong>Tenses</strong>: Simple, Continuous, Perfect, Perfect Continuous (12 total)</li><li><strong>Active/Passive</strong>: She writes a letter → A letter is written by her</li></ul>
+<div class="tip-box">💡 Common errors: "Neither/nor" takes singular verb. "Either/or" — verb agrees with nearest subject.</div>`,
+'reading-comprehension':`<h2>Reading Comprehension Techniques</h2><ol><li><strong>Skim first</strong>: Read passage in 2 min to get main idea</li><li><strong>Read questions first</strong>: Know what to look for before detail reading</li><li><strong>Underline key phrases</strong>: Names, dates, comparisons</li><li><strong>Answer from passage</strong>: Never use outside knowledge</li><li><strong>Eliminate</strong>: Rule out answers that contradict the passage</li></ol>
+<div class="trick-box">⚡ For inference questions: choose the answer most directly supported by text, not what you think is logical.</div>`,
+'vedic-math':`<h2>Vedic Math & Speed Tricks</h2><div class="formula-box">// Multiply numbers near 100:
+// 97 × 96 = (97-4)(97-4... 
+// Base 100: 97=100-3, 96=100-4
+// Left part: 97-4=93 or 96-3=93
+// Right part: 3×4=12 → Answer: 9312
+
+// Square ending in 5: 75² = 75×75
+// Take 7, multiply by next number 8 → 56
+// Append 25 → 5625
+
+// Multiply by 11: 47×11 = 4(4+7)7 = 4_11_7 = 517
+// (if middle sum>9, carry 1 to left)</div>`,
+'tables-squares':`<h2>Must-Memorise Number Facts</h2>
+<table><tr><th>Squares</th><th>Cubes</th><th>Fractions</th></tr>
+<tr><td>11²=121, 12²=144, 13²=169</td><td>11³=1331, 12³=1728</td><td>1/6=0.1667</td></tr>
+<tr><td>14²=196, 15²=225, 16²=256</td><td>13³=2197, 14³=2744</td><td>1/7=0.1429</td></tr>
+<tr><td>17²=289, 18²=324, 19²=361</td><td>15³=3375, 16³=4096</td><td>1/8=0.125</td></tr>
+<tr><td>20²=400, 25²=625, 30²=900</td><td>17³=4913, 18³=5832</td><td>1/9=0.1111</td></tr></table>
+<div class="tip-box">💡 Memorise tables 1-20, squares 1-30, cubes 1-15, and reciprocals of 1-10. This saves 30-40 seconds per question.</div>`,
+'time-management':`<h2>Exam Time Management Strategy</h2><ol><li><strong>Triage in first 2 min</strong>: Scan all questions, mark easy/medium/hard</li><li><strong>Easy first</strong>: Attempt all easy questions — never leave marks on the table</li><li><strong>Set per-question budget</strong>: 1-2 min per question max in written rounds</li><li><strong>Skip & return</strong>: Mark difficult questions, return if time allows</li><li><strong>Negative marking</strong>: Skip if less than 50% confident when -0.25 applies</li><li><strong>Last 5 min</strong>: Review flagged questions, check all filled answers</li></ol>`,
+'company-patterns':`<h2>Company-Specific Patterns</h2>
+<table><tr><th>Company</th><th>Quant Focus</th><th>Reasoning</th><th>Verbal</th></tr>
+<tr><td>TCS NQT</td><td>High — all topics</td><td>Moderate</td><td>High</td></tr>
+<tr><td>Infosys</td><td>Moderate</td><td>High — puzzles</td><td>High — RC</td></tr>
+<tr><td>Wipro</td><td>Easy-Moderate</td><td>Moderate</td><td>Moderate</td></tr>
+<tr><td>Accenture</td><td>Moderate</td><td>Moderate</td><td>High</td></tr>
+<tr><td>Cognizant</td><td>Moderate</td><td>Low-Moderate</td><td>Low</td></tr></table>`,
+'elimination':`<h2>Elimination Technique</h2><p>In MCQ aptitude tests, eliminating wrong answers is as powerful as knowing the right one.</p><ol><li><strong>Extreme answers</strong>: Very high/low values are often wrong</li><li><strong>Unit mismatch</strong>: Eliminate answers with wrong units</li><li><strong>Sense check</strong>: Does the magnitude make real-world sense?</li><li><strong>Plug in options</strong>: For equations, substitute answer choices and verify</li><li><strong>Reverse calculate</strong>: Work backward from answer choices</li></ol>`,
+'mock-tests':`<h2>Mock Test Analysis Strategy</h2><ol><li><strong>Attempt under real conditions</strong>: Full time limit, no interruptions</li><li><strong>After test — categorise errors</strong>: Silly mistakes vs concept gaps vs time issues</li><li><strong>Track error log</strong>: Note every wrong question and why you got it wrong</li><li><strong>Revisit weak topics</strong>: Spend 2x time on topics with >30% error rate</li><li><strong>Weekly target</strong>: 2-3 full mocks + daily 20-question topic sets</li></ol>`,
+'para-jumbles':`<h2>Para Jumbles — Sentence Rearrangement</h2><ol><li><strong>Find the opener</strong>: Look for an introduction, general statement, or definition</li><li><strong>Find the closer</strong>: Look for conclusion, result, or summary sentence</li><li><strong>Find connectors</strong>: Words like "however", "therefore", "this", "such" link sentences</li><li><strong>Pronouns are clues</strong>: "He", "They", "It" must refer to someone introduced earlier</li></ol>`,
+'approximation':`<h2>Approximation & Estimation</h2><div class="formula-box">// Round to nearest 5 or 10 for quick calculation
+// 498 × 32 ≈ 500 × 32 = 16,000 (actual: 15,936)
+
+// Percentage approximation:
+// 23% of 847 ≈ 25% of 800 = 200 (actual: 194.8)
+
+// Square root approximation:
+// √50 = √(49+1) ≈ 7 + 1/(2×7) ≈ 7.07</div>
+<div class="trick-box">⚡ In MCQ tests, approximation often narrows to one option. Never spend time on exact calculation when rounding works.</div>`,
+'analogy':`<h2>Analogies</h2><p>Identify the relationship in the given pair, then apply it:</p><ul><li><strong>Tool : Use</strong> — Pen : Writing :: Scissors : Cutting</li><li><strong>Part : Whole</strong> — Chapter : Book :: Petal : Flower</li><li><strong>Worker : Workplace</strong> — Doctor : Hospital :: Judge : Court</li><li><strong>Cause : Effect</strong> — Rain : Flood :: Drought : Famine</li></ul>
+<div class="trick-box">⚡ State the relationship as a sentence: "Pen is used for Writing". Now find which option fits: "Scissors is used for Cutting" ✓</div>`,
+'letter-series':`<h2>Letter & Alphabet Series</h2><div class="formula-box">A=1, B=2, C=3...Z=26
+Reverse: A=26, B=25...Z=1
+Opposite of A is Z (1+26=27), B is Y (2+25=27)
+
+// Common patterns:
+// A, C, E, G... (skip one letter)
+// A, D, H, M... (gaps of 3, 4, 5...)
+// AB, DE, GH... (pairs with skip)</div>
+<div class="tip-box">💡 Write the alphabet with positions 1-26 on rough paper first. Always refer to it for positional questions.</div>`,
+'critical-reasoning-verbal':`<h2>Critical Reasoning</h2><ul><li><strong>Assumption</strong>: Unstated premise that the argument depends on. Negate it — if argument breaks, it's the assumption.</li><li><strong>Inference</strong>: What can definitely be concluded from the passage — must be 100% supported</li><li><strong>Strengthen/Weaken</strong>: Find statements that support or attack the conclusion</li><li><strong>Conclusion</strong>: The main point the author is trying to prove</li></ul>`,
+'verbal-analogy':`<h2>Verbal Analogies</h2><p>Types of verbal relationships to recognise:</p><ul><li>Synonyms: Happy : Joyful</li><li>Antonyms: Hot : Cold</li><li>Degree: Warm : Hot (intensity)</li><li>Function: Key : Lock</li><li>Part-Whole: Wheel : Car</li><li>Category: Rose : Flower</li></ul>`,
+'vocabulary':`<h2>Vocabulary Strategies</h2><p>Most tested categories:</p><ul><li><strong>Synonyms & Antonyms</strong>: Know 500 common words</li><li><strong>Idioms</strong>: "Hit the nail on the head" = exactly right</li><li><strong>One-word substitution</strong>: "A person who eats too much" = Glutton</li></ul>
+<div class="tip-box">💡 Learn word roots: "bene" = good (benefit, benevolent), "mal" = bad (malice, malfunction). Roots help you guess unfamiliar words.</div>`,
+'sentence-correction':`<h2>Sentence Correction</h2><p>Most common error types:</p><ul><li><strong>Subject-Verb Agreement</strong>: "The team are winning" → "The team is winning"</li><li><strong>Tense errors</strong>: Mixing present and past incorrectly</li><li><strong>Pronoun reference</strong>: Unclear antecedent</li><li><strong>Modifier errors</strong>: Dangling/misplaced modifiers</li><li><strong>Parallelism</strong>: "She likes swimming, running, and to cycle" → "cycling"</li></ul>`,
+'fill-blanks':`<h2>Fill in the Blanks — Cloze Test</h2><ol><li>Read the full sentence before choosing</li><li>Check the context — is it positive or negative?</li><li>Check grammar — is a noun, verb, or adjective needed?</li><li>For two-blank questions, eliminate any option where one blank doesn't fit</li></ol>`};
+
+let currentStep=1,completedSteps=JSON.parse(localStorage.getItem('apt_completedSteps')||'[]');
+function updateProgress(){const p=(completedSteps.length/4)*100;document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressPercent').textContent=Math.round(p)+'%';document.querySelectorAll('.step-btn').forEach(b=>b.classList.toggle('completed',completedSteps.includes(parseInt(b.dataset.step))));}
+function markStepComplete(step){if(!completedSteps.includes(step)){completedSteps.push(step);localStorage.setItem('apt_completedSteps',JSON.stringify(completedSteps));updateProgress();renderStepContent(step);}}
+function renderStepContent(step){currentStep=step;const sd=stepsData[step];const isC=completedSteps.includes(step);let html=`<div class="step-content"><div class="step-header"><div><h2>${sd.title}</h2><p>${sd.description}</p></div>${!isC?`<button class="complete-step-btn" onclick="markStepComplete(${step})">✓ Mark as Complete</button>`:'<div class="completed-badge">✅ Step Completed! 🎉</div>'}</div>`;sd.topics.forEach(t=>{html+=`<div class="topic-card" onclick="toggleSubTopics(this)"><div class="topic-header"><h3><span class="topic-icon">${t.icon}</span> ${t.title}</h3><span class="arrow">›</span></div><div class="sub-topics">`;t.subs.forEach(s=>{html+=`<div class="sub-topic" onclick="showContent(event,'${s.id}')">${s.title}</div>`;});html+=`</div></div>`;});html+=`<div class="detail-container" id="detailContainer"><p style="color:#94a3b8;text-align:center;">🗂️ Click any topic above to view formulas, tricks and examples.</p></div><div class="nav-buttons">${step>1?`<button class="nav-btn prev" onclick="changeStep(${step-1})">← Previous</button>`:'<div></div>'}${step<4?`<button class="nav-btn next" onclick="changeStep(${step+1})">Next →</button>`:`<button class="nav-btn next" onclick="window.location.href='step5_projects.html'">Next: Build Projects →</button>`}</div></div>`;document.getElementById('contentSection').innerHTML=html;document.querySelectorAll('.step-btn').forEach(b=>b.classList.toggle('active',parseInt(b.dataset.step)===step));}
+function changeStep(s){if(s>=1&&s<=4){renderStepContent(s);window.scrollTo({top:0,behavior:'smooth'});}}
+function toggleSubTopics(card){const sub=card.querySelector('.sub-topics');const arrow=card.querySelector('.arrow');document.querySelectorAll('.sub-topics').forEach(s=>{if(s!==sub)s.classList.remove('active');});sub.classList.toggle('active');if(arrow)arrow.style.transform=sub.classList.contains('active')?'rotate(90deg)':'rotate(0deg)';}
+function showContent(e,id){e.stopPropagation();const dc=document.getElementById('detailContainer');dc.innerHTML=detailedContent[id]||'<p>Content coming soon!</p>';dc.scrollIntoView({behavior:'smooth',block:'start'});}
+
+// ===== REAL-TIME TF-IDF ML RECOMMENDER =====
+const topicDocs={
+  "Percentages & Profit Loss":"percentage profit loss cost price selling price discount markup percent change increase decrease word problem",
+  "Ratio Proportion & Mixture":"ratio proportion mixture alligation weighted average dilution concentration solution blend parts",
+  "Time Work & Pipes":"time work pipe cistern efficiency rate together combined days hours fill drain",
+  "Time Speed Distance":"speed distance time train boat stream relative speed average meeting overtake km hour",
+  "Simple & Compound Interest":"interest simple compound principal rate amount time years maturity investment bank",
+  "Permutation Combination Probability":"permutation combination probability arrange select choose favorable outcomes sample space factorial nCr nPr",
+  "Number Series & Patterns":"number series pattern missing term sequence arithmetic geometric fibonacci square prime difference",
+  "Coding Decoding & Analogy":"coding decoding analogy letter shift substitution encrypt word relationship pair similar",
+  "Syllogism & Logical Deduction":"syllogism all some no venn diagram logical deduction conclusion statement valid invalid",
+  "Seating Arrangement & Puzzles":"seating arrangement circular linear puzzle direction ranking scheduling order position north south east west",
+  "Blood Relations":"blood relation family tree maternal paternal mother father brother sister uncle aunt cousin",
+  "Grammar & Sentence Correction":"grammar tense article verb subject agreement sentence correction error spotting passive active voice pronoun",
+  "Vocabulary & Reading Comprehension":"vocabulary synonyms antonyms idiom reading comprehension passage inference assumption conclusion para jumble"
+};
+const tips={
+  "Percentages & Profit Loss":"Practice 20 percentage questions daily using IndiaBix — master the x% of y = y% of x trick",
+  "Ratio Proportion & Mixture":"Master alligation method for mixture problems — saves 2 minutes per question",
+  "Time Work & Pipes":"Always use LCM method — assume total work = LCM of days, find rates per day",
+  "Time Speed Distance":"Memorise: km/h to m/s × 5/18. Practice train crossing and boat-stream problems daily",
+  "Simple & Compound Interest":"Memorise SI and CI formulas. Know the CI-SI difference formula for 2 and 3 years",
+  "Permutation Combination Probability":"Practice counting principle first, then P(n,r) and C(n,r). Common probability distributions next",
+  "Number Series & Patterns":"Check differences, ratios, squares, alternating patterns in that order — covers 95% of questions",
+  "Coding Decoding & Analogy":"Identify pattern type first (shift, reverse, number code) before solving",
+  "Syllogism & Logical Deduction":"Draw Venn diagrams for every syllogism — never solve mentally, always draw",
+  "Seating Arrangement & Puzzles":"Draw the arrangement on paper. Fill definite seats first, then use negative clues",
+  "Blood Relations":"Always draw a family tree. Never solve blood relation problems mentally",
+  "Grammar & Sentence Correction":"Focus on 5 error types: SVA, tense, pronoun, modifier, parallelism — covers 80% of questions",
+  "Vocabulary & Reading Comprehension":"Build a 500-word synonym-antonym list. For RC, read questions first, then skim passage"
+};
+
+function tokenize(text){return text.toLowerCase().replace(/[^\w\s]/g,'').split(/\s+/).filter(w=>w.length>2);}
+function computeTFIDF(docs,query){
+  const allDocs=[...Object.values(docs),query];
+  const vocab=[...new Set(allDocs.flatMap(tokenize))];
+  function tf(doc,term){const w=tokenize(doc);const c=w.filter(x=>x===term).length;return w.length?c/w.length:0;}
+  function idf(term){const n=allDocs.filter(d=>tokenize(d).includes(term)).length;return Math.log((allDocs.length+1)/(n+1))+1;}
+  const idfCache={};vocab.forEach(t=>{idfCache[t]=idf(t);});
+  function vec(doc){return vocab.map(t=>tf(doc,t)*idfCache[t]);}
+  function cosine(a,b){let dot=0,ma=0,mb=0;for(let i=0;i<a.length;i++){dot+=a[i]*b[i];ma+=a[i]*a[i];mb+=b[i]*b[i];}return(ma&&mb)?dot/(Math.sqrt(ma)*Math.sqrt(mb)):0;}
+  const qv=vec(query);
+  return Object.entries(docs).map(([name,doc])=>({name,score:cosine(vec(doc),qv)})).sort((a,b)=>b.score-a.score);
+}
+function runMLRecommender(){
+  const query=document.getElementById('mlInput').value.trim();
+  if(!query){alert('Please describe your aptitude strengths and weaknesses!');return;}
+  const results=computeTFIDF(topicDocs,query);
+  const maxScore=results[0].score||1;
+  let html='';
+  results.slice(0,6).forEach((r,i)=>{
+    const pct=maxScore>0?Math.round((r.score/maxScore)*100):0;
+    const medal=i===0?'🔥':i===1?'⚡':i===2?'📌':'•';
+    html+=`<div class="ml-card"><span style="font-size:20px">${medal}</span><div style="flex:1"><div class="ml-topic-name">${r.name}</div><div class="ml-why">${tips[r.name]||'Practice this topic daily'}</div><div class="ml-score-bar" style="margin-top:8px"><div class="ml-score-fill" style="width:${pct}%"></div></div></div><span class="ml-pct">${pct}%</span></div>`;
+  });
+  document.getElementById('mlCards').innerHTML=html;
+  document.getElementById('mlResults').style.display='block';
+  document.getElementById('mlResults').scrollIntoView({behavior:'smooth'});
+}
+document.getElementById('mlInput').addEventListener('keydown',e=>{if(e.key==='Enter')runMLRecommender();});
+document.querySelectorAll('.step-btn').forEach(b=>b.addEventListener('click',()=>changeStep(parseInt(b.dataset.step))));
+updateProgress();renderStepContent(1);
+</script>
+</body>
+</html>

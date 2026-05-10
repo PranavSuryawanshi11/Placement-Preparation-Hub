@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Data Structures & Algorithms – Placement Prep Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:radial-gradient(circle at top,#0a1b3d,#020617);color:#e2e8f0;min-height:100vh;line-height:1.7;}
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 70px;z-index:100;background:rgba(2,6,23,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(99,102,241,0.3);}
+    .logo a{font-size:26px;font-weight:800;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent;text-decoration:none;}
+    nav a{margin-left:28px;text-decoration:none;color:#bfc6d4;font-size:15px;font-weight:500;transition:0.3s;padding:6px 12px;border-radius:8px;}
+    nav a:hover{color:white;background:rgba(99,102,241,0.2);}
+    .hero{text-align:center;margin-top:140px;padding:0 20px;}
+    .tag{display:inline-block;padding:8px 24px;border-radius:9999px;background:rgba(99,102,241,0.2);font-size:14px;color:#a5b4fc;margin-bottom:20px;border:1px solid rgba(99,102,241,0.4);}
+    .hero h1{font-size:56px;font-weight:800;background:linear-gradient(135deg,#e0e7ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:20px;line-height:1.2;}
+    .hero p{color:#9ca3af;font-size:18px;max-width:800px;margin:0 auto 30px;}
+    .progress-container{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .progress-stats{display:flex;justify-content:space-between;margin-bottom:12px;font-size:14px;color:#94a3b8;}
+    .progress-track{background:rgba(255,255,255,0.1);height:10px;border-radius:10px;overflow:hidden;}
+    .progress-fill{background:linear-gradient(90deg,#6366f1,#a855f7);height:100%;width:0%;transition:width 0.5s ease;border-radius:10px;}
+    .steps-nav{max-width:1100px;margin:30px auto;padding:0 30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+    .step-btn{padding:12px 28px;background:rgba(255,255,255,0.05);border:2px solid rgba(99,102,241,0.3);border-radius:12px;color:#cbd5e1;font-weight:600;cursor:pointer;transition:all 0.3s;font-size:15px;}
+    .step-btn:hover{border-color:#6366f1;background:rgba(99,102,241,0.1);transform:translateY(-2px);}
+    .step-btn.active{background:linear-gradient(135deg,#6366f1,#a855f7);border-color:transparent;color:white;box-shadow:0 4px 15px rgba(99,102,241,0.3);}
+    .step-btn.completed{border-color:#10b981;background:rgba(16,185,129,0.1);color:#10b981;}
+    .content-section{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .step-content{display:none;animation:fadeIn 0.5s ease;}
+    .step-content.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .step-header{margin-bottom:40px;padding-bottom:20px;border-bottom:2px solid rgba(99,102,241,0.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+    .step-header h2{font-size:36px;font-weight:700;color:#e0e7ff;margin-bottom:12px;}
+    .step-header p{color:#9ca3af;font-size:16px;}
+    .topic-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 28px;margin-bottom:20px;transition:all 0.3s;cursor:pointer;}
+    .topic-card:hover{border-color:#6366f1;transform:translateY(-3px);background:rgba(99,102,241,0.05);}
+    .topic-header{display:flex;align-items:center;justify-content:space-between;}
+    .topic-header h3{font-size:22px;font-weight:600;display:flex;align-items:center;gap:12px;}
+    .topic-icon{font-size:28px;} .arrow{font-size:28px;transition:transform 0.3s;}
+    .sub-topics{display:none;margin-top:20px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.2);}
+    .sub-topics.active{display:block;}
+    .sub-topic{padding:14px 22px;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:10px;transition:0.3s;cursor:pointer;border-left:3px solid transparent;}
+    .sub-topic:hover{background:rgba(99,102,241,0.15);border-left-color:#6366f1;transform:translateX(5px);}
+    .detail-container{margin-top:40px;background:rgba(15,23,42,0.7);border:1px solid rgba(99,102,241,0.3);border-radius:24px;padding:40px;backdrop-filter:blur(8px);}
+    .detail-container h2{font-size:28px;margin-bottom:20px;color:#c4b5fd;}
+    .detail-container h3{font-size:22px;margin:25px 0 15px;color:#a5b4fc;}
+    .detail-container p{margin-bottom:18px;color:#cbd5e1;line-height:1.8;}
+    .detail-container ul,.detail-container ol{margin:18px 0 25px;padding-left:32px;}
+    .detail-container li{margin-bottom:10px;}
+    .code-block{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:24px;margin:25px 0;font-family:'Courier New',monospace;font-size:14px;overflow-x:auto;color:#e2e8f0;white-space:pre;}
+    .example-box{background:rgba(16,185,129,0.1);border-left:5px solid #10b981;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .note-box{background:rgba(234,179,8,0.1);border-left:5px solid #eab308;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .tip-box{background:rgba(59,130,246,0.1);border-left:5px solid #3b82f6;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .warning-box{background:rgba(239,68,68,0.1);border-left:5px solid #ef4444;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    table{width:100%;border-collapse:collapse;margin:25px 0;}
+    th,td{border:1px solid rgba(255,255,255,0.2);padding:12px;text-align:left;}
+    th{background:rgba(99,102,241,0.2);color:#a5b4fc;}
+    .nav-buttons{display:flex;justify-content:space-between;gap:20px;margin-top:50px;padding:40px 0 60px;}
+    .nav-btn{padding:14px 32px;border-radius:12px;font-weight:600;transition:0.3s;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;border:none;font-size:16px;}
+    .nav-btn.prev{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;}
+    .nav-btn:hover{transform:translateY(-2px);opacity:0.9;}
+    .complete-step-btn{background:rgba(16,185,129,0.2);border:2px solid #10b981;color:#10b981;padding:12px 28px;border-radius:12px;font-weight:600;cursor:pointer;transition:0.3s;font-size:14px;}
+    .complete-step-btn:hover{background:#10b981;color:white;}
+    .completed-badge{color:#10b981;font-weight:600;display:flex;align-items:center;gap:8px;}
+    .ml-section{max-width:1100px;margin:0 auto 60px;padding:0 30px;}
+    .ml-box{background:rgba(15,23,42,0.8);border:1px solid rgba(99,102,241,0.4);border-radius:24px;padding:36px;}
+    .ml-box h2{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:8px;}
+    .ml-box p{color:#9ca3af;margin-bottom:24px;}
+    .ml-input-row{display:flex;gap:12px;flex-wrap:wrap;}
+    .ml-input{flex:1;min-width:220px;padding:14px 20px;background:rgba(255,255,255,0.05);border:1px solid rgba(99,102,241,0.3);border-radius:12px;color:#e2e8f0;font-size:15px;font-family:'Poppins',sans-serif;}
+    .ml-input:focus{outline:none;border-color:#6366f1;}
+    .ml-btn{padding:14px 32px;background:linear-gradient(135deg,#6366f1,#a855f7);border:none;border-radius:12px;color:white;font-weight:700;font-size:15px;cursor:pointer;transition:0.3s;font-family:'Poppins',sans-serif;}
+    .ml-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,0.4);}
+    .ml-results{margin-top:28px;display:none;}
+    .ml-results h3{font-size:18px;color:#a5b4fc;margin-bottom:16px;}
+    .ml-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:18px 22px;margin-bottom:12px;display:flex;align-items:center;gap:16px;transition:0.3s;}
+    .ml-card:hover{border-color:#6366f1;background:rgba(99,102,241,0.08);}
+    .ml-score-bar{flex:1;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;}
+    .ml-score-fill{height:100%;background:linear-gradient(90deg,#6366f1,#a855f7);border-radius:4px;}
+    .ml-topic-name{font-weight:600;color:#e0e7ff;min-width:200px;}
+    .ml-pct{color:#a5b4fc;font-size:14px;min-width:45px;text-align:right;}
+    .ml-why{font-size:13px;color:#64748b;margin-top:4px;}
+    .pdf-section{max-width:1100px;margin:0 auto 80px;padding:0 30px;}
+    .pdf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+    .pdf-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px;transition:all 0.3s;text-align:center;}
+    .pdf-card:hover{border-color:#6366f1;transform:translateY(-3px);}
+    .pdf-card h4{font-size:17px;font-weight:600;margin:12px 0 8px;color:#e0e7ff;}
+    .pdf-card p{color:#9ca3af;font-size:14px;margin-bottom:16px;}
+    .pdf-btn{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;border:none;padding:10px 24px;border-radius:9999px;font-size:14px;font-weight:600;cursor:pointer;transition:0.3s;text-decoration:none;display:inline-block;}
+    .pdf-btn:hover{opacity:0.85;transform:translateY(-2px);}
+    .section-title{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:24px;}
+    @media(max-width:768px){header{padding:15px 20px;}nav a{margin-left:10px;font-size:12px;}.hero h1{font-size:32px;}.ml-input-row{flex-direction:column;}}
+</style>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="index.html">🚀 Placement Prep</a></div>
+    <nav><a href="index.html">Home</a><a href="subjects.html">Subjects</a></nav>
+</header>
+
+<div class="hero">
+    <div class="tag">🗂️ Step 2 of 6 • DSA Mastery</div>
+    <h1>Data Structures<br>& Algorithms</h1>
+    <p>Master arrays, linked lists, trees, graphs, dynamic programming and all core DSA topics — the #1 skill tested in every tech placement.</p>
+</div>
+
+<div class="progress-container">
+    <div class="progress-stats"><span>📊 Your Progress</span><span id="progressPercent">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="steps-nav">
+    <button class="step-btn active" data-step="1">Step 1: Arrays & Strings</button>
+    <button class="step-btn" data-step="2">Step 2: Linked Lists & Stacks</button>
+    <button class="step-btn" data-step="3">Step 3: Trees & Graphs</button>
+    <button class="step-btn" data-step="4">Step 4: Sorting & Searching</button>
+    <button class="step-btn" data-step="5">Step 5: Dynamic Programming</button>
+</div>
+
+<div class="content-section" id="contentSection"></div>
+
+<div class="ml-section">
+    <div class="ml-box">
+        <h2>🤖 AI Topic Recommender <span style="font-size:13px;background:rgba(99,102,241,0.2);padding:3px 10px;border-radius:20px;color:#a5b4fc;font-weight:500;margin-left:8px;">TF-IDF Cosine Similarity</span></h2>
+        <p>Describe what you find difficult or what you've already studied — the ML engine recommends your next DSA topic using real TF-IDF vector similarity.</p>
+        <div class="ml-input-row">
+            <input class="ml-input" id="mlInput" placeholder="e.g. I understand arrays but trees and graph traversal confuse me..." />
+            <button class="ml-btn" onclick="runMLRecommender()">🔍 Get Recommendations</button>
+        </div>
+        <div class="ml-results" id="mlResults">
+            <h3>📌 Recommended DSA Topics — ranked by relevance</h3>
+            <div id="mlCards"></div>
+            <div style="margin-top:16px;padding:14px 18px;background:rgba(99,102,241,0.08);border-radius:12px;font-size:13px;color:#64748b;">ℹ️ TF-IDF: Each topic is a bag-of-words vector. Your input is vectorised the same way. Cosine similarity measures the angle between vectors — smaller angle = higher relevance.</div>
+        </div>
+    </div>
+</div>
+
+<div class="pdf-section">
+    <h2 class="section-title">📚 DSA Resources</h2>
+    <div class="pdf-grid">
+        <div class="pdf-card"><div style="font-size:40px">📗</div><h4>DSA Self Paced (GFG)</h4><p>Comprehensive DSA course — arrays to graphs with problems</p><a class="pdf-btn" href="https://www.geeksforgeeks.org/data-structures/" target="_blank">📖 Start Learning</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🏆</div><h4>LeetCode Top 150</h4><p>Top 150 interview questions covering all DSA topics</p><a class="pdf-btn" href="https://leetcode.com/studyplan/top-interview-150/" target="_blank">🔗 Solve Now</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🎯</div><h4>Striver's A2Z DSA Sheet</h4><p>Most popular placement DSA sheet — 450 curated problems</p><a class="pdf-btn" href="https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/" target="_blank">🔗 View Sheet</a></div>
+        <div class="pdf-card"><div style="font-size:40px">📊</div><h4>Big-O Cheat Sheet</h4><p>Time & space complexity for all common data structures</p><a class="pdf-btn" href="https://www.bigocheatsheet.com/" target="_blank">📖 View Sheet</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🌲</div><h4>Visualgo — Algorithm Viz</h4><p>Visual animations of sorting, trees, graphs and more</p><a class="pdf-btn" href="https://visualgo.net/en" target="_blank">🔗 Visualise</a></div>
+        <div class="pdf-card"><div style="font-size:40px">💡</div><h4>NeetCode Roadmap</h4><p>Curated 150 problems with video explanations</p><a class="pdf-btn" href="https://neetcode.io/roadmap" target="_blank">🔗 View Roadmap</a></div>
+    </div>
+</div>
+
+<script>
+const stepsData = {
+    1:{title:"📦 Arrays & Strings",description:"The most frequently tested DSA topic — every placement exam has array problems.",topics:[
+        {title:"Arrays",icon:"📋",subs:[
+            {id:"array-basics",title:"Array Basics — Declaration, Access, Traversal"},
+            {id:"array-ops",title:"Common Operations — Reverse, Rotate, Shift"},
+            {id:"2d-array",title:"2D Arrays & Matrix Operations"},
+            {id:"array-sorting",title:"Array Sorting & Searching Tricks"}
+        ]},
+        {title:"Strings",icon:"🔤",subs:[
+            {id:"string-basics",title:"String Basics & Immutability"},
+            {id:"string-patterns",title:"Pattern Matching — Naive & KMP"},
+            {id:"anagram",title:"Anagram, Palindrome, Substring Problems"},
+            {id:"string-dp",title:"String DP — LCS, Edit Distance"}
+        ]}
+    ]},
+    2:{title:"🔗 Linked Lists, Stacks & Queues",description:"Pointer-based structures — heavily tested in TCS, Infosys, and product companies.",topics:[
+        {title:"Linked Lists",icon:"🔗",subs:[
+            {id:"ll-basics",title:"Singly Linked List — Insert, Delete, Traverse"},
+            {id:"dll",title:"Doubly & Circular Linked Lists"},
+            {id:"ll-problems",title:"Reverse, Detect Cycle, Find Middle"},
+            {id:"ll-merge",title:"Merge Two Sorted Lists"}
+        ]},
+        {title:"Stacks & Queues",icon:"📚",subs:[
+            {id:"stack-impl",title:"Stack Implementation & Applications"},
+            {id:"queue-impl",title:"Queue, Deque & Circular Queue"},
+            {id:"monotonic",title:"Monotonic Stack Pattern"},
+            {id:"pq-heap",title:"Priority Queue & Heap Basics"}
+        ]}
+    ]},
+    3:{title:"🌲 Trees & Graphs",description:"Tree and graph problems are guaranteed in product company interviews.",topics:[
+        {title:"Trees",icon:"🌲",subs:[
+            {id:"bst",title:"Binary Search Tree — Insert, Delete, Search"},
+            {id:"tree-traversal",title:"Traversals — Inorder, Preorder, Postorder, Level"},
+            {id:"avl-rb",title:"Balanced Trees — AVL, Red-Black"},
+            {id:"trie",title:"Trie — Prefix Tree for String Problems"}
+        ]},
+        {title:"Graphs",icon:"🕸️",subs:[
+            {id:"graph-repr",title:"Graph Representation — Adjacency List/Matrix"},
+            {id:"bfs-dfs",title:"BFS & DFS — Full Implementation"},
+            {id:"shortest-path",title:"Dijkstra & Bellman-Ford"},
+            {id:"mst",title:"Minimum Spanning Tree — Kruskal & Prim"}
+        ]}
+    ]},
+    4:{title:"⚡ Sorting & Searching",description:"Sort every common algorithm by complexity and know when to use which.",topics:[
+        {title:"Sorting Algorithms",icon:"🔃",subs:[
+            {id:"bubble-select",title:"Bubble Sort & Selection Sort — O(n²)"},
+            {id:"merge-sort",title:"Merge Sort — O(n log n) Stable Sort"},
+            {id:"quick-sort",title:"Quick Sort — O(n log n) Avg, Partitioning"},
+            {id:"heap-sort",title:"Heap Sort & Counting Sort"}
+        ]},
+        {title:"Searching",icon:"🔍",subs:[
+            {id:"linear-search",title:"Linear Search & When to Use It"},
+            {id:"binary-search",title:"Binary Search — Template & Variants"},
+            {id:"bs-answer",title:"Binary Search on Answer Pattern"},
+            {id:"ternary-search",title:"Ternary Search & Interpolation Search"}
+        ]}
+    ]},
+    5:{title:"🧠 Dynamic Programming",description:"DP is the most feared topic — break it down into 5 clear categories.",topics:[
+        {title:"DP Foundations",icon:"🏗️",subs:[
+            {id:"dp-1d",title:"1D DP — Fibonacci, Climbing Stairs, House Robber"},
+            {id:"dp-2d",title:"2D DP — Grid Problems, Unique Paths"},
+            {id:"dp-strings",title:"String DP — LCS, Edit Distance, Palindrome"},
+            {id:"dp-knapsack",title:"0/1 Knapsack & Subset Sum"}
+        ]},
+        {title:"Advanced DP",icon:"🚀",subs:[
+            {id:"dp-intervals",title:"Interval DP — Matrix Chain, Burst Balloons"},
+            {id:"dp-trees",title:"Tree DP — Diameter, Max Path Sum"},
+            {id:"bitmask-dp",title:"Bitmask DP — TSP, Assignment Problem"},
+            {id:"dp-optimization",title:"DP Optimization — Monotone Queue, Divide & Conquer"}
+        ]}
+    ]}
+};
+
+const detailedContent = {
+    'array-basics':`<h2>Array Basics</h2><p>Arrays store elements of the same type in contiguous memory. Access is O(1) — the fastest possible.</p>
+<div class="code-block">// Declaration & Initialization
+int arr[5] = {10, 20, 30, 40, 50};  // C++ static array
+vector&lt;int&gt; v = {1, 2, 3, 4, 5};   // C++ dynamic array
+int[] arr = {1,2,3,4,5};            // Java
+arr = [1, 2, 3, 4, 5]               # Python list
+
+// Traversal — O(n)
+for (int i = 0; i < arr.size(); i++) cout << arr[i];
+for (int x : arr) cout << x;  // range-based (C++11)</div>
+<table><tr><th>Operation</th><th>Time</th><th>Notes</th></tr>
+<tr><td>Access arr[i]</td><td>O(1)</td><td>Direct index</td></tr>
+<tr><td>Search (unsorted)</td><td>O(n)</td><td>Linear scan</td></tr>
+<tr><td>Search (sorted)</td><td>O(log n)</td><td>Binary search</td></tr>
+<tr><td>Insert at end</td><td>O(1) amortized</td><td>Vector push_back</td></tr>
+<tr><td>Insert at i</td><td>O(n)</td><td>Shift elements right</td></tr>
+<tr><td>Delete at i</td><td>O(n)</td><td>Shift elements left</td></tr></table>`,
+
+    'array-ops':`<h2>Common Array Operations</h2>
+<div class="code-block">// Reverse array — O(n), O(1) space
+void reverse(int arr[], int n) {
+    int l=0, r=n-1;
+    while (l < r) swap(arr[l++], arr[r--]);
+}
+
+// Left rotate by k positions
+void leftRotate(vector&lt;int&gt;&amp; arr, int k) {
+    k %= arr.size();
+    reverse(arr.begin(), arr.begin()+k);
+    reverse(arr.begin()+k, arr.end());
+    reverse(arr.begin(), arr.end());
+}  // Time: O(n), Space: O(1)
+
+// Find max subarray sum (Kadane's Algorithm) — O(n)
+int maxSubarraySum(int arr[], int n) {
+    int maxSoFar = arr[0], maxEndHere = arr[0];
+    for (int i = 1; i &lt; n; i++) {
+        maxEndHere = max(arr[i], maxEndHere + arr[i]);
+        maxSoFar = max(maxSoFar, maxEndHere);
+    }
+    return maxSoFar;
+}</div>`,
+
+    '2d-array':`<h2>2D Arrays & Matrix Operations</h2>
+<div class="code-block">// 2D array declaration
+int mat[3][3] = {{1,2,3},{4,5,6},{7,8,9}};
+
+// Traverse row by row
+for (int i=0; i&lt;rows; i++)
+    for (int j=0; j&lt;cols; j++)
+        cout &lt;&lt; mat[i][j] &lt;&lt; " ";
+
+// Transpose matrix (swap mat[i][j] with mat[j][i])
+void transpose(int mat[][N], int n) {
+    for (int i=0; i&lt;n; i++)
+        for (int j=i+1; j&lt;n; j++)
+            swap(mat[i][j], mat[j][i]);
+}
+
+// Rotate 90° clockwise = Transpose + Reverse each row</div>`,
+
+    'array-sorting':`<h2>Array Sorting & Searching Tricks</h2>
+<div class="code-block">// Sort in C++ — O(n log n)
+sort(arr, arr+n);                    // ascending
+sort(arr, arr+n, greater&lt;int&gt;());   // descending
+sort(v.begin(), v.end());            // vector
+
+// Binary search on sorted array
+int pos = lower_bound(v.begin(), v.end(), target) - v.begin();
+
+// Find duplicates using sort — O(n log n)
+sort(arr.begin(), arr.end());
+for (int i=1; i&lt;n; i++) if (arr[i]==arr[i-1]) cout &lt;&lt; arr[i];
+
+// Find all unique elements using set — O(n)
+set&lt;int&gt; unique_set(arr.begin(), arr.end());</div>`,
+
+    'string-basics':`<h2>String Basics & Immutability</h2><p>In Java, strings are immutable — every modification creates a new object. Use StringBuilder for efficiency.</p>
+<div class="code-block">// Java — String vs StringBuilder
+String s = "Hello";
+s += " World";  // creates NEW object — O(n) each time!
+StringBuilder sb = new StringBuilder("Hello");
+sb.append(" World");  // O(1) amortized — use in loops!
+
+// C++ string is mutable
+string s = "hello";
+s[0] = 'H';  // OK in C++
+
+# Python strings are immutable
+s = "hello"
+# s[0] = 'H'  # ERROR!
+s = 'H' + s[1:]  # create new string</div>`,
+
+    'string-patterns':`<h2>Pattern Matching — Naive & KMP</h2>
+<div class="code-block">// Naive pattern search — O(n*m)
+int naiveSearch(string text, string pat) {
+    int n=text.size(), m=pat.size();
+    for (int i=0; i&lt;=n-m; i++) {
+        int j=0;
+        while (j&lt;m &amp;&amp; text[i+j]==pat[j]) j++;
+        if (j==m) return i;  // found at index i
+    }
+    return -1;
+}
+// KMP — O(n+m) using failure function (prefix array)
+// Built-in: string::find() in C++, indexOf() in Java</div>`,
+
+    'anagram':`<h2>Anagram, Palindrome & Substring Problems</h2>
+<div class="code-block">// Check anagram — O(n)
+bool isAnagram(string a, string b) {
+    if (a.size() != b.size()) return false;
+    int freq[26] = {0};
+    for (char c : a) freq[c-'a']++;
+    for (char c : b) { if (--freq[c-'a'] &lt; 0) return false; }
+    return true;
+}
+
+// Check palindrome — O(n)
+bool isPalindrome(string s) {
+    int l=0, r=s.size()-1;
+    while (l&lt;r) if (s[l++] != s[r--]) return false;
+    return true;
+}
+
+// Longest palindromic substring — O(n²) expand around center
+// Longest common substring — DP O(n*m)</div>`,
+
+    'string-dp':`<h2>String DP — LCS & Edit Distance</h2>
+<div class="code-block">// Longest Common Subsequence (LCS) — O(n*m)
+int lcs(string a, string b) {
+    int n=a.size(), m=b.size();
+    vector&lt;vector&lt;int&gt;&gt; dp(n+1, vector&lt;int&gt;(m+1, 0));
+    for (int i=1; i&lt;=n; i++)
+        for (int j=1; j&lt;=m; j++)
+            dp[i][j] = (a[i-1]==b[j-1]) ? dp[i-1][j-1]+1
+                                         : max(dp[i-1][j], dp[i][j-1]);
+    return dp[n][m];
+}
+
+// Edit Distance (Levenshtein) — O(n*m)
+// Operations: insert, delete, replace (each costs 1)</div>`,
+
+    'll-basics':`<h2>Singly Linked List</h2>
+<div class="code-block">struct Node {
+    int data;
+    Node* next;
+    Node(int d) : data(d), next(nullptr) {}
+};
+
+class LinkedList {
+    Node* head = nullptr;
+public:
+    void insertFront(int d) {        // O(1)
+        Node* n = new Node(d);
+        n->next = head; head = n;
+    }
+    void insertEnd(int d) {          // O(n)
+        Node* n = new Node(d);
+        if (!head) { head=n; return; }
+        Node* cur = head;
+        while (cur->next) cur = cur->next;
+        cur->next = n;
+    }
+    void deleteNode(int d) {         // O(n)
+        if (!head) return;
+        if (head->data==d) { head=head->next; return; }
+        Node* cur=head;
+        while (cur->next &amp;&amp; cur->next->data!=d) cur=cur->next;
+        if (cur->next) cur->next = cur->next->next;
+    }
+};</div>`,
+
+    'dll':`<h2>Doubly & Circular Linked Lists</h2>
+<div class="code-block">struct DNode {
+    int data;
+    DNode *prev, *next;
+    DNode(int d) : data(d), prev(nullptr), next(nullptr) {}
+};
+// Doubly: each node has prev and next pointers
+// Traversal in both directions possible
+// Deletion is O(1) if node pointer is given (vs O(n) singly)
+
+// Circular: last node points back to head
+// Used in: Round Robin scheduling, Josephus problem</div>`,
+
+    'll-problems':`<h2>Classic Linked List Problems</h2>
+<div class="code-block">// Reverse a linked list — O(n), O(1)
+Node* reverse(Node* head) {
+    Node *prev=nullptr, *cur=head, *next=nullptr;
+    while (cur) {
+        next = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = next;
+    }
+    return prev;
+}
+
+// Detect cycle — Floyd's Tortoise &amp; Hare O(n), O(1)
+bool hasCycle(Node* head) {
+    Node *slow=head, *fast=head;
+    while (fast &amp;&amp; fast->next) {
+        slow=slow->next; fast=fast->next->next;
+        if (slow==fast) return true;
+    }
+    return false;
+}
+
+// Find middle — slow/fast pointer
+Node* findMiddle(Node* head) {
+    Node *slow=head, *fast=head;
+    while (fast->next &amp;&amp; fast->next->next) {
+        slow=slow->next; fast=fast->next->next;
+    }
+    return slow;
+}</div>`,
+
+    'll-merge':`<h2>Merge Two Sorted Lists</h2>
+<div class="code-block">// Recursive merge — O(n+m)
+Node* mergeSorted(Node* l1, Node* l2) {
+    if (!l1) return l2;
+    if (!l2) return l1;
+    if (l1->data &lt;= l2->data) {
+        l1->next = mergeSorted(l1->next, l2);
+        return l1;
+    } else {
+        l2->next = mergeSorted(l1, l2->next);
+        return l2;
+    }
+}
+// This is the core of Merge Sort on linked lists</div>`,
+
+    'stack-impl':`<h2>Stack — Implementation & Applications</h2>
+<div class="code-block">// Stack using array
+class Stack {
+    int arr[100], top=-1;
+public:
+    void push(int x) { arr[++top]=x; }
+    int pop() { return arr[top--]; }
+    int peek() { return arr[top]; }
+    bool isEmpty() { return top==-1; }
+};
+
+// Applications of Stack:
+// 1. Balanced brackets: push '(' pop on ')'
+// 2. Undo/Redo functionality
+// 3. Expression evaluation (infix to postfix)
+// 4. DFS implementation
+// 5. Function call stack (recursion)</div>`,
+
+    'queue-impl':`<h2>Queue, Deque & Circular Queue</h2>
+<div class="code-block">// Circular Queue — avoids wasted space
+class CircularQueue {
+    int arr[5], front=-1, rear=-1, size=5;
+public:
+    void enqueue(int x) {
+        rear = (rear+1) % size;
+        arr[rear] = x;
+    }
+    int dequeue() {
+        int val = arr[front];
+        front = (front+1) % size;
+        return val;
+    }
+};
+
+// C++ STL Deque (double-ended queue)
+deque&lt;int&gt; dq;
+dq.push_front(1); dq.push_back(2);
+dq.pop_front(); dq.pop_back();</div>`,
+
+    'monotonic':`<h2>Monotonic Stack Pattern</h2><p>A stack that maintains monotone order. Solves "next greater/smaller element" problems in O(n).</p>
+<div class="code-block">// Next Greater Element — O(n)
+vector&lt;int&gt; nextGreater(vector&lt;int&gt;&amp; arr) {
+    int n=arr.size();
+    vector&lt;int&gt; result(n, -1);
+    stack&lt;int&gt; st;  // stores indices
+    for (int i=0; i&lt;n; i++) {
+        while (!st.empty() &amp;&amp; arr[st.top()] &lt; arr[i]) {
+            result[st.top()] = arr[i];
+            st.pop();
+        }
+        st.push(i);
+    }
+    return result;
+}
+// Problems: Largest Rectangle in Histogram,
+// Daily Temperatures, Stock Span</div>`,
+
+    'pq-heap':`<h2>Priority Queue & Heap</h2>
+<div class="code-block">// C++ Priority Queue (max-heap by default)
+priority_queue&lt;int&gt; maxPQ;
+priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; minPQ;
+
+maxPQ.push(5); maxPQ.push(3); maxPQ.push(8);
+cout &lt;&lt; maxPQ.top();  // 8
+maxPQ.pop();
+
+// Min-heap applications:
+// - Dijkstra's algorithm
+// - Merge k sorted arrays
+// - Find kth largest/smallest element
+// - Huffman coding
+
+// Heap property: Parent &lt;= children (min-heap)
+// Build heap: O(n), Insert/Delete: O(log n)</div>`,
+
+    'bst':`<h2>Binary Search Tree</h2>
+<div class="code-block">struct TreeNode {
+    int val;
+    TreeNode *left, *right;
+    TreeNode(int v) : val(v), left(nullptr), right(nullptr) {}
+};
+
+// Insert — O(log n) avg
+TreeNode* insert(TreeNode* root, int val) {
+    if (!root) return new TreeNode(val);
+    if (val &lt; root->val) root->left = insert(root->left, val);
+    else root->right = insert(root->right, val);
+    return root;
+}
+
+// Search — O(log n) avg
+bool search(TreeNode* root, int val) {
+    if (!root) return false;
+    if (root->val == val) return true;
+    return val &lt; root->val ? search(root->left, val)
+                            : search(root->right, val);
+}
+// BST worst case (sorted input): O(n) — skewed tree → use AVL/RB</div>`,
+
+    'tree-traversal':`<h2>Tree Traversals</h2>
+<div class="code-block">// Inorder (Left, Root, Right) — gives sorted order for BST
+void inorder(TreeNode* root) {
+    if (!root) return;
+    inorder(root->left);
+    cout &lt;&lt; root->val &lt;&lt; " ";
+    inorder(root->right);
+}
+
+// Preorder (Root, Left, Right) — used to copy/serialize tree
+// Postorder (Left, Right, Root) — used to delete tree
+
+// Level Order (BFS) — uses queue
+vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode* root) {
+    vector&lt;vector&lt;int&gt;&gt; result;
+    if (!root) return result;
+    queue&lt;TreeNode*&gt; q;
+    q.push(root);
+    while (!q.empty()) {
+        int size = q.size();
+        vector&lt;int&gt; level;
+        for (int i=0; i&lt;size; i++) {
+            auto node = q.front(); q.pop();
+            level.push_back(node->val);
+            if (node->left) q.push(node->left);
+            if (node->right) q.push(node->right);
+        }
+        result.push_back(level);
+    }
+    return result;
+}</div>`,
+
+    'avl-rb':`<h2>Balanced Trees — AVL & Red-Black</h2>
+<table><tr><th>Property</th><th>AVL Tree</th><th>Red-Black Tree</th></tr>
+<tr><td>Balance condition</td><td>Height diff ≤ 1</td><td>Color rules (4 properties)</td></tr>
+<tr><td>Height</td><td>~1.44 log n</td><td>~2 log n</td></tr>
+<tr><td>Insert/Delete</td><td>More rotations</td><td>Fewer rotations</td></tr>
+<tr><td>Use case</td><td>Read-heavy</td><td>Write-heavy (std::map)</td></tr></table>
+<div class="tip-box">💡 In C++, <code>std::map</code> and <code>std::set</code> are implemented as Red-Black Trees internally. You rarely implement these from scratch — just know the concepts.</div>`,
+
+    'trie':`<h2>Trie (Prefix Tree)</h2>
+<div class="code-block">struct TrieNode {
+    TrieNode* children[26];
+    bool isEnd;
+    TrieNode() { fill(children, children+26, nullptr); isEnd=false; }
+};
+class Trie {
+    TrieNode* root = new TrieNode();
+public:
+    void insert(string word) {
+        TrieNode* cur = root;
+        for (char c : word) {
+            int idx = c-'a';
+            if (!cur->children[idx]) cur->children[idx] = new TrieNode();
+            cur = cur->children[idx];
+        }
+        cur->isEnd = true;
+    }
+    bool search(string word) {
+        TrieNode* cur = root;
+        for (char c : word) {
+            if (!cur->children[c-'a']) return false;
+            cur = cur->children[c-'a'];
+        }
+        return cur->isEnd;
+    }
+};
+// Insert/Search: O(L) where L = word length
+// Use: autocomplete, spell check, IP routing</div>`,
+
+    'graph-repr':`<h2>Graph Representation</h2>
+<div class="code-block">// Adjacency List — O(V+E) space (preferred for sparse graphs)
+vector&lt;vector&lt;int&gt;&gt; adj(V);
+adj[0].push_back(1); adj[1].push_back(2);
+
+// Weighted graph
+vector&lt;vector&lt;pair&lt;int,int&gt;&gt;&gt; adjW(V);  // {neighbor, weight}
+
+// Adjacency Matrix — O(V²) space (for dense graphs)
+int mat[V][V] = {0};
+mat[0][1] = 1;  // edge from 0 to 1
+
+// Edge List — for algorithms like Kruskal
+vector&lt;tuple&lt;int,int,int&gt;&gt; edges;  // {weight, u, v}</div>`,
+
+    'bfs-dfs':`<h2>BFS & DFS — Full Implementation</h2>
+<div class="code-block">// BFS — O(V+E), uses queue, finds shortest path (unweighted)
+void bfs(int start, vector&lt;vector&lt;int&gt;&gt;&amp; adj, int V) {
+    vector&lt;bool&gt; visited(V, false);
+    queue&lt;int&gt; q;
+    q.push(start); visited[start]=true;
+    while (!q.empty()) {
+        int u = q.front(); q.pop();
+        cout &lt;&lt; u &lt;&lt; " ";
+        for (int v : adj[u]) if (!visited[v]) { visited[v]=true; q.push(v); }
+    }
+}
+
+// DFS — O(V+E), uses stack/recursion, finds connected components
+void dfs(int u, vector&lt;vector&lt;int&gt;&gt;&amp; adj, vector&lt;bool&gt;&amp; vis) {
+    vis[u] = true;
+    cout &lt;&lt; u &lt;&lt; " ";
+    for (int v : adj[u]) if (!vis[v]) dfs(v, adj, vis);
+}</div>`,
+
+    'shortest-path':`<h2>Dijkstra & Bellman-Ford</h2>
+<div class="code-block">// Dijkstra — O((V+E) log V), no negative weights
+void dijkstra(int src, vector&lt;vector&lt;pair&lt;int,int&gt;&gt;&gt;&amp; adj, int V) {
+    vector&lt;int&gt; dist(V, INT_MAX);
+    priority_queue&lt;pair&lt;int,int&gt;, vector&lt;pair&lt;int,int&gt;&gt;, greater&lt;&gt;&gt; pq;
+    dist[src]=0; pq.push({0, src});
+    while (!pq.empty()) {
+        auto [d, u] = pq.top(); pq.pop();
+        if (d &gt; dist[u]) continue;
+        for (auto [v, w] : adj[u])
+            if (dist[u]+w &lt; dist[v]) { dist[v]=dist[u]+w; pq.push({dist[v],v}); }
+    }
+}
+// Bellman-Ford — O(V*E), handles negative weights, detects negative cycles</div>`,
+
+    'mst':`<h2>Minimum Spanning Tree</h2>
+<div class="code-block">// Kruskal's Algorithm — O(E log E)
+// Sort edges by weight, add edge if it doesn't form cycle (Union-Find)
+
+// Prim's Algorithm — O((V+E) log V)
+// Start from any vertex, greedily add min weight edge
+
+// Union-Find (Disjoint Set) for Kruskal:
+int parent[N], rank_[N];
+int find(int x) { return parent[x]==x ? x : parent[x]=find(parent[x]); }
+void unite(int x, int y) {
+    int px=find(x), py=find(y);
+    if (rank_[px] &lt; rank_[py]) swap(px,py);
+    parent[py]=px;
+    if (rank_[px]==rank_[py]) rank_[px]++;
+}</div>`,
+
+    'bubble-select':`<h2>Bubble Sort & Selection Sort</h2>
+<div class="code-block">// Bubble Sort — O(n²) worst/avg, O(n) best (with early exit)
+void bubbleSort(int arr[], int n) {
+    for (int i=0; i&lt;n-1; i++) {
+        bool swapped=false;
+        for (int j=0; j&lt;n-i-1; j++)
+            if (arr[j]&gt;arr[j+1]) { swap(arr[j],arr[j+1]); swapped=true; }
+        if (!swapped) break;  // already sorted
+    }
+}
+
+// Selection Sort — O(n²) always, NOT stable
+void selectionSort(int arr[], int n) {
+    for (int i=0; i&lt;n-1; i++) {
+        int minIdx=i;
+        for (int j=i+1; j&lt;n; j++) if (arr[j]&lt;arr[minIdx]) minIdx=j;
+        swap(arr[i], arr[minIdx]);
+    }
+}</div>`,
+
+    'merge-sort':`<h2>Merge Sort — O(n log n) Stable</h2>
+<div class="code-block">void merge(vector&lt;int&gt;&amp; arr, int l, int mid, int r) {
+    vector&lt;int&gt; left(arr.begin()+l, arr.begin()+mid+1);
+    vector&lt;int&gt; right(arr.begin()+mid+1, arr.begin()+r+1);
+    int i=0, j=0, k=l;
+    while (i&lt;left.size() &amp;&amp; j&lt;right.size())
+        arr[k++] = (left[i]&lt;=right[j]) ? left[i++] : right[j++];
+    while (i&lt;left.size()) arr[k++]=left[i++];
+    while (j&lt;right.size()) arr[k++]=right[j++];
+}
+void mergeSort(vector&lt;int&gt;&amp; arr, int l, int r) {
+    if (l &gt;= r) return;
+    int mid = (l+r)/2;
+    mergeSort(arr, l, mid);
+    mergeSort(arr, mid+1, r);
+    merge(arr, l, mid, r);
+}
+// Stable ✅, O(n log n) always ✅, O(n) extra space ❌</div>`,
+
+    'quick-sort':`<h2>Quick Sort — O(n log n) Average</h2>
+<div class="code-block">int partition(int arr[], int low, int high) {
+    int pivot=arr[high], i=low-1;
+    for (int j=low; j&lt;high; j++)
+        if (arr[j]&lt;=pivot) swap(arr[++i], arr[j]);
+    swap(arr[i+1], arr[high]);
+    return i+1;
+}
+void quickSort(int arr[], int low, int high) {
+    if (low &lt; high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi-1);
+        quickSort(arr, pi+1, high);
+    }
+}
+// O(n log n) avg, O(n²) worst (sorted input)
+// NOT stable, O(log n) space (stack)
+// Fastest in practice due to cache efficiency</div>`,
+
+    'heap-sort':`<h2>Heap Sort & Counting Sort</h2>
+<div class="code-block">// Heap Sort — O(n log n), O(1) space, NOT stable
+void heapify(int arr[], int n, int i) {
+    int largest=i, l=2*i+1, r=2*i+2;
+    if (l&lt;n &amp;&amp; arr[l]&gt;arr[largest]) largest=l;
+    if (r&lt;n &amp;&amp; arr[r]&gt;arr[largest]) largest=r;
+    if (largest!=i) { swap(arr[i],arr[largest]); heapify(arr,n,largest); }
+}
+
+// Counting Sort — O(n+k), stable, only for small integer ranges
+void countingSort(int arr[], int n) {
+    int maxVal = *max_element(arr, arr+n);
+    vector&lt;int&gt; count(maxVal+1, 0);
+    for (int x : vector&lt;int&gt;(arr,arr+n)) count[x]++;
+    int idx=0;
+    for (int i=0; i&lt;=maxVal; i++) while (count[i]--) arr[idx++]=i;
+}</div>`,
+
+    'linear-search':`<h2>Linear Search</h2>
+<div class="code-block">int linearSearch(int arr[], int n, int target) {
+    for (int i=0; i&lt;n; i++) if (arr[i]==target) return i;
+    return -1;
+}
+// O(n) time, O(1) space
+// Use when: array is unsorted, small size, or only one search needed</div>`,
+
+    'binary-search':`<h2>Binary Search — Template & Variants</h2>
+<div class="code-block">// Standard binary search — O(log n), requires SORTED array
+int binarySearch(int arr[], int n, int target) {
+    int l=0, r=n-1;
+    while (l &lt;= r) {
+        int mid = l + (r-l)/2;  // avoids overflow vs (l+r)/2
+        if (arr[mid]==target) return mid;
+        else if (arr[mid]&lt;target) l=mid+1;
+        else r=mid-1;
+    }
+    return -1;
+}
+
+// Find first occurrence (lower_bound)
+int lowerBound(int arr[], int n, int target) {
+    int l=0, r=n, ans=n;
+    while (l&lt;r) {
+        int mid=(l+r)/2;
+        if (arr[mid] &gt;= target) { ans=mid; r=mid; }
+        else l=mid+1;
+    }
+    return ans;
+}</div>`,
+
+    'bs-answer':`<h2>Binary Search on Answer Pattern</h2><p>Instead of searching in array, search in the range of possible answers. Crucial pattern in placement exams.</p>
+<div class="code-block">// Find minimum days to make m bouquets
+// (Binary search on answer: days from 1 to max bloom day)
+bool canMake(vector&lt;int&gt;&amp; bloomDay, int m, int k, int day) {
+    int bouquets=0, flowers=0;
+    for (int d : bloomDay) {
+        if (d &lt;= day) { flowers++; if (flowers==k) { bouquets++; flowers=0; } }
+        else flowers=0;
+    }
+    return bouquets &gt;= m;
+}
+// Binary search: low=1, high=max(bloomDay)
+// Check if canMake(mid) → narrow range</div>`,
+
+    'ternary-search':`<h2>Ternary Search & Interpolation Search</h2>
+<div class="code-block">// Ternary Search — finds max/min of unimodal function
+double ternarySearch(double l, double r) {
+    while (r-l &gt; 1e-9) {
+        double m1 = l + (r-l)/3;
+        double m2 = r - (r-l)/3;
+        if (f(m1) &lt; f(m2)) l = m1;
+        else r = m2;
+    }
+    return (l+r)/2;
+}
+// Interpolation Search — O(log log n) for uniform distribution
+// int pos = low + ((target-arr[low])*(high-low))/(arr[high]-arr[low]);</div>`,
+
+    'dp-1d':`<h2>1D DP — Foundation Problems</h2>
+<div class="code-block">// Climbing Stairs (= Fibonacci)
+int climbStairs(int n) {
+    if (n&lt;=2) return n;
+    int a=1, b=2;
+    for (int i=3; i&lt;=n; i++) { int c=a+b; a=b; b=c; }
+    return b;
+}
+
+// House Robber — can't rob adjacent houses
+int rob(vector&lt;int&gt;&amp; nums) {
+    int prev2=0, prev1=0;
+    for (int x : nums) {
+        int cur = max(prev1, prev2+x);
+        prev2=prev1; prev1=cur;
+    }
+    return prev1;
+}
+
+// Min Cost Climbing Stairs
+// dp[i] = min(dp[i-1]+cost[i-1], dp[i-2]+cost[i-2])</div>`,
+
+    'dp-2d':`<h2>2D DP — Grid Problems</h2>
+<div class="code-block">// Unique Paths in m×n grid
+int uniquePaths(int m, int n) {
+    vector&lt;vector&lt;int&gt;&gt; dp(m, vector&lt;int&gt;(n, 1));
+    for (int i=1; i&lt;m; i++)
+        for (int j=1; j&lt;n; j++)
+            dp[i][j] = dp[i-1][j] + dp[i][j-1];
+    return dp[m-1][n-1];
+}
+
+// Min Path Sum in grid
+int minPathSum(vector&lt;vector&lt;int&gt;&gt;&amp; grid) {
+    int m=grid.size(), n=grid[0].size();
+    for (int i=0; i&lt;m; i++)
+        for (int j=0; j&lt;n; j++) {
+            if (i==0 &amp;&amp; j==0) continue;
+            int top  = i&gt;0 ? grid[i-1][j] : INT_MAX;
+            int left = j&gt;0 ? grid[i][j-1] : INT_MAX;
+            grid[i][j] += min(top, left);
+        }
+    return grid[m-1][n-1];
+}</div>`,
+
+    'dp-strings':`<h2>String DP</h2>
+<div class="code-block">// Edit Distance — O(n*m)
+int editDistance(string a, string b) {
+    int n=a.size(), m=b.size();
+    vector&lt;vector&lt;int&gt;&gt; dp(n+1, vector&lt;int&gt;(m+1));
+    for (int i=0; i&lt;=n; i++) dp[i][0]=i;
+    for (int j=0; j&lt;=m; j++) dp[0][j]=j;
+    for (int i=1; i&lt;=n; i++)
+        for (int j=1; j&lt;=m; j++)
+            dp[i][j] = (a[i-1]==b[j-1]) ? dp[i-1][j-1]
+                       : 1+min({dp[i-1][j], dp[i][j-1], dp[i-1][j-1]});
+    return dp[n][m];
+}</div>`,
+
+    'dp-knapsack':`<h2>0/1 Knapsack & Subset Sum</h2>
+<div class="code-block">// 0/1 Knapsack — O(n*W)
+int knapsack(int W, int wt[], int val[], int n) {
+    vector&lt;vector&lt;int&gt;&gt; dp(n+1, vector&lt;int&gt;(W+1, 0));
+    for (int i=1; i&lt;=n; i++)
+        for (int w=0; w&lt;=W; w++) {
+            dp[i][w] = dp[i-1][w];
+            if (wt[i-1] &lt;= w)
+                dp[i][w] = max(dp[i][w], dp[i-1][w-wt[i-1]] + val[i-1]);
+        }
+    return dp[n][W];
+}
+// Subset Sum — can we form sum S from subset of array?
+// dp[i][s] = can we form sum s using first i elements?</div>`,
+
+    'dp-intervals':`<h2>Interval DP</h2>
+<div class="code-block">// Matrix Chain Multiplication — O(n³)
+int mcm(int p[], int n) {
+    vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(n, 0));
+    for (int len=2; len&lt;n; len++)
+        for (int i=1; i&lt;n-len+1; i++) {
+            int j=i+len-1; dp[i][j]=INT_MAX;
+            for (int k=i; k&lt;j; k++)
+                dp[i][j]=min(dp[i][j], dp[i][k]+dp[k+1][j]+p[i-1]*p[k]*p[j]);
+        }
+    return dp[1][n-1];
+}</div>`,
+
+    'dp-trees':`<h2>Tree DP</h2>
+<div class="code-block">// Diameter of Binary Tree
+int diameter=0;
+int height(TreeNode* root) {
+    if (!root) return 0;
+    int l=height(root->left), r=height(root->right);
+    diameter = max(diameter, l+r);
+    return 1+max(l,r);
+}
+// Max Path Sum — O(n)
+int maxSum=INT_MIN;
+int maxGain(TreeNode* root) {
+    if (!root) return 0;
+    int l=max(0, maxGain(root->left));
+    int r=max(0, maxGain(root->right));
+    maxSum = max(maxSum, l+r+root->val);
+    return root->val + max(l,r);
+}</div>`,
+
+    'bitmask-dp':`<h2>Bitmask DP</h2>
+<div class="code-block">// Travelling Salesman Problem — O(n² * 2^n)
+// State: dp[mask][v] = min cost to visit all cities in mask, ending at v
+int tsp(int mask, int pos, vector&lt;vector&lt;int&gt;&gt;&amp; dist, vector&lt;vector&lt;int&gt;&gt;&amp; dp, int n) {
+    if (mask == (1&lt;&lt;n)-1) return dist[pos][0];
+    if (dp[mask][pos] != -1) return dp[mask][pos];
+    int ans = INT_MAX;
+    for (int city=0; city&lt;n; city++)
+        if (!(mask &amp; (1&lt;&lt;city)))
+            ans=min(ans, dist[pos][city]+tsp(mask|(1&lt;&lt;city), city, dist, dp, n));
+    return dp[mask][pos]=ans;
+}</div>`,
+
+    'dp-optimization':`<h2>DP Optimization Techniques</h2>
+<ul>
+<li><strong>Space optimization:</strong> Many 2D DPs can use rolling array (only 1-2 rows needed)</li>
+<li><strong>Monotone deque:</strong> Sliding window maximum in O(n) for DP transitions</li>
+<li><strong>Divide & Conquer DP:</strong> When opt[i][j] is monotone — O(n log n) instead of O(n²)</li>
+<li><strong>Knuth's optimization:</strong> For interval DP with certain properties — O(n²) instead of O(n³)</li>
+</ul>`
+};
+
+let currentStep=1, completedSteps=JSON.parse(localStorage.getItem('dsa_completedSteps')||'[]');
+function updateProgress(){const p=(completedSteps.length/5)*100;document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressPercent').textContent=Math.round(p)+'%';document.querySelectorAll('.step-btn').forEach(b=>b.classList.toggle('completed',completedSteps.includes(parseInt(b.dataset.step))));}
+function markStepComplete(step){if(!completedSteps.includes(step)){completedSteps.push(step);localStorage.setItem('dsa_completedSteps',JSON.stringify(completedSteps));updateProgress();renderStepContent(step);}}
+function renderStepContent(step){currentStep=step;const sd=stepsData[step];const isC=completedSteps.includes(step);let html=`<div class="step-content active"><div class="step-header"><div><h2>${sd.title}</h2><p>${sd.description}</p></div>${!isC?`<button class="complete-step-btn" onclick="markStepComplete(${step})">✓ Mark as Complete</button>`:'<div class="completed-badge">✓ Step Completed! 🎉</div>'}</div>`;sd.topics.forEach(t=>{html+=`<div class="topic-card" onclick="toggleSubTopics(this)"><div class="topic-header"><h3><span class="topic-icon">${t.icon}</span> ${t.title}</h3><span class="arrow">›</span></div><div class="sub-topics">`;t.subs.forEach(s=>{html+=`<div class="sub-topic" onclick="showContent(event,'${s.id}')">${s.title}</div>`;});html+=`</div></div>`;});html+=`<div class="detail-container" id="detailContainer"><p style="color:#94a3b8;text-align:center;">🗂️ Click any topic to view detailed explanations and code examples.</p></div><div class="nav-buttons">${step>1?`<button class="nav-btn prev" onclick="changeStep(${step-1})">← Previous</button>`:'<div></div>'}${step<5?`<button class="nav-btn next" onclick="changeStep(${step+1})">Next →</button>`:`<button class="nav-btn next" onclick="window.location.href='step3_core_cs.html'">Next: Core CS →</button>`}</div></div>`;document.getElementById('contentSection').innerHTML=html;document.querySelectorAll('.step-btn').forEach(b=>b.classList.toggle('active',parseInt(b.dataset.step)===step));}
+function changeStep(s){if(s>=1&&s<=5){renderStepContent(s);window.scrollTo({top:0,behavior:'smooth'});}}
+function toggleSubTopics(card){const sub=card.querySelector('.sub-topics');const arrow=card.querySelector('.arrow');document.querySelectorAll('.sub-topics').forEach(s=>{if(s!==sub)s.classList.remove('active');});sub.classList.toggle('active');if(arrow)arrow.style.transform=sub.classList.contains('active')?'rotate(90deg)':'rotate(0deg)';}
+function showContent(e,id){e.stopPropagation();const dc=document.getElementById('detailContainer');dc.innerHTML=detailedContent[id]||'<p>Content coming soon!</p>';dc.scrollIntoView({behavior:'smooth',block:'start'});}
+
+// TF-IDF Cosine Similarity ML Recommender
+const topicDocs={
+    "Arrays & 2D Arrays":"array matrix 2d row column reverse rotate shift traverse access index contiguous memory",
+    "String Algorithms":"string pattern matching anagram palindrome substring kmp search immutable format parse",
+    "Linked Lists":"linked list node pointer singly doubly circular reverse cycle middle merge delete insert",
+    "Stacks & Queues":"stack queue deque circular lifo fifo push pop enqueue dequeue monotonic balanced brackets expression",
+    "Binary Trees & BST":"tree binary bst insert delete search traversal inorder preorder postorder level avl balance",
+    "Graphs — BFS/DFS":"graph bfs dfs adjacency list matrix connected component traversal directed undirected cycle",
+    "Shortest Path Algorithms":"dijkstra bellman ford shortest path weighted graph distance priority queue",
+    "Sorting Algorithms":"sort bubble selection merge quick heap counting radix stable time complexity nlogn",
+    "Binary Search":"binary search sorted array lower bound upper bound answer pattern mid log n",
+    "Dynamic Programming":"dp dynamic programming memoization tabulation knapsack lcs edit distance fibonacci overlapping subproblems"
+};
+const tips={"Arrays & 2D Arrays":"Practice Kadane's, sliding window, and prefix sum on LeetCode","String Algorithms":"Implement KMP and practice anagram/palindrome problems","Linked Lists":"Code reverse, cycle detection, and merge from scratch","Stacks & Queues":"Solve monotonic stack and expression evaluation problems","Binary Trees & BST":"Implement all 4 traversals and BST operations from scratch","Graphs — BFS/DFS":"Code BFS and DFS on adjacency list, solve connected components","Shortest Path Algorithms":"Implement Dijkstra with priority_queue","Sorting Algorithms":"Know when to use merge vs quick vs counting sort","Binary Search":"Master the lower_bound template and binary search on answer","Dynamic Programming":"Start with 1D DP, then 2D grid, then knapsack"};
+function tfidf(docs,query){const all=[...Object.values(docs),query];const vocab=[...new Set(all.flatMap(d=>d.toLowerCase().split(/\s+/)))];function tf(doc,term){const w=doc.toLowerCase().split(/\s+/);return w.filter(x=>x===term).length/w.length;}function idf(term){const n=all.filter(d=>d.toLowerCase().includes(term)).length;return Math.log((all.length+1)/(n+1))+1;}function vec(doc){return vocab.map(t=>tf(doc,t)*idf(t));}function cosine(a,b){const dot=a.reduce((s,v,i)=>s+v*b[i],0);const ma=Math.sqrt(a.reduce((s,v)=>s+v*v,0));const mb=Math.sqrt(b.reduce((s,v)=>s+v*v,0));return ma&&mb?dot/(ma*mb):0;}const qv=vec(query);return Object.entries(docs).map(([name,doc])=>({name,score:cosine(vec(doc),qv)})).sort((a,b)=>b.score-a.score);}
+function runMLRecommender(){const query=document.getElementById('mlInput').value.trim();if(!query){alert('Please describe your skill level first!');return;}const results=tfidf(topicDocs,query);const maxScore=results[0].score||1;let html='';results.slice(0,6).forEach((r,i)=>{const pct=maxScore>0?Math.round((r.score/maxScore)*100):0;const medal=i===0?'🔥':i===1?'⚡':i===2?'📌':'•';html+=`<div class="ml-card"><span style="font-size:20px">${medal}</span><div style="flex:1"><div class="ml-topic-name">${r.name}</div><div class="ml-why">${tips[r.name]||'Review this topic'}</div><div class="ml-score-bar" style="margin-top:8px"><div class="ml-score-fill" style="width:${pct}%"></div></div></div><span class="ml-pct">${pct}%</span></div>`;});document.getElementById('mlCards').innerHTML=html;document.getElementById('mlResults').style.display='block';document.getElementById('mlResults').scrollIntoView({behavior:'smooth'});}
+document.getElementById('mlInput').addEventListener('keydown',e=>{if(e.key==='Enter')runMLRecommender();});
+document.querySelectorAll('.step-btn').forEach(b=>b.addEventListener('click',()=>changeStep(parseInt(b.dataset.step))));
+updateProgress();renderStepContent(1);
+</script>
+</body>
+</html>

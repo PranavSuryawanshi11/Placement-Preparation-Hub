@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>PrepHub Jobs</title>
+
+<style>
+body{
+background:#020617;
+color:white;
+font-family:sans-serif;
+margin:0;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+padding:20px 60px;
+background:#0a1b3d;
+}
+
+.search-box{
+text-align:center;
+margin:30px;
+}
+
+.search-box input{
+padding:10px;
+width:250px;
+border-radius:8px;
+border:none;
+}
+
+.search-box button{
+padding:10px 15px;
+background:#6366f1;
+border:none;
+border-radius:8px;
+color:white;
+cursor:pointer;
+}
+
+.job-container{
+width:80%;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+}
+
+.job-card{
+background:#111827;
+padding:15px;
+border-radius:12px;
+}
+
+.apply-btn{
+display:inline-block;
+margin-top:10px;
+padding:8px 12px;
+background:#6366f1;
+border-radius:6px;
+text-decoration:none;
+color:white;
+}
+
+.badge{
+display:inline-block;
+margin-top:5px;
+padding:3px 8px;
+font-size:12px;
+background:#22c55e;
+border-radius:5px;
+}
+
+.loader{
+text-align:center;
+margin-top:50px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h2>PrepHub Jobs</h2>
+</header>
+
+<div class="search-box">
+<input id="search" placeholder="Search jobs (Python, Web Dev)">
+<button onclick="filterJobs()">Search</button>
+</div>
+
+<div id="jobs" class="job-container"></div>
+
+<script>
+
+let allJobs = [];
+let loggedIn = false;
+
+// 🔹 Load jobs from PHP backend
+async function loadJobs(){
+
+const jobsDiv = document.getElementById("jobs");
+jobsDiv.innerHTML = "<div class='loader'>Loading jobs...</div>";
+
+try{
+
+const res = await fetch("jobs.php");
+const html = await res.text();
+
+// Convert HTML → DOM
+const parser = new DOMParser();
+const doc = parser.parseFromString(html, "text/html");
+
+// Updated selectors (important)
+const jobElements = doc.querySelectorAll(".srp-jobtuple-wrapper, .jobTuple");
+
+if(jobElements.length === 0){
+  jobsDiv.innerHTML = "<h3 style='text-align:center'>No jobs found</h3>";
+  return;
+}
+
+// Extract data
+allJobs = Array.from(jobElements).map(job => {
+
+  const title = job.querySelector("a.title")?.innerText || "No Title";
+  const company = job.querySelector(".comp-name, .companyInfo")?.innerText || "Company not specified";
+  const location = job.querySelector(".locWdth, .loc-wrap")?.innerText || "Not specified";
+  const link = job.querySelector("a.title")?.href || "#";
+
+  return {
+    title,
+    company,
+    location,
+    salary: loggedIn ? "Check on site" : "Login to view",
+    link,
+    source: "Naukri"
+  };
+
+});
+
+displayJobs(allJobs);
+
+}catch(e){
+jobsDiv.innerHTML = "Error loading jobs";
+console.error(e);
+}
+
+}
+
+// Display jobs
+function displayJobs(jobs){
+const jobsDiv = document.getElementById("jobs");
+jobsDiv.innerHTML = "";
+
+jobs.slice(0,30).forEach(job=>{
+jobsDiv.innerHTML += `
+<div class="job-card">
+<h3>${job.title}</h3>
+<p><b>${job.company}</b></p>
+<p>Location: ${job.location}</p>
+<p>Salary: ${job.salary}</p>
+<span class="badge">${job.source}</span>
+<br>
+<a class="apply-btn" href="${job.link}" target="_blank">Apply</a>
+</div>
+`;
+});
+}
+
+// Search filter
+function filterJobs(){
+const keyword = document.getElementById("search").value.toLowerCase();
+
+const filtered = allJobs.filter(job =>
+  job.title.toLowerCase().includes(keyword) ||
+  job.company.toLowerCase().includes(keyword)
+);
+
+displayJobs(filtered);
+}
+
+// Load on start
+loadJobs();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Resume Preparation – Placement Prep Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:radial-gradient(circle at top,#0a1b3d,#020617);color:#e2e8f0;min-height:100vh;line-height:1.7;}
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 70px;z-index:100;background:rgba(2,6,23,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(99,102,241,0.3);}
+    .logo a{font-size:26px;font-weight:800;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent;text-decoration:none;}
+    nav a{margin-left:28px;text-decoration:none;color:#bfc6d4;font-size:15px;font-weight:500;transition:0.3s;padding:6px 12px;border-radius:8px;}
+    nav a:hover{color:white;background:rgba(99,102,241,0.2);}
+    .hero{text-align:center;margin-top:140px;padding:0 20px;}
+    .tag{display:inline-block;padding:8px 24px;border-radius:9999px;background:rgba(99,102,241,0.2);font-size:14px;color:#a5b4fc;margin-bottom:20px;border:1px solid rgba(99,102,241,0.4);}
+    .hero h1{font-size:56px;font-weight:800;background:linear-gradient(135deg,#e0e7ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:20px;line-height:1.2;}
+    .hero p{color:#9ca3af;font-size:18px;max-width:800px;margin:0 auto 30px;}
+    .progress-container{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .progress-stats{display:flex;justify-content:space-between;margin-bottom:12px;font-size:14px;color:#94a3b8;}
+    .progress-track{background:rgba(255,255,255,0.1);height:10px;border-radius:10px;overflow:hidden;}
+    .progress-fill{background:linear-gradient(90deg,#6366f1,#a855f7);height:100%;width:0%;transition:width 0.5s ease;border-radius:10px;}
+    .steps-nav{max-width:1100px;margin:30px auto;padding:0 30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+    .step-btn{padding:12px 28px;background:rgba(255,255,255,0.05);border:2px solid rgba(99,102,241,0.3);border-radius:12px;color:#cbd5e1;font-weight:600;cursor:pointer;transition:all 0.3s;font-size:15px;}
+    .step-btn:hover{border-color:#6366f1;background:rgba(99,102,241,0.1);transform:translateY(-2px);}
+    .step-btn.active{background:linear-gradient(135deg,#6366f1,#a855f7);border-color:transparent;color:white;box-shadow:0 4px 15px rgba(99,102,241,0.3);}
+    .step-btn.completed{border-color:#10b981;background:rgba(16,185,129,0.1);color:#10b981;}
+    .content-section{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .step-content{display:none;animation:fadeIn 0.5s ease;}
+    .step-content.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .step-header{margin-bottom:40px;padding-bottom:20px;border-bottom:2px solid rgba(99,102,241,0.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+    .step-header h2{font-size:36px;font-weight:700;color:#e0e7ff;margin-bottom:12px;}
+    .step-header p{color:#9ca3af;font-size:16px;}
+    .topic-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 28px;margin-bottom:20px;transition:all 0.3s;cursor:pointer;}
+    .topic-card:hover{border-color:#6366f1;transform:translateY(-3px);background:rgba(99,102,241,0.05);}
+    .topic-header{display:flex;align-items:center;justify-content:space-between;}
+    .topic-header h3{font-size:22px;font-weight:600;display:flex;align-items:center;gap:12px;}
+    .topic-icon{font-size:28px;} .arrow{font-size:28px;transition:transform 0.3s;}
+    .sub-topics{display:none;margin-top:20px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.2);}
+    .sub-topics.active{display:block;}
+    .sub-topic{padding:14px 22px;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:10px;transition:0.3s;cursor:pointer;border-left:3px solid transparent;}
+    .sub-topic:hover{background:rgba(99,102,241,0.15);border-left-color:#6366f1;transform:translateX(5px);}
+    .detail-container{margin-top:40px;background:rgba(15,23,42,0.7);border:1px solid rgba(99,102,241,0.3);border-radius:24px;padding:40px;backdrop-filter:blur(8px);}
+    .detail-container h2{font-size:28px;margin-bottom:20px;color:#c4b5fd;}
+    .detail-container h3{font-size:22px;margin:25px 0 15px;color:#a5b4fc;}
+    .detail-container p{margin-bottom:18px;color:#cbd5e1;line-height:1.8;}
+    .detail-container ul,.detail-container ol{margin:18px 0 25px;padding-left:32px;}
+    .detail-container li{margin-bottom:10px;}
+    .example-box{background:rgba(16,185,129,0.1);border-left:5px solid #10b981;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .note-box{background:rgba(234,179,8,0.1);border-left:5px solid #eab308;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .tip-box{background:rgba(59,130,246,0.1);border-left:5px solid #3b82f6;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .warning-box{background:rgba(239,68,68,0.1);border-left:5px solid #ef4444;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    table{width:100%;border-collapse:collapse;margin:25px 0;}
+    th,td{border:1px solid rgba(255,255,255,0.2);padding:12px;text-align:left;}
+    th{background:rgba(99,102,241,0.2);color:#a5b4fc;}
+    .nav-buttons{display:flex;justify-content:space-between;gap:20px;margin-top:50px;padding:40px 0 60px;}
+    .nav-btn{padding:14px 32px;border-radius:12px;font-weight:600;transition:0.3s;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;border:none;font-size:16px;}
+    .nav-btn.prev{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;}
+    .nav-btn:hover{transform:translateY(-2px);opacity:0.9;}
+    .complete-step-btn{background:rgba(16,185,129,0.2);border:2px solid #10b981;color:#10b981;padding:12px 28px;border-radius:12px;font-weight:600;cursor:pointer;transition:0.3s;font-size:14px;}
+    .complete-step-btn:hover{background:#10b981;color:white;}
+    .completed-badge{color:#10b981;font-weight:600;display:flex;align-items:center;gap:8px;}
+    .quiz-section{max-width:1100px;margin:40px auto;padding:0 30px 80px;}
+    .quiz-header{text-align:center;margin-bottom:40px;}
+    .quiz-header h2{font-size:36px;font-weight:700;color:#e0e7ff;margin-bottom:10px;}
+    .quiz-header p{color:#9ca3af;}
+    .quiz-container{background:rgba(15,23,42,0.7);border:1px solid rgba(99,102,241,0.3);border-radius:24px;padding:40px;}
+    .quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;flex-wrap:wrap;gap:15px;}
+    .quiz-meta span{background:rgba(99,102,241,0.2);padding:8px 20px;border-radius:9999px;font-size:14px;color:#a5b4fc;}
+    .question-block{margin-bottom:30px;padding:24px;background:rgba(255,255,255,0.03);border-radius:16px;border:1px solid rgba(255,255,255,0.08);}
+    .question-block h4{font-size:17px;font-weight:600;margin-bottom:16px;color:#e0e7ff;}
+    .options{display:flex;flex-direction:column;gap:10px;}
+    .option-label{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;cursor:pointer;transition:0.2s;border:1px solid rgba(255,255,255,0.08);}
+    .option-label:hover{background:rgba(99,102,241,0.15);border-color:#6366f1;}
+    .option-label input[type=radio]{accent-color:#6366f1;width:16px;height:16px;}
+    .option-label.correct{background:rgba(16,185,129,0.2);border-color:#10b981;color:#10b981;}
+    .option-label.wrong{background:rgba(239,68,68,0.2);border-color:#ef4444;color:#ef4444;}
+    .submit-quiz-btn{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;border:none;padding:16px 40px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:0.3s;margin-top:20px;}
+    .submit-quiz-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,0.4);}
+    .quiz-toggle-btn{width:100%;background:rgba(99,102,241,0.15);border:2px solid rgba(99,102,241,0.4);border-radius:16px;color:#a5b4fc;font-size:17px;font-weight:700;padding:18px 28px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all 0.3s;font-family:'Poppins',sans-serif;}
+    .quiz-toggle-btn:hover{background:rgba(99,102,241,0.25);border-color:#6366f1;color:white;}
+    .quiz-toggle-btn .toggle-arrow{font-size:22px;transition:transform 0.35s;display:inline-block;}
+    .quiz-toggle-btn.open{background:linear-gradient(135deg,rgba(99,102,241,0.25),rgba(168,85,247,0.15));border-color:#6366f1;color:white;border-radius:16px 16px 0 0;}
+    .quiz-toggle-btn.open .toggle-arrow{transform:rotate(180deg);}
+    .quiz-collapsible{display:none;border:2px solid rgba(99,102,241,0.3);border-top:none;border-radius:0 0 16px 16px;padding:28px;background:rgba(15,23,42,0.5);}
+    .quiz-collapsible.open{display:block;animation:fadeIn 0.4s ease;}
+    .quiz-result{margin-top:30px;padding:30px;border-radius:16px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);text-align:center;}
+    .quiz-result h3{font-size:28px;font-weight:700;color:#a5b4fc;margin-bottom:10px;}
+    .improvement-area{margin-top:20px;padding:24px;background:rgba(234,179,8,0.1);border:1px solid #eab308;border-radius:16px;text-align:left;}
+    .improvement-area h4{color:#eab308;font-size:18px;margin-bottom:12px;}
+    .pdf-section{max-width:1100px;margin:0 auto 80px;padding:0 30px;}
+    .pdf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+    .pdf-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px;transition:all 0.3s;text-align:center;}
+    .pdf-card:hover{border-color:#6366f1;transform:translateY(-3px);}
+    .pdf-card h4{font-size:17px;font-weight:600;margin:12px 0 8px;color:#e0e7ff;}
+    .pdf-card p{color:#9ca3af;font-size:14px;margin-bottom:16px;}
+    .pdf-btn{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;border:none;padding:10px 24px;border-radius:9999px;font-size:14px;font-weight:600;cursor:pointer;transition:0.3s;text-decoration:none;display:inline-block;}
+    .pdf-btn:hover{opacity:0.85;transform:translateY(-2px);}
+    .section-title{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:24px;}
+    @media(max-width:768px){header{padding:15px 20px;}nav a{margin-left:12px;font-size:12px;}.hero h1{font-size:36px;}}
+</style>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="subjects.html">📄 Resume Prep</a></div>
+    <nav><a href="index.html">Home</a><a href="subjects.html">Subjects</a></nav>
+</header>
+
+<div class="hero">
+    <div class="tag">📄 Resume Mastery • 5 Steps to ATS Success</div>
+    <h1>Resume Preparation<br>Complete Guide for Freshers</h1>
+    <p>Build a recruiter-winning resume from scratch. Master ATS optimization, impactful bullet writing, formatting, and portfolio building for IT placements.</p>
+</div>
+
+<div class="progress-container">
+    <div class="progress-stats"><span>📊 Overall Progress</span><span id="progressPercent">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="steps-nav">
+    <button class="step-btn active" data-step="1">Step 1: Resume Basics</button>
+    <button class="step-btn" data-step="2">Step 2: Writing Content</button>
+    <button class="step-btn" data-step="3">Step 3: ATS Optimization</button>
+    <button class="step-btn" data-step="4">Step 4: Design & Format</button>
+    <button class="step-btn" data-step="5">Step 5: Portfolio & LinkedIn</button>
+</div>
+
+<div class="content-section" id="contentSection"></div>
+
+<div class="quiz-section">
+    <div class="quiz-header">
+        <h2>🧠 Resume Knowledge Quiz — 50 Questions</h2>
+        <p>Test your resume-building knowledge. ML analysis pinpoints exactly what to improve.</p>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-meta">
+            <span>📝 50 Questions</span>
+            <span>📄 Resume Focus</span>
+            <span>🎯 ATS & Recruiter Tips</span>
+        </div>
+        <button class="quiz-toggle-btn" id="quizToggleBtn" onclick="toggleQuiz()">
+            <span>📋 Click to Start the 50-Question Quiz</span>
+            <span class="toggle-arrow">▼</span>
+        </button>
+        <div class="quiz-collapsible" id="quizCollapsible">
+            <div id="quizQuestions"></div>
+            <button class="submit-quiz-btn" onclick="submitQuiz()">Submit & Get ML Analysis</button>
+        </div>
+        <div class="quiz-result" id="quizResult" style="display:none;margin-top:20px;"></div>
+    </div>
+</div>
+
+<div class="pdf-section">
+    <h2 class="section-title">📚 Resume Resources & Templates</h2>
+    <div class="pdf-grid">
+        <div class="pdf-card"><div style="font-size:40px">📋</div><h4>Fresher Resume Templates</h4><p>ATS-friendly one-page resume templates for IT freshers</p><a class="pdf-btn" href="https://resumegenius.com/resume-templates" target="_blank">📖 Get Templates</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🎯</div><h4>Resume Writing Guide (GFG)</h4><p>Complete GFG guide for writing a strong tech fresher resume</p><a class="pdf-btn" href="https://www.geeksforgeeks.org/blogs/how-to-make-a-resume/" target="_blank">📖 Read Guide</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🔍</div><h4>ATS Resume Checker</h4><p>Check if your resume passes Applicant Tracking Systems</p><a class="pdf-btn" href="https://www.jobscan.co/" target="_blank">🔍 Check Now</a></div>
+        <div class="pdf-card"><div style="font-size:40px">💼</div><h4>LinkedIn Profile Guide</h4><p>Optimize your LinkedIn to attract IT recruiters</p><a class="pdf-btn" href="https://university.linkedin.com/linkedin-for-students" target="_blank">📖 LinkedIn Tips</a></div>
+        <div class="pdf-card"><div style="font-size:40px">⭐</div><h4>GitHub Portfolio Guide</h4><p>Build an impressive GitHub profile for placements</p><a class="pdf-btn" href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile" target="_blank">📖 GitHub Docs</a></div>
+        <div class="pdf-card"><div style="font-size:40px">📊</div><h4>200+ Power Action Verbs</h4><p>Cornell's action verbs PDF for powerful resume bullets</p><a class="pdf-btn" href="https://in.indeed.com/career-advice/resumes-cover-letters/action-verbs-list" target="_blank">📖 View Online</a></div>
+    </div>
+</div>
+
+<script>
+const stepsData = {
+    1: { title: "📄 Resume Fundamentals", description: "What makes a great resume and exactly what to include as a fresher.", topics: [
+        { title: "Resume Basics", icon: "📋", subs: [{ id: "what-resume", title: "What Makes a Great Resume?" },{ id: "resume-length", title: "Ideal Length & File Format" },{ id: "sections-order", title: "Sections Order for Freshers" }]},
+        { title: "Fresher-Specific Tips", icon: "🎓", subs: [{ id: "no-experience", title: "No Experience? What to Include" },{ id: "objective-summary", title: "Career Objective vs Summary" },{ id: "projects-resume", title: "How to Present Projects" }]}
+    ]},
+    2: { title: "✍️ Writing Impactful Content", description: "Write bullet points that impress, quantify achievements, and showcase the right skills.", topics: [
+        { title: "Bullet Point Writing", icon: "🎯", subs: [{ id: "action-verbs", title: "Power Action Verbs" },{ id: "quantify", title: "Quantifying Achievements" },{ id: "xyz-formula", title: "X-Y-Z Formula (Google Method)" }]},
+        { title: "Skills & Certifications", icon: "⚙️", subs: [{ id: "technical-skills", title: "Technical Skills Section" },{ id: "soft-skills-resume", title: "Soft Skills Done Right" },{ id: "certifications", title: "Certifications & Courses" }]}
+    ]},
+    3: { title: "🤖 ATS Optimization", description: "Make your resume pass the Applicant Tracking Systems used by 98% of top companies.", topics: [
+        { title: "ATS Basics", icon: "🔍", subs: [{ id: "what-ats", title: "What is ATS & How It Works" },{ id: "keywords", title: "Keyword Matching Strategy" },{ id: "ats-format", title: "ATS-Friendly Formatting Rules" }]},
+        { title: "Optimization Tips", icon: "⚡", subs: [{ id: "file-format", title: "PDF vs DOCX — Which to Send?" },{ id: "avoid-ats", title: "Elements ATS Cannot Read" },{ id: "tailoring", title: "Tailoring Resume Per Job" }]}
+    ]},
+    4: { title: "🎨 Design & Formatting", description: "Professional clean design that impresses human recruiters after passing ATS.", topics: [
+        { title: "Visual Design", icon: "🎨", subs: [{ id: "fonts", title: "Best Fonts & Font Sizes" },{ id: "spacing", title: "Whitespace & Layout Rules" },{ id: "one-pager", title: "One-Page Rule for Freshers" }]},
+        { title: "Common Mistakes", icon: "⚠️", subs: [{ id: "mistakes", title: "Top 10 Resume Mistakes" },{ id: "photos", title: "Photo on Resume — Yes or No?" },{ id: "proofreading", title: "Proofreading Checklist" }]}
+    ]},
+    5: { title: "🌐 Portfolio & LinkedIn", description: "Build a complete professional online presence that makes recruiters reach out to you.", topics: [
+        { title: "GitHub Portfolio", icon: "💻", subs: [{ id: "github-profile", title: "GitHub Profile README" },{ id: "pinned-projects", title: "Pinned Projects Best Practices" },{ id: "contributions", title: "Open Source Contributions" }]},
+        { title: "LinkedIn Profile", icon: "💼", subs: [{ id: "linkedin-headline", title: "LinkedIn Headline Formula" },{ id: "linkedin-about", title: "LinkedIn About Section" },{ id: "networking", title: "Networking for Placements" }]}
+    ]}
+};
+
+const detailedContent = {
+    'what-resume': `<h2>What Makes a Great Resume?</h2><p>A great fresher resume is <strong>clear, concise, relevant, and scannable</strong>. Recruiters spend only 6–10 seconds on first screening.</p><div class="example-box"><strong>5 Non-Negotiables:</strong><br>1. ATS-friendly formatting<br>2. Quantified achievements with numbers<br>3. Relevant keywords from job description<br>4. Clean 1-page design<br>5. Zero spelling or grammar errors</div><div class="tip-box">💡 Think of your resume as a marketing document — sell your skills, don't just list them.</div>`,
+    'resume-length': `<h2>Ideal Length & File Format</h2><div class="tip-box">💡 Fresher rule: <strong>Exactly 1 page</strong>. Recruiters treat multi-page fresher resumes as poor prioritization.</div><table><tr><th>Format</th><th>When to Use</th></tr><tr><td>PDF</td><td>Default — preserves layout on all devices</td></tr><tr><td>DOCX</td><td>When explicitly asked by employer</td></tr><tr><td>Image/JPG</td><td>Never — ATS reads zero text from images</td></tr></table>`,
+    'sections-order': `<h2>Sections Order for Freshers</h2><ol><li><strong>Name & Contact Info</strong> — phone, email, LinkedIn, GitHub</li><li><strong>Career Objective</strong> — 2–3 impactful lines</li><li><strong>Education</strong> — degree, college, year, CGPA</li><li><strong>Technical Skills</strong> — organized by category</li><li><strong>Projects</strong> — 2–3 best with tech stack</li><li><strong>Internships</strong> — if any, even short ones</li><li><strong>Certifications</strong> — relevant courses</li><li><strong>Achievements</strong> — hackathons, awards</li><li><strong>Extra-Curricular</strong> — clubs, leadership roles</li></ol>`,
+    'no-experience': `<h2>No Experience? What to Include</h2><p>Every fresher has something valuable — you just need to present it right.</p><ul><li>🔧 <strong>Academic Projects</strong> — highlight tech stack, problem solved, results</li><li>💻 <strong>Personal / Side Projects</strong> — GitHub repos with good READMEs</li><li>🏆 <strong>Hackathons</strong> — even participation shows initiative</li><li>📜 <strong>Certifications</strong> — Coursera, NPTEL, AWS, Google</li><li>👥 <strong>College Clubs & Leadership</strong> — tech fest, club lead</li></ul>`,
+    'objective-summary': `<h2>Career Objective vs Summary</h2><p><strong>Objective</strong> (for freshers): Forward-looking — what you want to contribute.</p><div class="example-box"><strong>Strong Objective:</strong><br>"Motivated CS graduate with expertise in Python and React, seeking a Software Engineer role at TCS to build scalable applications and contribute to agile teams."</div><div class="warning-box">⚠️ Weak: "To get a good job in a good company" — too vague, no value.</div>`,
+    'projects-resume': `<h2>How to Present Projects</h2><p>Every project needs: Name, Tech Stack, 2–3 impact bullets, GitHub link.</p><div class="example-box"><strong>📦 Expense Tracker App</strong> | React, Node.js, MongoDB<br>• Built full-stack CRUD app with JWT auth serving 200+ test users<br>• Reduced load time by 35% using lazy loading and code splitting<br>• Deployed on Vercel; 99.9% uptime over 3 months<br><em style="color:#a5b4fc">github.com/username/expense-tracker</em></div>`,
+    'action-verbs': `<h2>Power Action Verbs</h2><p>Start every bullet with a strong verb — never use "Responsible for" or "Helped with".</p><table><tr><th>Category</th><th>Strong Verbs</th></tr><tr><td>Development</td><td>Built, Engineered, Designed, Implemented, Developed</td></tr><tr><td>Optimization</td><td>Reduced, Improved, Optimized, Accelerated, Enhanced</td></tr><tr><td>Leadership</td><td>Led, Coordinated, Managed, Mentored, Organized</td></tr><tr><td>Achievement</td><td>Achieved, Delivered, Launched, Published, Won</td></tr></table>`,
+    'quantify': `<h2>Quantifying Achievements</h2><p>Numbers make your resume 40% more likely to get a callback. Always ask: How much? How many? How fast?</p><div class="example-box"><strong>❌ Weak:</strong> "Improved API performance"<br><strong>✅ Strong:</strong> "Reduced API response time by 60% (2.5s → 1s) via Redis caching and N+1 query elimination"</div><div class="tip-box">💡 Even small projects can be quantified: "Served 150+ test users", "95% test coverage", "30% faster build".</div>`,
+    'xyz-formula': `<h2>X-Y-Z Formula (Google's Resume Method)</h2><p>Format: <strong>"Accomplished [X] as measured by [Y] by doing [Z]"</strong></p><div class="example-box"><strong>Examples:</strong><br>• "Boosted website performance score from 62 to 94 by implementing lazy loading and CDN caching"<br>• "Won 2nd among 200 teams at Smart India Hackathon by building an ML-based traffic system"</div>`,
+    'technical-skills': `<h2>Technical Skills Section</h2><p>Organize by category. Only list skills you can confidently discuss for at least 5 minutes.</p><div class="example-box"><strong>Format:</strong><br>• <strong>Languages:</strong> Python, Java, C++, JavaScript<br>• <strong>Web:</strong> React, Node.js, Express, HTML/CSS<br>• <strong>Databases:</strong> MySQL, MongoDB, Redis<br>• <strong>Tools:</strong> Git, Docker, VS Code, Postman<br>• <strong>Cloud:</strong> AWS (EC2, S3), GCP basics</div>`,
+    'soft-skills-resume': `<h2>Soft Skills Done Right</h2><div class="warning-box">⚠️ Never list: "Good communicator, team player, hard worker" — every candidate writes this.</div><div class="tip-box">💡 Instead, demonstrate them: "Led a 5-member team to deliver the project 2 weeks early" shows both leadership and time management.</div>`,
+    'certifications': `<h2>Certifications & Online Courses</h2><p>List certification name, platform, and year. Prioritize industry-recognized ones.</p><ul><li>🏆 <strong>AWS Cloud Practitioner</strong> — Amazon Web Services (2024)</li><li>📊 <strong>Google Data Analytics</strong> — Coursera (2024)</li><li>🐍 <strong>Python for Data Science</strong> — NPTEL/IIT Madras (2023)</li></ul><div class="tip-box">💡 NPTEL certifications with silver/gold badges carry real weight for Indian IT companies.</div>`,
+    'what-ats': `<h2>What is ATS & How It Works</h2><p>Applicant Tracking System software is used by 98% of Fortune 500 companies to filter resumes automatically before a human sees them.</p><div class="note-box">📌 ATS Process:<br>1. Parses your resume into structured data<br>2. Extracts keywords, skills, education, experience<br>3. Scores it against job requirements<br>4. Only top-scoring resumes reach recruiters</div>`,
+    'keywords': `<h2>Keyword Matching Strategy</h2><p>ATS matches your resume against the JD word-for-word. Use exact terminology.</p><div class="example-box"><strong>JD says:</strong> "Experience with REST APIs"<br><strong>Use:</strong> "REST APIs" — NOT "RESTful services" or "web services"</div><div class="tip-box">💡 Use Jobscan.co or ResyMatch to compare your resume to any JD and see your keyword match score.</div>`,
+    'ats-format': `<h2>ATS-Friendly Formatting Rules</h2><ul><li>✅ Standard headings: Education, Experience, Skills, Projects</li><li>✅ Standard bullets (•), single-column layout</li><li>✅ Fonts: Arial, Calibri, or Garamond (11–12pt)</li><li>❌ No tables, text boxes, columns, headers/footers</li><li>❌ No graphics, icons, charts, or images of any kind</li></ul>`,
+    'file-format': `<h2>PDF vs DOCX — Which to Send?</h2><table><tr><th>Situation</th><th>Recommendation</th></tr><tr><td>Job form doesn't specify</td><td>PDF — preserves layout</td></tr><tr><td>Job explicitly asks for DOCX</td><td>DOCX — some ATS parse it better</td></tr><tr><td>Email application</td><td>PDF named: FirstName_LastName_Resume.pdf</td></tr><tr><td>Scanned / image PDF</td><td>Never — ATS reads zero text</td></tr></table>`,
+    'avoid-ats': `<h2>Elements ATS Cannot Read</h2><div class="warning-box">⚠️ ATS systems CANNOT parse:<br>• Text inside images or shapes<br>• Graphics, charts, icons<br>• Tables (some older ATS)<br>• Two-column layouts (some ATS)<br>• Header/footer text<br>• Fancy special characters</div><p>Maintain a plain ATS version for online applications and a polished visual version for in-person handouts.</p>`,
+    'tailoring': `<h2>Tailoring Resume Per Job</h2><p>Sending the same resume to all companies = leaving callbacks on the table. Customize each time:</p><ul><li>📌 Rewrite objective with company name and role</li><li>📌 Reorder skills to match JD priorities</li><li>📌 Add JD keywords naturally into bullet points</li><li>📌 Lead with the most relevant project for that role</li></ul><div class="tip-box">💡 Keep a "master resume" with everything. Trim per application.</div>`,
+    'fonts': `<h2>Best Fonts & Font Sizes</h2><table><tr><th>Element</th><th>Recommendation</th></tr><tr><td>Body text</td><td>Calibri, Arial, or Garamond — 11pt</td></tr><tr><td>Section headings</td><td>Same font, Bold, 12–13pt</td></tr><tr><td>Your name</td><td>Same font, Bold, 16–18pt</td></tr><tr><td>Margins</td><td>0.5 to 1 inch all sides</td></tr></table>`,
+    'spacing': `<h2>Whitespace & Layout Rules</h2><p>Whitespace is not wasted space — it improves readability and professionalism.</p><ul><li>Line spacing: 1.15 to 1.5 between bullets</li><li>Section gap: 6–8pt padding between sections</li><li>Consistent indentation throughout the document</li></ul>`,
+    'one-pager': `<h2>One-Page Rule for Freshers</h2><div class="tip-box">💡 0–3 years experience = 1 page. No exceptions. A 2-page fresher resume signals poor prioritization to recruiters.</div><p>To fit on 1 page: reduce margins to 0.5", shrink font to 10.5–11pt, cut weak bullets, remove irrelevant hobbies.</p>`,
+    'mistakes': `<h2>Top 10 Resume Mistakes Freshers Make</h2><ol><li>Spelling and grammar errors (use Grammarly)</li><li>Generic, vague career objective</li><li>Bullets describe duties, not achievements</li><li>More than 1 page as a fresher</li><li>Including irrelevant hobbies</li><li>Projects without tech stack or impact metrics</li><li>Tables/columns that break ATS parsing</li><li>Same resume sent everywhere</li><li>Missing GitHub / LinkedIn / portfolio links</li><li>Inconsistent formatting throughout</li></ol>`,
+    'photos': `<h2>Photo on Resume — Yes or No?</h2><table><tr><th>Context</th><th>Recommendation</th></tr><tr><td>Indian IT (TCS, Infosys, Wipro)</td><td>Acceptable but not required</td></tr><tr><td>International / MNC roles</td><td>Do NOT include — bias protection</td></tr><tr><td>If including photo</td><td>Professional headshot, plain background only</td></tr></table>`,
+    'proofreading': `<h2>Proofreading Checklist</h2><ul><li>✅ Run through Grammarly for grammar and spelling</li><li>✅ All dates consistent (Month Year format)</li><li>✅ Phone number correct with country code</li><li>✅ Email address is professional</li><li>✅ All URLs are live and working</li><li>✅ No personal pronouns (I, me, my)</li><li>✅ Consistent past tense for completed projects</li><li>✅ PDF renders correctly on another device</li></ul>`,
+    'github-profile': `<h2>GitHub Profile README Setup</h2><p>Create repo: <strong>username/username</strong> — add README.md to display on your profile page.</p><div class="example-box"><strong>Include:</strong><br>• Brief 1–2 line intro<br>• Skills & tech stack badges<br>• Currently building / learning<br>• GitHub stats widget (github-readme-stats)<br>• Links to LinkedIn and portfolio</div>`,
+    'pinned-projects': `<h2>Pinned Projects Best Practices</h2><p>Pin 4–6 best repos. Each should have:</p><ul><li>Clear repository name and one-line description</li><li>Comprehensive README with screenshots and setup guide</li><li>Live demo link (Vercel, Netlify, Heroku)</li><li>Topics/tags added for searchability</li></ul>`,
+    'contributions': `<h2>Open Source Contributions</h2><p>Even small contributions signal initiative and team collaboration skills.</p><ul><li>Use "Good First Issue" labels on popular GitHub repos</li><li>Fix docs, typos, or small bugs to get started</li><li>Participate in GSSoC, Hacktoberfest, or MLH Fellowship</li></ul><div class="tip-box">💡 One merged PR to a popular project is more impressive than 10 solo toy projects.</div>`,
+    'linkedin-headline': `<h2>LinkedIn Headline Formula</h2><div class="example-box"><strong>Formula:</strong> [Role Target] | [Key Skills] | [College / Status]<br><br><strong>Example:</strong><br>"Aspiring SDE | Python • Java • React | B.Tech CS @ XYZ University 2025 | Open to Opportunities"</div><div class="tip-box">💡 Your headline appears in search results — make it keyword-rich so recruiters can find you.</div>`,
+    'linkedin-about': `<h2>LinkedIn About Section</h2><p>First 2–3 lines appear before "See more" — they must immediately hook the reader.</p><div class="example-box"><strong>Structure:</strong><br>1. Who you are + key strength (1 line)<br>2. What you've built / achieved (2 lines)<br>3. What you're seeking (1 line)<br>4. Call to action: "Feel free to connect or message me!"</div>`,
+    'networking': `<h2>Networking for Placements</h2><ul><li>Connect with alumni from your college at target companies</li><li>Message: <em>"Hi [Name], I'm a final-year CS student at [College]. I noticed you work at [Company] — would you have 15 minutes to share your experience?"</em></li><li>Engage thoughtfully with company and recruiter posts</li><li>Follow hiring managers at your target companies</li></ul>`
+};
+
+const quizData = [
+    { q: "Freshers should keep their resume to how many pages?", opts: ["3 pages", "2 pages", "1 page", "No specific limit"], ans: 2 },
+    { q: "ATS stands for:", opts: ["Application Testing System", "Applicant Tracking System", "Automated Task Scheduler", "Access Token Service"], ans: 1 },
+    { q: "The X-Y-Z resume formula means:", opts: ["Experience-Years-Zone", "Accomplished X as measured by Y by doing Z", "Skill-Year-Zone", "None of the above"], ans: 1 },
+    { q: "A fresher with no internship should include:", opts: ["Leave experience blank", "Projects, certifications, academic achievements", "Write 'fresher' in experience", "Only education"], ans: 1 },
+    { q: "Career objective on a fresher resume should be:", opts: ["Summary of past work", "Forward-looking statement about goals and contribution", "Just contact info", "A list of skills"], ans: 1 },
+    { q: "Which font is most ATS-friendly?", opts: ["Comic Sans", "Wingdings", "Calibri or Arial", "Papyrus"], ans: 2 },
+    { q: "ATS systems CANNOT read:", opts: ["Plain text bullets", "Graphics, images, and tables", "Section headings", "Contact details"], ans: 1 },
+    { q: "When should you send a PDF resume?", opts: ["Only for startups", "When format is not specified — preserves layout", "Never — always DOCX", "Only via email"], ans: 1 },
+    { q: "Tailoring a resume means:", opts: ["Adding a photo", "Customizing content to match the specific job description", "Making it colorful", "Extending it to 2 pages"], ans: 1 },
+    { q: "Which is a strong resume action verb?", opts: ["Did", "Was responsible for", "Implemented", "Had experience in"], ans: 2 },
+    { q: "Quantifying achievements means:", opts: ["Using numbers/metrics to show impact", "Writing longer paragraph bullets", "Adding certifications", "Listing all technologies"], ans: 0 },
+    { q: "LinkedIn headline should include:", opts: ["Your hobbies", "Role | Skills | College/Status", "Phone number", "Random bio"], ans: 1 },
+    { q: "For GitHub, you should pin:", opts: ["All repos including private", "4–6 best projects with detailed READMEs", "Oldest repositories", "Empty demo repos"], ans: 1 },
+    { q: "Using 'I', 'me', 'my' in a resume is:", opts: ["Recommended", "Acceptable sometimes", "Bad practice — avoid pronouns", "Required"], ans: 2 },
+    { q: "Soft skills on a resume should be:", opts: ["Listed explicitly", "Demonstrated through achievement bullets", "Not included", "Listed first"], ans: 1 },
+    { q: "Recommended resume margin size is:", opts: ["3 inches", "0.5 to 1 inch", "0.1 inch", "2 inches"], ans: 1 },
+    { q: "Best section order for freshers starts with:", opts: ["Hobbies first", "Name/Contact → Objective → Education", "Skills only", "Work experience first"], ans: 1 },
+    { q: "Which email is most professional?", opts: ["coolboy123@gmail.com", "firstnamelastname@gmail.com", "xyz123lol@yahoo.com", "It doesn't matter"], ans: 1 },
+    { q: "CGPA should be included if:", opts: ["Always", "It's above 7.0 or specifically required", "Never", "Only for government jobs"], ans: 1 },
+    { q: "Technical skills should be organized:", opts: ["Alphabetically", "By category: Languages, Tools, Frameworks", "By difficulty level", "Randomly"], ans: 1 },
+    { q: "Open source contributions signal:", opts: ["Waste of time", "Initiative, collaboration, real-world coding skills", "Only relevant for open-source companies", "Nothing"], ans: 1 },
+    { q: "Two-column resume layout risk:", opts: ["Too creative", "ATS parsing failure on some systems", "Waste of space", "Too much white space"], ans: 1 },
+    { q: "Jobscan.co helps with:", opts: ["Coding practice", "Comparing resume to JD for ATS keyword match score", "Mock interviews", "System design"], ans: 1 },
+    { q: "GitHub profile README appears on:", opts: ["Every repository page", "Your main GitHub profile page", "Only private repos", "Settings page"], ans: 1 },
+    { q: "Which is NOT a good resume action verb?", opts: ["Developed", "Optimized", "Was responsible for", "Led"], ans: 2 },
+    { q: "How many projects should a fresher include?", opts: ["Only 1 major project", "2–3 best and most relevant", "All projects ever done", "None needed"], ans: 1 },
+    { q: "Purpose of a career objective:", opts: ["List all skills", "Tell recruiter your target role and what you bring", "Describe hobbies", "Explain why you need a job"], ans: 1 },
+    { q: "Best networking message approach on LinkedIn:", opts: ["'Give me a job'", "Short professional request for 15-min informational chat", "Long email about your entire background", "Just follow, never message"], ans: 1 },
+    { q: "NPTEL certifications are valuable for:", opts: ["International MNCs only", "Indian IT companies and campus placements", "Not valuable", "Only government jobs"], ans: 1 },
+    { q: "What does a recruiter check first on a fresher resume?", opts: ["Hobbies", "College name, CGPA, projects, contact info", "References", "Photo"], ans: 1 },
+    { q: "Hackathon participation shows:", opts: ["You waste time", "Problem-solving under pressure, teamwork, initiative", "Only coding skills", "Nothing relevant"], ans: 1 },
+    { q: "A 'master resume' is:", opts: ["Your prettiest resume", "Full resume with everything — trimmed per application", "Your first resume", "A certified resume"], ans: 1 },
+    { q: "Best line spacing for resume body text:", opts: ["3.0 — very spaced out", "Single 1.0 only", "1.15 to 1.5", "Double spacing only"], ans: 2 },
+    { q: "Scanned/image PDFs should NEVER be sent because:", opts: ["They look unprofessional", "ATS reads zero text from image PDFs", "They are large files", "They load slowly"], ans: 1 },
+    { q: "LinkedIn 'About' first 2–3 lines matter because:", opts: ["LinkedIn rewards with SEO", "They appear before 'See more' — must hook recruiter", "It's the only part read", "LinkedIn requires it"], ans: 1 },
+    { q: "Adding company name to objective helps by:", opts: ["Wasting space", "Showing genuine interest in that specific company", "Nothing", "Making it longer"], ans: 1 },
+    { q: "Which is a most recognized certification for IT freshers?", opts: ["Cooking certificate", "AWS Cloud Practitioner, Google, NPTEL", "Sports achievement", "School science fair"], ans: 1 },
+    { q: "A project README should include:", opts: ["Only code", "Problem statement, tech stack, setup instructions, screenshots", "Developer biography", "Random notes"], ans: 1 },
+    { q: "Consistent resume formatting means:", opts: ["Many different fonts for variety", "Same font, style, and spacing throughout", "Colorful section headers", "No particular standard"], ans: 1 },
+    { q: "Project bullet points should mention:", opts: ["Technologies used + impact/result", "Only project name", "Team member names", "Start date only"], ans: 0 },
+    { q: "A strong LinkedIn headline is keyword-rich because:", opts: ["LinkedIn requires it", "Recruiters search keywords — improves your discoverability", "It looks professional", "No reason"], ans: 1 },
+    { q: "Resume bullet points should begin with:", opts: ["'I' or 'We'", "Strong action verbs", "The year", "A question"], ans: 1 },
+    { q: "github-readme-stats by anuraghazra is used for:", opts: ["Hosting projects", "Auto-generating GitHub activity stats cards for your profile", "LinkedIn optimization", "Resume building"], ans: 1 },
+    { q: "Grammarly helps with:", opts: ["Coding only", "Grammar, spelling, and style errors in resume text", "ATS scoring", "LinkedIn optimization"], ans: 1 },
+    { q: "For Indian IT placement, photo on resume is:", opts: ["Mandatory", "Acceptable but not mandatory", "Never allowed", "Required for TCS only"], ans: 1 },
+    { q: "Pinned GitHub repos should have:", opts: ["Maximum stars only", "Clear descriptions, READMEs, and live demo links", "Private access only", "No description"], ans: 1 },
+    { q: "'Good First Issue' labels on GitHub help beginners:", opts: ["Find paid work", "Find beginner-friendly open source contributions", "Find internships", "Submit resumes"], ans: 1 },
+    { q: "Main purpose of ATS-friendly resume:", opts: ["Impress designers", "Get parsed correctly and score high enough to reach a human recruiter", "Look colorful", "Fit on 3 pages"], ans: 1 },
+    { q: "Strong quantified bullet example:", opts: ["'Worked on app performance'", "'Reduced app load time by 45% using code splitting and CDN'", "'Did a project using React'", "'Made a website'"], ans: 1 },
+    { q: "Recommended filename when sending resume:", opts: ["resume_final.pdf", "myCV.docx", "FirstName_LastName_Resume.pdf", "document1.pdf"], ans: 2 }
+];
+
+let currentStep = 1;
+let completedSteps = JSON.parse(localStorage.getItem('resumeCompletedSteps') || '[]');
+
+function updateProgress() {
+    const p = (completedSteps.length / 5) * 100;
+    document.getElementById('progressFill').style.width = `${p}%`;
+    document.getElementById('progressPercent').textContent = `${Math.round(p)}%`;
+    document.querySelectorAll('.step-btn').forEach(b => b.classList.toggle('completed', completedSteps.includes(parseInt(b.dataset.step))));
+}
+
+function markStepComplete(step) {
+    if (!completedSteps.includes(step)) {
+        completedSteps.push(step);
+        localStorage.setItem('resumeCompletedSteps', JSON.stringify(completedSteps));
+        updateProgress(); renderStepContent(step);
+    }
+}
+
+function renderStepContent(step) {
+    currentStep = step;
+    const sd = stepsData[step]; const isC = completedSteps.includes(step);
+    let html = `<div class="step-content active"><div class="step-header"><div><h2>${sd.title}</h2><p>${sd.description}</p></div>${!isC ? `<button class="complete-step-btn" onclick="markStepComplete(${step})">✓ Mark as Complete</button>` : '<div class="completed-badge">✓ Step Completed! 🎉</div>'}</div>`;
+    sd.topics.forEach(t => {
+        html += `<div class="topic-card" onclick="toggleSubTopics(this)"><div class="topic-header"><h3><span class="topic-icon">${t.icon}</span> ${t.title}</h3><span class="arrow">›</span></div><div class="sub-topics">`;
+        t.subs.forEach(s => { html += `<div class="sub-topic" onclick="showContent(event,'${s.id}')">${s.title}</div>`; });
+        html += `</div></div>`;
+    });
+    html += `<div class="detail-container" id="detailContainer"><p style="color:#94a3b8;text-align:center;">📄 Click any topic to view detailed guidance, examples, and templates.</p></div><div class="nav-buttons">${step > 1 ? `<button class="nav-btn prev" onclick="changeStep(${step - 1})">← Previous</button>` : '<div></div>'}${step < 5 ? `<button class="nav-btn next" onclick="changeStep(${step + 1})">Next →</button>` : '<button class="nav-btn next" onclick="window.location.href=\'subjects.html\'">🏆 Complete Resume Course →</button>'}</div></div>`;
+    document.getElementById('contentSection').innerHTML = html;
+    document.querySelectorAll('.step-btn').forEach(b => b.classList.toggle('active', parseInt(b.dataset.step) === step));
+}
+
+function changeStep(s) { if (s >= 1 && s <= 5) { renderStepContent(s); window.scrollTo({ top: 0, behavior: 'smooth' }); } }
+
+function toggleSubTopics(card) {
+    const sub = card.querySelector('.sub-topics'); const arrow = card.querySelector('.arrow');
+    document.querySelectorAll('.sub-topics').forEach(s => { if (s !== sub) s.classList.remove('active'); });
+    sub.classList.toggle('active');
+    if (arrow) arrow.style.transform = sub.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+
+function showContent(e, id) {
+    e.stopPropagation();
+    const dc = document.getElementById('detailContainer');
+    dc.innerHTML = detailedContent[id] || '<p>Content coming soon!</p>';
+    dc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function renderQuiz() {
+    let html = '';
+    quizData.forEach((q, i) => {
+        html += `<div class="question-block"><h4>${i + 1}. ${q.q}</h4><div class="options">`;
+        q.opts.forEach((o, j) => { html += `<label class="option-label" id="opt_${i}_${j}"><input type="radio" name="q${i}" value="${j}"> ${o}</label>`; });
+        html += `</div></div>`;
+    });
+    document.getElementById('quizQuestions').innerHTML = html;
+}
+
+function submitQuiz() {
+    let score = 0; let wrongIdx = [];
+    quizData.forEach((q, i) => {
+        const sel = document.querySelector(`input[name="q${i}"]:checked`);
+        if (sel) {
+            const v = parseInt(sel.value);
+            if (v === q.ans) { score++; document.getElementById(`opt_${i}_${v}`).classList.add('correct'); }
+            else { document.getElementById(`opt_${i}_${v}`).classList.add('wrong'); document.getElementById(`opt_${i}_${q.ans}`).classList.add('correct'); wrongIdx.push(i); }
+        } else { document.getElementById(`opt_${i}_${q.ans}`).classList.add('correct'); }
+    });
+
+    const topicMap = { 0: 'Resume Basics', 1: 'ATS Optimization', 2: 'Content Writing', 3: 'Project Presentation', 4: 'LinkedIn & GitHub', 5: 'Design & Formatting', 6: 'Certifications', 7: 'Skills Section', 8: 'Networking', 9: 'Proofreading & Polish' };
+    const ts = {}; wrongIdx.forEach(i => { const t = topicMap[i % 10]; ts[t] = (ts[t] || 0) + 1; });
+    const weakTopics = Object.entries(ts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+
+    let grade = score >= 45 ? '🏆 Resume Expert' : score >= 35 ? '✅ Good' : score >= 25 ? '⚡ Average' : '📚 Needs Work';
+    let r = `<h3>${grade} — ${score}/50</h3><p style="color:#94a3b8;margin-top:10px;">${score >= 45 ? 'Excellent! Your resume knowledge is recruiter-ready.' : score >= 35 ? 'Good job! A few areas need polishing.' : 'Focus on the weak areas below to build a stronger resume.'}</p>`;
+
+    if (weakTopics.length > 0) {
+        const tips = {
+            'Resume Basics': 'Review resume structure: sections order, 1-page rule, and objective writing',
+            'ATS Optimization': 'Study ATS formatting rules; use Jobscan to test against real JDs',
+            'Content Writing': 'Rewrite all bullets using X-Y-Z formula with quantified results',
+            'Project Presentation': 'Add: tech stack + 2–3 metric bullets + GitHub link to every project',
+            'LinkedIn & GitHub': 'Set up GitHub README and optimize LinkedIn headline this week',
+            'Design & Formatting': 'Use ATS-compliant Calibri/Arial at 11pt with 0.75" margins throughout',
+            'Certifications': 'Complete at least 1 recognized cert this month (NPTEL, AWS, Google)',
+            'Skills Section': 'Reorganize skills by category; remove any you can\'t defend in interview',
+            'Networking': 'Connect with 5 alumni at target companies; send 2 informational messages',
+            'Proofreading & Polish': 'Run through Grammarly, check every URL, and verify all contact details'
+        };
+        r += `<div class="improvement-area"><h4>🤖 ML Frequency Analysis — Weak Areas Identified</h4><p style="color:#94a3b8;font-size:14px;margin-bottom:12px;">Based on your wrong answer patterns, the algorithm detected these recurring knowledge gaps:</p><ul>`;
+        weakTopics.forEach(([t, c]) => { r += `<li style="margin-bottom:10px;"><strong style="color:#eab308;">${t}</strong> (${c} mistake${c > 1 ? 's' : ''}): ${tips[t] || 'Review this topic'}</li>`; });
+        r += `</ul></div>`;
+    }
+    document.getElementById('quizResult').innerHTML = r;
+    document.getElementById('quizResult').style.display = 'block';
+    document.getElementById('quizResult').scrollIntoView({ behavior: 'smooth' });
+}
+
+document.querySelectorAll('.step-btn').forEach(b => b.addEventListener('click', () => changeStep(parseInt(b.dataset.step))));
+updateProgress(); renderStepContent(1); renderQuiz();
+
+function toggleQuiz() {
+    const btn = document.getElementById('quizToggleBtn');
+    const body = document.getElementById('quizCollapsible');
+    btn.classList.toggle('open');
+    body.classList.toggle('open');
+    if (body.classList.contains('open')) {
+        btn.querySelector('span:first-child').textContent = '📋 50-Question Resume Quiz';
+        body.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+        btn.querySelector('span:first-child').textContent = '📋 Click to Start the 50-Question Quiz';
+    }
+}
+</script>
+</body>
+</html>

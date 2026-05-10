@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OOP Complete Roadmap – Placement Prep Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:radial-gradient(circle at top,#0a1b3d,#020617);color:#e2e8f0;min-height:100vh;line-height:1.7;}
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 70px;z-index:100;background:rgba(2,6,23,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(99,102,241,0.3);}
+    .logo a{font-size:26px;font-weight:800;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent;text-decoration:none;}
+    nav a{margin-left:28px;text-decoration:none;color:#bfc6d4;font-size:15px;font-weight:500;transition:0.3s;padding:6px 12px;border-radius:8px;}
+    nav a:hover{color:white;background:rgba(99,102,241,0.2);}
+    .hero{text-align:center;margin-top:140px;padding:0 20px;}
+    .tag{display:inline-block;padding:8px 24px;border-radius:9999px;background:rgba(99,102,241,0.2);font-size:14px;color:#a5b4fc;margin-bottom:20px;border:1px solid rgba(99,102,241,0.4);}
+    .hero h1{font-size:56px;font-weight:800;background:linear-gradient(135deg,#e0e7ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:20px;line-height:1.2;}
+    .hero p{color:#9ca3af;font-size:18px;max-width:800px;margin:0 auto 30px;}
+    .progress-container{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .progress-stats{display:flex;justify-content:space-between;margin-bottom:12px;font-size:14px;color:#94a3b8;}
+    .progress-track{background:rgba(255,255,255,0.1);height:10px;border-radius:10px;overflow:hidden;}
+    .progress-fill{background:linear-gradient(90deg,#6366f1,#a855f7);height:100%;width:0%;transition:width 0.5s ease;border-radius:10px;}
+    .steps-nav{max-width:1100px;margin:30px auto;padding:0 30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+    .step-btn{padding:12px 28px;background:rgba(255,255,255,0.05);border:2px solid rgba(99,102,241,0.3);border-radius:12px;color:#cbd5e1;font-weight:600;cursor:pointer;transition:all 0.3s;font-size:15px;}
+    .step-btn:hover{border-color:#6366f1;background:rgba(99,102,241,0.1);transform:translateY(-2px);}
+    .step-btn.active{background:linear-gradient(135deg,#6366f1,#a855f7);border-color:transparent;color:white;box-shadow:0 4px 15px rgba(99,102,241,0.3);}
+    .step-btn.completed{border-color:#10b981;background:rgba(16,185,129,0.1);color:#10b981;}
+    .content-section{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .step-content{display:none;animation:fadeIn 0.5s ease;}
+    .step-content.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .step-header{margin-bottom:40px;padding-bottom:20px;border-bottom:2px solid rgba(99,102,241,0.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+    .step-header h2{font-size:36px;font-weight:700;color:#e0e7ff;margin-bottom:12px;}
+    .step-header p{color:#9ca3af;font-size:16px;}
+    .topic-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 28px;margin-bottom:20px;transition:all 0.3s;cursor:pointer;}
+    .topic-card:hover{border-color:#6366f1;transform:translateY(-3px);background:rgba(99,102,241,0.05);}
+    .topic-header{display:flex;align-items:center;justify-content:space-between;}
+    .topic-header h3{font-size:22px;font-weight:600;display:flex;align-items:center;gap:12px;}
+    .topic-icon{font-size:28px;}.arrow{font-size:28px;transition:transform 0.3s;}
+    .sub-topics{display:none;margin-top:20px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.2);}
+    .sub-topics.active{display:block;}
+    .sub-topic{padding:14px 22px;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:10px;transition:0.3s;cursor:pointer;border-left:3px solid transparent;}
+    .sub-topic:hover{background:rgba(99,102,241,0.15);border-left-color:#6366f1;transform:translateX(5px);}
+    .detail-container{margin-top:40px;background:rgba(15,23,42,0.7);border:1px solid rgba(99,102,241,0.3);border-radius:24px;padding:40px;backdrop-filter:blur(8px);}
+    .detail-container h2{font-size:28px;margin-bottom:20px;color:#c4b5fd;}
+    .detail-container h3{font-size:20px;margin:25px 0 15px;color:#a5b4fc;}
+    .detail-container p{margin-bottom:18px;color:#cbd5e1;line-height:1.8;}
+    .detail-container ul,.detail-container ol{margin:18px 0 25px;padding-left:32px;}
+    .detail-container li{margin-bottom:10px;color:#cbd5e1;}
+    .code-block{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:24px;margin:25px 0;font-family:'Courier New',monospace;font-size:14px;overflow-x:auto;color:#e2e8f0;white-space:pre;line-height:1.8;}
+    .kw{color:#c084fc;font-weight:700;}
+    .str{color:#86efac;}
+    .cm{color:#64748b;font-style:italic;}
+    .fn{color:#67e8f9;}
+    .num{color:#fdba74;}
+    .example-box{background:rgba(16,185,129,0.1);border-left:5px solid #10b981;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .note-box{background:rgba(234,179,8,0.1);border-left:5px solid #eab308;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .tip-box{background:rgba(59,130,246,0.1);border-left:5px solid #3b82f6;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .warning-box{background:rgba(239,68,68,0.1);border-left:5px solid #ef4444;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    table{width:100%;border-collapse:collapse;margin:25px 0;}
+    th,td{border:1px solid rgba(255,255,255,0.2);padding:12px;text-align:left;color:#cbd5e1;}
+    th{background:rgba(99,102,241,0.2);color:#a5b4fc;font-weight:600;}
+    .nav-buttons{display:flex;justify-content:space-between;gap:20px;margin-top:50px;padding:40px 0 60px;}
+    .nav-btn{padding:14px 32px;border-radius:12px;font-weight:600;transition:0.3s;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;border:none;font-size:16px;}
+    .nav-btn.prev{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;}
+    .nav-btn:hover{transform:translateY(-2px);opacity:0.9;}
+    .complete-step-btn{background:rgba(16,185,129,0.2);border:2px solid #10b981;color:#10b981;padding:12px 28px;border-radius:12px;font-weight:600;cursor:pointer;transition:0.3s;font-size:14px;}
+    .complete-step-btn:hover{background:#10b981;color:white;}
+    .completed-badge{color:#10b981;font-weight:600;display:flex;align-items:center;gap:8px;}
+    @media(max-width:768px){header{padding:15px 20px;}nav a{margin-left:10px;font-size:12px;}.hero h1{font-size:32px;}.detail-container{padding:20px;}}
+</style>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="subjects.html">🧱 OOP Mastery</a></div>
+    <nav><a href="index.html">Home</a><a href="subjects.html">Subjects</a></nav>
+</header>
+<div class="hero">
+    <div class="tag">🎯 Complete OOP Roadmap • 6 Steps to Mastery</div>
+    <h1>Object Oriented<br>Programming</h1>
+    <p>Master OOP from classes to design patterns — every concept explained with Java, C++ and Python code. The most asked subject in every tech interview.</p>
+</div>
+<div class="progress-container">
+    <div class="progress-stats"><span>📊 Overall Progress</span><span id="progressPercent">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+<div class="steps-nav">
+    <button class="step-btn active" data-step="1">Step 1: Classes & Objects</button>
+    <button class="step-btn" data-step="2">Step 2: Encapsulation</button>
+    <button class="step-btn" data-step="3">Step 3: Inheritance</button>
+    <button class="step-btn" data-step="4">Step 4: Polymorphism</button>
+    <button class="step-btn" data-step="5">Step 5: Abstraction & Interfaces</button>
+    <button class="step-btn" data-step="6">Step 6: Advanced OOP & Design Patterns</button>
+</div>
+<div class="content-section" id="contentSection"></div>
+<script>
+const stepsData={
+1:{title:"🧱 Classes & Objects — OOP Foundations",description:"Understand the fundamental building blocks of OOP — classes, objects, constructors and memory layout.",topics:[
+    {title:"Classes & Objects",icon:"📦",subs:[
+        {id:"class-object",title:"Class vs Object — Blueprint vs Instance"},
+        {id:"attributes-methods",title:"Attributes (Fields) & Methods"},
+        {id:"this-keyword",title:"'this' Keyword — Reference to Current Object"},
+        {id:"static-members",title:"Static Members — Class-Level vs Instance-Level"}
+    ]},
+    {title:"Constructors & Destructors",icon:"🏗️",subs:[
+        {id:"constructors",title:"Types of Constructors — Default, Parameterized, Copy"},
+        {id:"constructor-overloading",title:"Constructor Overloading"},
+        {id:"destructors",title:"Destructors — Memory Cleanup"},
+        {id:"object-lifecycle",title:"Object Lifecycle — Creation to Destruction"}
+    ]},
+    {title:"Memory & References",icon:"🧠",subs:[
+        {id:"stack-heap",title:"Stack vs Heap Memory for Objects"},
+        {id:"pass-by-value-ref",title:"Pass by Value vs Pass by Reference"},
+        {id:"shallow-deep-copy",title:"Shallow Copy vs Deep Copy"}
+    ]}
+]},
+2:{title:"🔒 Encapsulation & Access Control",description:"Learn how to protect data, control access and write maintainable code using encapsulation.",topics:[
+    {title:"Access Modifiers",icon:"🔐",subs:[
+        {id:"access-modifiers",title:"public, private, protected, default — Full Comparison"},
+        {id:"getters-setters",title:"Getters & Setters — Best Practices"},
+        {id:"data-hiding",title:"Data Hiding — Why It Matters"}
+    ]},
+    {title:"Encapsulation in Practice",icon:"🛡️",subs:[
+        {id:"encapsulation-benefits",title:"Benefits of Encapsulation"},
+        {id:"immutable-class",title:"Immutable Classes — String, Final Keyword"},
+        {id:"encapsulation-java",title:"Encapsulation — Complete Java Example"},
+        {id:"encapsulation-cpp",title:"Encapsulation — Complete C++ Example"}
+    ]},
+    {title:"Packages & Namespaces",icon:"📁",subs:[
+        {id:"packages-java",title:"Packages in Java — Import, Default"},
+        {id:"namespaces-cpp",title:"Namespaces in C++"},
+        {id:"friend-class",title:"Friend Class & Friend Function (C++)"}
+    ]}
+]},
+3:{title:"🧬 Inheritance — Code Reuse",description:"Master all types of inheritance, method overriding, super keyword and the inheritance hierarchy.",topics:[
+    {title:"Inheritance Basics",icon:"🌳",subs:[
+        {id:"inheritance-intro",title:"What is Inheritance? IS-A Relationship"},
+        {id:"types-of-inheritance",title:"Types — Single, Multi-level, Hierarchical, Multiple, Hybrid"},
+        {id:"extends-java",title:"extends in Java — Syntax & Example"},
+        {id:"inheritance-cpp",title:"Inheritance in C++ — Access Specifiers"}
+    ]},
+    {title:"Method Overriding & super",icon:"🔄",subs:[
+        {id:"method-overriding",title:"Method Overriding — Runtime Polymorphism Setup"},
+        {id:"super-keyword",title:"super Keyword — Calling Parent Methods & Constructors"},
+        {id:"final-keyword",title:"final Class & final Method — Preventing Inheritance"},
+        {id:"object-class",title:"Object Class — Root of Java Hierarchy"}
+    ]},
+    {title:"Constructor Chaining",icon:"⛓️",subs:[
+        {id:"constructor-chaining",title:"Constructor Chaining — this() and super()"},
+        {id:"inheritance-order",title:"Initialization Order in Inheritance"},
+        {id:"diamond-problem",title:"Diamond Problem & Solution (virtual in C++)"}
+    ]}
+]},
+4:{title:"🎭 Polymorphism — One Interface, Many Forms",description:"Understand compile-time and runtime polymorphism, virtual functions, and method dispatch.",topics:[
+    {title:"Compile-Time Polymorphism",icon:"⚡",subs:[
+        {id:"method-overloading",title:"Method Overloading — Same Name, Different Params"},
+        {id:"operator-overloading",title:"Operator Overloading (C++)"},
+        {id:"overloading-vs-overriding",title:"Overloading vs Overriding — Complete Comparison"}
+    ]},
+    {title:"Runtime Polymorphism",icon:"🔄",subs:[
+        {id:"runtime-poly",title:"Runtime Polymorphism — Virtual Functions & Dispatch"},
+        {id:"virtual-functions",title:"Virtual Functions & vtable in C++"},
+        {id:"dynamic-binding",title:"Dynamic Binding vs Static Binding"},
+        {id:"upcasting-downcasting",title:"Upcasting & Downcasting — instanceof, dynamic_cast"}
+    ]},
+    {title:"Polymorphism Patterns",icon:"🏛️",subs:[
+        {id:"covariant-return",title:"Covariant Return Types"},
+        {id:"poly-real-world",title:"Real-World Polymorphism — Shape, Payment Systems"},
+        {id:"liskov-principle",title:"Liskov Substitution Principle (LSP)"}
+    ]}
+]},
+5:{title:"🎨 Abstraction & Interfaces",description:"Master abstract classes, interfaces, and the difference between them in Java and C++.",topics:[
+    {title:"Abstract Classes",icon:"🏗️",subs:[
+        {id:"abstract-class",title:"Abstract Class — Definition, Rules & Use Cases"},
+        {id:"abstract-methods",title:"Abstract Methods — Must Override"},
+        {id:"abstract-vs-concrete",title:"Abstract Class vs Concrete Class"},
+        {id:"abstract-cpp",title:"Pure Virtual Functions in C++ (= 0)"}
+    ]},
+    {title:"Interfaces",icon:"🔌",subs:[
+        {id:"interface-java",title:"interface in Java — Complete Guide"},
+        {id:"multiple-interface",title:"Implementing Multiple Interfaces"},
+        {id:"default-methods",title:"Default & Static Methods in Interfaces (Java 8+)"},
+        {id:"functional-interface",title:"Functional Interfaces & Lambda Expressions"}
+    ]},
+    {title:"Abstract vs Interface",icon:"⚖️",subs:[
+        {id:"abstract-vs-interface",title:"Abstract Class vs Interface — When to Use Which"},
+        {id:"interface-segregation",title:"Interface Segregation Principle (ISP)"},
+        {id:"dependency-inversion",title:"Dependency Inversion Principle (DIP)"}
+    ]}
+]},
+6:{title:"🏆 Advanced OOP & Design Patterns",description:"SOLID principles, design patterns, generics and everything needed for product company interviews.",topics:[
+    {title:"SOLID Principles",icon:"🧱",subs:[
+        {id:"solid-overview",title:"SOLID — All 5 Principles Overview"},
+        {id:"srp",title:"Single Responsibility Principle (SRP)"},
+        {id:"ocp",title:"Open/Closed Principle (OCP)"},
+        {id:"solid-rest",title:"LSP, ISP, DIP — with Examples"}
+    ]},
+    {title:"Design Patterns",icon:"🎨",subs:[
+        {id:"singleton",title:"Singleton Pattern — Thread-Safe Implementation"},
+        {id:"factory",title:"Factory & Abstract Factory Pattern"},
+        {id:"observer",title:"Observer Pattern — Event System"},
+        {id:"strategy",title:"Strategy Pattern — Algorithm Selection"},
+        {id:"decorator",title:"Decorator Pattern — Extending Behavior"}
+    ]},
+    {title:"Generics & Advanced Topics",icon:"⚙️",subs:[
+        {id:"generics",title:"Generics in Java / Templates in C++"},
+        {id:"exception-hierarchy",title:"Exception Hierarchy & Custom Exceptions"},
+        {id:"oop-interview-qs",title:"Top 30 OOP Interview Questions — Quick Reference"}
+    ]}
+]}
+};
+
+const detailedContent={
+'class-object':`<h2>Class vs Object — Blueprint vs Instance</h2>
+<p>A <strong>class</strong> is a blueprint/template. An <strong>object</strong> is a concrete instance of that class created in memory.</p>
+<div class="code-block"><span class="cm">// Java: Class definition</span>
+<span class="kw">public class</span> <span class="fn">Car</span> {
+    <span class="cm">// Fields (attributes/state)</span>
+    <span class="kw">String</span> brand;
+    <span class="kw">String</span> color;
+    <span class="kw">int</span>    speed;
+
+    <span class="cm">// Method (behavior)</span>
+    <span class="kw">void</span> <span class="fn">accelerate</span>(<span class="kw">int</span> amount) {
+        speed += amount;
+        <span class="fn">System.out.println</span>(brand + <span class="str">" speed: "</span> + speed);
+    }
+}
+
+<span class="cm">// Creating objects (instances)</span>
+<span class="fn">Car</span> car1 = <span class="kw">new</span> <span class="fn">Car</span>();   <span class="cm">// object 1 in heap memory</span>
+<span class="fn">Car</span> car2 = <span class="kw">new</span> <span class="fn">Car</span>();   <span class="cm">// object 2 — separate memory</span>
+car1.brand = <span class="str">"Toyota"</span>;
+car2.brand = <span class="str">"Honda"</span>;
+car1.<span class="fn">accelerate</span>(<span class="num">30</span>);    <span class="cm">// Toyota speed: 30</span></div>
+<table><tr><th>Aspect</th><th>Class</th><th>Object</th></tr>
+<tr><td>Nature</td><td>Template / Blueprint</td><td>Instance / Real entity</td></tr>
+<tr><td>Memory</td><td>No memory at declaration</td><td>Memory allocated on heap</td></tr>
+<tr><td>How many</td><td>Declared once</td><td>Created many times (new)</td></tr>
+<tr><td>Existence</td><td>Logical entity</td><td>Physical entity</td></tr></table>`,
+
+'attributes-methods':`<h2>Attributes (Fields) & Methods</h2>
+<div class="code-block"><span class="cm">// Python example — clean OOP syntax</span>
+<span class="kw">class</span> <span class="fn">BankAccount</span>:
+    <span class="cm"># Class variable (shared by all instances)</span>
+    bank_name = <span class="str">"National Bank"</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="kw">self</span>, owner, balance=<span class="num">0</span>):
+        <span class="cm"># Instance variables (unique per object)</span>
+        <span class="kw">self</span>.owner   = owner
+        <span class="kw">self</span>.balance = balance
+        <span class="kw">self</span>._transactions = []  <span class="cm"># private by convention</span>
+
+    <span class="kw">def</span> <span class="fn">deposit</span>(<span class="kw">self</span>, amount):
+        <span class="kw">if</span> amount &gt; <span class="num">0</span>:
+            <span class="kw">self</span>.balance += amount
+            <span class="kw">self</span>._transactions.<span class="fn">append</span>(<span class="str">f"Deposit: +{amount}"</span>)
+
+    <span class="kw">def</span> <span class="fn">get_balance</span>(<span class="kw">self</span>):
+        <span class="kw">return</span> <span class="kw">self</span>.balance
+
+acc = <span class="fn">BankAccount</span>(<span class="str">"Alice"</span>, <span class="num">1000</span>)
+acc.<span class="fn">deposit</span>(<span class="num">500</span>)
+<span class="fn">print</span>(acc.<span class="fn">get_balance</span>())  <span class="cm"># 1500</span></div>`,
+
+'this-keyword':`<h2>'this' Keyword</h2>
+<p><code>this</code> refers to the current object instance. Used to disambiguate instance variables from parameters, and to call other constructors.</p>
+<div class="code-block"><span class="cm">// Java — this keyword uses</span>
+<span class="kw">public class</span> <span class="fn">Student</span> {
+    <span class="kw">String</span> name;
+    <span class="kw">int</span>    age;
+
+    <span class="fn">Student</span>(<span class="kw">String</span> name, <span class="kw">int</span> age) {
+        <span class="kw">this</span>.name = name;  <span class="cm">// 'this.name' = field, 'name' = param</span>
+        <span class="kw">this</span>.age  = age;
+    }
+
+    <span class="cm">// Return current object (method chaining)</span>
+    <span class="fn">Student</span> <span class="fn">setName</span>(<span class="kw">String</span> name) {
+        <span class="kw">this</span>.name = name;
+        <span class="kw">return this</span>;  <span class="cm">// enables chaining</span>
+    }
+
+    <span class="cm">// Call another constructor using this()</span>
+    <span class="fn">Student</span>(<span class="kw">String</span> name) {
+        <span class="kw">this</span>(name, <span class="num">18</span>);  <span class="cm">// calls 2-param constructor</span>
+    }
+}
+
+<span class="cm">// Method chaining</span>
+<span class="fn">Student</span> s = <span class="kw">new</span> <span class="fn">Student</span>(<span class="str">"Alice"</span>).<span class="fn">setName</span>(<span class="str">"Bob"</span>);</div>`,
+
+'static-members':`<h2>Static Members — Class vs Instance Level</h2>
+<div class="code-block"><span class="cm">// Java static example</span>
+<span class="kw">public class</span> <span class="fn">Counter</span> {
+    <span class="kw">private static int</span> count = <span class="num">0</span>;  <span class="cm">// shared by ALL objects</span>
+    <span class="kw">private int</span> id;                  <span class="cm">// unique per object</span>
+
+    <span class="fn">Counter</span>() {
+        count++;
+        <span class="kw">this</span>.id = count;
+    }
+
+    <span class="kw">public static int</span> <span class="fn">getCount</span>() { <span class="kw">return</span> count; }
+    <span class="kw">public int</span> <span class="fn">getId</span>()            { <span class="kw">return</span> id; }
+
+    <span class="cm">// Static method — cannot use 'this', no instance needed</span>
+    <span class="kw">public static void</span> <span class="fn">reset</span>() { count = <span class="num">0</span>; }
+}
+
+<span class="fn">Counter</span> c1 = <span class="kw">new</span> <span class="fn">Counter</span>();  <span class="cm">// id=1, count=1</span>
+<span class="fn">Counter</span> c2 = <span class="kw">new</span> <span class="fn">Counter</span>();  <span class="cm">// id=2, count=2</span>
+<span class="fn">Counter</span>.<span class="fn">getCount</span>();             <span class="cm">// 2 — called on class, not object</span></div>
+<table><tr><th></th><th>Instance Member</th><th>Static Member</th></tr>
+<tr><td>Belongs to</td><td>Each object</td><td>The class itself</td></tr>
+<tr><td>Memory</td><td>Separate per object (heap)</td><td>Single copy (method area)</td></tr>
+<tr><td>Access</td><td>object.field</td><td>ClassName.field (preferred)</td></tr>
+<tr><td>Can access</td><td>Both static & instance</td><td>Only static members</td></tr>
+<tr><td>Use case</td><td>Object-specific state</td><td>Shared state, utility methods</td></tr></table>`,
+
+'constructors':`<h2>Types of Constructors</h2>
+<div class="code-block"><span class="cm">// C++ — all 3 constructor types</span>
+<span class="kw">class</span> <span class="fn">Box</span> {
+    <span class="kw">double</span> length, width, height;
+<span class="kw">public</span>:
+    <span class="cm">// 1. Default constructor (no params)</span>
+    <span class="fn">Box</span>() : length(<span class="num">1.0</span>), width(<span class="num">1.0</span>), height(<span class="num">1.0</span>) {
+        <span class="fn">cout</span> &lt;&lt; <span class="str">"Default constructor\n"</span>;
+    }
+
+    <span class="cm">// 2. Parameterized constructor</span>
+    <span class="fn">Box</span>(<span class="kw">double</span> l, <span class="kw">double</span> w, <span class="kw">double</span> h)
+        : length(l), width(w), height(h) {}
+
+    <span class="cm">// 3. Copy constructor — deep copies another Box</span>
+    <span class="fn">Box</span>(<span class="kw">const</span> <span class="fn">Box</span>&amp; other)
+        : length(other.length), width(other.width), height(other.height) {
+        <span class="fn">cout</span> &lt;&lt; <span class="str">"Copy constructor\n"</span>;
+    }
+
+    <span class="kw">double</span> <span class="fn">volume</span>() { <span class="kw">return</span> length * width * height; }
+};
+
+<span class="fn">Box</span> b1;               <span class="cm">// Default: 1×1×1</span>
+<span class="fn">Box</span> b2(<span class="num">3.0</span>, <span class="num">4.0</span>, <span class="num">5.0</span>); <span class="cm">// Parameterized: 3×4×5</span>
+<span class="fn">Box</span> b3 = b2;          <span class="cm">// Copy constructor called</span></div>`,
+
+'constructor-overloading':`<h2>Constructor Overloading</h2>
+<div class="code-block"><span class="cm">// Java — multiple constructors, different signatures</span>
+<span class="kw">public class</span> <span class="fn">Rectangle</span> {
+    <span class="kw">double</span> width, height;
+
+    <span class="fn">Rectangle</span>() { <span class="kw">this</span>(<span class="num">1.0</span>, <span class="num">1.0</span>); }          <span class="cm">// delegates</span>
+    <span class="fn">Rectangle</span>(<span class="kw">double</span> side) { <span class="kw">this</span>(side, side); } <span class="cm">// square</span>
+    <span class="fn">Rectangle</span>(<span class="kw">double</span> w, <span class="kw">double</span> h) {
+        <span class="kw">this</span>.width = w; <span class="kw">this</span>.height = h;
+    }
+
+    <span class="kw">double</span> <span class="fn">area</span>() { <span class="kw">return</span> width * height; }
+}
+
+<span class="fn">Rectangle</span> r1 = <span class="kw">new</span> <span class="fn">Rectangle</span>();          <span class="cm">// 1×1</span>
+<span class="fn">Rectangle</span> r2 = <span class="kw">new</span> <span class="fn">Rectangle</span>(<span class="num">5.0</span>);       <span class="cm">// 5×5</span>
+<span class="fn">Rectangle</span> r3 = <span class="kw">new</span> <span class="fn">Rectangle</span>(<span class="num">3.0</span>, <span class="num">4.0</span>);  <span class="cm">// 3×4</span></div>`,
+
+'destructors':`<h2>Destructors — Memory Cleanup</h2>
+<div class="code-block"><span class="cm">// C++ destructor — essential for manual memory management</span>
+<span class="kw">class</span> <span class="fn">DynamicArray</span> {
+    <span class="kw">int</span>* data;
+    <span class="kw">int</span>  size;
+<span class="kw">public</span>:
+    <span class="fn">DynamicArray</span>(<span class="kw">int</span> n) : size(n) {
+        data = <span class="kw">new int</span>[n];  <span class="cm">// allocate on heap</span>
+        <span class="fn">cout</span> &lt;&lt; <span class="str">"Allocated "</span> &lt;&lt; n &lt;&lt; <span class="str">" ints\n"</span>;
+    }
+
+    ~<span class="fn">DynamicArray</span>() {       <span class="cm">// DESTRUCTOR — called on scope exit</span>
+        <span class="kw">delete</span>[] data;       <span class="cm">// free heap memory</span>
+        <span class="fn">cout</span> &lt;&lt; <span class="str">"Memory freed\n"</span>;
+    }
+};
+<span class="cm">// Java: no destructor, Garbage Collector handles deallocation</span>
+<span class="cm">// finalize() exists but deprecated — use try-with-resources or close()</span></div>
+<div class="note-box">📌 In Java/Python, memory is managed by GC — no explicit destructor. In C++, always implement destructor if you have raw pointer members (Rule of Three/Five).</div>`,
+
+'object-lifecycle':`<h2>Object Lifecycle</h2>
+<table><tr><th>Phase</th><th>Java</th><th>C++</th></tr>
+<tr><td>1. Memory allocation</td><td>new operator → heap</td><td>new or auto (stack)</td></tr>
+<tr><td>2. Constructor call</td><td>Constructor executes</td><td>Constructor executes</td></tr>
+<tr><td>3. Object in use</td><td>Methods called</td><td>Methods called</td></tr>
+<tr><td>4. Destruction</td><td>GC unreachable → collects</td><td>Destructor called on scope exit or delete</td></tr></table>`,
+
+'stack-heap':`<h2>Stack vs Heap Memory</h2>
+<table><tr><th></th><th>Stack</th><th>Heap</th></tr>
+<tr><td>Stores</td><td>Primitive types, references, local vars</td><td>Objects, arrays</td></tr>
+<tr><td>Size</td><td>Limited (~1-8 MB)</td><td>Large (available RAM)</td></tr>
+<tr><td>Speed</td><td>Very fast (LIFO)</td><td>Slower (allocator overhead)</td></tr>
+<tr><td>Management</td><td>Auto (scope-based)</td><td>Java: GC / C++: manual or smart ptr</td></tr>
+<tr><td>Lifetime</td><td>Function scope</td><td>Until freed/GC</td></tr></table>
+<div class="code-block"><span class="cm">// Java memory layout</span>
+<span class="kw">int</span> x = <span class="num">5</span>;              <span class="cm">// x=5 stored on STACK</span>
+<span class="fn">Car</span> car = <span class="kw">new</span> <span class="fn">Car</span>();   <span class="cm">// ref 'car' on stack, Car OBJECT on heap</span>
+<span class="fn">Car</span> car2 = car;        <span class="cm">// car2 also points to SAME object on heap!</span>
+car2.speed = <span class="num">100</span>;     <span class="cm">// car.speed is also 100 — same object</span></div>`,
+
+'pass-by-value-ref':`<h2>Pass by Value vs Pass by Reference</h2>
+<div class="code-block"><span class="cm">// Java: primitives by value, objects by reference-copy</span>
+<span class="kw">void</span> <span class="fn">changePrimitive</span>(<span class="kw">int</span> x) {
+    x = <span class="num">100</span>;  <span class="cm">// local copy only — original unchanged</span>
+}
+<span class="kw">void</span> <span class="fn">changeObject</span>(<span class="fn">Car</span> c) {
+    c.speed = <span class="num">200</span>;  <span class="cm">// modifies the SAME object — caller sees change</span>
+    c = <span class="kw">new</span> <span class="fn">Car</span>();  <span class="cm">// local re-assignment — caller unchanged</span>
+}
+
+<span class="cm">// C++: explicit by value or by reference</span>
+<span class="kw">void</span> <span class="fn">byValue</span>(<span class="fn">Box</span> b) { b.length = <span class="num">10</span>; }    <span class="cm">// copy — no effect outside</span>
+<span class="kw">void</span> <span class="fn">byRef</span>(<span class="fn">Box</span>&amp; b) { b.length = <span class="num">10</span>; }   <span class="cm">// reference — CHANGES original</span>
+<span class="kw">void</span> <span class="fn">byPtr</span>(<span class="fn">Box</span>* b) { b-&gt;length = <span class="num">10</span>; }  <span class="cm">// pointer — CHANGES original</span></div>`,
+
+'shallow-deep-copy':`<h2>Shallow Copy vs Deep Copy</h2>
+<div class="code-block"><span class="cm">// Shallow copy — copies reference, shares inner objects</span>
+<span class="kw">class</span> <span class="fn">Address</span> { <span class="kw">String</span> city; }
+<span class="kw">class</span> <span class="fn">Person</span> {
+    <span class="kw">String</span> name;
+    <span class="fn">Address</span> addr;
+
+    <span class="cm">// SHALLOW copy: addr reference copied, not the Address object</span>
+    <span class="fn">Person</span> <span class="fn">shallowCopy</span>() {
+        <span class="fn">Person</span> p = <span class="kw">new</span> <span class="fn">Person</span>();
+        p.name = <span class="kw">this</span>.name;
+        p.addr = <span class="kw">this</span>.addr;  <span class="cm">// SAME Address object!</span>
+        <span class="kw">return</span> p;
+    }
+
+    <span class="cm">// DEEP copy: creates new Address object</span>
+    <span class="fn">Person</span> <span class="fn">deepCopy</span>() {
+        <span class="fn">Person</span> p = <span class="kw">new</span> <span class="fn">Person</span>();
+        p.name = <span class="kw">this</span>.name;
+        p.addr = <span class="kw">new</span> <span class="fn">Address</span>();
+        p.addr.city = <span class="kw">this</span>.addr.city;  <span class="cm">// NEW Address object</span>
+        <span class="kw">return</span> p;
+    }
+}</div>
+<div class="warning-box">⚠️ Object.clone() in Java does shallow copy by default. Always override clone() or use copy constructors for deep copy when objects have mutable reference fields.</div>`,
+
+'access-modifiers':`<h2>Access Modifiers — Full Comparison</h2>
+<table><tr><th>Modifier</th><th>Same Class</th><th>Same Package</th><th>Subclass</th><th>Outside</th></tr>
+<tr><td><code>public</code></td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td><code>protected</code></td><td>✅</td><td>✅</td><td>✅</td><td>❌</td></tr>
+<tr><td>(default/package)</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td></tr>
+<tr><td><code>private</code></td><td>✅</td><td>❌</td><td>❌</td><td>❌</td></tr></table>
+<div class="code-block"><span class="cm">// C++ access modifiers</span>
+<span class="kw">class</span> <span class="fn">Account</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="fn">showBalance</span>();    <span class="cm">// accessible everywhere</span>
+<span class="kw">protected</span>:
+    <span class="kw">double</span> balance;        <span class="cm">// accessible in subclasses</span>
+<span class="kw">private</span>:
+    <span class="kw">int</span> pin;               <span class="cm">// ONLY this class</span>
+    <span class="kw">void</span> <span class="fn">validatePin</span>();   <span class="cm">// helper method, hidden</span>
+};</div>`,
+
+'getters-setters':`<h2>Getters & Setters — Best Practices</h2>
+<div class="code-block"><span class="cm">// Java — well-designed encapsulated class</span>
+<span class="kw">public class</span> <span class="fn">Temperature</span> {
+    <span class="kw">private double</span> celsius;  <span class="cm">// PRIVATE — cannot access directly</span>
+
+    <span class="cm">// Getter — read access</span>
+    <span class="kw">public double</span> <span class="fn">getCelsius</span>()  { <span class="kw">return</span> celsius; }
+    <span class="kw">public double</span> <span class="fn">getFahrenheit</span>(){ <span class="kw">return</span> celsius * <span class="num">9</span>/<span class="num">5</span> + <span class="num">32</span>; }
+
+    <span class="cm">// Setter — write access WITH validation</span>
+    <span class="kw">public void</span> <span class="fn">setCelsius</span>(<span class="kw">double</span> c) {
+        <span class="kw">if</span> (c &lt; -<span class="num">273.15</span>) <span class="kw">throw new</span> <span class="fn">IllegalArgumentException</span>(
+            <span class="str">"Below absolute zero!"</span>);
+        celsius = c;
+    }
+
+    <span class="cm">// Read-only property (no setter)</span>
+    <span class="kw">public double</span> <span class="fn">getKelvin</span>() { <span class="kw">return</span> celsius + <span class="num">273.15</span>; }
+}</div>
+<div class="tip-box">💡 Always make fields <code>private</code>. Use getters/setters to add validation, logging, or computed properties. Never expose mutable collections directly — return an unmodifiable view instead.</div>`,
+
+'data-hiding':`<h2>Data Hiding — Why It Matters</h2>
+<p>Data hiding means restricting direct access to an object's internal state. It separates interface (what) from implementation (how).</p>
+<div class="example-box"><strong>Without data hiding (bad):</strong><br>
+<code>account.balance = -10000;</code> — no validation, anyone can corrupt state<br><br>
+<strong>With data hiding (good):</strong><br>
+<code>account.setBalance(-10000);</code> → throws exception, invalid value rejected</div>
+<table><tr><th>Benefit</th><th>Explanation</th></tr>
+<tr><td>Validation</td><td>Setters enforce business rules before accepting values</td></tr>
+<tr><td>Flexibility</td><td>Change internal representation without breaking callers</td></tr>
+<tr><td>Security</td><td>Sensitive data (PIN, password) cannot be accessed directly</td></tr>
+<tr><td>Debugging</td><td>All state changes go through known code paths</td></tr></table>`,
+
+'encapsulation-java':`<h2>Encapsulation — Complete Java Example</h2>
+<div class="code-block"><span class="kw">public class</span> <span class="fn">Employee</span> {
+    <span class="kw">private</span> <span class="kw">int</span>    id;
+    <span class="kw">private</span> <span class="kw">String</span> name;
+    <span class="kw">private</span> <span class="kw">double</span> salary;
+    <span class="kw">private</span> <span class="kw">String</span> department;
+
+    <span class="cm">// Constructor</span>
+    <span class="kw">public</span> <span class="fn">Employee</span>(<span class="kw">int</span> id, <span class="kw">String</span> name, <span class="kw">double</span> salary, <span class="kw">String</span> dept) {
+        <span class="kw">this</span>.id = id;
+        <span class="fn">setName</span>(name);
+        <span class="fn">setSalary</span>(salary);
+        <span class="kw">this</span>.department = dept;
+    }
+
+    <span class="cm">// Getters</span>
+    <span class="kw">public int</span>    <span class="fn">getId</span>()         { <span class="kw">return</span> id; }
+    <span class="kw">public</span> <span class="kw">String</span> <span class="fn">getName</span>()       { <span class="kw">return</span> name; }
+    <span class="kw">public double</span> <span class="fn">getSalary</span>()     { <span class="kw">return</span> salary; }
+    <span class="kw">public</span> <span class="kw">String</span> <span class="fn">getDepartment</span>() { <span class="kw">return</span> department; }
+
+    <span class="cm">// Setters with validation</span>
+    <span class="kw">public void</span> <span class="fn">setName</span>(<span class="kw">String</span> name) {
+        <span class="kw">if</span> (name == <span class="kw">null</span> || name.<span class="fn">isBlank</span>())
+            <span class="kw">throw new</span> <span class="fn">IllegalArgumentException</span>(<span class="str">"Name cannot be empty"</span>);
+        <span class="kw">this</span>.name = name.<span class="fn">trim</span>();
+    }
+    <span class="kw">public void</span> <span class="fn">setSalary</span>(<span class="kw">double</span> salary) {
+        <span class="kw">if</span> (salary &lt; <span class="num">0</span>)
+            <span class="kw">throw new</span> <span class="fn">IllegalArgumentException</span>(<span class="str">"Salary cannot be negative"</span>);
+        <span class="kw">this</span>.salary = salary;
+    }
+
+    <span class="kw">public double</span> <span class="fn">getAnnualSalary</span>() { <span class="kw">return</span> salary * <span class="num">12</span>; }
+
+    @<span class="fn">Override</span>
+    <span class="kw">public</span> <span class="kw">String</span> <span class="fn">toString</span>() {
+        <span class="kw">return</span> <span class="str">String.format("Employee{id=%d, name=%s, salary=%.2f}"</span>, id, name, salary);
+    }
+}</div>`,
+
+'encapsulation-cpp':`<h2>Encapsulation — Complete C++ Example</h2>
+<div class="code-block"><span class="kw">class</span> <span class="fn">Stack</span> {
+<span class="kw">private</span>:
+    <span class="kw">int</span> arr[<span class="num">100</span>];
+    <span class="kw">int</span> top = -<span class="num">1</span>;
+    <span class="kw">int</span> capacity = <span class="num">100</span>;
+
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="fn">push</span>(<span class="kw">int</span> val) {
+        <span class="kw">if</span> (<span class="fn">isFull</span>()) <span class="kw">throw</span> <span class="fn">overflow_error</span>(<span class="str">"Stack overflow"</span>);
+        arr[++top] = val;
+    }
+    <span class="kw">int</span> <span class="fn">pop</span>() {
+        <span class="kw">if</span> (<span class="fn">isEmpty</span>()) <span class="kw">throw</span> <span class="fn">underflow_error</span>(<span class="str">"Stack underflow"</span>);
+        <span class="kw">return</span> arr[top--];
+    }
+    <span class="kw">int</span>  <span class="fn">peek</span>()    <span class="kw">const</span> { <span class="kw">return</span> arr[top]; }
+    <span class="kw">bool</span> <span class="fn">isEmpty</span>() <span class="kw">const</span> { <span class="kw">return</span> top == -<span class="num">1</span>; }
+    <span class="kw">bool</span> <span class="fn">isFull</span>()  <span class="kw">const</span> { <span class="kw">return</span> top == capacity - <span class="num">1</span>; }
+    <span class="kw">int</span>  <span class="fn">size</span>()    <span class="kw">const</span> { <span class="kw">return</span> top + <span class="num">1</span>; }
+};</div>`,
+
+'inheritance-intro':`<h2>What is Inheritance? IS-A Relationship</h2>
+<p>Inheritance allows a class (child/subclass) to acquire properties and behaviors of another class (parent/superclass). Models an IS-A relationship.</p>
+<div class="example-box"><strong>IS-A vs HAS-A:</strong><br>
+• Dog IS-A Animal → Use inheritance (extends)<br>
+• Car HAS-A Engine → Use composition (field)<br><br>
+Prefer composition over inheritance when in doubt!</div>
+<div class="code-block"><span class="cm">// Java inheritance</span>
+<span class="kw">class</span> <span class="fn">Animal</span> {               <span class="cm">// Parent/Super class</span>
+    <span class="kw">String</span> name;
+    <span class="kw">int</span>    age;
+
+    <span class="kw">void</span> <span class="fn">eat</span>()   { <span class="fn">System.out.println</span>(name + <span class="str">" is eating"</span>); }
+    <span class="kw">void</span> <span class="fn">sleep</span>() { <span class="fn">System.out.println</span>(name + <span class="str">" is sleeping"</span>); }
+}
+
+<span class="kw">class</span> <span class="fn">Dog</span> <span class="kw">extends</span> <span class="fn">Animal</span> {  <span class="cm">// Child/Sub class</span>
+    <span class="kw">String</span> breed;
+
+    <span class="kw">void</span> <span class="fn">bark</span>() { <span class="fn">System.out.println</span>(name + <span class="str">": Woof!"</span>); }
+    <span class="cm">// Inherits: eat(), sleep(), name, age</span>
+    <span class="cm">// Adds:     bark(), breed</span>
+}
+
+<span class="fn">Dog</span> d = <span class="kw">new</span> <span class="fn">Dog</span>();
+d.name = <span class="str">"Rex"</span>;
+d.<span class="fn">eat</span>();   <span class="cm">// inherited from Animal</span>
+d.<span class="fn">bark</span>();  <span class="cm">// Dog's own method</span></div>`,
+
+'types-of-inheritance':`<h2>Types of Inheritance</h2>
+<table><tr><th>Type</th><th>Description</th><th>Java Support</th><th>C++ Support</th></tr>
+<tr><td>Single</td><td>A → B (one parent)</td><td>✅</td><td>✅</td></tr>
+<tr><td>Multi-level</td><td>A → B → C (chain)</td><td>✅</td><td>✅</td></tr>
+<tr><td>Hierarchical</td><td>A → B, A → C (one parent, many children)</td><td>✅</td><td>✅</td></tr>
+<tr><td>Multiple</td><td>A, B → C (two parents)</td><td>❌ (classes) / ✅ (interfaces)</td><td>✅</td></tr>
+<tr><td>Hybrid</td><td>Combination of above</td><td>❌ (classes) / ✅ (interfaces)</td><td>✅</td></tr></table>
+<div class="note-box">📌 Java does NOT support multiple inheritance with classes to avoid the Diamond Problem. It allows multiple inheritance through interfaces.</div>`,
+
+'method-overriding':`<h2>Method Overriding — Runtime Polymorphism Setup</h2>
+<p>Subclass provides its own implementation of a method already defined in the parent class.</p>
+<div class="code-block"><span class="cm">// Java — method overriding rules</span>
+<span class="kw">class</span> <span class="fn">Shape</span> {
+    <span class="kw">double</span> <span class="fn">area</span>() {
+        <span class="fn">System.out.println</span>(<span class="str">"Computing area of generic shape"</span>);
+        <span class="kw">return</span> <span class="num">0</span>;
+    }
+    <span class="kw">String</span> <span class="fn">describe</span>() { <span class="kw">return</span> <span class="str">"I am a Shape"</span>; }
+}
+
+<span class="kw">class</span> <span class="fn">Circle</span> <span class="kw">extends</span> <span class="fn">Shape</span> {
+    <span class="kw">double</span> radius;
+    <span class="fn">Circle</span>(<span class="kw">double</span> r) { radius = r; }
+
+    @<span class="fn">Override</span>                         <span class="cm">// annotation for safety</span>
+    <span class="kw">double</span> <span class="fn">area</span>() {                   <span class="cm">// OVERRIDES Shape.area()</span>
+        <span class="kw">return</span> Math.PI * radius * radius;
+    }
+    <span class="cm">// Rules: same name, same params, same or covariant return type</span>
+    <span class="cm">// Cannot reduce visibility (public → private is illegal)</span>
+    <span class="cm">// Cannot override static, final, or private methods</span>
+}</div>`,
+
+'super-keyword':`<h2>super Keyword</h2>
+<div class="code-block"><span class="cm">// super — access parent class members</span>
+<span class="kw">class</span> <span class="fn">Vehicle</span> {
+    <span class="kw">String</span> type = <span class="str">"Vehicle"</span>;
+    <span class="fn">Vehicle</span>(<span class="kw">String</span> t) { type = t; <span class="fn">System.out.println</span>(<span class="str">"Vehicle created"</span>); }
+    <span class="kw">void</span> <span class="fn">start</span>() { <span class="fn">System.out.println</span>(<span class="str">"Vehicle starting..."</span>); }
+}
+
+<span class="kw">class</span> <span class="fn">ElectricCar</span> <span class="kw">extends</span> <span class="fn">Vehicle</span> {
+    <span class="kw">int</span> batteryCapacity;
+
+    <span class="fn">ElectricCar</span>(<span class="kw">int</span> battery) {
+        <span class="kw">super</span>(<span class="str">"Electric"</span>);  <span class="cm">// MUST be first line — calls parent constructor</span>
+        <span class="kw">this</span>.batteryCapacity = battery;
+    }
+
+    @<span class="fn">Override</span>
+    <span class="kw">void</span> <span class="fn">start</span>() {
+        <span class="kw">super</span>.<span class="fn">start</span>();            <span class="cm">// call parent's start()</span>
+        <span class="fn">System.out.println</span>(<span class="str">"Electric motor engaged"</span>);
+    }
+
+    <span class="kw">String</span> <span class="fn">getType</span>() { <span class="kw">return super</span>.type; }  <span class="cm">// access parent field</span>
+}</div>`,
+
+'diamond-problem':`<h2>Diamond Problem & Solution</h2>
+<div class="code-block"><span class="cm">// Diamond Problem: ambiguity in multiple inheritance</span>
+<span class="cm">//     A</span>
+<span class="cm">//    / \</span>
+<span class="cm">//   B   C</span>
+<span class="cm">//    \ /</span>
+<span class="cm">//     D  ← Which show() does D inherit? B's or C's?</span>
+
+<span class="cm">// C++ solution: virtual inheritance</span>
+<span class="kw">class</span> <span class="fn">A</span> { <span class="kw">public</span>: <span class="kw">void</span> <span class="fn">show</span>() { <span class="fn">cout</span> &lt;&lt; <span class="str">"A"</span>; } };
+<span class="kw">class</span> <span class="fn">B</span> : <span class="kw">virtual public</span> <span class="fn">A</span> {};  <span class="cm">// virtual keyword</span>
+<span class="kw">class</span> <span class="fn">C</span> : <span class="kw">virtual public</span> <span class="fn">A</span> {};  <span class="cm">// virtual keyword</span>
+<span class="kw">class</span> <span class="fn">D</span> : <span class="kw">public</span> <span class="fn">B</span>, <span class="kw">public</span> <span class="fn">C</span> {};  <span class="cm">// only ONE copy of A</span>
+
+<span class="cm">// Java avoids this: classes allow single inheritance only</span>
+<span class="cm">// Java 8+ interface default method conflict → must override in implementing class</span></div>`,
+
+'method-overloading':`<h2>Method Overloading — Compile-Time Polymorphism</h2>
+<p>Same method name, different parameter list (type, count, or order). Resolved at compile time.</p>
+<div class="code-block"><span class="cm">// Java — overloaded methods</span>
+<span class="kw">class</span> <span class="fn">Calculator</span> {
+    <span class="cm">// Different number of params</span>
+    <span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b)            { <span class="kw">return</span> a + b; }
+    <span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b, <span class="kw">int</span> c)     { <span class="kw">return</span> a + b + c; }
+
+    <span class="cm">// Different param types</span>
+    <span class="kw">double</span> <span class="fn">add</span>(<span class="kw">double</span> a, <span class="kw">double</span> b)   { <span class="kw">return</span> a + b; }
+    <span class="kw">String</span> <span class="fn">add</span>(<span class="kw">String</span> a, <span class="kw">String</span> b)   { <span class="kw">return</span> a + b; }  <span class="cm">// concat</span>
+}
+
+<span class="cm">// Return type alone is NOT enough to distinguish overloads!</span>
+<span class="cm">// int foo()  and  double foo()  → COMPILE ERROR</span></div>`,
+
+'operator-overloading':`<h2>Operator Overloading (C++)</h2>
+<div class="code-block"><span class="cm">// C++ — overloading + and << operators</span>
+<span class="kw">class</span> <span class="fn">Complex</span> {
+    <span class="kw">double</span> real, imag;
+<span class="kw">public</span>:
+    <span class="fn">Complex</span>(<span class="kw">double</span> r=<span class="num">0</span>, <span class="kw">double</span> i=<span class="num">0</span>) : real(r), imag(i) {}
+
+    <span class="cm">// Overload + operator</span>
+    <span class="fn">Complex</span> <span class="kw">operator</span>+(<span class="kw">const</span> <span class="fn">Complex</span>&amp; other) <span class="kw">const</span> {
+        <span class="kw">return</span> <span class="fn">Complex</span>(real + other.real, imag + other.imag);
+    }
+
+    <span class="cm">// Overload == operator</span>
+    <span class="kw">bool</span> <span class="kw">operator</span>==(<span class="kw">const</span> <span class="fn">Complex</span>&amp; o) <span class="kw">const</span> {
+        <span class="kw">return</span> real == o.real &amp;&amp; imag == o.imag;
+    }
+
+    <span class="cm">// Overload << for cout</span>
+    <span class="kw">friend</span> <span class="fn">ostream</span>&amp; <span class="kw">operator</span>&lt;&lt;(<span class="fn">ostream</span>&amp; os, <span class="kw">const</span> <span class="fn">Complex</span>&amp; c) {
+        <span class="kw">return</span> os &lt;&lt; c.real &lt;&lt; <span class="str">"+"</span> &lt;&lt; c.imag &lt;&lt; <span class="str">"i"</span>;
+    }
+};
+
+<span class="fn">Complex</span> a(<span class="num">3</span>,<span class="num">4</span>), b(<span class="num">1</span>,<span class="num">2</span>);
+<span class="fn">Complex</span> c = a + b;  <span class="cm">// calls operator+()</span>
+<span class="fn">cout</span> &lt;&lt; c;          <span class="cm">// 4+6i</span></div>`,
+
+'runtime-poly':`<h2>Runtime Polymorphism</h2>
+<p>Same method call on parent reference → different behavior based on actual object type. Decided at RUNTIME via dynamic dispatch.</p>
+<div class="code-block"><span class="cm">// Java — classic polymorphism example</span>
+<span class="kw">class</span> <span class="fn">Shape</span>  { <span class="kw">double</span> <span class="fn">area</span>() { <span class="kw">return</span> <span class="num">0</span>; } }
+<span class="kw">class</span> <span class="fn">Circle</span>    <span class="kw">extends</span> <span class="fn">Shape</span> { <span class="kw">double</span> r; <span class="fn">Circle</span>(<span class="kw">double</span> r){<span class="kw">this</span>.r=r;}
+    @<span class="fn">Override</span> <span class="kw">double</span> <span class="fn">area</span>(){ <span class="kw">return</span> Math.PI*r*r; } }
+<span class="kw">class</span> <span class="fn">Rectangle</span>  <span class="kw">extends</span> <span class="fn">Shape</span> { <span class="kw">double</span> w,h; <span class="fn">Rectangle</span>(<span class="kw">double</span> w,<span class="kw">double</span> h){<span class="kw">this</span>.w=w;<span class="kw">this</span>.h=h;}
+    @<span class="fn">Override</span> <span class="kw">double</span> <span class="fn">area</span>(){ <span class="kw">return</span> w*h; } }
+
+<span class="cm">// Parent reference, different child objects</span>
+<span class="fn">Shape</span>[] shapes = {
+    <span class="kw">new</span> <span class="fn">Circle</span>(<span class="num">5</span>),
+    <span class="kw">new</span> <span class="fn">Rectangle</span>(<span class="num">4</span>,<span class="num">6</span>),
+    <span class="kw">new</span> <span class="fn">Circle</span>(<span class="num">3</span>)
+};
+<span class="kw">for</span> (<span class="fn">Shape</span> s : shapes)
+    <span class="fn">System.out.println</span>(s.<span class="fn">area</span>());  <span class="cm">// calls CORRECT area() at runtime!</span>
+<span class="cm">// 78.54, 24.0, 28.27 — all via SAME method call syntax</span></div>`,
+
+'virtual-functions':`<h2>Virtual Functions & vtable in C++</h2>
+<div class="code-block"><span class="cm">// Without virtual — STATIC binding (wrong!)</span>
+<span class="kw">class</span> <span class="fn">Base</span>  { <span class="kw">public</span>: <span class="kw">void</span> <span class="fn">show</span>() { <span class="fn">cout</span>&lt;&lt;<span class="str">"Base"</span>; } };
+<span class="kw">class</span> <span class="fn">Derived</span> : <span class="kw">public</span> <span class="fn">Base</span> { <span class="kw">public</span>: <span class="kw">void</span> <span class="fn">show</span>() { <span class="fn">cout</span>&lt;&lt;<span class="str">"Derived"</span>; } };
+<span class="fn">Base</span>* p = <span class="kw">new</span> <span class="fn">Derived</span>();
+p-&gt;<span class="fn">show</span>();  <span class="cm">// prints "Base" ← WRONG (static binding)</span>
+
+<span class="cm">// With virtual — DYNAMIC binding (correct!)</span>
+<span class="kw">class</span> <span class="fn">Base</span>    { <span class="kw">public</span>: <span class="kw">virtual void</span> <span class="fn">show</span>() { <span class="fn">cout</span>&lt;&lt;<span class="str">"Base"</span>; } };
+<span class="kw">class</span> <span class="fn">Derived</span> : <span class="kw">public</span> <span class="fn">Base</span> { <span class="kw">public</span>: <span class="kw">void</span> <span class="fn">show</span>() { <span class="fn">cout</span>&lt;&lt;<span class="str">"Derived"</span>; } };
+<span class="fn">Base</span>* p = <span class="kw">new</span> <span class="fn">Derived</span>();
+p-&gt;<span class="fn">show</span>();  <span class="cm">// prints "Derived" ← CORRECT</span>
+
+<span class="cm">// vtable: hidden table of function pointers per class
+// Each virtual function has an entry in vtable
+// Base::vtable  → { &Base::show }
+// Derived::vtable → { &Derived::show }
+// p→vptr→vtable→correct function called at runtime</span></div>`,
+
+'upcasting-downcasting':`<h2>Upcasting & Downcasting</h2>
+<div class="code-block"><span class="cm">// Java</span>
+<span class="fn">Animal</span> a = <span class="kw">new</span> <span class="fn">Dog</span>();   <span class="cm">// UPCASTING — implicit, always safe</span>
+                          <span class="cm">// Dog IS-A Animal</span>
+
+<span class="fn">Dog</span> d = (<span class="fn">Dog</span>) a;        <span class="cm">// DOWNCASTING — explicit cast, UNSAFE</span>
+                          <span class="cm">// ClassCastException if 'a' is not a Dog!</span>
+
+<span class="cm">// Safe downcast with instanceof</span>
+<span class="kw">if</span> (a <span class="kw">instanceof</span> <span class="fn">Dog</span> dog) {  <span class="cm">// Java 16+ pattern matching</span>
+    dog.<span class="fn">bark</span>();              <span class="cm">// safe — already checked</span>
+}
+
+<span class="cm">// C++ equivalents</span>
+<span class="fn">Base</span>* base = <span class="kw">new</span> <span class="fn">Derived</span>();  <span class="cm">// upcasting</span>
+<span class="fn">Derived</span>* d = <span class="kw">dynamic_cast</span>&lt;<span class="fn">Derived</span>*&gt;(base);  <span class="cm">// safe downcast</span>
+<span class="kw">if</span> (d != <span class="kw">nullptr</span>) d-&gt;<span class="fn">derivedMethod</span>();       <span class="cm">// nullptr if cast fails</span></div>`,
+
+'abstract-class':`<h2>Abstract Class</h2>
+<p>An abstract class cannot be instantiated. It provides a partial implementation and forces subclasses to implement abstract methods.</p>
+<div class="code-block"><span class="cm">// Java abstract class</span>
+<span class="kw">abstract class</span> <span class="fn">Vehicle</span> {
+    <span class="kw">private String</span> brand;
+    <span class="kw">private int</span>    year;
+
+    <span class="cm">// Regular constructor</span>
+    <span class="fn">Vehicle</span>(<span class="kw">String</span> brand, <span class="kw">int</span> year) {
+        <span class="kw">this</span>.brand = brand; <span class="kw">this</span>.year = year;
+    }
+
+    <span class="cm">// Concrete method — inherited as-is</span>
+    <span class="kw">void</span> <span class="fn">displayInfo</span>() {
+        <span class="fn">System.out.println</span>(brand + <span class="str">" ("</span> + year + <span class="str">")"</span>);
+    }
+
+    <span class="cm">// Abstract methods — MUST be implemented by subclass</span>
+    <span class="kw">abstract void</span> <span class="fn">start</span>();
+    <span class="kw">abstract double</span> <span class="fn">fuelEfficiency</span>();  <span class="cm">// km per litre/kWh</span>
+}
+
+<span class="kw">class</span> <span class="fn">ElectricCar</span> <span class="kw">extends</span> <span class="fn">Vehicle</span> {
+    <span class="kw">int</span> batteryKwh;
+    <span class="fn">ElectricCar</span>(<span class="kw">String</span> b, <span class="kw">int</span> y, <span class="kw">int</span> kwh) { <span class="kw">super</span>(b,y); batteryKwh=kwh; }
+
+    @<span class="fn">Override</span> <span class="kw">void</span>   <span class="fn">start</span>()            { <span class="fn">System.out.println</span>(<span class="str">"Silent motor"</span>); }
+    @<span class="fn">Override</span> <span class="kw">double</span> <span class="fn">fuelEfficiency</span>()  { <span class="kw">return</span> <span class="num">6.0</span>; } <span class="cm">// km/kWh</span>
+}
+<span class="cm">// Vehicle v = new Vehicle();  ← ERROR: cannot instantiate abstract class</span></div>`,
+
+'abstract-cpp':`<h2>Pure Virtual Functions in C++</h2>
+<div class="code-block"><span class="cm">// C++ abstract class = class with at least one pure virtual function</span>
+<span class="kw">class</span> <span class="fn">AbstractShape</span> {
+<span class="kw">public</span>:
+    <span class="cm">// Pure virtual function — = 0 makes it abstract</span>
+    <span class="kw">virtual double</span> <span class="fn">area</span>()      = <span class="num">0</span>;
+    <span class="kw">virtual double</span> <span class="fn">perimeter</span>() = <span class="num">0</span>;
+    <span class="kw">virtual</span> <span class="kw">void</span>   <span class="fn">draw</span>()      = <span class="num">0</span>;
+
+    <span class="cm">// Virtual destructor — CRUCIAL for polymorphic base classes</span>
+    <span class="kw">virtual</span> ~<span class="fn">AbstractShape</span>() = <span class="kw">default</span>;
+
+    <span class="cm">// Concrete method still allowed</span>
+    <span class="kw">void</span> <span class="fn">printArea</span>() {
+        <span class="fn">cout</span> &lt;&lt; <span class="str">"Area: "</span> &lt;&lt; <span class="fn">area</span>() &lt;&lt; <span class="str">"\n"</span>;
+    }
+};
+
+<span class="kw">class</span> <span class="fn">Circle</span> : <span class="kw">public</span> <span class="fn">AbstractShape</span> {
+    <span class="kw">double</span> r;
+<span class="kw">public</span>:
+    <span class="fn">Circle</span>(<span class="kw">double</span> r) : r(r) {}
+    <span class="kw">double</span> <span class="fn">area</span>()      <span class="kw">override</span> { <span class="kw">return</span> M_PI * r * r; }
+    <span class="kw">double</span> <span class="fn">perimeter</span>() <span class="kw">override</span> { <span class="kw">return</span> <span class="num">2</span> * M_PI * r; }
+    <span class="kw">void</span>   <span class="fn">draw</span>()       <span class="kw">override</span> { <span class="fn">cout</span> &lt;&lt; <span class="str">"Drawing circle\n"</span>; }
+};</div>`,
+
+'interface-java':`<h2>Interface in Java — Complete Guide</h2>
+<div class="code-block"><span class="cm">// Java interface — all methods public abstract by default (before Java 8)</span>
+<span class="kw">interface</span> <span class="fn">Drawable</span> {
+    <span class="kw">void</span> <span class="fn">draw</span>();           <span class="cm">// public abstract (implicit)</span>
+    <span class="kw">void</span> <span class="fn">resize</span>(<span class="kw">double</span> f); <span class="cm">// public abstract (implicit)</span>
+
+    <span class="cm">// Java 8+: default method (has body)</span>
+    <span class="kw">default void</span> <span class="fn">print</span>() { <span class="fn">System.out.println</span>(<span class="str">"Printing drawable"</span>); }
+
+    <span class="cm">// Java 8+: static method</span>
+    <span class="kw">static</span> <span class="fn">Drawable</span> <span class="fn">createDefault</span>() { <span class="kw">return</span> () -&gt; {}; }
+
+    <span class="cm">// Constants (public static final)</span>
+    <span class="kw">int</span> MAX_SIZE = <span class="num">1000</span>;
+}
+
+<span class="kw">interface</span> <span class="fn">Resizable</span> { <span class="kw">void</span> <span class="fn">setSize</span>(<span class="kw">int</span> w, <span class="kw">int</span> h); }
+
+<span class="cm">// Implementing multiple interfaces</span>
+<span class="kw">class</span> <span class="fn">Square</span> <span class="kw">implements</span> <span class="fn">Drawable</span>, <span class="fn">Resizable</span> {
+    <span class="kw">double</span> side;
+    @<span class="fn">Override</span> <span class="kw">public void</span> <span class="fn">draw</span>()               { <span class="fn">System.out.println</span>(<span class="str">"Drawing square"</span>); }
+    @<span class="fn">Override</span> <span class="kw">public void</span> <span class="fn">resize</span>(<span class="kw">double</span> f)     { side *= f; }
+    @<span class="fn">Override</span> <span class="kw">public void</span> <span class="fn">setSize</span>(<span class="kw">int</span> w, <span class="kw">int</span> h){ side = Math.<span class="fn">min</span>(w,h); }
+}</div>`,
+
+'abstract-vs-interface':`<h2>Abstract Class vs Interface — When to Use Which</h2>
+<table><tr><th>Aspect</th><th>Abstract Class</th><th>Interface</th></tr>
+<tr><td>Instantiation</td><td>Cannot instantiate</td><td>Cannot instantiate</td></tr>
+<tr><td>Methods</td><td>Abstract + concrete</td><td>Abstract + default + static</td></tr>
+<tr><td>Fields</td><td>Any (instance, static, final)</td><td>Only public static final</td></tr>
+<tr><td>Constructor</td><td>Yes (not called directly)</td><td>No</td></tr>
+<tr><td>Inheritance</td><td>Single (extends)</td><td>Multiple (implements)</td></tr>
+<tr><td>Access modifiers</td><td>Any</td><td>public only</td></tr>
+<tr><td>IS-A relationship</td><td>Strong (shared state)</td><td>HAS-CAPABILITY ("can do")</td></tr></table>
+<div class="example-box"><strong>Rule of thumb:</strong><br>
+• Use <strong>abstract class</strong> when subclasses share code/state and have an IS-A relationship (Animal → Dog)<br>
+• Use <strong>interface</strong> when unrelated classes need the same capability (Flyable → Bird, Airplane, Superman)</div>`,
+
+'functional-interface':`<h2>Functional Interfaces & Lambda Expressions</h2>
+<div class="code-block"><span class="cm">// @FunctionalInterface: exactly one abstract method</span>
+@<span class="fn">FunctionalInterface</span>
+<span class="kw">interface</span> <span class="fn">MathOperation</span> {
+    <span class="kw">int</span> <span class="fn">operate</span>(<span class="kw">int</span> a, <span class="kw">int</span> b);
+}
+
+<span class="cm">// Lambda = anonymous implementation of functional interface</span>
+<span class="fn">MathOperation</span> add      = (a, b) -&gt; a + b;
+<span class="fn">MathOperation</span> multiply = (a, b) -&gt; a * b;
+<span class="fn">MathOperation</span> max      = (a, b) -&gt; a &gt; b ? a : b;
+
+<span class="fn">System.out.println</span>(<span class="fn">add</span>.<span class="fn">operate</span>(<span class="num">5</span>, <span class="num">3</span>));       <span class="cm">// 8</span>
+<span class="fn">System.out.println</span>(<span class="fn">multiply</span>.<span class="fn">operate</span>(<span class="num">4</span>, <span class="num">3</span>));  <span class="cm">// 12</span>
+
+<span class="cm">// Built-in functional interfaces (java.util.function)</span>
+<span class="cm">// Predicate<T>  — T → boolean</span>
+<span class="cm">// Function<T,R> — T → R</span>
+<span class="cm">// Consumer<T>   — T → void</span>
+<span class="cm">// Supplier<T>   — () → T</span>
+<span class="cm">// BiFunction<T,U,R> — (T,U) → R</span>
+
+<span class="fn">List</span>&lt;<span class="kw">String</span>&gt; names = <span class="fn">Arrays</span>.<span class="fn">asList</span>(<span class="str">"Alice"</span>,<span class="str">"Bob"</span>,<span class="str">"Charlie"</span>);
+names.<span class="fn">stream</span>()
+     .<span class="fn">filter</span>(n -&gt; n.<span class="fn">length</span>() &gt; <span class="num">3</span>)   <span class="cm">// Predicate</span>
+     .<span class="fn">map</span>(<span class="kw">String</span>::<span class="fn">toUpperCase</span>)      <span class="cm">// Function</span>
+     .<span class="fn">forEach</span>(<span class="fn">System.out</span>::<span class="fn">println</span>); <span class="cm">// Consumer → ALICE, CHARLIE</span></div>`,
+
+'solid-overview':`<h2>SOLID Principles — Overview</h2>
+<table><tr><th>Letter</th><th>Principle</th><th>One-Line Summary</th></tr>
+<tr><td>S</td><td>Single Responsibility (SRP)</td><td>A class should have only ONE reason to change</td></tr>
+<tr><td>O</td><td>Open/Closed (OCP)</td><td>Open for extension, closed for modification</td></tr>
+<tr><td>L</td><td>Liskov Substitution (LSP)</td><td>Subclass must be substitutable for parent without breaking behavior</td></tr>
+<tr><td>I</td><td>Interface Segregation (ISP)</td><td>Don't force clients to depend on methods they don't use</td></tr>
+<tr><td>D</td><td>Dependency Inversion (DIP)</td><td>Depend on abstractions, not concrete implementations</td></tr></table>`,
+
+'srp':`<h2>Single Responsibility Principle (SRP)</h2>
+<div class="code-block"><span class="cm">// BAD — Employee class does too much</span>
+<span class="kw">class</span> <span class="fn">Employee</span> {
+    <span class="kw">void</span> <span class="fn">calculateSalary</span>() { ... }   <span class="cm">// payroll logic</span>
+    <span class="kw">void</span> <span class="fn">saveToDatabase</span>()  { ... }   <span class="cm">// persistence logic</span>
+    <span class="kw">void</span> <span class="fn">generateReport</span>()  { ... }   <span class="cm">// reporting logic</span>
+    <span class="cm">// 3 reasons to change — VIOLATES SRP</span>
+}
+
+<span class="cm">// GOOD — each class has one responsibility</span>
+<span class="kw">class</span> <span class="fn">Employee</span>         { <span class="kw">String</span> name; <span class="kw">double</span> salary; }
+<span class="kw">class</span> <span class="fn">PayrollService</span>   { <span class="kw">double</span> <span class="fn">calculate</span>(<span class="fn">Employee</span> e) { ... } }
+<span class="kw">class</span> <span class="fn">EmployeeRepo</span>     { <span class="kw">void</span>   <span class="fn">save</span>(<span class="fn">Employee</span> e)       { ... } }
+<span class="kw">class</span> <span class="fn">ReportGenerator</span>  { <span class="kw">void</span>   <span class="fn">generate</span>(<span class="fn">Employee</span> e)   { ... } }</div>`,
+
+'ocp':`<h2>Open/Closed Principle (OCP)</h2>
+<div class="code-block"><span class="cm">// BAD — must modify existing class to add new shape</span>
+<span class="kw">class</span> <span class="fn">AreaCalc</span> {
+    <span class="kw">double</span> <span class="fn">calculate</span>(<span class="fn">Object</span> shape) {
+        <span class="kw">if</span> (shape <span class="kw">instanceof</span> <span class="fn">Circle</span> c)    <span class="kw">return</span> Math.PI*c.r*c.r;
+        <span class="kw">if</span> (shape <span class="kw">instanceof</span> <span class="fn">Rectangle</span> r) <span class="kw">return</span> r.w*r.h;
+        <span class="cm">// Must MODIFY this to add Triangle → violates OCP!</span>
+    }
+}
+
+<span class="cm">// GOOD — extend via polymorphism, never modify</span>
+<span class="kw">interface</span> <span class="fn">Shape</span> { <span class="kw">double</span> <span class="fn">area</span>(); }
+<span class="kw">class</span> <span class="fn">Circle</span>    <span class="kw">implements</span> <span class="fn">Shape</span> { <span class="kw">double</span> <span class="fn">area</span>(){<span class="kw">return</span> Math.PI*r*r;} }
+<span class="kw">class</span> <span class="fn">Rectangle</span> <span class="kw">implements</span> <span class="fn">Shape</span> { <span class="kw">double</span> <span class="fn">area</span>(){<span class="kw">return</span> w*h;} }
+<span class="kw">class</span> <span class="fn">Triangle</span>  <span class="kw">implements</span> <span class="fn">Shape</span> { <span class="kw">double</span> <span class="fn">area</span>(){<span class="kw">return</span> <span class="num">0.5</span>*b*h;} }
+<span class="kw">class</span> <span class="fn">AreaCalc</span>  { <span class="kw">double</span> <span class="fn">calculate</span>(<span class="fn">Shape</span> s){ <span class="kw">return</span> s.<span class="fn">area</span>(); } }
+<span class="cm">// Add new shape → just add new class, ZERO modifications to AreaCalc!</span></div>`,
+
+'solid-rest':`<h2>LSP, ISP, DIP — With Examples</h2>
+<h3>Liskov Substitution Principle</h3>
+<div class="code-block"><span class="cm">// VIOLATION: Square IS-A Rectangle but breaks the contract</span>
+<span class="kw">class</span> <span class="fn">Rectangle</span> { <span class="kw">void setWidth</span>(<span class="kw">int</span> w); <span class="kw">void setHeight</span>(<span class="kw">int</span> h); }
+<span class="kw">class</span> <span class="fn">Square</span> <span class="kw">extends</span> <span class="fn">Rectangle</span> {
+    @<span class="fn">Override</span> <span class="kw">void setWidth</span>(<span class="kw">int</span> w)  { <span class="kw">this</span>.w = <span class="kw">this</span>.h = w; }
+    @<span class="fn">Override</span> <span class="kw">void setHeight</span>(<span class="kw">int</span> h) { <span class="kw">this</span>.w = <span class="kw">this</span>.h = h; }
+}
+<span class="cm">// r.setWidth(5); r.setHeight(4); → area should be 20</span>
+<span class="cm">// But if r is Square: area = 16 (last set wins) → LSP VIOLATED!</span></div>
+<h3>Interface Segregation Principle</h3>
+<div class="code-block"><span class="cm">// BAD — fat interface forces useless methods</span>
+<span class="kw">interface</span> <span class="fn">Worker</span> { <span class="kw">void</span> <span class="fn">work</span>(); <span class="kw">void</span> <span class="fn">eat</span>(); <span class="kw">void</span> <span class="fn">sleep</span>(); }
+<span class="cm">// Robot implements Worker but doesn't eat/sleep!</span>
+
+<span class="cm">// GOOD — segregated interfaces</span>
+<span class="kw">interface</span> <span class="fn">Workable</span>  { <span class="kw">void</span> <span class="fn">work</span>(); }
+<span class="kw">interface</span> <span class="fn">Feedable</span>  { <span class="kw">void</span> <span class="fn">eat</span>(); }
+<span class="kw">interface</span> <span class="fn">Restable</span>  { <span class="kw">void</span> <span class="fn">sleep</span>(); }
+<span class="kw">class</span> <span class="fn">Human</span> <span class="kw">implements</span> <span class="fn">Workable</span>, <span class="fn">Feedable</span>, <span class="fn">Restable</span> { ... }
+<span class="kw">class</span> <span class="fn">Robot</span> <span class="kw">implements</span> <span class="fn">Workable</span> { ... }  <span class="cm">// only what it needs</span></div>
+<h3>Dependency Inversion Principle</h3>
+<div class="code-block"><span class="cm">// BAD — high-level depends on low-level</span>
+<span class="kw">class</span> <span class="fn">EmailNotifier</span>  { <span class="kw">void</span> <span class="fn">send</span>(<span class="kw">String</span> msg) {} }
+<span class="kw">class</span> <span class="fn">OrderService</span>   { <span class="fn">EmailNotifier</span> notifier = <span class="kw">new</span> <span class="fn">EmailNotifier</span>(); }
+
+<span class="cm">// GOOD — depend on abstraction</span>
+<span class="kw">interface</span> <span class="fn">Notifier</span>  { <span class="kw">void</span> <span class="fn">send</span>(<span class="kw">String</span> msg); }
+<span class="kw">class</span> <span class="fn">EmailNotifier</span> <span class="kw">implements</span> <span class="fn">Notifier</span> { ... }
+<span class="kw">class</span> <span class="fn">SMSNotifier</span>   <span class="kw">implements</span> <span class="fn">Notifier</span> { ... }
+<span class="kw">class</span> <span class="fn">OrderService</span>  {
+    <span class="kw">private</span> <span class="fn">Notifier</span> notifier;
+    <span class="fn">OrderService</span>(<span class="fn">Notifier</span> n) { <span class="kw">this</span>.notifier = n; }  <span class="cm">// INJECT dependency</span>
+}</div>`,
+
+'singleton':`<h2>Singleton Pattern — Thread-Safe Implementation</h2>
+<p>Ensures only ONE instance of a class exists. Used for: Logger, Config, DB connection pool.</p>
+<div class="code-block"><span class="cm">// Java — Thread-safe Singleton (Double-Checked Locking)</span>
+<span class="kw">public class</span> <span class="fn">Singleton</span> {
+    <span class="cm">// volatile prevents CPU cache inconsistency</span>
+    <span class="kw">private static volatile</span> <span class="fn">Singleton</span> instance = <span class="kw">null</span>;
+
+    <span class="kw">private</span> <span class="fn">Singleton</span>() {}  <span class="cm">// private constructor — no external new</span>
+
+    <span class="kw">public static</span> <span class="fn">Singleton</span> <span class="fn">getInstance</span>() {
+        <span class="kw">if</span> (instance == <span class="kw">null</span>) {             <span class="cm">// 1st check (no lock)</span>
+            <span class="kw">synchronized</span> (<span class="fn">Singleton</span>.<span class="kw">class</span>) {
+                <span class="kw">if</span> (instance == <span class="kw">null</span>) {     <span class="cm">// 2nd check (with lock)</span>
+                    instance = <span class="kw">new</span> <span class="fn">Singleton</span>();
+                }
+            }
+        }
+        <span class="kw">return</span> instance;
+    }
+}
+
+<span class="cm">// Better: Bill Pugh Singleton (lazy, thread-safe, no synchronization)</span>
+<span class="kw">public class</span> <span class="fn">Singleton</span> {
+    <span class="kw">private</span> <span class="fn">Singleton</span>() {}
+    <span class="kw">private static class</span> <span class="fn">Holder</span> {
+        <span class="kw">static final</span> <span class="fn">Singleton</span> INSTANCE = <span class="kw">new</span> <span class="fn">Singleton</span>();
+    }
+    <span class="kw">public static</span> <span class="fn">Singleton</span> <span class="fn">getInstance</span>() { <span class="kw">return</span> <span class="fn">Holder</span>.INSTANCE; }
+}</div>`,
+
+'factory':`<h2>Factory & Abstract Factory Pattern</h2>
+<div class="code-block"><span class="cm">// Factory Pattern — creates object without exposing creation logic</span>
+<span class="kw">interface</span> <span class="fn">Animal</span> { <span class="kw">void</span> <span class="fn">speak</span>(); }
+<span class="kw">class</span> <span class="fn">Dog</span>  <span class="kw">implements</span> <span class="fn">Animal</span> { <span class="kw">public void</span> <span class="fn">speak</span>() { <span class="fn">System.out.println</span>(<span class="str">"Woof"</span>); } }
+<span class="kw">class</span> <span class="fn">Cat</span>  <span class="kw">implements</span> <span class="fn">Animal</span> { <span class="kw">public void</span> <span class="fn">speak</span>() { <span class="fn">System.out.println</span>(<span class="str">"Meow"</span>); } }
+
+<span class="kw">class</span> <span class="fn">AnimalFactory</span> {
+    <span class="kw">public static</span> <span class="fn">Animal</span> <span class="fn">create</span>(<span class="kw">String</span> type) {
+        <span class="kw">return switch</span> (type.<span class="fn">toLowerCase</span>()) {
+            <span class="kw">case</span> <span class="str">"dog"</span> -&gt; <span class="kw">new</span> <span class="fn">Dog</span>();
+            <span class="kw">case</span> <span class="str">"cat"</span> -&gt; <span class="kw">new</span> <span class="fn">Cat</span>();
+            <span class="kw">default</span> -&gt; <span class="kw">throw new</span> <span class="fn">IllegalArgumentException</span>(<span class="str">"Unknown: "</span> + type);
+        };
+    }
+}
+
+<span class="cm">// Caller doesn't know which class is instantiated</span>
+<span class="fn">Animal</span> a = <span class="fn">AnimalFactory</span>.<span class="fn">create</span>(<span class="str">"dog"</span>);
+a.<span class="fn">speak</span>();  <span class="cm">// Woof</span></div>`,
+
+'observer':`<h2>Observer Pattern — Event System</h2>
+<div class="code-block"><span class="cm">// Subject notifies multiple observers when state changes</span>
+<span class="kw">interface</span> <span class="fn">Observer</span>  { <span class="kw">void</span> <span class="fn">update</span>(<span class="kw">String</span> event, <span class="fn">Object</span> data); }
+<span class="kw">interface</span> <span class="fn">Observable</span>{
+    <span class="kw">void</span> <span class="fn">subscribe</span>(<span class="fn">Observer</span> o);
+    <span class="kw">void</span> <span class="fn">unsubscribe</span>(<span class="fn">Observer</span> o);
+    <span class="kw">void</span> <span class="fn">notify</span>(<span class="kw">String</span> event, <span class="fn">Object</span> data);
+}
+
+<span class="kw">class</span> <span class="fn">EventBus</span> <span class="kw">implements</span> <span class="fn">Observable</span> {
+    <span class="kw">private</span> <span class="fn">List</span>&lt;<span class="fn">Observer</span>&gt; observers = <span class="kw">new</span> <span class="fn">ArrayList</span>&lt;&gt;();
+    <span class="kw">public void</span> <span class="fn">subscribe</span>(<span class="fn">Observer</span> o)   { observers.<span class="fn">add</span>(o); }
+    <span class="kw">public void</span> <span class="fn">unsubscribe</span>(<span class="fn">Observer</span> o) { observers.<span class="fn">remove</span>(o); }
+    <span class="kw">public void</span> <span class="fn">notify</span>(<span class="kw">String</span> e, <span class="fn">Object</span> d) {
+        observers.<span class="fn">forEach</span>(o -&gt; o.<span class="fn">update</span>(e, d));
+    }
+}
+
+<span class="kw">class</span> <span class="fn">Logger</span>  <span class="kw">implements</span> <span class="fn">Observer</span> {
+    <span class="kw">public void</span> <span class="fn">update</span>(<span class="kw">String</span> e, <span class="fn">Object</span> d) { <span class="fn">System.out.println</span>(<span class="str">"LOG: "</span>+e); }
+}
+<span class="kw">class</span> <span class="fn">EmailAlert</span> <span class="kw">implements</span> <span class="fn">Observer</span> {
+    <span class="kw">public void</span> <span class="fn">update</span>(<span class="kw">String</span> e, <span class="fn">Object</span> d) { <span class="fn">System.out.println</span>(<span class="str">"EMAIL: "</span>+e); }
+}</div>`,
+
+'strategy':`<h2>Strategy Pattern — Algorithm Selection</h2>
+<div class="code-block"><span class="cm">// Define family of algorithms, encapsulate each, make interchangeable</span>
+<span class="kw">interface</span> <span class="fn">SortStrategy</span> { <span class="kw">void</span> <span class="fn">sort</span>(<span class="kw">int</span>[] arr); }
+
+<span class="kw">class</span> <span class="fn">BubbleSort</span>  <span class="kw">implements</span> <span class="fn">SortStrategy</span> {
+    <span class="kw">public void</span> <span class="fn">sort</span>(<span class="kw">int</span>[] a) { <span class="cm">/* bubble sort */</span> }
+}
+<span class="kw">class</span> <span class="fn">QuickSort</span>   <span class="kw">implements</span> <span class="fn">SortStrategy</span> {
+    <span class="kw">public void</span> <span class="fn">sort</span>(<span class="kw">int</span>[] a) { <span class="cm">/* quick sort */</span> }
+}
+<span class="kw">class</span> <span class="fn">MergeSort</span>   <span class="kw">implements</span> <span class="fn">SortStrategy</span> {
+    <span class="kw">public void</span> <span class="fn">sort</span>(<span class="kw">int</span>[] a) { <span class="cm">/* merge sort */</span> }
+}
+
+<span class="kw">class</span> <span class="fn">Sorter</span> {
+    <span class="kw">private</span> <span class="fn">SortStrategy</span> strategy;
+    <span class="fn">Sorter</span>(<span class="fn">SortStrategy</span> s) { <span class="kw">this</span>.strategy = s; }
+    <span class="kw">void</span> <span class="fn">setStrategy</span>(<span class="fn">SortStrategy</span> s) { strategy = s; }  <span class="cm">// swap at runtime!</span>
+    <span class="kw">void</span> <span class="fn">sort</span>(<span class="kw">int</span>[] a) { strategy.<span class="fn">sort</span>(a); }
+}
+
+<span class="fn">Sorter</span> sorter = <span class="kw">new</span> <span class="fn">Sorter</span>(<span class="kw">new</span> <span class="fn">QuickSort</span>());
+sorter.<span class="fn">sort</span>(arr);
+sorter.<span class="fn">setStrategy</span>(<span class="kw">new</span> <span class="fn">MergeSort</span>());  <span class="cm">// change algorithm at runtime</span></div>`,
+
+'decorator':`<h2>Decorator Pattern</h2>
+<div class="code-block"><span class="cm">// Add behavior to objects dynamically without changing their class</span>
+<span class="kw">interface</span> <span class="fn">Coffee</span> { <span class="kw">double</span> <span class="fn">cost</span>(); <span class="kw">String</span> <span class="fn">description</span>(); }
+
+<span class="kw">class</span> <span class="fn">SimpleCoffee</span> <span class="kw">implements</span> <span class="fn">Coffee</span> {
+    <span class="kw">public double</span> <span class="fn">cost</span>()        { <span class="kw">return</span> <span class="num">50</span>; }
+    <span class="kw">public</span> <span class="kw">String</span> <span class="fn">description</span>() { <span class="kw">return</span> <span class="str">"Coffee"</span>; }
+}
+
+<span class="kw">abstract class</span> <span class="fn">CoffeeDecorator</span> <span class="kw">implements</span> <span class="fn">Coffee</span> {
+    <span class="kw">protected</span> <span class="fn">Coffee</span> coffee;
+    <span class="fn">CoffeeDecorator</span>(<span class="fn">Coffee</span> c) { <span class="kw">this</span>.coffee = c; }
+}
+
+<span class="kw">class</span> <span class="fn">MilkDecorator</span> <span class="kw">extends</span> <span class="fn">CoffeeDecorator</span> {
+    <span class="fn">MilkDecorator</span>(<span class="fn">Coffee</span> c) { <span class="kw">super</span>(c); }
+    <span class="kw">public double</span> <span class="fn">cost</span>()        { <span class="kw">return</span> coffee.<span class="fn">cost</span>() + <span class="num">20</span>; }
+    <span class="kw">public</span> <span class="kw">String</span> <span class="fn">description</span>() { <span class="kw">return</span> coffee.<span class="fn">description</span>() + <span class="str">", Milk"</span>; }
+}
+<span class="kw">class</span> <span class="fn">SugarDecorator</span> <span class="kw">extends</span> <span class="fn">CoffeeDecorator</span> {
+    <span class="fn">SugarDecorator</span>(<span class="fn">Coffee</span> c) { <span class="kw">super</span>(c); }
+    <span class="kw">public double</span> <span class="fn">cost</span>()        { <span class="kw">return</span> coffee.<span class="fn">cost</span>() + <span class="num">10</span>; }
+    <span class="kw">public</span> <span class="kw">String</span> <span class="fn">description</span>() { <span class="kw">return</span> coffee.<span class="fn">description</span>() + <span class="str">", Sugar"</span>; }
+}
+
+<span class="fn">Coffee</span> c = <span class="kw">new</span> <span class="fn">SugarDecorator</span>(<span class="kw">new</span> <span class="fn">MilkDecorator</span>(<span class="kw">new</span> <span class="fn">SimpleCoffee</span>()));
+<span class="fn">System.out.println</span>(c.<span class="fn">description</span>() + <span class="str">" = ₹"</span> + c.<span class="fn">cost</span>());
+<span class="cm">// Coffee, Milk, Sugar = ₹80</span></div>`,
+
+'generics':`<h2>Generics in Java / Templates in C++</h2>
+<div class="code-block"><span class="cm">// Java Generics — type-safe containers</span>
+<span class="kw">class</span> <span class="fn">Pair</span>&lt;T, U&gt; {
+    <span class="kw">private</span> T first;
+    <span class="kw">private</span> U second;
+
+    <span class="fn">Pair</span>(T f, U s) { first = f; second = s; }
+    T <span class="fn">getFirst</span>()  { <span class="kw">return</span> first; }
+    U <span class="fn">getSecond</span>() { <span class="kw">return</span> second; }
+}
+
+<span class="fn">Pair</span>&lt;<span class="kw">String</span>, <span class="kw">Integer</span>&gt; p = <span class="kw">new</span> <span class="fn">Pair</span>&lt;&gt;(<span class="str">"Alice"</span>, <span class="num">25</span>);
+<span class="cm">// Type safe — no casting needed</span>
+
+<span class="cm">// Generic method</span>
+<span class="kw">public static</span> &lt;T <span class="kw">extends</span> <span class="fn">Comparable</span>&lt;T&gt;&gt; T <span class="fn">max</span>(T a, T b) {
+    <span class="kw">return</span> a.<span class="fn">compareTo</span>(b) &gt; <span class="num">0</span> ? a : b;
+}
+<span class="fn">System.out.println</span>(<span class="fn">max</span>(<span class="num">3</span>, <span class="num">7</span>));      <span class="cm">// 7</span>
+<span class="fn">System.out.println</span>(<span class="fn">max</span>(<span class="str">"a"</span>, <span class="str">"z"</span>)); <span class="cm">// z</span>
+
+<span class="cm">// C++ Templates (same concept)</span>
+<span class="kw">template</span>&lt;<span class="kw">typename</span> T&gt;
+T <span class="fn">maximum</span>(T a, T b) { <span class="kw">return</span> a &gt; b ? a : b; }
+<span class="fn">maximum</span>(<span class="num">3</span>, <span class="num">5</span>);       <span class="cm">// int version generated at compile time</span>
+<span class="fn">maximum</span>(<span class="num">3.14</span>, <span class="num">2.71</span>); <span class="cm">// double version generated at compile time</span></div>`,
+
+'exception-hierarchy':`<h2>Exception Hierarchy & Custom Exceptions</h2>
+<div class="code-block"><span class="cm">// Java Exception Hierarchy</span>
+<span class="cm">// Throwable</span>
+<span class="cm">//   ├── Error (system errors, don't catch: OutOfMemoryError)</span>
+<span class="cm">//   └── Exception</span>
+<span class="cm">//         ├── RuntimeException (unchecked — no compile-time check)</span>
+<span class="cm">//         │     ├── NullPointerException</span>
+<span class="cm">//         │     ├── ArrayIndexOutOfBoundsException</span>
+<span class="cm">//         │     ├── ClassCastException</span>
+<span class="cm">//         │     └── ArithmeticException</span>
+<span class="cm">//         └── Checked Exceptions (must handle or declare)</span>
+<span class="cm">//               ├── IOException</span>
+<span class="cm">//               ├── SQLException</span>
+<span class="cm">//               └── FileNotFoundException</span>
+
+<span class="cm">// Custom Exception</span>
+<span class="kw">class</span> <span class="fn">InsufficientFundsException</span> <span class="kw">extends</span> <span class="fn">Exception</span> {
+    <span class="kw">private double</span> amount;
+    <span class="fn">InsufficientFundsException</span>(<span class="kw">double</span> amount) {
+        <span class="kw">super</span>(<span class="str">"Insufficient funds: needed ₹"</span> + amount);
+        <span class="kw">this</span>.amount = amount;
+    }
+    <span class="kw">double</span> <span class="fn">getAmount</span>() { <span class="kw">return</span> amount; }
+}
+
+<span class="kw">void</span> <span class="fn">withdraw</span>(<span class="kw">double</span> amt) <span class="kw">throws</span> <span class="fn">InsufficientFundsException</span> {
+    <span class="kw">if</span> (amt &gt; balance)
+        <span class="kw">throw new</span> <span class="fn">InsufficientFundsException</span>(amt - balance);
+    balance -= amt;
+}</div>`,
+
+'oop-interview-qs':`<h2>Top 30 OOP Interview Questions — Quick Reference</h2>
+<table><tr><th>#</th><th>Question</th><th>Quick Answer</th></tr>
+<tr><td>1</td><td>4 pillars of OOP?</td><td>Encapsulation, Abstraction, Inheritance, Polymorphism</td></tr>
+<tr><td>2</td><td>Class vs Object?</td><td>Blueprint vs instance in memory</td></tr>
+<tr><td>3</td><td>Overloading vs Overriding?</td><td>Compile-time (same name, diff params) vs Runtime (subclass redefines parent method)</td></tr>
+<tr><td>4</td><td>Abstract class vs Interface?</td><td>Abstract: partial impl, single inherit. Interface: contract only, multiple inherit</td></tr>
+<tr><td>5</td><td>Constructor vs Method?</td><td>Constructor: same name as class, no return, auto-called on new. Method: explicit call</td></tr>
+<tr><td>6</td><td>Can constructor be private?</td><td>Yes — Singleton pattern, utility class</td></tr>
+<tr><td>7</td><td>What is a virtual function?</td><td>C++ function dispatched at runtime via vtable — enables runtime polymorphism</td></tr>
+<tr><td>8</td><td>What is a pure virtual function?</td><td>= 0 in C++ — makes class abstract, forces subclasses to implement</td></tr>
+<tr><td>9</td><td>Diamond problem?</td><td>Ambiguity in multiple inheritance — solved by virtual inheritance in C++, Java avoids via interfaces</td></tr>
+<tr><td>10</td><td>Shallow vs Deep copy?</td><td>Shallow: copies references. Deep: creates new objects recursively</td></tr>
+<tr><td>11</td><td>Static vs instance method?</td><td>Static: class-level, no this. Instance: object-level, has this</td></tr>
+<tr><td>12</td><td>final keyword uses?</td><td>final variable: constant. final method: cannot override. final class: cannot extend</td></tr>
+<tr><td>13</td><td>Composition vs Inheritance?</td><td>HAS-A vs IS-A. Prefer composition for flexibility</td></tr>
+<tr><td>14</td><td>What is polymorphism?</td><td>One interface, many implementations — compile-time (overloading) or runtime (overriding)</td></tr>
+<tr><td>15</td><td>Can abstract class have constructor?</td><td>Yes — called via super() from subclass constructors</td></tr>
+<tr><td>16</td><td>Interface vs abstract class in Java 8+?</td><td>Interfaces now have default/static methods. Use abstract for shared state, interface for capabilities</td></tr>
+<tr><td>17</td><td>What is SOLID?</td><td>5 OOP design principles for maintainable code</td></tr>
+<tr><td>18</td><td>What is the Singleton pattern?</td><td>Ensures only one instance — private constructor, static getInstance()</td></tr>
+<tr><td>19</td><td>What is method hiding?</td><td>Static method in subclass hides (not overrides) parent's static method</td></tr>
+<tr><td>20</td><td>What is covariant return type?</td><td>Overriding method can return a subtype of the parent's return type</td></tr></table>`,
+
+'overloading-vs-overriding':`<h2>Overloading vs Overriding — Complete Comparison</h2>
+<table><tr><th>Aspect</th><th>Overloading</th><th>Overriding</th></tr>
+<tr><td>Also called</td><td>Compile-time / Static polymorphism</td><td>Runtime / Dynamic polymorphism</td></tr>
+<tr><td>Where</td><td>Same class</td><td>Parent-child classes</td></tr>
+<tr><td>Method signature</td><td>MUST differ (params)</td><td>MUST be same</td></tr>
+<tr><td>Return type</td><td>Can differ</td><td>Same or covariant</td></tr>
+<tr><td>Access modifier</td><td>Can differ</td><td>Cannot reduce visibility</td></tr>
+<tr><td>Resolved at</td><td>Compile time</td><td>Runtime</td></tr>
+<tr><td>Static methods</td><td>Can overload</td><td>Cannot override (method hiding)</td></tr>
+<tr><td>Private methods</td><td>Can overload</td><td>Cannot override</td></tr>
+<tr><td>final methods</td><td>Can overload</td><td>Cannot override</td></tr></table>`,
+
+'poly-real-world':`<h2>Real-World Polymorphism — Payment System</h2>
+<div class="code-block"><span class="cm">// Payment system — polymorphism in action</span>
+<span class="kw">abstract class</span> <span class="fn">Payment</span> {
+    <span class="kw">abstract boolean</span> <span class="fn">process</span>(<span class="kw">double</span> amount);
+    <span class="kw">abstract</span> <span class="kw">String</span>  <span class="fn">getType</span>();
+
+    <span class="kw">void</span> <span class="fn">log</span>(<span class="kw">double</span> amt) {
+        <span class="fn">System.out.println</span>(<span class="str">"Processing "</span> + <span class="fn">getType</span>() + <span class="str">": ₹"</span> + amt);
+    }
+}
+
+<span class="kw">class</span> <span class="fn">CreditCard</span> <span class="kw">extends</span> <span class="fn">Payment</span> {
+    <span class="kw">private</span> <span class="kw">String</span> cardNumber;
+    @<span class="fn">Override</span> <span class="kw">boolean</span> <span class="fn">process</span>(<span class="kw">double</span> amt) { <span class="cm">/* charge card */</span> <span class="kw">return true</span>; }
+    @<span class="fn">Override</span> <span class="kw">String</span>  <span class="fn">getType</span>()           { <span class="kw">return</span> <span class="str">"Credit Card"</span>; }
+}
+<span class="kw">class</span> <span class="fn">UPI</span>        <span class="kw">extends</span> <span class="fn">Payment</span> {
+    @<span class="fn">Override</span> <span class="kw">boolean</span> <span class="fn">process</span>(<span class="kw">double</span> amt) { <span class="cm">/* UPI transfer */</span> <span class="kw">return true</span>; }
+    @<span class="fn">Override</span> <span class="kw">String</span>  <span class="fn">getType</span>()           { <span class="kw">return</span> <span class="str">"UPI"</span>; }
+}
+<span class="kw">class</span> <span class="fn">Crypto</span>     <span class="kw">extends</span> <span class="fn">Payment</span> {
+    @<span class="fn">Override</span> <span class="kw">boolean</span> <span class="fn">process</span>(<span class="kw">double</span> amt) { <span class="cm">/* blockchain tx */</span> <span class="kw">return true</span>; }
+    @<span class="fn">Override</span> <span class="kw">String</span>  <span class="fn">getType</span>()           { <span class="kw">return</span> <span class="str">"Crypto"</span>; }
+}
+
+<span class="cm">// Checkout service — same code works for ANY payment type!</span>
+<span class="kw">class</span> <span class="fn">CheckoutService</span> {
+    <span class="kw">void</span> <span class="fn">checkout</span>(<span class="fn">Payment</span> payment, <span class="kw">double</span> amount) {
+        payment.<span class="fn">log</span>(amount);
+        <span class="kw">if</span> (payment.<span class="fn">process</span>(amount))
+            <span class="fn">System.out.println</span>(<span class="str">"Payment successful!"</span>);
+    }
+}</div>`,
+
+'liskov-principle':`<h2>Liskov Substitution Principle (LSP)</h2>
+<p>If S is a subtype of T, objects of type T may be replaced with objects of type S without altering the correctness of the program.</p>
+<div class="example-box"><strong>Simple rule:</strong> You should be able to use a child class wherever a parent class is expected, and the program should still work correctly.</div>
+<div class="code-block"><span class="cm">// CORRECT LSP: FlyingBird is-a Bird that can fly</span>
+<span class="kw">abstract class</span> <span class="fn">Bird</span>       { <span class="kw">abstract void</span> <span class="fn">eat</span>(); }
+<span class="kw">abstract class</span> <span class="fn">FlyingBird</span> <span class="kw">extends</span> <span class="fn">Bird</span> { <span class="kw">abstract void</span> <span class="fn">fly</span>(); }
+<span class="kw">class</span> <span class="fn">Eagle</span>   <span class="kw">extends</span> <span class="fn">FlyingBird</span> { <span class="kw">void</span> <span class="fn">eat</span>(){} <span class="kw">void</span> <span class="fn">fly</span>(){} }
+<span class="kw">class</span> <span class="fn">Penguin</span> <span class="kw">extends</span> <span class="fn">Bird</span>        { <span class="kw">void</span> <span class="fn">eat</span>(){} }
+<span class="cm">// Penguin doesn't extend FlyingBird — no need to fake fly()</span></div>`,
+
+'dynamic-binding':`<h2>Dynamic Binding vs Static Binding</h2>
+<table><tr><th></th><th>Static Binding</th><th>Dynamic Binding</th></tr>
+<tr><td>When resolved</td><td>Compile time</td><td>Runtime</td></tr>
+<tr><td>Also called</td><td>Early binding</td><td>Late binding</td></tr>
+<tr><td>Performance</td><td>Faster (no lookup)</td><td>Slightly slower (vtable)</td></tr>
+<tr><td>Applies to</td><td>static, private, final methods, overloading</td><td>virtual/overridden methods</td></tr>
+<tr><td>Requires inheritance</td><td>No</td><td>Yes</td></tr></table>`,
+
+'covariant-return':`<h2>Covariant Return Types</h2>
+<div class="code-block"><span class="cm">// Overriding method can return subtype of parent's return type</span>
+<span class="kw">class</span> <span class="fn">Animal</span>     { <span class="fn">Animal</span>   <span class="fn">create</span>() { <span class="kw">return new</span> <span class="fn">Animal</span>(); } }
+<span class="kw">class</span> <span class="fn">Dog</span> <span class="kw">extends</span> <span class="fn">Animal</span> {
+    @<span class="fn">Override</span>
+    <span class="fn">Dog</span> <span class="fn">create</span>() { <span class="kw">return new</span> <span class="fn">Dog</span>(); }  <span class="cm">// Dog (subtype of Animal) — valid!</span>
+}
+<span class="cm">// Java supports covariant return types since Java 5</span>
+<span class="cm">// C++ also supports covariant return types for pointer/reference returns</span></div>`,
+
+'interface-segregation':`<h2>Interface Segregation Principle</h2>
+<p>Clients should not be forced to depend upon interfaces they do not use. Create smaller, focused interfaces instead of large "fat" ones.</p>
+<div class="code-block"><span class="cm">// BAD: PrinterDevice has methods many devices don't need</span>
+<span class="kw">interface</span> <span class="fn">AllInOnePrinter</span> {
+    <span class="kw">void</span> <span class="fn">print</span>(); <span class="kw">void</span> <span class="fn">scan</span>(); <span class="kw">void</span> <span class="fn">fax</span>(); <span class="kw">void</span> <span class="fn">copy</span>();
+}
+<span class="cm">// A basic printer must implement scan(), fax(), copy() — useless!</span>
+
+<span class="cm">// GOOD: segregated interfaces</span>
+<span class="kw">interface</span> <span class="fn">Printable</span>  { <span class="kw">void</span> <span class="fn">print</span>(); }
+<span class="kw">interface</span> <span class="fn">Scannable</span>  { <span class="kw">void</span> <span class="fn">scan</span>(); }
+<span class="kw">interface</span> <span class="fn">Faxable</span>    { <span class="kw">void</span> <span class="fn">fax</span>(); }
+<span class="kw">class</span> <span class="fn">BasicPrinter</span>  <span class="kw">implements</span> <span class="fn">Printable</span> { ... }
+<span class="kw">class</span> <span class="fn">AdvancedPrinter</span> <span class="kw">implements</span> <span class="fn">Printable</span>, <span class="fn">Scannable</span>, <span class="fn">Faxable</span> { ... }</div>`,
+
+'dependency-inversion':`<h2>Dependency Inversion Principle</h2>
+<p>High-level modules should not depend on low-level modules. Both should depend on abstractions.</p>
+<div class="code-block"><span class="cm">// BAD — UserService directly depends on MySQLDatabase</span>
+<span class="kw">class</span> <span class="fn">MySQLDatabase</span> { <span class="kw">void</span> <span class="fn">save</span>(<span class="fn">User</span> u) {} }
+<span class="kw">class</span> <span class="fn">UserService</span>   {
+    <span class="fn">MySQLDatabase</span> db = <span class="kw">new</span> <span class="fn">MySQLDatabase</span>();  <span class="cm">// tightly coupled!</span>
+}
+
+<span class="cm">// GOOD — both depend on abstraction</span>
+<span class="kw">interface</span> <span class="fn">Database</span>     { <span class="kw">void</span> <span class="fn">save</span>(<span class="fn">User</span> u); }
+<span class="kw">class</span> <span class="fn">MySQLDatabase</span>    <span class="kw">implements</span> <span class="fn">Database</span> { ... }
+<span class="kw">class</span> <span class="fn">MongoDatabase</span>    <span class="kw">implements</span> <span class="fn">Database</span> { ... }
+<span class="kw">class</span> <span class="fn">UserService</span> {
+    <span class="kw">private</span> <span class="fn">Database</span> db;
+    <span class="fn">UserService</span>(<span class="fn">Database</span> db) { <span class="kw">this</span>.db = db; }  <span class="cm">// INJECT abstraction</span>
+    <span class="kw">void</span> <span class="fn">register</span>(<span class="fn">User</span> u) { db.<span class="fn">save</span>(u); }        <span class="cm">// works with ANY DB</span>
+}</div>`,
+
+'packages-java':`<h2>Packages in Java</h2>
+<div class="code-block"><span class="cm">// Package declaration — must be first statement</span>
+<span class="kw">package</span> com.company.models;
+
+<span class="cm">// Import specific class</span>
+<span class="kw">import</span> java.util.ArrayList;
+
+<span class="cm">// Import all classes from package</span>
+<span class="kw">import</span> java.util.*;
+
+<span class="cm">// Static import — import static members directly</span>
+<span class="kw">import static</span> java.lang.Math.*;
+<span class="kw">double</span> r = <span class="fn">sqrt</span>(<span class="num">25</span>);  <span class="cm">// No Math.sqrt() needed</span>
+
+<span class="cm">// Package naming convention: reverse domain name</span>
+<span class="cm">// com.google.guava, org.apache.commons, io.netty</span></div>`,
+
+'namespaces-cpp':`<h2>Namespaces in C++</h2>
+<div class="code-block"><span class="cm">// Namespace prevents naming conflicts</span>
+<span class="kw">namespace</span> <span class="fn">Graphics</span> {
+    <span class="kw">class</span> <span class="fn">Color</span> { <span class="kw">int</span> r, g, b; };
+    <span class="kw">void</span> <span class="fn">draw</span>() { <span class="fn">cout</span> &lt;&lt; <span class="str">"Graphics draw"</span>; }
+}
+
+<span class="kw">namespace</span> <span class="fn">Audio</span> {
+    <span class="kw">class</span> <span class="fn">Color</span> { <span class="kw">int</span> frequency; };  <span class="cm">// same name, different namespace</span>
+    <span class="kw">void</span> <span class="fn">draw</span>() { <span class="fn">cout</span> &lt;&lt; <span class="str">"Audio draw"</span>; }
+}
+
+<span class="fn">Graphics</span>::<span class="fn">Color</span> c1;  <span class="cm">// fully qualified</span>
+<span class="fn">Audio</span>::<span class="fn">Color</span> c2;
+
+<span class="kw">using namespace</span> std;  <span class="cm">// standard namespace — brings cout, cin, etc.</span>
+<span class="fn">cout</span> &lt;&lt; <span class="str">"Hello"</span>;     <span class="cm">// instead of std::cout</span></div>`,
+
+'friend-class':`<h2>Friend Class & Friend Function (C++)</h2>
+<div class="code-block"><span class="cm">// Friend function: access private members without being member</span>
+<span class="kw">class</span> <span class="fn">Box</span> {
+    <span class="kw">private</span>:
+        <span class="kw">double</span> volume;
+    <span class="kw">public</span>:
+        <span class="fn">Box</span>(<span class="kw">double</span> v) : volume(v) {}
+        <span class="kw">friend double</span> <span class="fn">getVolume</span>(<span class="fn">Box</span>&amp; b);  <span class="cm">// declare as friend</span>
+        <span class="kw">friend class</span> <span class="fn">BoxFactory</span>;           <span class="cm">// entire class as friend</span>
+};
+
+<span class="kw">double</span> <span class="fn">getVolume</span>(<span class="fn">Box</span>&amp; b) {
+    <span class="kw">return</span> b.volume;  <span class="cm">// can access private 'volume'</span>
+}
+<span class="cm">// Use sparingly — breaks encapsulation. Needed for operator<< overloading</span></div>`,
+
+'constructor-chaining':`<h2>Constructor Chaining</h2>
+<div class="code-block"><span class="cm">// Java — this() calls another constructor in SAME class</span>
+<span class="kw">class</span> <span class="fn">Pizza</span> {
+    <span class="kw">String</span> size, crust, topping;
+
+    <span class="fn">Pizza</span>()                                   { <span class="kw">this</span>(<span class="str">"Medium"</span>); }
+    <span class="fn">Pizza</span>(<span class="kw">String</span> size)                         { <span class="kw">this</span>(size, <span class="str">"Thin"</span>); }
+    <span class="fn">Pizza</span>(<span class="kw">String</span> size, <span class="kw">String</span> crust)          { <span class="kw">this</span>(size, crust, <span class="str">"Cheese"</span>); }
+    <span class="fn">Pizza</span>(<span class="kw">String</span> size, <span class="kw">String</span> crust, <span class="kw">String</span> t){
+        <span class="kw">this</span>.size=size; <span class="kw">this</span>.crust=crust; <span class="kw">this</span>.topping=t;
+    }
+}
+
+<span class="cm">// Java — super() calls parent constructor (MUST be first line)</span>
+<span class="kw">class</span> <span class="fn">PepperoniPizza</span> <span class="kw">extends</span> <span class="fn">Pizza</span> {
+    <span class="fn">PepperoniPizza</span>() {
+        <span class="kw">super</span>(<span class="str">"Large"</span>, <span class="str">"Thick"</span>, <span class="str">"Pepperoni"</span>);  <span class="cm">// calls Pizza(String,String,String)</span>
+    }
+}</div>`,
+
+'inheritance-order':`<h2>Initialization Order in Inheritance</h2>
+<div class="code-block"><span class="cm">// Java initialization order</span>
+<span class="kw">class</span> <span class="fn">Parent</span> {
+    <span class="kw">static</span> { <span class="fn">System.out.println</span>(<span class="str">"1. Parent static block"</span>); }
+    { <span class="fn">System.out.println</span>(<span class="str">"3. Parent instance block"</span>); }
+    <span class="fn">Parent</span>() { <span class="fn">System.out.println</span>(<span class="str">"4. Parent constructor"</span>); }
+}
+<span class="kw">class</span> <span class="fn">Child</span> <span class="kw">extends</span> <span class="fn">Parent</span> {
+    <span class="kw">static</span> { <span class="fn">System.out.println</span>(<span class="str">"2. Child static block"</span>); }
+    { <span class="fn">System.out.println</span>(<span class="str">"5. Child instance block"</span>); }
+    <span class="fn">Child</span>() { <span class="fn">System.out.println</span>(<span class="str">"6. Child constructor"</span>); }
+}
+<span class="cm">// new Child() output order: 1 → 2 → 3 → 4 → 5 → 6</span>
+<span class="cm">// Static blocks: run once, parent before child</span>
+<span class="cm">// Instance blocks + constructors: parent before child, every instantiation</span></div>`,
+
+'extends-java':`<h2>extends in Java — Full Example</h2>
+<div class="code-block"><span class="kw">class</span> <span class="fn">Person</span> {
+    <span class="kw">protected</span> <span class="kw">String</span> name;
+    <span class="kw">protected</span> <span class="kw">int</span>    age;
+
+    <span class="fn">Person</span>(<span class="kw">String</span> name, <span class="kw">int</span> age) { <span class="kw">this</span>.name=name; <span class="kw">this</span>.age=age; }
+    <span class="kw">void</span> <span class="fn">introduce</span>() {
+        <span class="fn">System.out.println</span>(<span class="str">"I'm "</span> + name + <span class="str">", age "</span> + age);
+    }
+}
+
+<span class="kw">class</span> <span class="fn">Student</span> <span class="kw">extends</span> <span class="fn">Person</span> {
+    <span class="kw">private</span> <span class="kw">String</span> major;
+    <span class="kw">private</span> <span class="kw">double</span> cgpa;
+
+    <span class="fn">Student</span>(<span class="kw">String</span> name, <span class="kw">int</span> age, <span class="kw">String</span> major, <span class="kw">double</span> cgpa) {
+        <span class="kw">super</span>(name, age);  <span class="cm">// call Person constructor</span>
+        <span class="kw">this</span>.major = major; <span class="kw">this</span>.cgpa = cgpa;
+    }
+
+    @<span class="fn">Override</span>
+    <span class="kw">void</span> <span class="fn">introduce</span>() {
+        <span class="kw">super</span>.<span class="fn">introduce</span>();  <span class="cm">// "I'm Alice, age 20"</span>
+        <span class="fn">System.out.println</span>(<span class="str">"Studying "</span> + major + <span class="str">", CGPA: "</span> + cgpa);
+    }
+}
+
+<span class="fn">Person</span> p = <span class="kw">new</span> <span class="fn">Student</span>(<span class="str">"Alice"</span>, <span class="num">20</span>, <span class="str">"CSE"</span>, <span class="num">9.1</span>);
+p.<span class="fn">introduce</span>();  <span class="cm">// Student.introduce() called (runtime polymorphism)</span></div>`,
+
+'inheritance-cpp':`<h2>Inheritance in C++ — Access Specifiers</h2>
+<div class="code-block"><span class="kw">class</span> <span class="fn">Base</span> {
+<span class="kw">public</span>:    <span class="kw">int</span> pub = <span class="num">1</span>;
+<span class="kw">protected</span>: <span class="kw">int</span> prot = <span class="num">2</span>;
+<span class="kw">private</span>:   <span class="kw">int</span> priv = <span class="num">3</span>;
+};
+
+<span class="cm">// public inheritance (IS-A) — most common</span>
+<span class="kw">class</span> <span class="fn">PubDerived</span> : <span class="kw">public</span> <span class="fn">Base</span> {
+    <span class="cm">// pub → public, prot → protected, priv → NOT inherited</span>
+};
+
+<span class="cm">// protected inheritance — less common</span>
+<span class="kw">class</span> <span class="fn">ProtDerived</span> : <span class="kw">protected</span> <span class="fn">Base</span> {
+    <span class="cm">// pub → protected, prot → protected, priv → NOT inherited</span>
+};
+
+<span class="cm">// private inheritance — rarely used (HAS-A implemented via inheritance)</span>
+<span class="kw">class</span> <span class="fn">PrivDerived</span> : <span class="kw">private</span> <span class="fn">Base</span> {
+    <span class="cm">// pub → private, prot → private, priv → NOT inherited</span>
+};</div>`,
+
+'final-keyword':`<h2>final Class & final Method</h2>
+<div class="code-block"><span class="cm">// final class — cannot be subclassed (e.g. String, Integer, Math)</span>
+<span class="kw">final class</span> <span class="fn">ImmutablePoint</span> {
+    <span class="kw">final double</span> x, y;  <span class="cm">// final field = constant, set once</span>
+    <span class="fn">ImmutablePoint</span>(<span class="kw">double</span> x, <span class="kw">double</span> y) { <span class="kw">this</span>.x=x; <span class="kw">this</span>.y=y; }
+    <span class="cm">// No setters — value never changes after construction</span>
+}
+<span class="cm">// class Derived extends ImmutablePoint {}  ← COMPILE ERROR</span>
+
+<span class="cm">// final method — cannot be overridden</span>
+<span class="kw">class</span> <span class="fn">Template</span> {
+    <span class="kw">final void</span> <span class="fn">runAlgorithm</span>() {  <span class="cm">// template method — fixed steps</span>
+        <span class="fn">step1</span>(); <span class="fn">step2</span>(); <span class="fn">step3</span>();
+    }
+    <span class="kw">void</span> <span class="fn">step1</span>() { <span class="cm">/* default */</span> }
+    <span class="kw">void</span> <span class="fn">step2</span>() { <span class="cm">/* override this */</span> }
+    <span class="kw">void</span> <span class="fn">step3</span>() { <span class="cm">/* default */</span> }
+}</div>`,
+
+'object-class':`<h2>Object Class — Root of Java Hierarchy</h2>
+<p>Every Java class implicitly extends <code>java.lang.Object</code>. Key methods to know:</p>
+<table><tr><th>Method</th><th>Default Behavior</th><th>When to Override</th></tr>
+<tr><td>toString()</td><td>ClassName@hashCode</td><td>Always — for meaningful output</td></tr>
+<tr><td>equals(Object)</td><td>Reference equality (==)</td><td>When object equality means same content</td></tr>
+<tr><td>hashCode()</td><td>Memory address-based</td><td>Whenever equals() is overridden (contract!)</td></tr>
+<tr><td>clone()</td><td>Shallow copy</td><td>When copying objects (implement Cloneable)</td></tr>
+<tr><td>getClass()</td><td>Returns Class object</td><td>Rarely — use instanceof instead</td></tr>
+<tr><td>finalize()</td><td>Nothing</td><td>Deprecated — don't use</td></tr></table>
+<div class="code-block"><span class="cm">// equals + hashCode contract</span>
+@<span class="fn">Override</span>
+<span class="kw">public boolean</span> <span class="fn">equals</span>(<span class="fn">Object</span> o) {
+    <span class="kw">if</span> (<span class="kw">this</span> == o) <span class="kw">return true</span>;
+    <span class="kw">if</span> (!(o <span class="kw">instanceof</span> <span class="fn">Student</span> s)) <span class="kw">return false</span>;
+    <span class="kw">return</span> id == s.id &amp;&amp; name.<span class="fn">equals</span>(s.name);
+}
+@<span class="fn">Override</span>
+<span class="kw">public int</span> <span class="fn">hashCode</span>() { <span class="kw">return</span> <span class="fn">Objects</span>.<span class="fn">hash</span>(id, name); }  <span class="cm">// same fields!</span></div>`,
+
+'encapsulation-benefits':`<h2>Benefits of Encapsulation</h2>
+<table><tr><th>Benefit</th><th>Details</th></tr>
+<tr><td>Data Integrity</td><td>Setters validate data before accepting — no invalid state</td></tr>
+<tr><td>Flexibility</td><td>Internal implementation can change without affecting external code</td></tr>
+<tr><td>Security</td><td>Sensitive fields (password, PIN) cannot be accessed directly</td></tr>
+<tr><td>Reusability</td><td>Well-encapsulated classes are self-contained and reusable</td></tr>
+<tr><td>Testability</td><td>Encapsulated state = deterministic behavior = easier testing</td></tr>
+<tr><td>Maintainability</td><td>Changes are localised within the class</td></tr></table>`,
+
+'immutable-class':`<h2>Immutable Classes — String, Final</h2>
+<div class="code-block"><span class="cm">// How to create an immutable class in Java:</span>
+<span class="kw">public final class</span> <span class="fn">Money</span> {  <span class="cm">// 1. Declare class as final</span>
+    <span class="kw">private final double</span> amount;      <span class="cm">// 2. All fields private final</span>
+    <span class="kw">private final</span> <span class="kw">String</span> currency;
+
+    <span class="kw">public</span> <span class="fn">Money</span>(<span class="kw">double</span> amount, <span class="kw">String</span> currency) {
+        <span class="kw">this</span>.amount = amount;           <span class="cm">// 3. Set only in constructor</span>
+        <span class="kw">this</span>.currency = currency;
+    }
+
+    <span class="cm">// 4. Only getters, NO setters</span>
+    <span class="kw">public double</span> <span class="fn">getAmount</span>()   { <span class="kw">return</span> amount; }
+    <span class="kw">public</span> <span class="kw">String</span> <span class="fn">getCurrency</span>() { <span class="kw">return</span> currency; }
+
+    <span class="cm">// 5. Return new object for "modifications"</span>
+    <span class="kw">public</span> <span class="fn">Money</span> <span class="fn">add</span>(<span class="fn">Money</span> other) {
+        <span class="kw">return new</span> <span class="fn">Money</span>(<span class="kw">this</span>.amount + other.amount, currency);
+    }
+}
+<span class="cm">// String in Java is immutable — every "modification" creates new String!</span></div>`,
+
+'multiple-interface':`<h2>Implementing Multiple Interfaces</h2>
+<div class="code-block"><span class="kw">interface</span> <span class="fn">Flyable</span>   { <span class="kw">default void</span> <span class="fn">fly</span>()   { <span class="fn">System.out.println</span>(<span class="str">"Flying"</span>); } }
+<span class="kw">interface</span> <span class="fn">Swimmable</span> { <span class="kw">default void</span> <span class="fn">swim</span>()  { <span class="fn">System.out.println</span>(<span class="str">"Swimming"</span>); } }
+<span class="kw">interface</span> <span class="fn">Runnable</span>  { <span class="kw">void</span> <span class="fn">run</span>(); }  <span class="cm">// note: java.lang.Runnable already exists</span>
+
+<span class="kw">class</span> <span class="fn">Duck</span> <span class="kw">implements</span> <span class="fn">Flyable</span>, <span class="fn">Swimmable</span>, <span class="fn">Runnable</span> {
+    <span class="kw">public void</span> <span class="fn">run</span>() { <span class="fn">System.out.println</span>(<span class="str">"Duck running"</span>); }
+    <span class="cm">// fly() and swim() inherited as default methods</span>
+}
+
+<span class="cm">// Conflict resolution: if two interfaces have same default method</span>
+<span class="kw">interface</span> <span class="fn">A</span> { <span class="kw">default void</span> <span class="fn">hello</span>() { <span class="fn">System.out.println</span>(<span class="str">"A"</span>); } }
+<span class="kw">interface</span> <span class="fn">B</span> { <span class="kw">default void</span> <span class="fn">hello</span>() { <span class="fn">System.out.println</span>(<span class="str">"B"</span>); } }
+<span class="kw">class</span> <span class="fn">C</span> <span class="kw">implements</span> <span class="fn">A</span>, <span class="fn">B</span> {
+    <span class="kw">public void</span> <span class="fn">hello</span>() { <span class="fn">A</span>.<span class="kw">super</span>.<span class="fn">hello</span>(); }  <span class="cm">// MUST override to resolve conflict</span>
+}</div>`,
+
+'default-methods':`<h2>Default & Static Methods in Interfaces (Java 8+)</h2>
+<div class="code-block"><span class="kw">interface</span> <span class="fn">Collection</span>&lt;T&gt; {
+    <span class="kw">void</span> <span class="fn">add</span>(T item);
+    <span class="kw">int</span>  <span class="fn">size</span>();
+
+    <span class="cm">// Default method — has implementation, can be overridden</span>
+    <span class="kw">default boolean</span> <span class="fn">isEmpty</span>() {
+        <span class="kw">return</span> <span class="fn">size</span>() == <span class="num">0</span>;  <span class="cm">// uses abstract method</span>
+    }
+
+    <span class="cm">// Default method with complex logic — avoids code duplication</span>
+    <span class="kw">default void</span> <span class="fn">addAll</span>(<span class="fn">T</span>... items) {
+        <span class="kw">for</span> (T item : items) <span class="fn">add</span>(item);
+    }
+
+    <span class="cm">// Static method — utility factory, cannot be overridden</span>
+    <span class="kw">static</span> &lt;T&gt; <span class="fn">Collection</span>&lt;T&gt; <span class="fn">empty</span>() {
+        <span class="kw">return new</span> <span class="fn">EmptyCollection</span>&lt;&gt;();
+    }
+
+    <span class="cm">// Private method (Java 9+) — helper for default methods</span>
+    <span class="kw">private void</span> <span class="fn">logAdd</span>(T item) { <span class="cm">/* internal helper */</span> }
+}</div>`
+};
+
+let currentStep=1,completedSteps=JSON.parse(localStorage.getItem('oop_completedSteps')||'[]');
+function updateProgress(){const p=(completedSteps.length/6)*100;document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressPercent').textContent=Math.round(p)+'%';document.querySelectorAll('.step-btn').forEach(b=>b.classList.toggle('completed',completedSteps.includes(parseInt(b.dataset.step))));}
+function markStepComplete(step){if(!completedSteps.includes(step)){completedSteps.push(step);localStorage.setItem('oop_completedSteps',JSON.stringify(completedSteps));updateProgress();renderStepContent(step);}}
+function renderStepContent(step){currentStep=step;const sd=stepsData[step];const isC=completedSteps.includes(step);let html=`<div class="step-content active"><div class="step-header"><div><h2>${sd.title}</h2><p>${sd.description}</p></div>${!isC?`<button class="complete-step-btn" onclick="markStepComplete(${step})">✓ Mark as Complete</button>`:'<div class="completed-badge">✓ Step Completed! 🎉</div>'}</div>`;sd.topics.forEach(t=>{html+=`<div class="topic-card" onclick="toggleSubTopics(this)"><div class="topic-header"><h3><span class="topic-icon">${t.icon}</span> ${t.title}</h3><span class="arrow">›</span></div><div class="sub-topics">`;t.subs.forEach(s=>{html+=`<div class="sub-topic" onclick="showContent(event,'${s.id}')">${s.title}</div>`;});html+=`</div></div>`;});html+=`<div class="detail-container" id="detailContainer"><p style="color:#94a3b8;text-align:center;">🧱 Click any topic to view detailed explanations with Java, C++ and Python code examples.</p></div><div class="nav-buttons">${step>1?`<button class="nav-btn prev" onclick="changeStep(${step-1})">← Previous</button>`:'<div></div>'}${step<6?`<button class="nav-btn next" onclick="changeStep(${step+1})">Next →</button>`:`<button class="nav-btn next" onclick="window.location.href='subjects.html'">🏆 Complete OOP →</button>`}</div></div>`;document.getElementById('contentSection').innerHTML=html;document.querySelectorAll('.step-btn').forEach(b=>b.classList.toggle('active',parseInt(b.dataset.step)===step));}
+function changeStep(s){if(s>=1&&s<=6){renderStepContent(s);window.scrollTo({top:0,behavior:'smooth'});}}
+function toggleSubTopics(card){const sub=card.querySelector('.sub-topics');const arrow=card.querySelector('.arrow');document.querySelectorAll('.sub-topics').forEach(s=>{if(s!==sub)s.classList.remove('active');});sub.classList.toggle('active');if(arrow)arrow.style.transform=sub.classList.contains('active')?'rotate(90deg)':'rotate(0deg)';}
+function showContent(e,id){e.stopPropagation();const dc=document.getElementById('detailContainer');dc.innerHTML=detailedContent[id]||'<p>Content coming soon!</p>';dc.scrollIntoView({behavior:'smooth',block:'start'});}
+document.querySelectorAll('.step-btn').forEach(b=>b.addEventListener('click',()=>changeStep(parseInt(b.dataset.step))));
+updateProgress();renderStepContent(1);
+</script>
+</body>
+</html>

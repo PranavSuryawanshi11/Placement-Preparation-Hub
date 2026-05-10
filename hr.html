@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>HR Interview Questions – Placement Prep Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: radial-gradient(circle at top, #0a1b3d, #020617); color: #e2e8f0; min-height: 100vh; line-height: 1.7; }
+    header { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 18px 70px; z-index: 100; background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(99, 102, 241, 0.3); }
+    .logo { font-size: 26px; font-weight: 800; background: linear-gradient(135deg, #818cf8, #c084fc); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .logo a { text-decoration: none; background: linear-gradient(135deg, #818cf8, #c084fc); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    nav a { margin-left: 28px; text-decoration: none; color: #bfc6d4; font-size: 15px; font-weight: 500; transition: 0.3s; padding: 6px 12px; border-radius: 8px; }
+    nav a:hover { color: white; background: rgba(99, 102, 241, 0.2); }
+    nav a.active { background: #6366f1; color: white; padding: 6px 20px; border-radius: 9999px; }
+    .hero { text-align: center; margin-top: 140px; padding: 0 20px; }
+    .tag { display: inline-block; padding: 8px 24px; border-radius: 9999px; background: rgba(99, 102, 241, 0.2); font-size: 14px; color: #a5b4fc; margin-bottom: 20px; border: 1px solid rgba(99, 102, 241, 0.4); }
+    .hero h1 { font-size: 56px; font-weight: 800; background: linear-gradient(135deg, #e0e7ff, #a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 20px; line-height: 1.2; }
+    .hero p { color: #9ca3af; font-size: 18px; max-width: 800px; margin: 0 auto 30px; }
+    .progress-container { max-width: 1100px; margin: 40px auto; padding: 0 30px; }
+    .progress-stats { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; color: #94a3b8; }
+    .progress-track { background: rgba(255,255,255,0.1); height: 10px; border-radius: 10px; overflow: hidden; }
+    .progress-fill { background: linear-gradient(90deg, #6366f1, #a855f7); height: 100%; width: 0%; transition: width 0.5s ease; border-radius: 10px; }
+    .steps-nav { max-width: 1100px; margin: 30px auto; padding: 0 30px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+    .step-btn { padding: 12px 28px; background: rgba(255,255,255,0.05); border: 2px solid rgba(99,102,241,0.3); border-radius: 12px; color: #cbd5e1; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 15px; }
+    .step-btn:hover { border-color: #6366f1; background: rgba(99,102,241,0.1); transform: translateY(-2px); }
+    .step-btn.active { background: linear-gradient(135deg, #6366f1, #a855f7); border-color: transparent; color: white; box-shadow: 0 4px 15px rgba(99,102,241,0.3); }
+    .step-btn.completed { border-color: #10b981; background: rgba(16,185,129,0.1); color: #10b981; }
+    .content-section { max-width: 1100px; margin: 40px auto; padding: 0 30px; }
+    .step-content { display: none; animation: fadeIn 0.5s ease; }
+    .step-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .step-header { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid rgba(99,102,241,0.3); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .step-header h2 { font-size: 36px; font-weight: 700; color: #e0e7ff; margin-bottom: 12px; }
+    .step-header p { color: #9ca3af; font-size: 16px; }
+    .topic-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 24px 28px; margin-bottom: 20px; transition: all 0.3s; cursor: pointer; }
+    .topic-card:hover { border-color: #6366f1; transform: translateY(-3px); background: rgba(99,102,241,0.05); }
+    .topic-header { display: flex; align-items: center; justify-content: space-between; }
+    .topic-header h3 { font-size: 22px; font-weight: 600; display: flex; align-items: center; gap: 12px; }
+    .topic-icon { font-size: 28px; }
+    .arrow { font-size: 28px; transition: transform 0.3s; }
+    .sub-topics { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.2); }
+    .sub-topics.active { display: block; }
+    .sub-topic { padding: 14px 22px; background: rgba(255,255,255,0.03); border-radius: 12px; margin-bottom: 10px; transition: 0.3s; cursor: pointer; border-left: 3px solid transparent; }
+    .sub-topic:hover { background: rgba(99,102,241,0.15); border-left-color: #6366f1; transform: translateX(5px); }
+    .detail-container { margin-top: 40px; background: rgba(15,23,42,0.7); border: 1px solid rgba(99,102,241,0.3); border-radius: 24px; padding: 40px; backdrop-filter: blur(8px); }
+    .detail-container h2 { font-size: 28px; margin-bottom: 20px; color: #c4b5fd; }
+    .detail-container h3 { font-size: 22px; margin: 25px 0 15px; color: #a5b4fc; }
+    .detail-container p { margin-bottom: 18px; color: #cbd5e1; line-height: 1.8; }
+    .detail-container ul, .detail-container ol { margin: 18px 0 25px; padding-left: 32px; }
+    .detail-container li { margin-bottom: 10px; }
+    .example-box { background: rgba(16,185,129,0.1); border-left: 5px solid #10b981; padding: 20px 24px; margin: 25px 0; border-radius: 12px; }
+    .note-box { background: rgba(234,179,8,0.1); border-left: 5px solid #eab308; padding: 20px 24px; margin: 25px 0; border-radius: 12px; }
+    .tip-box { background: rgba(59,130,246,0.1); border-left: 5px solid #3b82f6; padding: 20px 24px; margin: 25px 0; border-radius: 12px; }
+    .warning-box { background: rgba(239,68,68,0.1); border-left: 5px solid #ef4444; padding: 20px 24px; margin: 25px 0; border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; margin: 25px 0; }
+    th, td { border: 1px solid rgba(255,255,255,0.2); padding: 12px; text-align: left; }
+    th { background: rgba(99,102,241,0.2); color: #a5b4fc; }
+    .nav-buttons { display: flex; justify-content: space-between; gap: 20px; margin-top: 50px; padding: 40px 0 60px; }
+    .nav-btn { padding: 14px 32px; border-radius: 12px; font-weight: 600; transition: 0.3s; cursor: pointer; text-decoration: none; display: inline-block; text-align: center; border: none; font-size: 16px; }
+    .nav-btn.prev { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
+    .nav-btn.next { background: linear-gradient(135deg, #6366f1, #a855f7); color: white; }
+    .nav-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+    .complete-step-btn { background: rgba(16,185,129,0.2); border: 2px solid #10b981; color: #10b981; padding: 12px 28px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 14px; }
+    .complete-step-btn:hover { background: #10b981; color: white; }
+    .completed-badge { color: #10b981; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+
+    /* Quiz Styles */
+    .quiz-section { max-width: 1100px; margin: 40px auto; padding: 0 30px 80px; }
+    .quiz-header { text-align: center; margin-bottom: 40px; }
+    .quiz-header h2 { font-size: 36px; font-weight: 700; color: #e0e7ff; margin-bottom: 10px; }
+    .quiz-header p { color: #9ca3af; }
+    .quiz-container { background: rgba(15,23,42,0.7); border: 1px solid rgba(99,102,241,0.3); border-radius: 24px; padding: 40px; }
+    .quiz-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px; }
+    .quiz-meta span { background: rgba(99,102,241,0.2); padding: 8px 20px; border-radius: 9999px; font-size: 14px; color: #a5b4fc; }
+    .question-block { margin-bottom: 30px; padding: 24px; background: rgba(255,255,255,0.03); border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); }
+    .question-block h4 { font-size: 17px; font-weight: 600; margin-bottom: 16px; color: #e0e7ff; }
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    .option-label { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; cursor: pointer; transition: 0.2s; border: 1px solid rgba(255,255,255,0.08); }
+    .option-label:hover { background: rgba(99,102,241,0.15); border-color: #6366f1; }
+    .option-label input[type=radio] { accent-color: #6366f1; width: 16px; height: 16px; }
+    .option-label.correct { background: rgba(16,185,129,0.2); border-color: #10b981; color: #10b981; }
+    .option-label.wrong { background: rgba(239,68,68,0.2); border-color: #ef4444; color: #ef4444; }
+    .submit-quiz-btn { background: linear-gradient(135deg, #6366f1, #a855f7); color: white; border: none; padding: 16px 40px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 20px; }
+    .submit-quiz-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(99,102,241,0.4); }
+    .quiz-toggle-btn { width: 100%; background: rgba(99,102,241,0.15); border: 2px solid rgba(99,102,241,0.4); border-radius: 16px; color: #a5b4fc; font-size: 17px; font-weight: 700; padding: 18px 28px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s; font-family: 'Poppins', sans-serif; }
+    .quiz-toggle-btn:hover { background: rgba(99,102,241,0.25); border-color: #6366f1; color: white; }
+    .quiz-toggle-btn .toggle-arrow { font-size: 22px; transition: transform 0.35s; display: inline-block; }
+    .quiz-toggle-btn.open { background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(168,85,247,0.15)); border-color: #6366f1; color: white; border-radius: 16px 16px 0 0; }
+    .quiz-toggle-btn.open .toggle-arrow { transform: rotate(180deg); }
+    .quiz-collapsible { display: none; border: 2px solid rgba(99,102,241,0.3); border-top: none; border-radius: 0 0 16px 16px; padding: 28px; background: rgba(15,23,42,0.5); }
+    .quiz-collapsible.open { display: block; animation: fadeIn 0.4s ease; }
+    .quiz-result { margin-top: 30px; padding: 30px; border-radius: 16px; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.3); text-align: center; }
+    .quiz-result h3 { font-size: 28px; font-weight: 700; color: #a5b4fc; margin-bottom: 10px; }
+    .improvement-area { margin-top: 30px; padding: 24px; background: rgba(234,179,8,0.1); border: 1px solid #eab308; border-radius: 16px; }
+    .improvement-area h4 { color: #eab308; font-size: 18px; margin-bottom: 12px; }
+    .pdf-section { max-width: 1100px; margin: 0 auto 80px; padding: 0 30px; }
+    .pdf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .pdf-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 24px; transition: all 0.3s; text-align: center; }
+    .pdf-card:hover { border-color: #6366f1; transform: translateY(-3px); }
+    .pdf-card h4 { font-size: 17px; font-weight: 600; margin: 12px 0 8px; color: #e0e7ff; }
+    .pdf-card p { color: #9ca3af; font-size: 14px; margin-bottom: 16px; }
+    .pdf-btn { background: linear-gradient(135deg, #6366f1, #a855f7); color: white; border: none; padding: 10px 24px; border-radius: 9999px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-block; }
+    .pdf-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+    .section-title { font-size: 28px; font-weight: 700; color: #e0e7ff; margin-bottom: 24px; }
+    @media(max-width:768px){ header{padding:15px 20px;} nav a{margin-left:12px;font-size:12px;} .hero h1{font-size:36px;} }
+</style>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="subjects.html">🎤 Interview Prep</a></div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="subjects.html">Subjects</a>
+
+    </nav>
+</header>
+
+<div class="hero">
+    <div class="tag">🎯 HR Interview Mastery • 5 Steps to Confidence</div>
+    <h1>HR Interview Questions<br>Complete Preparation Guide</h1>
+    <p>Master common HR interview questions — from "Tell me about yourself" to salary negotiation. Build confidence with real examples and proven frameworks.</p>
+</div>
+
+<div class="progress-container">
+    <div class="progress-stats"><span>📊 Overall Progress</span><span id="progressPercent">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="steps-nav" id="stepsNav">
+    <button class="step-btn active" data-step="1">Step 1: Personal Questions</button>
+    <button class="step-btn" data-step="2">Step 2: Behavioral Questions</button>
+    <button class="step-btn" data-step="3">Step 3: Situational Questions</button>
+    <button class="step-btn" data-step="4">Step 4: Company & Role Questions</button>
+    <button class="step-btn" data-step="5">Step 5: Salary & Closing Questions</button>
+</div>
+
+<div class="content-section" id="contentSection"></div>
+
+<!-- Quiz Section -->
+<div class="quiz-section">
+    <div class="quiz-header">
+        <h2>🧠 HR Interview Quiz — 50 Questions</h2>
+        <p>Test your knowledge of HR interview best practices. 50 real-world questions with instant feedback and ML-powered improvement insights.</p>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-meta">
+            <span>📝 50 Questions</span>
+            <span>⏱️ No Time Limit</span>
+            <span>🎯 HR Interview Focus</span>
+        </div>
+        <button class="quiz-toggle-btn" id="quizToggleBtn" onclick="toggleQuiz()">
+            <span>📋 Click to Start the 50-Question Quiz</span>
+            <span class="toggle-arrow">▼</span>
+        </button>
+        <div class="quiz-collapsible" id="quizCollapsible">
+            <div id="quizQuestions"></div>
+            <button class="submit-quiz-btn" onclick="submitQuiz()">Submit Quiz & Get Analysis</button>
+        </div>
+        <div class="quiz-result" id="quizResult" style="display:none;margin-top:20px;"></div>
+    </div>
+</div>
+
+<!-- PDF Resources Section -->
+<div class="pdf-section">
+    <h2 class="section-title">📚 Download HR Interview Question PDFs</h2>
+    <div class="pdf-grid">
+        <div class="pdf-card">
+            <div style="font-size:40px">🏢</div>
+            <h4>TCS HR Interview Q&A</h4>
+            <p>150+ most asked TCS HR questions with model answers</p>
+            <a class="pdf-btn" href="https://www.naukri.com/code360/library/tcs-hr-interview-questions" target="_blank">📖 View Online</a>
+        </div>
+        <div class="pdf-card">
+            <div style="font-size:40px">💼</div>
+            <h4>Infosys HR Interview Q&A</h4>
+            <p>Common Infosys HR round questions with tips & tricks</p>
+            <a class="pdf-btn" href="https://www.indiabix.com/hr-interview/questions-and-answers/" target="_blank">📖 View Online</a>
+        </div>
+        <div class="pdf-card">
+            <div style="font-size:40px">🎯</div>
+            <h4>Wipro HR Interview Q&A</h4>
+            <p>Wipro HR interview experience and top 100 questions</p>
+            <a class="pdf-btn" href="https://www.geeksforgeeks.org/wipro-interview-experience/" target="_blank">📖 View Online</a>
+        </div>
+        <div class="pdf-card">
+            <div style="font-size:40px">🚀</div>
+            <h4>Capgemini HR Interview Q&A</h4>
+            <p>Capgemini HR round complete guide with sample answers</p>
+            <a class="pdf-btn" href="https://www.ambitionbox.com/interviews/capgemini-interview-questions" target="_blank">📖 View Online</a>
+        </div>
+        <div class="pdf-card">
+            <div style="font-size:40px">📋</div>
+            <h4>General HR Q&A Mega PDF</h4>
+            <p>Top 200 HR interview questions for all IT companies</p>
+            <a class="pdf-btn" href="https://www.indiabix.com/hr-interview/questions-and-answers/" target="_blank">📖 View Online</a>
+        </div>
+        <div class="pdf-card">
+            <div style="font-size:40px">⭐</div>
+            <h4>STAR Method Guide PDF</h4>
+            <p>Complete STAR framework with 50 example answers</p>
+            <a class="pdf-btn" href="https://in.indeed.com/career-advice/interviewing/how-to-use-the-star-interview-response-technique" target="_blank">📖 View Online</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const stepsData = {
+    1: {
+        title: "👤 Personal & Introduction Questions",
+        description: "Master the most common personal HR questions that open every interview.",
+        topics: [
+            { title: "Self-Introduction Questions", icon: "🎤", subs: [
+                { id: "tell-yourself", title: "Tell me about yourself" },
+                { id: "strengths", title: "What are your strengths?" },
+                { id: "weaknesses", title: "What are your weaknesses?" }
+            ]},
+            { title: "Background Questions", icon: "📚", subs: [
+                { id: "background", title: "Walk me through your background" },
+                { id: "achievements", title: "Your greatest achievement" },
+                { id: "hobbies", title: "Hobbies and interests" }
+            ]}
+        ]
+    },
+    2: {
+        title: "🧠 Behavioral Questions",
+        description: "Answer behavioral questions using the STAR method with confidence.",
+        topics: [
+            { title: "Teamwork & Leadership", icon: "👥", subs: [
+                { id: "teamwork", title: "Describe teamwork experience" },
+                { id: "leadership", title: "Leadership example" },
+                { id: "conflict", title: "Handling conflict" }
+            ]},
+            { title: "Problem Solving", icon: "🔧", subs: [
+                { id: "challenge", title: "Biggest challenge overcome" },
+                { id: "failure", title: "Describe a failure" },
+                { id: "pressure", title: "Working under pressure" }
+            ]}
+        ]
+    },
+    3: {
+        title: "💡 Situational Questions",
+        description: "Handle 'What would you do if...' questions with structured responses.",
+        topics: [
+            { title: "Workplace Scenarios", icon: "🏢", subs: [
+                { id: "disagreement", title: "Disagree with manager" },
+                { id: "multitask", title: "Multiple priorities at once" },
+                { id: "difficult-coworker", title: "Difficult coworker" }
+            ]},
+            { title: "Career Scenarios", icon: "📈", subs: [
+                { id: "overqualified", title: "If you're overqualified" },
+                { id: "gap", title: "Employment gap explanation" },
+                { id: "fired", title: "Why were you fired?" }
+            ]}
+        ]
+    },
+    4: {
+        title: "🏢 Company & Role Questions",
+        description: "Show your research and genuine interest in the company and role.",
+        topics: [
+            { title: "Company Questions", icon: "🔍", subs: [
+                { id: "why-company", title: "Why this company?" },
+                { id: "know-company", title: "What do you know about us?" },
+                { id: "culture", title: "Preferred work culture" }
+            ]},
+            { title: "Role Questions", icon: "🎯", subs: [
+                { id: "why-hire", title: "Why should we hire you?" },
+                { id: "5-years", title: "Where in 5 years?" },
+                { id: "career-goals", title: "Career goals" }
+            ]}
+        ]
+    },
+    5: {
+        title: "💰 Salary & Closing Questions",
+        description: "Negotiate salary confidently and close interviews on a strong note.",
+        topics: [
+            { title: "Salary Questions", icon: "💵", subs: [
+                { id: "salary-expect", title: "Salary expectations" },
+                { id: "current-salary", title: "Current salary discussion" },
+                { id: "negotiate", title: "Salary negotiation tips" }
+            ]},
+            { title: "Closing Questions", icon: "🤝", subs: [
+                { id: "questions-ask", title: "Questions to ask the interviewer" },
+                { id: "notice-period", title: "Notice period handling" },
+                { id: "joining", title: "Joining date discussion" }
+            ]}
+        ]
+    }
+};
+
+const detailedContent = {
+    'tell-yourself': `<h2>Tell Me About Yourself</h2><p>This is the most common opening question. Use the <strong>Present-Past-Future</strong> framework.</p><div class="example-box"><strong>Structure:</strong><br><strong>Present:</strong> "I am a final-year Computer Science student at XYZ University..."<br><strong>Past:</strong> "I have interned at ABC company where I worked on..."<br><strong>Future:</strong> "I am looking to join a company where I can contribute to..."</div><div class="tip-box">💡 Keep it to 2 minutes. Practice it 10+ times. Don't recite your resume.</div>`,
+    'strengths': `<h2>What Are Your Strengths?</h2><p>Choose 3 strengths relevant to the job. Back each with a brief example.</p><ul><li><strong>Problem-solving:</strong> Give an example of a complex problem you solved</li><li><strong>Team player:</strong> Mention how you collaborated on a project</li><li><strong>Quick learner:</strong> Show how you picked up a new skill fast</li></ul><div class="tip-box">💡 Match your strengths to the job description keywords.</div>`,
+    'weaknesses': `<h2>What Are Your Weaknesses?</h2><p>Choose a real weakness, but show what you're doing to improve it.</p><div class="example-box"><strong>Good Answer:</strong> "I sometimes get too focused on details and lose track of the big picture. I've started using project management tools to step back and review overall progress regularly."</div><div class="warning-box">⚠️ Never say "I work too hard" — interviewers see through it.</div>`,
+    'background': `<h2>Walk Me Through Your Background</h2><p>Same as "Tell me about yourself" but more focused on academic/professional journey. Emphasize relevant coursework, projects, and internships.</p>`,
+    'achievements': `<h2>Your Greatest Achievement</h2><p>Use the STAR method: <strong>S</strong>ituation → <strong>T</strong>ask → <strong>A</strong>ction → <strong>R</strong>esult.</p><div class="example-box"><strong>Example:</strong> "During my final year project (S), I was tasked with building a recommendation engine (T). I implemented collaborative filtering and improved accuracy by 30% (A), which won Best Project Award at our college (R)."</div>`,
+    'hobbies': `<h2>Hobbies and Interests</h2><p>Pick hobbies that indirectly showcase relevant skills.</p><ul><li>Competitive programming → problem solving</li><li>Open-source contributions → collaboration</li><li>Blogging/teaching → communication skills</li></ul>`,
+    'teamwork': `<h2>Describe a Teamwork Experience</h2><div class="example-box"><strong>STAR Answer:</strong><br>S: Our team of 4 had to build a full-stack app in 48 hours for a hackathon<br>T: I was responsible for the backend API<br>A: I coordinated with teammates daily and handled integration issues<br>R: We placed 2nd among 200 teams</div>`,
+    'leadership': `<h2>Leadership Example</h2><p>You don't need a formal title to show leadership. Leading a project, mentoring peers, or organizing events counts.</p>`,
+    'conflict': `<h2>Handling Conflict</h2><div class="tip-box">💡 Always show that you resolved conflict professionally, not aggressively. Emphasize listening and finding common ground.</div>`,
+    'challenge': `<h2>Biggest Challenge Overcome</h2><p>Pick a challenge from academics or a project. Show resilience and problem-solving.</p>`,
+    'failure': `<h2>Describe a Failure</h2><p>Show that you can accept responsibility, learn from mistakes, and apply lessons. Never blame others.</p>`,
+    'pressure': `<h2>Working Under Pressure</h2><div class="example-box"><strong>Example:</strong> "During exam week, my team had a project deadline. I created a daily checklist, split tasks, and we delivered on time with no quality compromise."</div>`,
+    'disagreement': `<h2>Disagree with Manager</h2><p>Show professionalism: listen first, present your case with data, respect the final decision.</p>`,
+    'multitask': `<h2>Multiple Priorities at Once</h2><div class="tip-box">💡 Mention prioritization techniques: Eisenhower Matrix, to-do lists, communicating with stakeholders.</div>`,
+    'difficult-coworker': `<h2>Difficult Coworker</h2><p>Focus on the issue, not the person. Show empathy and resolution.</p>`,
+    'overqualified': `<h2>If You're Overqualified</h2><p>"I believe there's always more to learn. I'm excited about this specific role because it lets me contribute immediately while learning [specific aspect]."</p>`,
+    'gap': `<h2>Employment Gap Explanation</h2><p>Be honest but frame it positively: courses, freelance work, family responsibilities, or deliberate upskilling.</p>`,
+    'fired': `<h2>Why Were You Fired?</h2><p>Be honest, brief, and show what you learned. Never badmouth the former employer.</p>`,
+    'why-company': `<h2>Why This Company?</h2><p>Research the company. Mention: their mission, recent achievements, culture, or specific projects that excite you.</p><div class="tip-box">💡 Formula: "I admire [specific thing]. I believe my skills in [X] align with your team's focus on [Y]."</div>`,
+    'know-company': `<h2>What Do You Know About Us?</h2><p>Mention: founding year, products/services, recent news, company values, and market position.</p>`,
+    'culture': `<h2>Preferred Work Culture</h2><p>Research company culture (Glassdoor, LinkedIn). Align your answer with their values without being dishonest.</p>`,
+    'why-hire': `<h2>Why Should We Hire You?</h2><div class="example-box"><strong>3-Part Answer:</strong><br>1. "I have the skills you need — specifically [skills from JD]"<br>2. "I've applied them successfully — [brief example]"<br>3. "I'm genuinely excited about this role because [reason]"</div>`,
+    '5-years': `<h2>Where in 5 Years?</h2><p>Show ambition aligned with company growth. "I see myself as a senior engineer contributing to [company's vision]..." Avoid "your company" sounding desperate.</p>`,
+    'career-goals': `<h2>Career Goals</h2><p>Short-term (1-2 years): master the role. Long-term (5+ years): grow into leadership or specialization. Tie to company's growth.</p>`,
+    'salary-expect': `<h2>Salary Expectations</h2><div class="tip-box">💡 Research market rates on Glassdoor, AmbitionBox. Give a range based on research: "Based on market research and my skills, I'm looking for ₹X–Y LPA. I'm open to discussion."</div>`,
+    'current-salary': `<h2>Current Salary Discussion</h2><p>In India, you can politely decline or give a range. "I'd prefer to focus on the total compensation package and what this role offers."</p>`,
+    'negotiate': `<h2>Salary Negotiation Tips</h2><ul><li>Never be the first to give a number if possible</li><li>Use competing offers (if real) as leverage</li><li>Negotiate the full package: base, bonus, ESOPs, benefits</li><li>Always be polite and collaborative in tone</li></ul>`,
+    'questions-ask': `<h2>Questions to Ask the Interviewer</h2><ul><li>What does success look like in this role?</li><li>What are the biggest challenges facing the team?</li><li>What does career growth look like here?</li><li>What do you enjoy most about working here?</li></ul>`,
+    'notice-period': `<h2>Notice Period Handling</h2><p>Be honest about your notice period. If negotiable, mention it. Offer to try to accelerate it if the role is urgent.</p>`,
+    'joining': `<h2>Joining Date Discussion</h2><p>Give a realistic date. Show eagerness: "I can join by [date] — I want to ensure a smooth handover at my current company."</p>`
+};
+
+const quizData = [
+    { q: "What is the best framework to answer behavioral HR questions?", opts: ["FIFO Method", "STAR Method", "LIFO Method", "PDCA Cycle"], ans: 1 },
+    { q: "Which opening should you use for 'Tell me about yourself'?", opts: ["Start with childhood stories", "Present-Past-Future framework", "Read your resume aloud", "Discuss salary first"], ans: 1 },
+    { q: "When asked about weaknesses, you should:", opts: ["Say you have none", "Pick an irrelevant weakness", "Show a real weakness and how you're improving", "Blame external factors"], ans: 2 },
+    { q: "In STAR method, what does 'R' stand for?", opts: ["Responsibility", "Relevance", "Result", "Resource"], ans: 2 },
+    { q: "Why should we hire you — best approach:", opts: ["Just list your resume points", "Skills + Example + Enthusiasm", "Talk only about salary", "Ask them to decide"], ans: 1 },
+    { q: "For salary negotiation, you should:", opts: ["Accept first offer always", "Research market rates first", "Ask as high as possible without research", "Avoid salary discussion"], ans: 1 },
+    { q: "When answering 'Where do you see yourself in 5 years':", opts: ["Say you want their job", "Align with company's growth", "Say you're unsure", "Mention another company"], ans: 1 },
+    { q: "What is the ideal length for 'Tell me about yourself'?", opts: ["10 minutes", "30 seconds", "2 minutes", "5 minutes"], ans: 2 },
+    { q: "When asked about a failure, you should:", opts: ["Blame your team", "Deny having any failures", "Accept responsibility and show learning", "Change the subject"], ans: 2 },
+    { q: "Researching a company before interview should include:", opts: ["Only their website", "Mission, culture, recent news, products", "Just their office location", "Nothing special"], ans: 1 },
+    { q: "What does STAR stand for?", opts: ["Situation, Task, Action, Result", "Skill, Task, Achievement, Role", "Story, Time, Activity, Review", "System, Target, Ability, Record"], ans: 0 },
+    { q: "Which is a strong closing question to ask an interviewer?", opts: ["What's the salary?", "What does success look like in this role?", "Can I leave early on Fridays?", "Do you have snacks?"], ans: 1 },
+    { q: "When discussing a conflict with a coworker, focus on:", opts: ["Making them look bad", "How you resolved it professionally", "Getting revenge", "HR filing"], ans: 1 },
+    { q: "Which strength is most relevant for software fresher roles?", opts: ["Cooking", "Problem-solving and quick learning", "Sports", "Traveling"], ans: 1 },
+    { q: "Employment gaps should be explained by:", opts: ["Lying", "Being honest and showing productive use of time", "Ignoring the question", "Crying"], ans: 1 },
+    { q: "For 'current salary' question in India, you can:", opts: ["Must always disclose", "Politely redirect to value-based discussion", "Walk out", "Give a fake number"], ans: 1 },
+    { q: "Body language in HR interviews should be:", opts: ["Slouched and casual", "Confident, upright, good eye contact", "Arms crossed", "Looking at your phone"], ans: 1 },
+    { q: "Hobbies that impress tech HR interviewers include:", opts: ["Sleeping", "Competitive programming, open source contributions", "Watching TV", "Shopping"], ans: 1 },
+    { q: "What is 'Behavioral Competency' in HR context?", opts: ["Technical skills test", "Past behavior predicts future performance", "Coding challenge", "Physical test"], ans: 1 },
+    { q: "Notice period should be discussed:", opts: ["Never", "Honestly with willingness to negotiate", "Always say 0 days", "After getting offer letter"], ans: 1 },
+    { q: "Leadership examples can come from:", opts: ["Only CEO-level roles", "Any project lead, event org, or team coordination", "Military only", "Government roles only"], ans: 1 },
+    { q: "For fresher roles, best achievement to mention:", opts: ["Won a cooking contest", "Final year project with measurable results", "Got highest marks once", "Attended many classes"], ans: 1 },
+    { q: "'Why do you want to leave your current job' — avoid saying:", opts: ["Looking for growth", "Excited about this opportunity", "My boss is terrible", "Seeking new challenges"], ans: 2 },
+    { q: "The Eisenhower Matrix helps with:", opts: ["Coding", "Task prioritization under pressure", "Salary calculation", "Resume writing"], ans: 1 },
+    { q: "Which is NOT a good question to ask interviewer?", opts: ["Growth opportunities", "Team culture", "When can I take vacations?", "Biggest team challenge"], ans: 2 },
+    { q: "Overqualified candidates should emphasize:", opts: ["Their boredom", "Specific learning and contribution opportunity in this role", "Higher salary demand", "Short-term nature of commitment"], ans: 1 },
+    { q: "The best way to handle multiple deadlines:", opts: ["Pick one and ignore others", "Panic and escalate", "Prioritize, communicate, and deliver systematically", "Ask for extension always"], ans: 2 },
+    { q: "TCS HR interview is known for:", opts: ["Complex coding problems", "Values, background, and situational questions", "Data structures deep dive", "System design"], ans: 1 },
+    { q: "For Infosys HR round, you should prepare:", opts: ["Only DSA", "Values alignment, team scenarios, communication", "SQL only", "Networking concepts"], ans: 1 },
+    { q: "Which company values are important to mention for Wipro HR?", opts: ["Profit above all", "Sustainability, integrity, innovation", "Speed over quality", "Individual recognition"], ans: 1 },
+    { q: "The present-past-future framework means:", opts: ["Talk in reverse order", "Current role → past experience → future goals", "Future goals only", "Past education only"], ans: 1 },
+    { q: "When facing a difficult coworker scenario:", opts: ["Gossip about them", "Address the issue directly and professionally", "Ignore forever", "Involve everyone"], ans: 1 },
+    { q: "'What motivates you?' best answer focuses on:", opts: ["Money only", "Growth, impact, and solving real problems", "Free food", "Easy work"], ans: 1 },
+    { q: "Eye contact in interviews should be:", opts: ["Avoided completely", "Natural, not staring — move between notes and interviewer", "Constant intense staring", "Never"], ans: 1 },
+    { q: "Glassdoor and AmbitionBox are useful for:", opts: ["Coding practice", "Salary benchmarking and interview prep", "Resume templates only", "Project ideas"], ans: 1 },
+    { q: "Which language tone works best in HR interviews?", opts: ["Casual slang", "Professional yet warm and conversational", "Very formal robotic", "Silent"], ans: 1 },
+    { q: "'Tell me about a time you failed' requires:", opts: ["Denying failure", "Honesty + learning + what changed", "Blaming teammates", "Changing topic"], ans: 1 },
+    { q: "Resume and interview story should be:", opts: ["Completely different", "Consistent — interview expands on resume", "Opposite", "Irrelevant"], ans: 1 },
+    { q: "For career growth question, showing:", opts: ["Only money goals", "Skill growth + contribution + alignment with company", "Desire to leave soon", "Just promotions"], ans: 1 },
+    { q: "A strong closing statement in interview is:", opts: ["'I need this job desperately'", "'I'm excited about [specific thing] and confident I can contribute'", "'Whatever you decide'", "'I have other offers'"], ans: 1 },
+    { q: "Background check discussions should be handled:", opts: ["Panic", "Confidently — be honest about your background", "Lie about education", "Refuse"], ans: 1 },
+    { q: "Team player vs leader question — answer should:", opts: ["Choose only one", "Show ability to do both based on context", "Deny being either", "Always say leader"], ans: 1 },
+    { q: "For Capgemini HR, key focus areas are:", opts: ["DSA only", "Adaptability, communication, teamwork scenarios", "Only technical skills", "Salary negotiation"], ans: 1 },
+    { q: "'How do you handle stress?' best approach:", opts: ["Deny having stress", "Healthy coping: exercise, planning, prioritization", "Cry at work", "Stress doesn't exist"], ans: 1 },
+    { q: "Dress code advice for HR interviews:", opts: ["Casuals always fine", "Formal/business casual unless stated otherwise", "Party wear", "Sports wear"], ans: 1 },
+    { q: "Arriving for interview should be:", opts: ["10-15 minutes early", "Exactly on time", "5 minutes late is fine", "Whenever you want"], ans: 0 },
+    { q: "Thank you email after interview should be sent:", opts: ["Never", "Within 24 hours", "After 1 week", "Only if you want the job"], ans: 1 },
+    { q: "Joining date flexibility shows:", opts: ["Desperation", "Professionalism and genuine interest", "Weakness", "Indifference"], ans: 1 },
+    { q: "Which is the most important HR interview skill?", opts: ["Technical coding", "Clear, confident communication with structured thinking", "Memorizing answers", "Speed"], ans: 1 },
+    { q: "Mock interviews help by:", opts: ["Wasting time", "Building confidence and identifying weak areas", "Making you nervous", "Not helpful at all"], ans: 1 }
+];
+
+let currentStep = 1;
+let completedSteps = JSON.parse(localStorage.getItem('hrCompletedSteps') || '[]');
+
+function updateProgress() {
+    const percent = (completedSteps.length / 5) * 100;
+    document.getElementById('progressFill').style.width = `${percent}%`;
+    document.getElementById('progressPercent').textContent = `${Math.round(percent)}%`;
+    document.querySelectorAll('.step-btn').forEach(btn => {
+        const step = parseInt(btn.dataset.step);
+        btn.classList.toggle('completed', completedSteps.includes(step));
+    });
+}
+
+function markStepComplete(step) {
+    if (!completedSteps.includes(step)) {
+        completedSteps.push(step);
+        localStorage.setItem('hrCompletedSteps', JSON.stringify(completedSteps));
+        updateProgress();
+        renderStepContent(step);
+    }
+}
+
+function renderStepContent(step) {
+    currentStep = step;
+    const stepData = stepsData[step];
+    const isCompleted = completedSteps.includes(step);
+    let html = `<div class="step-content active">
+        <div class="step-header">
+            <div><h2>${stepData.title}</h2><p>${stepData.description}</p></div>
+            ${!isCompleted ? `<button class="complete-step-btn" onclick="markStepComplete(${step})">✓ Mark as Complete</button>` : '<div class="completed-badge">✓ Step Completed! 🎉</div>'}
+        </div>`;
+    stepData.topics.forEach(topic => {
+        html += `<div class="topic-card" onclick="toggleSubTopics(this)">
+            <div class="topic-header">
+                <h3><span class="topic-icon">${topic.icon}</span> ${topic.title}</h3>
+                <span class="arrow">›</span>
+            </div>
+            <div class="sub-topics">`;
+        topic.subs.forEach(sub => { html += `<div class="sub-topic" onclick="showContent(event,'${sub.id}')">${sub.title}</div>`; });
+        html += `</div></div>`;
+    });
+    html += `<div class="detail-container" id="detailContainer"><p style="color:#94a3b8;text-align:center;">📚 Click on any topic above to view detailed content with examples and proven frameworks.</p></div>
+        <div class="nav-buttons">
+            ${step > 1 ? `<button class="nav-btn prev" onclick="changeStep(${step-1})">← Previous Step</button>` : '<div></div>'}
+            ${step < 5 ? `<button class="nav-btn next" onclick="changeStep(${step+1})">Next Step →</button>` : '<button class="nav-btn next" onclick="window.location.href=\'subjects.html\'">🏆 Complete HR Course →</button>'}
+        </div></div>`;
+    document.getElementById('contentSection').innerHTML = html;
+    document.querySelectorAll('.step-btn').forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.dataset.step) === step);
+    });
+}
+
+function changeStep(step) { if (step >= 1 && step <= 5) { renderStepContent(step); window.scrollTo({top:0,behavior:'smooth'}); } }
+function toggleSubTopics(card) {
+    const sub = card.querySelector('.sub-topics'); const arrow = card.querySelector('.arrow');
+    document.querySelectorAll('.sub-topics').forEach(s => { if(s !== sub) s.classList.remove('active'); });
+    sub.classList.toggle('active');
+    if(arrow) arrow.style.transform = sub.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+function showContent(event, id) {
+    event.stopPropagation();
+    const dc = document.getElementById('detailContainer');
+    dc.innerHTML = detailedContent[id] || '<p>Content coming soon!</p>';
+    dc.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// Quiz
+function renderQuiz() {
+    let html = '';
+    quizData.forEach((q, i) => {
+        html += `<div class="question-block">
+            <h4>${i+1}. ${q.q}</h4>
+            <div class="options">`;
+        q.opts.forEach((opt, j) => {
+            html += `<label class="option-label" id="opt_${i}_${j}">
+                <input type="radio" name="q${i}" value="${j}"> ${opt}
+            </label>`;
+        });
+        html += `</div></div>`;
+    });
+    document.getElementById('quizQuestions').innerHTML = html;
+}
+
+function submitQuiz() {
+    let score = 0; let wrongTopics = [];
+    const categories = ['Introduction','Behavioral','Situational','Company Research','Salary & Closing','STAR Method','Leadership','Communication','Preparation','Confidence'];
+    quizData.forEach((q, i) => {
+        const sel = document.querySelector(`input[name="q${i}"]:checked`);
+        const correct = q.ans;
+        if (sel) {
+            const val = parseInt(sel.value);
+            if (val === correct) { score++; document.getElementById(`opt_${i}_${val}`).classList.add('correct'); }
+            else { document.getElementById(`opt_${i}_${val}`).classList.add('wrong'); document.getElementById(`opt_${i}_${correct}`).classList.add('correct'); wrongTopics.push(i); }
+        } else { document.getElementById(`opt_${i}_${correct}`).classList.add('correct'); }
+    });
+
+    // ML: Naive Bayes-like topic scoring
+    const topicScores = {};
+    const topicMap = {0:'Introduction',1:'Behavioral',2:'Situational',3:'Company Research',4:'Salary',5:'STAR Method',6:'Leadership',7:'Communication',8:'Preparation',9:'Confidence'};
+    wrongTopics.forEach(idx => { const t = topicMap[idx % 10]; topicScores[t] = (topicScores[t]||0)+1; });
+    const weakTopics = Object.entries(topicScores).sort((a,b)=>b[1]-a[1]).slice(0,3);
+
+    let grade = score >= 45 ? '🏆 Excellent' : score >= 35 ? '✅ Good' : score >= 25 ? '⚡ Average' : '📚 Needs Work';
+    let resultHTML = `<h3>${grade} — ${score}/50</h3>
+        <p style="color:#94a3b8;margin-top:10px;">${score>=45?'Outstanding! You are very well prepared for HR interviews.':score>=35?'Good score! Review the areas you missed.':'Keep practicing! Focus on your weak areas.'}</p>`;
+    if (weakTopics.length > 0) {
+        resultHTML += `<div class="improvement-area" style="margin-top:20px;text-align:left;">
+            <h4>🤖 ML-Powered Improvement Areas (Weakness Pattern Analysis)</h4>
+            <p style="color:#94a3b8;font-size:14px;margin-bottom:12px;">Based on your wrong answers, our algorithm detected these recurring weak patterns:</p>
+            <ul>`;
+        weakTopics.forEach(([topic, count]) => {
+            const tips = {
+                'Introduction': 'Practice your elevator pitch daily using Present-Past-Future framework',
+                'Behavioral': 'Prepare 10 STAR stories from your academic/internship experience',
+                'Situational': 'Read 20+ case studies on workplace conflict resolution',
+                'Company Research': 'Spend 30 mins researching company before each interview',
+                'Salary': 'Use Glassdoor and AmbitionBox for market rate research',
+                'STAR Method': 'Write out 5 complete STAR stories this week',
+                'Leadership': 'Document all leadership moments from college/internships',
+                'Communication': 'Practice mock interviews with a friend or record yourself',
+                'Preparation': 'Follow a structured 7-day interview prep plan',
+                'Confidence': 'Do 5 mock interviews to build confidence'
+            };
+            resultHTML += `<li style="margin-bottom:8px;"><strong style="color:#eab308;">${topic}</strong> (${count} mistake${count>1?'s':''}): ${tips[topic]||'Review this topic carefully'}</li>`;
+        });
+        resultHTML += `</ul></div>`;
+    }
+    document.getElementById('quizResult').innerHTML = resultHTML;
+    document.getElementById('quizResult').style.display = 'block';
+    document.getElementById('quizResult').scrollIntoView({behavior:'smooth'});
+}
+
+document.querySelectorAll('.step-btn').forEach(btn => btn.addEventListener('click', () => changeStep(parseInt(btn.dataset.step))));
+updateProgress();
+renderStepContent(1);
+renderQuiz();
+
+function toggleQuiz() {
+    const btn = document.getElementById('quizToggleBtn');
+    const body = document.getElementById('quizCollapsible');
+    btn.classList.toggle('open');
+    body.classList.toggle('open');
+    if (body.classList.contains('open')) {
+        btn.querySelector('span:first-child').textContent = '📋 50-Question HR Interview Quiz';
+        body.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+        btn.querySelector('span:first-child').textContent = '📋 Click to Start the 50-Question Quiz';
+    }
+}
+</script>
+</body>
+</html>

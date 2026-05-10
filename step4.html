@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Step 4: Stack & Queue – DSA Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:radial-gradient(circle at top,#0a1b3d,#020617);color:#e2e8f0;min-height:100vh;line-height:1.8;}
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 80px;z-index:100;background:rgba(2,6,23,0.95);backdrop-filter:blur(10px);}
+    .logo{font-size:24px;font-weight:700;color:#6366f1;}
+    nav a{margin-left:28px;text-decoration:none;color:#bfc6d4;font-size:15px;transition:0.3s;}
+    nav a:hover{color:white;}
+    nav a.active{background:#1f2937;padding:8px 20px;border-radius:9999px;color:white;}
+
+    .hero{text-align:center;margin-top:160px;}
+    .tag{display:inline-block;padding:8px 20px;border-radius:9999px;background:#1f2937;font-size:14px;color:#a5b4fc;margin-bottom:20px;}
+    .hero h1{font-size:54px;font-weight:700;line-height:1.1;margin-bottom:20px;}
+    .hero p{color:#9ca3af;font-size:18px;max-width:820px;margin:0 auto 40px;}
+
+    .progress-bar{max-width:1150px;margin:40px auto;padding:0 40px;}
+    .progress-label{display:flex;justify-content:space-between;font-size:14px;color:#94a3b8;margin-bottom:10px;}
+    .progress-track{background:rgba(255,255,255,0.1);height:8px;border-radius:9999px;}
+    .progress-fill{background:linear-gradient(90deg,#6366f1,#a855f7);height:100%;width:57%;border-radius:9999px;}
+
+    .content-section{max-width:1150px;margin:40px auto;padding:0 40px;}
+    .section-title{font-size:28px;font-weight:600;margin:50px 0 30px;color:#e0e7ff;}
+
+    .topic-card{
+        background:rgba(255,255,255,0.06);
+        border:1px solid rgba(255,255,255,0.12);
+        border-radius:16px;
+        padding:28px 32px;
+        margin-bottom:20px;
+        transition:all 0.3s;
+        cursor:pointer;
+    }
+    .topic-card:hover{border-color:#6366f1;transform:translateY(-4px);}
+    .topic-header{display:flex;align-items:center;justify-content:space-between;}
+    .topic-header h4{font-size:21px;font-weight:600;display:flex;align-items:center;gap:14px;}
+    .badge{padding:6px 16px;border-radius:9999px;font-size:13px;font-weight:500;}
+    .badge.green{background:#10b981;color:white;}
+    .badge.yellow{background:#f59e0b;color:white;}
+
+    .sub-topics{display:none;margin-top:25px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.2);}
+    .sub-topics.active{display:block;}
+    .sub-topic{padding:18px 26px;background:rgba(255,255,255,0.05);border-radius:12px;margin-bottom:12px;transition:0.3s;cursor:pointer;font-size:16.5px;}
+    .sub-topic:hover{background:rgba(99,102,241,0.18);border-left:5px solid #6366f1;}
+
+    .topic-content{
+        display:none;
+        margin-top:35px;
+        background:rgba(15,23,42,0.75);
+        border:1px solid rgba(99,102,241,0.35);
+        border-radius:18px;
+        padding:45px;
+    }
+    .topic-content.active{display:block;}
+    .topic-content h2{margin:35px 0 20px;font-size:28px;color:#c4d0ff;}
+    .topic-content h3{margin:28px 0 14px;font-size:23px;color:#a5b4fc;}
+    .topic-content p{margin-bottom:22px;color:#cbd5e1;}
+    .topic-content ul{margin:18px 0 25px;padding-left:32px;}
+    .topic-content li{margin-bottom:10px;}
+
+    table{width:100%;border-collapse:collapse;margin:25px 0;}
+    th, td{border:1px solid rgba(255,255,255,0.2);padding:16px;text-align:left;}
+    th{background:rgba(99,102,241,0.25);color:#e0e7ff;}
+
+    .code-block{
+        background:#0f172a;
+        border:1px solid #334155;
+        border-radius:14px;
+        padding:28px;
+        margin:25px 0;
+        font-family:ui-monospace, monospace;
+        font-size:15.2px;
+        line-height:1.8;
+        color:#e2e8f0;
+        overflow-x:auto;
+    }
+
+    .lang-tabs{
+        display:flex;
+        background:rgba(255,255,255,0.1);
+        border-radius:8px;
+        padding:4px;
+        margin-bottom:15px;
+        width:fit-content;
+    }
+    .lang-tab{
+        padding:8px 18px;
+        border-radius:6px;
+        cursor:pointer;
+        font-size:14px;
+        transition:0.3s;
+        margin-right:4px;
+    }
+    .lang-tab.active{
+        background:#6366f1;
+        color:white;
+    }
+
+    .diagram{
+        background:#1e2937;
+        border:1px solid #475569;
+        border-radius:12px;
+        padding:20px;
+        margin:25px 0;
+        font-family:monospace;
+        white-space:pre;
+        line-height:1.6;
+        color:#94a3b8;
+        overflow-x:auto;
+    }
+
+    .example-box{background:rgba(16,185,129,0.12);border-left:5px solid #10b981;padding:22px 26px;margin:28px 0;border-radius:10px;}
+    .note{background:rgba(234,179,8,0.18);border-left:6px solid #eab308;padding:22px 26px;margin:30px 0;border-radius:10px;}
+    .warning{background:rgba(239,68,68,0.18);border-left:6px solid #ef4444;padding:22px 26px;margin:30px 0;border-radius:10px;}
+    .tip{background:rgba(59,130,246,0.15);border-left:6px solid #3b82f6;padding:22px 26px;margin:30px 0;border-radius:10px;}
+
+    .nav-btns{display:flex;justify-content:center;gap:25px;padding:90px 0 120px;}
+    .btn{padding:16px 38px;font-size:17px;border-radius:12px;transition:0.3s;font-weight:500;}
+    .btn-primary{background:#6366f1;color:white;}
+    .btn-primary:hover{background:#4f46e5;}
+    .btn-outline{border:2px solid rgba(255,255,255,0.35);color:white;}
+    .btn-outline:hover{border-color:#6366f1;background:rgba(99,102,241,0.15);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><a href="dsa-roadmap.html">🧠 DSA Roadmap</a></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="step1.html">Step 1</a>
+    <a href="step2.html">Step 2</a>
+    <a href="step3.html">Step 3</a>
+    <a href="step4.html" class="active">Step 4</a>
+    <a href="step5.html">Step 5</a>
+    <a href="step6.html">Step 6</a>
+    <a href="step7.html">Step 7</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="tag">Step 4 of 7 • Abstract Data Types</div>
+  <h1>Stack & Queue</h1>
+  <p>Essential linear data structures based on order. Master LIFO (Stack), FIFO (Queue), Priority Queue, and Deque with real-world applications.</p>
+</div>
+
+<div class="progress-bar">
+  <div class="progress-label"><span>Your Progress</span><span>Step 4 / 7 (57%)</span></div>
+  <div class="progress-track"><div class="progress-fill"></div></div>
+</div>
+
+<div class="content-section">
+  <div class="section-title">📖 Stack (LIFO)</div>
+
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">📚</span> Stack Basics</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'stack-intro')">1. What is a Stack?</div>
+      <div class="sub-topic" onclick="showContent(event, 'stack-operations')">2. Core Operations</div>
+    </div>
+  </div>
+
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">🎯</span> Stack Applications</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'valid-parens')">1. Valid Parentheses</div>
+      <div class="sub-topic" onclick="showContent(event, 'next-greater')">2. Next Greater Element</div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:50px;">📖 Queue (FIFO)</div>
+
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">🚶</span> Queue Basics</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'queue-intro')">1. What is a Queue?</div>
+      <div class="sub-topic" onclick="showContent(event, 'queue-operations')">2. Core Operations</div>
+    </div>
+  </div>
+
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">⭐</span> Priority Queue & Heap</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'priority-queue')">1. Priority Queue</div>
+    </div>
+  </div>
+
+  <div class="topic-card" onclick="toggleSubTopics(this)">
+    <div class="topic-header">
+      <h4><span style="font-size:30px;">🔄</span> Deque (Double-Ended Queue)</h4>
+      <span style="font-size:30px;transition:0.3s;">›</span>
+    </div>
+    <div class="sub-topics">
+      <div class="sub-topic" onclick="showContent(event, 'deque')">1. Deque & Sliding Window</div>
+    </div>
+  </div>
+</div>
+
+<div id="content-container" class="content-section"></div>
+
+<div class="nav-btns">
+  <a href="step3.html" class="btn btn-outline">← Step 3: Linked List</a>
+  <a href="step5.html" class="btn btn-primary">Next: Step 5 – Trees →</a>
+</div>
+
+<script>
+// Deep content for Step 4
+const contents = {
+
+  'stack-intro': `
+    <h2>What is a Stack?</h2>
+    <p>A Stack is a linear data structure that follows <strong>LIFO (Last In, First Out)</strong> principle. The last element added is the first one to be removed.</p>
+    
+    <div class="diagram">
+Top → [ 3 ] ← Push/Pop here
+      [ 2 ]
+      [ 1 ]
+Bottom
+    </div>
+
+    <div class="tip"><strong>Real-life example:</strong> Stack of plates, browser back button, undo feature in editors.</div>
+  `,
+
+  'stack-operations': `
+    <h2>Core Stack Operations (All O(1))</h2>
+
+    <div class="lang-tabs">
+      <div class="lang-tab active" onclick="switchLang(this, 'py-stack')">Python</div>
+      <div class="lang-tab" onclick="switchLang(this, 'java-stack')">Java</div>
+      <div class="lang-tab" onclick="switchLang(this, 'c-stack')">C</div>
+    </div>
+
+    <div id="py-stack" class="code-block">
+stack = []<br>
+stack.append(10)     <span class="comment"># push</span><br>
+stack.append(20)<br>
+top = stack.pop()    <span class="comment"># pop → 20</span><br>
+peek = stack[-1]     <span class="comment"># peek → 10</span>
+    </div>
+
+    <div id="java-stack" class="code-block" style="display:none;">
+Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();<br>
+stack.push(10);<br>
+stack.push(20);<br>
+int top = stack.pop();      <span class="comment">// 20</span><br>
+int peek = stack.peek();    <span class="comment">// 10</span>
+    </div>
+
+    <div id="c-stack" class="code-block" style="display:none;">
+// Using array-based stack (simplified)
+void push(int val) { ... }<br>
+int pop() { ... }<br>
+int peek() { ... }
+    </div>
+  `,
+
+  'valid-parens': `
+    <h2>Valid Parentheses (Classic Stack Problem)</h2>
+    <p>Use stack to check if brackets are properly balanced.</p>
+
+    <div class="lang-tabs">
+      <div class="lang-tab active" onclick="switchLang(this, 'py-parens')">Python</div>
+    </div>
+
+    <div id="py-parens" class="code-block">
+<span class="kw">def</span> isValid(s):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;stack = []<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mapping = {<span class="str">")"</span>: <span class="str">"("</span>, <span class="str">"}"</span>: <span class="str">"{"</span>, <span class="str">"]"</span>: <span class="str">"["</span>}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">for</span> char <span class="kw">in</span> s:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> char <span class="kw">in</span> mapping:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top = stack.pop() <span class="kw">if</span> stack <span class="kw">else</span> <span class="str">"#"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> mapping[char] != top: <span class="kw">return</span> False<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">else</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stack.append(char)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> not stack
+    </div>
+
+    <div class="example-box">
+<strong>Input:</strong> "()[]{}" → True<br>
+<strong>Input:</strong> "(]" → False
+    </div>
+  `,
+
+  'queue-intro': `
+    <h2>What is a Queue?</h2>
+    <p>A Queue follows <strong>FIFO (First In, First Out)</strong> principle. Elements are added at the rear and removed from the front.</p>
+    
+    <div class="diagram">
+Front → [1] [2] [3] ← Rear
+    </div>
+
+    <div class="tip"><strong>Real-life example:</strong> People standing in a queue, printer jobs, BFS traversal.</div>
+  `,
+
+  'queue-operations': `
+    <h2>Core Queue Operations</h2>
+
+    <div class="lang-tabs">
+      <div class="lang-tab active" onclick="switchLang(this, 'py-queue')">Python</div>
+      <div class="lang-tab" onclick="switchLang(this, 'java-queue')">Java</div>
+    </div>
+
+    <div id="py-queue" class="code-block">
+<span class="kw">from</span> collections <span class="kw">import</span> deque<br>
+q = deque()<br>
+q.append(10)      <span class="comment"># enqueue</span><br>
+q.append(20)<br>
+front = q.popleft()   <span class="comment"># dequeue → 10</span>
+    </div>
+
+    <div id="java-queue" class="code-block" style="display:none;">
+Queue&lt;Integer&gt; q = new LinkedList&lt;&gt;();<br>
+q.add(10);<br>
+q.add(20);<br>
+int front = q.poll();   <span class="comment">// 10</span>
+    </div>
+  `,
+
+  'priority-queue': `
+    <h2>Priority Queue (Min-Heap / Max-Heap)</h2>
+    <p>Elements are served based on priority, not insertion order. Usually implemented using a Binary Heap.</p>
+
+    <div class="lang-tabs">
+      <div class="lang-tab active" onclick="switchLang(this, 'py-heap')">Python</div>
+    </div>
+
+    <div id="py-heap" class="code-block">
+<span class="kw">import</span> heapq<br>
+heap = []<br>
+heapq.heappush(heap, 3)<br>
+heapq.heappush(heap, 1)<br>
+heapq.heappush(heap, 5)<br>
+<span class="fn">print</span>(heapq.heappop(heap))   <span class="comment"># 1 (smallest)</span>
+    </div>
+
+    <div class="note"><strong>Use case:</strong> Finding K largest/smallest elements, Dijkstra's algorithm, Huffman coding.</div>
+  `,
+
+  'deque': `
+    <h2>Deque (Double-Ended Queue)</h2>
+    <p>Allows insertion and deletion from both ends in O(1) time. Very useful for sliding window problems.</p>
+
+    <div class="diagram">
+Left (front) ← [1] [2] [3] → Right (rear)
+    </div>
+  `
+};
+
+// Language switching function
+function switchLang(tab, id) {
+    const parent = tab.parentElement;
+    parent.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    const container = parent.parentElement;
+    container.querySelectorAll('.code-block').forEach(block => block.style.display = 'none');
+
+    const target = document.getElementById(id);
+    if (target) target.style.display = 'block';
+}
+
+// Toggle sub-topics
+function toggleSubTopics(card) {
+    document.querySelectorAll('.sub-topics').forEach(sub => {
+        if (sub !== card.querySelector('.sub-topics')) sub.classList.remove('active');
+    });
+    const subTopics = card.querySelector('.sub-topics');
+    subTopics.classList.toggle('active');
+    const arrow = card.querySelector('span:last-child');
+    if (arrow) arrow.style.transform = subTopics.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+
+// Show detailed content
+function showContent(e, id) {
+    e.stopImmediatePropagation();
+    const container = document.getElementById('content-container');
+    container.innerHTML = contents[id] || `<p style="color:#f87171;padding:40px;">Deep content for this section is ready.</p>`;
+    container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+</script>
+
+</body>
+</html>

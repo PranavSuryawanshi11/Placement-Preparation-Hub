@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Subjects - Preparation Hub</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.subject-card img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:10px;
+    margin-bottom:12px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">PrepHub</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a class="active" href="subjects.html">Subjects</a>
+
+</nav>
+
+</header>
+
+<section class="subjects-section">
+
+<h1 class="subjects-title">Core Subjects</h1>
+
+<div class="subjects-container">
+
+<div class="subject-card">
+        <a href="learn dsa.html" style="text-decoration:none; color:inherit;">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrL77GzB3o74mZXH5kzw7jjAF1oTY2Bqm_nw&s">
+<h3>Data Structures & Algorithms</h3>
+<p>Practice coding problems and master algorithms.</p>
+<button class="subject-btn">Start Learning</button>
+</a>
+</div>
+
+<div class="subject-card">
+        <a href="Dbms.html" style="text-decoration:none; color:inherit;">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwjB9qxndlmbB2yTZN27Xo7vXq6tfN7JaatA&s">
+<h3>DBMS</h3>
+<p>Learn database concepts, SQL queries and normalization.</p>
+<button class="subject-btn">Start Learning</button>
+</a>
+</div>
+
+<div class="subject-card">
+        <a href="os_learning.html" style="text-decoration:none; color:inherit;">
+<img src="https://www.mygreatlearning.com/blog/wp-content/uploads/2021/06/shutterstock_387653479.jpg">
+<h3>Operating System</h3>
+<p>Understand processes, scheduling and memory management.</p>
+    <button class="subject-btn">Start Learning</button>
+</a>
+</div>
+
+<div class="subject-card">
+        <a href="Cn.html" style="text-decoration:none; color:inherit;">
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20250726184452563578/frame_25-660.webp">
+<h3>Computer Networks</h3>
+<p>Learn networking models, protocols and communication.</p>
+<button class="subject-btn">Start Learning</button>
+</a>
+</div>
+
+<div class="subject-card">
+        <a href="Oop.html" style="text-decoration:none; color:inherit;">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiqyfltFNh9Kn5FL2go3VpZj5ARbWMWQapVg&s">
+<h3>Object Oriented Programming</h3>
+<p>Master OOP concepts like inheritance and polymorphism.</p>
+<button class="subject-btn">Start Learning</button>
+        </a>
+</div>
+
+<div class="subject-card">
+        <a href="aptitude.html" style="text-decoration:none; color:inherit;">
+<img src="https://cache.careers360.mobi/media/presets/860X430/article_images/2019/9/17/Quantitative-Aptitude.jpg">
+<h3>Aptitude</h3>
+<p>Improve logical reasoning and quantitative skills.</p>
+<button class="subject-btn">Start Learning</button>
+        </a>
+</div>
+
+</div>
+
+</section>
+
+<script>
+  if (window.self === window.top) {
+    // Page opened directly (not inside PrepHub iframe) → redirect to home
+    var page = window.location.pathname.split('/').pop();
+    window.location.replace('index.html#' + page);
+  }
+</script>
+
+</body>
+</html>

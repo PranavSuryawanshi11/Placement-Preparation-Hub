@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PrepHub Code Editor</title>
+    <meta charset="UTF-8">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #020617;
+            color: #e2e8f0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 120px auto 40px;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 0 40px;
+        }
+
+        .left-panel { flex: 2; min-width: 620px; }
+        .right-panel { 
+            flex: 1; 
+            min-width: 380px; 
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        h4 {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 17px;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        select {
+            padding: 12px 18px;
+            background: #1f2937;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .panel {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .panel:hover { border-color: #6366f1; }
+
+        .panel-header {
+            background: #1f2937;
+            padding: 14px 20px;
+            font-weight: 600;
+            font-size: 15px;
+            color: #cbd5f5;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 20px;
+            background: #0f172a;
+            color: #e2e8f0;
+            border: none;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 15.5px;
+            line-height: 1.55;
+            resize: vertical;
+            min-height: 480px;
+        }
+
+        #input { min-height: 160px; }
+
+        #output {
+            width: 100%;
+            min-height: 280px;
+            padding: 20px;
+            background: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 15px;
+            line-height: 1.55;
+            white-space: pre-wrap;
+            overflow-y: auto;
+        }
+
+        .run-container { text-align: center; }
+
+        button {
+            padding: 14px 34px;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 1100px) {
+            .container {
+                flex-direction: column;
+                padding: 0 20px;
+            }
+            .left-panel, .right-panel { min-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>PrepHub Code Editor</h1>
+    <h4>Write, compile and run code in multiple languages instantly</h4>
+
+    <div class="container">
+
+        <!-- Left: Code Editor -->
+        <div class="left-panel">
+            <div class="header">
+                <select id="language" onchange="loadBoilerplate()">
+                    <option value="50">C</option>
+                    <option value="54">C++</option>
+                    <option value="62">Java</option>
+                    <option value="71">Python 3</option>
+                    <option value="63">JavaScript (Node.js)</option>
+                    <option value="51">C# (.NET)</option>
+                    <option value="73">Rust</option>
+                    <option value="60">Go</option>
+                    <option value="78">Kotlin</option>
+                    <option value="68">PHP</option>
+                    <option value="74">TypeScript</option>
+                    <option value="72">Ruby</option>
+                </select>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">Code</div>
+                <textarea id="code" placeholder="Write your code here..."></textarea>
+            </div>
+        </div>
+
+        <!-- Right: Input + Output -->
+        <div class="right-panel">
+
+            <div class="panel">
+                <div class="panel-header">Input (stdin)</div>
+                <textarea id="input" placeholder="Enter program input here (If Required)..."></textarea>
+            </div>
+
+            <div class="run-container">
+                <button onclick="runCode()">Run Code ▶</button>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">Output</div>
+                <div id="output">Click "Run Code" to execute your program...</div>
+            </div>
+
+        </div>
+    </div>
+
+<script>
+// Boilerplate code for each language
+const boilerplates = {
+    "50": `#include <stdio.h>
+
+int main() {
+    printf("Hello, World!\\n");
+    return 0;
+}`,
+
+    "54": `#include <iostream>
+
+int main() {
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}`,
+
+    "62": `public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}`,
+
+    "71": `print("Hello, World!")`,
+
+    "63": `console.log("Hello, World!");`,
+
+    "51": `using System;
+
+class Program {
+    static void Main() {
+        Console.WriteLine("Hello, World!");
+    }
+}`,
+
+    "73": `fn main() {
+    println!("Hello, World!");
+}`,
+
+    "60": `package main
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}`,
+
+    "78": `fun main() {
+    println("Hello, World!")
+}`,
+
+    "68": `<?php
+echo "Hello, World!";
+?>`,
+
+    "74": `console.log("Hello, World!");`,
+
+    "72": `puts "Hello, World!"`
+};
+
+function loadBoilerplate() {
+    const lang = document.getElementById("language").value;
+    const codeArea = document.getElementById("code");
+    
+    if (boilerplates[lang]) {
+        codeArea.value = boilerplates[lang];
+    } else {
+        codeArea.value = "";
+    }
+}
+
+// Load default boilerplate when page loads
+window.onload = function() {
+    loadBoilerplate();
+};
+
+async function runCode() {
+    const code = document.getElementById("code").value.trim();
+    const lang = document.getElementById("language").value;
+    const input = document.getElementById("input").value;
+
+    if (!code) {
+        document.getElementById("output").innerText = "Error: Please write some code before running.";
+        return;
+    }
+
+    let processedCode = code;
+    if (lang === "62") {
+        processedCode = code.replace(/public class \w+/, "public class Main");
+    }
+
+    const outputDiv = document.getElementById("output");
+    outputDiv.innerText = "Compiling and running...";
+
+    try {
+        const response = await fetch("run.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                code: processedCode,
+                language: lang,
+                input: input
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        let resultText = data.stdout || 
+                        (data.stderr ? "Error:\n" + data.stderr : "") ||
+                        (data.compile_output ? "Compilation Error:\n" + data.compile_output : "") ||
+                        (data.error ? "Error: " + data.error : "No output");
+
+        outputDiv.innerText = resultText || "No Output";
+
+    } catch (error) {
+        outputDiv.innerText = "Request failed: " + error.message;
+        console.error(error);
+    }
+}
+</script>
+
+</body>
+</html>

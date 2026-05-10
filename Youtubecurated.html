@@ -1,0 +1,494 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <title>Top Channels - PrepHub</title>
+
+        <style>
+        *{ margin:0; padding:0; box-sizing:border-box; }
+
+        body{
+        background:#0d1117;
+        color:#e2e8f0;
+        font-family:sans-serif;
+        min-height:100vh;
+        }
+
+        /* Header */
+        header{
+        position:fixed;
+        top:0; left:0; right:0;
+        z-index:100;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:18px 60px;
+        background:rgba(13,17,23,0.92);
+        backdrop-filter:blur(12px);
+        border-bottom:1px solid rgba(255,255,255,0.07);
+        }
+        .logo{ font-size:22px; font-weight:800; color:#6366f1; }
+        nav a{
+        color:#94a3b8;
+        text-decoration:none;
+        margin-left:28px;
+        font-size:14px;
+        font-weight:500;
+        transition:color 0.2s;
+        }
+        nav a:hover{ color:#e2e8f0; }
+
+        /* Page header */
+        .channel-section{ padding-top:120px; text-align:center; }
+        .subjects-title{ font-size:32px; font-weight:800; color:#e2e8f0; margin-bottom:6px; }
+        .subjects-title span{ color:#6366f1; }
+        .sub-title{ font-size:14px; color:#64748b; margin-bottom:22px; }
+
+        /* Tabs */
+        .tab-bar{ display:flex; justify-content:center; gap:10px; margin-bottom:20px; }
+        .tab-btn{
+        padding:9px 26px;
+        border-radius:8px;
+        border:1px solid rgba(255,255,255,0.1);
+        background:transparent;
+        color:#94a3b8;
+        font-size:14px;
+        font-weight:600;
+        cursor:pointer;
+        transition:all 0.2s;
+        }
+        .tab-btn.active{ background:#6366f1; border-color:#6366f1; color:#fff; }
+        .tab-btn:hover:not(.active){ border-color:#6366f1; color:#e2e8f0; }
+
+        /* Search Bar */
+        .search-container {
+        max-width: 620px;
+        margin: 15px auto 20px;
+        padding: 0 20px;
+        }
+        .search-box {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 16px;
+        border-radius: 12px;
+        background: #161b22;
+        border: 1px solid rgba(255,255,255,0.12);
+        color: #e2e8f0;
+        outline: none;
+        }
+        .search-box:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+        }
+
+        /* Filters */
+        .filters{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:10px;
+        margin:0 20px 10px;
+        }
+        .filter-group{
+        display:flex;
+        align-items:center;
+        gap:8px;
+        background:#161b22;
+        border:1px solid rgba(255,255,255,0.08);
+        border-radius:8px;
+        padding:7px 14px;
+        }
+        .filter-group label{ font-size:12px; color:#64748b; font-weight:600; white-space:nowrap; }
+        .filter-group select{
+        background:transparent;
+        border:none;
+        color:#e2e8f0;
+        font-size:13px;
+        font-weight:500;
+        cursor:pointer;
+        outline:none;
+        }
+
+        /* Count */
+        .result-count{ font-size:13px; color:#64748b; text-align:center; margin-bottom:10px; }
+        .result-count b{ color:#818cf8; }
+
+        /* Channel & Video Grid */
+        .channel-container, .video-grid{
+        display:grid;
+        gap:22px;
+        padding:20px 60px 60px;
+        }
+        .channel-container { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+        .video-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+
+        .channel-card, .video-card{
+        background:rgba(255,255,255,0.04);
+        border:1px solid rgba(255,255,255,0.08);
+        border-radius:14px;
+        transition: all 0.25s;
+        }
+        .channel-card:hover, .video-card:hover{
+        transform:translateY(-6px);
+        border-color:#6366f1;
+        box-shadow:0 4px 24px rgba(99,102,241,0.15);
+        }
+
+        .channel-card img{
+        width:76px; height:76px;
+        border-radius:50%;
+        object-fit:cover;
+        border:2px solid rgba(255,255,255,0.1);
+        margin-bottom:10px;
+        background:#1f2937;
+        }
+        .channel-card h3{ font-size:15px; font-weight:700; margin-bottom:6px; color:#e2e8f0; }
+        .channel-card > p{ font-size:13px; color:#64748b; margin-bottom:14px; }
+
+        .topic-link{
+        display:inline-block;
+        margin:3px;
+        font-size:12px;
+        color:#818cf8;
+        background:rgba(99,102,241,0.1);
+        border:1px solid rgba(99,102,241,0.2);
+        border-radius:6px;
+        padding:3px 10px;
+        }
+        .topic-link:hover{ background:rgba(99,102,241,0.22); }
+
+        .video-embed{ position:relative; padding-bottom:56.25%; background:#000; }
+        .video-embed iframe{
+        position:absolute;
+        top:0; left:0;
+        width:100%; height:100%;
+        border:none;
+        }
+        .video-info{ padding:14px 16px 16px; }
+        .video-info h3{ font-size:14px; font-weight:600; line-height:1.4; color:#e2e8f0; margin-bottom:10px; }
+        .video-meta{ display:flex; flex-wrap:wrap; gap:6px; }
+        .badge{ font-size:11px; font-weight:600; padding:3px 10px; border-radius:6px; }
+        .badge.subject  { background:rgba(99,102,241,0.12); color:#a5b4fc; border:1px solid rgba(99,102,241,0.25); }
+        .badge.lang     { background:rgba(34,211,238,0.08);  color:#67e8f9; border:1px solid rgba(34,211,238,0.18); }
+        .badge.beginner { background:rgba(74,222,128,0.1);   color:#4ade80; border:1px solid rgba(74,222,128,0.2); }
+        .badge.medium   { background:rgba(250,204,21,0.1);   color:#facc15; border:1px solid rgba(250,204,21,0.2); }
+        .badge.hard     { background:rgba(248,113,113,0.1);  color:#f87171; border:1px solid rgba(248,113,113,0.2); }
+
+        .loading {
+        text-align:center;
+        padding:60px 20px;
+        color:#64748b;
+        }
+        .spinner {
+        display:inline-block;
+        width:28px;
+        height:28px;
+        border:3px solid rgba(99,102,241,0.2);
+        border-top:3px solid #6366f1;
+        border-radius:50%;
+        animation:spin 1s linear infinite;
+        margin-bottom:12px;
+        }
+        @keyframes spin { to { transform:rotate(360deg); } }
+
+        .empty-state{ text-align:center; padding:70px 20px; color:#475569; display:none; }
+        .empty-state p{ font-size:15px; margin-top:12px; }
+        </style>
+        </head>
+        <body>
+
+        <header>
+        <div class="logo">PrepHub</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="subjects.html">Subjects</a>
+        </nav>
+        </header>
+
+        <section class="channel-section">
+
+        <h1 class="subjects-title">Top YouTube <span>Channels</span></h1>
+        <p class="sub-title">Curated resources to crack your CS placements</p>
+
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTab('channels')">Top Channels</button>
+            <button class="tab-btn"        onclick="switchTab('videos')">Topic Videos (Live)</button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-box" 
+                placeholder="Search any topic (e.g. binary search, deadlock, SQL joins, OOP...)" 
+                onkeyup="handleSearch(event)">
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+            <label>Language</label>
+            <select id="langFilter" onchange="applyFilter()">
+                <option value="all">All</option>
+                <option value="english">English</option>
+                <option value="hindi">Hindi</option>
+            </select>
+            </div>
+            <div class="filter-group">
+            <label>Subject</label>
+            <select id="subjectFilter" onchange="applyFilter()">
+                <option value="all">All Subjects</option>
+                <option value="dsa">DSA</option>
+                <option value="dbms">DBMS</option>
+                <option value="os">OS</option>
+                <option value="cn">CN</option>
+                <option value="oop">OOP</option>
+            </select>
+            </div>
+            <div class="filter-group" id="levelGroup" style="display:none">
+            <label>Level</label>
+            <select id="levelFilter" onchange="applyFilter()">
+                <option value="all">All Levels</option>
+                <option value="beginner">Beginner</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            </div>
+        </div>
+
+        <p class="result-count"><b id="countText">--</b></p>
+
+        <!-- CHANNELS SECTION -->
+        <div id="channels-section">
+            <div class="channel-container">
+
+            <div class="channel-card hindi dsa">
+                <a href="https://www.youtube.com/@CodeHelp" target="_blank">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS74VhOU2ZlZ6GttIYPashUrE-a4NcOXJZCcQ&s" alt="Love Babbar">
+                <h3>CodeHelp  Love Babbar</h3>
+                </a>
+                <p>DSA Hindi roadmap for beginners</p>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=Y6X7XG3mE1M" target="_blank">Arrays</a>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=V7v2s7Jt3zI" target="_blank">Recursion</a>
+            </div>
+
+            <div class="channel-card english dbms os cn">
+                <a href="https://www.youtube.com/@GateSmashers" target="_blank">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTT_uvsAe9fc9SMJTkXs50Nf2HxmyEDQQ2cQ&s" alt="Gate Smashers">
+                <h3>Gate Smashers</h3>
+                </a>
+                <p>DBMS, OS, CN  GATE and placement focused</p>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=HXV3zeQKqGY" target="_blank">Normalization</a>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=ztHopE5Wnpc" target="_blank">SQL Basics</a>
+            </div>
+
+            <div class="channel-card english os cn dbms">
+                <a href="https://www.youtube.com/@NesoAcademy" target="_blank">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8J-5HtlHniFD5CVe47fFAJNbuqyUbqzrvOw&s" alt="Neso Academy">
+                <h3>Neso Academy</h3>
+                </a>
+                <p>OS, CN, DBMS  whiteboard-style teaching</p>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=26QPDBe-NB8" target="_blank">Processes</a>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=5m0p2s1yG7g" target="_blank">Scheduling</a>
+            </div>
+
+            <div class="channel-card hindi dbms os cn">
+                <a href="https://www.youtube.com/@LastMomentTuitions" target="_blank">
+                <img src="https://play-lh.googleusercontent.com/APeEZa4FLR80Q2huR4dQmpElLaBz_jw7kkkpFF38Kjm6Y_ehZjg3XIqH_8Vvo0WZBg" alt="Last Moment Tuitions">
+                <h3>Last Moment Tuitions</h3>
+                </a>
+                <p>Quick revision  DBMS, OS, CN (Hindi)</p>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=kBdlM6hNDAE" target="_blank">Transactions</a>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=4s3A9GwPBog" target="_blank">Deadlocks</a>
+            </div>
+
+            <div class="channel-card hindi dsa oop">
+                <a href="https://www.youtube.com/@ApnaCollege" target="_blank">
+                <img src="https://yt3.googleusercontent.com/FEcjRtez5od8UowDo6tTt9WlE-MrIFEmcwPMTORmK9Swk6KCklOmA3xfIG9WuLWfNYfNThQE=s900-c-k-c0x00ffffff-no-rj" alt="Apna College">
+                <h3>Apna College</h3>
+                </a>
+                <p>DSA and OOP full course in Hindi</p>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=yRpLlJmRo2w" target="_blank">Java OOP</a>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=9YfkQkIHCw4" target="_blank">Linked List</a>
+            </div>
+
+            <div class="channel-card english cn dsa">
+                <a href="https://www.youtube.com/@Kunal-Kushwaha" target="_blank">
+                <img src="https://yt3.googleusercontent.com/O8WpyZ5fkSpxQJDMA1N1WZeUp4foB4LTDeaQrRlZX_Ue4GTyMnz2J2yi4kXR4BNpGI55uzEs=s900-c-k-c0x00ffffff-no-rj" alt="Kunal Kushwaha">
+                <h3>Kunal Kushwaha</h3>
+                </a>
+                <p>CN, OS, DSA  beginner friendly (English)</p>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=VwN91x5i25g" target="_blank">Networking</a>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=qiQR5rTSshw" target="_blank">HTTP</a>
+            </div>
+
+            <div class="channel-card english oop dsa">
+                <a href="https://www.youtube.com/@BroCodez" target="_blank">
+                <img src="https://yt3.googleusercontent.com/ytc/AIdro_mPFVsxROj1dOtTWc9iNBwDYV4z42Q8LPokBSewiW9pCSg=s900-c-k-c0x00ffffff-no-rj" alt="Bro Code">
+                <h3>Bro Code</h3>
+                </a>
+                <p>OOP, Java, Python  easy explanations</p>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=Ej_02ICOIgs" target="_blank">OOP Java</a>
+                <a class="topic-link" href="https://www.youtube.com/watch?v=xoet_9LBGdQ" target="_blank">Python OOP</a>
+            </div>
+
+            </div>
+            <div class="empty-state" id="channelEmpty">
+            <p>No channels match your filters.</p>
+            </div>
+        </div>
+
+        <!-- VIDEOS SECTION -->
+        <div id="videos-section" style="display:none">
+            <div id="videoLoading" class="loading" style="display:none">
+            <div class="spinner"></div>
+            <p id="loadingText">Searching YouTube...</p>
+            </div>
+            <div class="video-grid" id="videoGrid"></div>
+            <div class="empty-state" id="videoEmpty">
+            <p>No videos found. Try a different search or select a subject.</p>
+            </div>
+        </div>
+
+        </section>
+
+        <script>
+        // ==================== Static Videos ====================
+        const videos = [
+        // DSA Hindi (Love Babbar & Apna College)
+        { id:"WQoB2z67hvY", title:"Sorting Algorithms - Apna College (Hindi)", subject:"dsa", lang:"hindi", level:"medium" },
+        { id:"yRpLlJmRo2w", title:"Java OOP Full Course - Apna College (Hindi)", subject:"dsa", lang:"hindi", level:"beginner" },
+
+        // DBMS
+        { id:"ztHopE5Wnpc", title:"SQL Basics - Gate Smashers", subject:"dbms", lang:"english", level:"beginner" },
+        { id:"HXV3zeQKqGY", title:"Normalization - Gate Smashers", subject:"dbms", lang:"english", level:"medium" },
+        { id:"kBdlM6hNDAE", title:"Transactions and ACID - LMT (Hindi)", subject:"dbms", lang:"hindi", level:"medium" },
+
+        // OS
+        { id:"26QPDBe-NB8", title:"Processes and Threads - Neso Academy", subject:"os", lang:"english", level:"beginner" },
+        { id:"wS_CjWpZvBxB6NI5", title:"Process Synchronization - Neso Academy", subject:"os", lang:"english", level:"medium" },
+        { id:"zEpWBBdBm-Rrg_HD", title:"Deadlocks - Last Moment Tuitions (Hindi)", subject:"os", lang:"hindi", level:"medium" },
+
+        // CN
+        { id:"VwN91x5i25g", title:"Computer Networking Intro - Kunal Kushwaha", subject:"cn", lang:"english", level:"beginner" },
+        { id:"qiQR5rTSshw", title:"HTTP and HTTPS - Kunal Kushwaha", subject:"cn", lang:"english", level:"beginner" },
+        { id:"PpsEaqJV_A0", title:"TCP vs UDP - Gate Smashers", subject:"cn", lang:"english", level:"medium" },
+        { id:"A_SQ84lHVWvsTPrf", title:"CN Short Revision - LMT (Hindi)", subject:"cn", lang:"hindi", level:"medium" },
+
+        // OOP
+        { id:"Ej_02ICOIgs", title:"OOP in Java - Bro Code", subject:"oop", lang:"english", level:"beginner" },
+        { id:"i_5pvt7ag7E", title:"Abstract Class and Interface - Hindi", subject:"oop", lang:"hindi", level:"medium" },
+        ];
+
+        const API_KEY = "AIzaSyCfK7oM7TzvpbH-D-iJF9oGzHqoY-xf4dg";
+
+        let currentTab = 'channels';
+        let searchTimeout = null;
+
+        function switchTab(tab){
+        currentTab = tab;
+        document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+            b.classList.toggle('active',(i===0&&tab==='channels')||(i===1&&tab==='videos'));
+        });
+        document.getElementById('channels-section').style.display = tab==='channels'?'':'none';
+        document.getElementById('videos-section').style.display   = tab==='videos'  ?'':'none';
+        document.getElementById('levelGroup').style.display       = tab==='videos'  ?'':'none';
+        if(tab === 'videos') applyFilter();
+        }
+
+        function handleSearch(e) {
+        clearTimeout(searchTimeout);
+        const query = document.getElementById('searchInput').value.trim();
+
+        searchTimeout = setTimeout(() => {
+            if (query.length >= 2) {
+            performSearch(query);
+            } else {
+            applyFilter();
+            }
+        }, 400);
+        }
+
+        async function performSearch(query) {
+        const loadingEl = document.getElementById('videoLoading');
+        document.getElementById('loadingText').textContent = `Searching "${query}"...`;
+        loadingEl.style.display = 'block';
+
+        try {
+            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=15&key=${API_KEY}`;
+            const res = await fetch(url);
+            const data = await res.json();
+
+            const results = data.items ? data.items.map(item => ({
+            id: item.id.videoId,
+            title: item.snippet.title,
+            subject: "search",
+            lang: "english",
+            level: "medium"
+            })) : [];
+
+            renderVideos(results);
+        } catch (error) {
+            console.error(error);
+            document.getElementById('videoEmpty').style.display = 'block';
+        } finally {
+            loadingEl.style.display = 'none';
+        }
+        }
+
+        function renderVideos(list){
+        const grid = document.getElementById('videoGrid');
+        grid.innerHTML = '';
+        document.getElementById('videoEmpty').style.display = list.length === 0 ? 'block' : 'none';
+        document.getElementById('countText').textContent = list.length + ' video' + (list.length !== 1 ? 's' : '') + ' found';
+
+        list.forEach((v,i)=>{
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            card.style.animationDelay = (i*0.04)+'s';
+            card.innerHTML = `
+            <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/${v.id}" title="${v.title}" loading="lazy" 
+                allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+                <h3>${v.title}</h3>
+                <div class="video-meta">
+                <span class="badge subject">${v.subject.toUpperCase()}</span>
+                <span class="badge lang">${v.lang==='hindi'?'Hindi':'English'}</span>
+                <span class="badge medium">Medium</span>
+                </div>
+            </div>`;
+            grid.appendChild(card);
+        });
+        }
+
+        function applyFilter(){
+        if(currentTab === 'channels'){
+            let n=0;
+            document.querySelectorAll('.channel-card').forEach(c=>{
+            const ok = true;
+            c.classList.toggle('hidden',!ok);
+            if(ok) n++;
+            });
+            document.getElementById('channelEmpty').style.display = n===0?'block':'none';
+            document.getElementById('countText').textContent = n+' channel'+(n!==1?'s':'')+' shown';
+            return;
+        }
+
+        // Normal filter using static videos (without Striver)
+        const lang  = document.getElementById('langFilter').value;
+        const sub   = document.getElementById('subjectFilter').value;
+        const level = document.getElementById('levelFilter').value;
+
+        let list = videos.filter(v =>
+            (lang ==='all'||v.lang===lang)&&
+            (sub  ==='all'||v.subject===sub)&&
+            (level==='all'||v.level===level)
+        );
+
+        renderVideos(list);
+        }
+
+        // Initialize
+        switchTab('channels');
+        </script>
+
+        </body>
+        </html>

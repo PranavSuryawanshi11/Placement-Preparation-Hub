@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Preparation Hub</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ── Full-screen iframe shell ── */
+  #page-frame {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    z-index: 100;
+    background: #fff;
+  }
+
+  /* ── Overlay ── */
+  #login-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+  }
+  #login-overlay.show { display: flex; }
+
+  #login-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 36px;
+    max-width: 380px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+    font-family: 'Poppins', sans-serif;
+    animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+  }
+  #login-box .lock-icon { font-size: 48px; margin-bottom: 12px; }
+  #login-box h2 {
+    margin: 0 0 8px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a1a2e;
+  }
+  #login-box p {
+    margin: 0 0 28px;
+    font-size: 0.88rem;
+    color: #666;
+    line-height: 1.5;
+  }
+  #login-box .btn-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  #login-box .btn-login,
+  #login-box .btn-register {
+    padding: 11px 28px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.15s, box-shadow 0.15s;
+    font-family: 'Poppins', sans-serif;
+  }
+  #login-box .btn-login {
+    background: #4f46e5;
+    color: #fff;
+    border: none;
+  }
+  #login-box .btn-register {
+    background: transparent;
+    color: #4f46e5;
+    border: 2px solid #4f46e5;
+  }
+  #login-box .btn-login:hover,
+  #login-box .btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(79,70,229,0.3);
+  }
+
+  /* ── Timer badge ── */
+  #timer-badge {
+    display: none;
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    z-index: 10000;
+    background: rgba(0,0,0,0.65);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+    transition: background 0.3s;
+  }
+  #timer-badge.urgent { background: rgba(220, 38, 38, 0.85); }
+</style>
+</head>
+
+<body>
+
+<!-- ── OVERLAY ── -->
+<div id="login-overlay">
+  <div id="login-box">
+    <div class="lock-icon">🔒</div>
+    <h2>Access Restricted</h2>
+    <p>Your free preview has ended. Please log in or register to continue using PrepHub.</p>
+    <div class="btn-group">
+      <a class="btn-login" href="login.php">Log In</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── TIMER BADGE ── -->
+<div id="timer-badge">⏱ Preview: <span id="timer-count">15</span>s</div>
+
+<!-- ── IFRAME: other pages load here so the parent timer never stops ── -->
+<iframe id="page-frame" src="" title="PrepHub Content"></iframe>
+
+<!-- ── HOME PAGE CONTENT ── -->
+<div id="home-content">
+
+  <header>
+    <div class="logo">PrepHub</div>
+    <nav>
+      <a class="active" href="#" data-page="home">Home</a>
+      <a href="subjects.html"       data-page="subjects.html">Subjects</a>
+      <a href="Youtubecurated.html" data-page="Youtubecurated.html">Youtube</a>
+      <a href="coding.html"         data-page="coding.html">Compiler</a>
+      <a href="login.php"    id="nav-login">Login</a>
+      <a href="register.php" id="nav-register">Register</a>
+      <a href="logout.php"   id="nav-logout" style="display:none;">Logout</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="tag">Your Placement Our Responsibility..</div>
+    <h1>Master Placement <br> Preparation</h1>
+    <p>Learn curated topics and best videos for coding and core CS subjects</p>
+    <button class="btn">
+      <a href="subjects.html" data-page="subjects.html" style="text-decoration:none; color:inherit;">
+        Start Learning ⮟
+      </a>
+    </button>
+  </section>
+
+  <section class="features">
+    <a href="curated.html" data-page="curated.html" class="feature-link">
+      <div class="card">
+        <div class="icon">📚</div>
+        <h3>Curated Content</h3>
+        <p>Handpicked videos and resources</p>
+      </div>
+    </a>
+    <a href="ai.php" data-page="ai.php" class="feature-link">
+      <div class="card">
+        <div class="icon">🤖</div>
+        <h3>AI Assistant</h3>
+        <p>Get instant doubt resolution</p>
+      </div>
+    </a>
+    <a href="subjects.html" data-page="subjects.html" class="feature-link">
+      <div class="card">
+        <div class="icon">🎓</div>
+        <h3>Core Subjects</h3>
+        <p>DSA, OOPs, DBMS, CN & OS</p>
+      </div>
+    </a>
+  </section>
+
+</div><!-- /#home-content -->
+
+
+<script>
+(function () {
+
+  var PREVIEW_SECONDS = 15;
+  var SESSION_KEY     = 'prephub_timer_expiry';
+
+  var overlay = document.getElementById('login-overlay');
+  var badge   = document.getElementById('timer-badge');
+  var countEl = document.getElementById('timer-count');
+  var frame   = document.getElementById('page-frame');
+  var homeDiv = document.getElementById('home-content');
+
+  var AUTH_PAGES = ['login.php', 'register.php', 'logout.php'];
+
+  /* ────────────────────────────────
+     Helpers
+  ──────────────────────────────── */
+  function showHome() {
+    frame.style.display = 'none';
+    frame.src = '';               // clear src → no white flash
+    homeDiv.style.display = '';
+  }
+
+  function showFrame(page) {
+    frame.src = page;
+    frame.style.display = 'block';
+    homeDiv.style.display = 'none';
+  }
+
+  function isHomePath(path) {
+    return !path || path === '' || path === 'index.html' || path === '/';
+  }
+
+  /* ────────────────────────────────
+     Auth check
+  ──────────────────────────────── */
+  fetch('check_login.php', { credentials: 'same-origin' })
+    .then(function (res) { return res.json(); })
+    .then(function (data) { init(data.logged_in === true); })
+    .catch(function () { init(false); });
+
+  function init(isLoggedIn) {
+    document.getElementById('nav-login').style.display    = isLoggedIn ? 'none' : '';
+    document.getElementById('nav-register').style.display = isLoggedIn ? 'none' : '';
+    document.getElementById('nav-logout').style.display   = isLoggedIn ? '' : 'none';
+
+    if (isLoggedIn) {
+      sessionStorage.removeItem(SESSION_KEY);
+    } else {
+      startTimer();
+    }
+
+    setupNavInterception(isLoggedIn);
+
+    /* ── If browser landed on subjects.html directly, it redirects here
+          with hash like index.html#subjects.html — load it in iframe ── */
+    var hash = window.location.hash.replace('#', '').trim();
+    if (hash && hash !== 'home' && AUTH_PAGES.indexOf(hash) === -1) {
+      if (!isLoggedIn) {
+        var expiry = parseInt(sessionStorage.getItem(SESSION_KEY), 10);
+        if (expiry && Date.now() >= expiry) {
+          showOverlay();
+          return;
+        }
+      }
+      history.replaceState({ page: hash }, '', hash);
+      showFrame(hash);
+    } else {
+      /* Normal home — stamp initial history state */
+      history.replaceState({ page: 'home' }, '', window.location.href);
+    }
+  }
+
+  /* ────────────────────────────────
+     Navigation interception
+  ──────────────────────────────── */
+  function setupNavInterception(isLoggedIn) {
+
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-page]');
+      if (!el) return;
+
+      var page = el.getAttribute('data-page');
+
+      /* Home link */
+      if (!page || page === 'home') {
+        e.preventDefault();
+        showHome();
+        history.pushState({ page: 'home' }, '', 'index.html');
+        return;
+      }
+
+      /* Auth pages — browser handles normally */
+      if (AUTH_PAGES.indexOf(page) !== -1) return;
+
+      e.preventDefault();
+
+      /* Timer expired? */
+      if (!isLoggedIn) {
+        var expiry = parseInt(sessionStorage.getItem(SESSION_KEY), 10);
+        if (expiry && Date.now() >= expiry) {
+          showOverlay();
+          return;
+        }
+      }
+
+      history.pushState({ page: page }, '', page);
+      showFrame(page);
+    });
+
+    /* ── Back / Forward button ── */
+    window.addEventListener('popstate', function (e) {
+      /* Use state object first (most reliable) */
+      if (e.state && e.state.page) {
+        if (e.state.page === 'home') {
+          showHome();
+          return;
+        }
+        if (AUTH_PAGES.indexOf(e.state.page) === -1) {
+          showFrame(e.state.page);
+          return;
+        }
+      }
+
+      /* Fallback: read URL */
+      var path = window.location.pathname.split('/').pop();
+      if (isHomePath(path)) {
+        showHome();
+      } else if (AUTH_PAGES.indexOf(path) === -1) {
+        showFrame(path);
+      }
+    });
+  }
+
+  /* ────────────────────────────────
+     Timer
+  ──────────────────────────────── */
+  function startTimer() {
+    var expiry = parseInt(sessionStorage.getItem(SESSION_KEY), 10);
+
+    if (!expiry || isNaN(expiry)) {
+      expiry = Date.now() + PREVIEW_SECONDS * 1000;
+      sessionStorage.setItem(SESSION_KEY, expiry);
+    }
+
+    var remaining = Math.ceil((expiry - Date.now()) / 1000);
+
+    if (remaining <= 0) {
+      showOverlay();
+      return;
+    }
+
+    badge.style.display = 'block';
+    countEl.textContent = remaining;
+
+    var interval = setInterval(function () {
+      remaining = Math.ceil((expiry - Date.now()) / 1000);
+      if (remaining <= 0) {
+        clearInterval(interval);
+        showOverlay();
+        return;
+      }
+      countEl.textContent = remaining;
+      if (remaining <= 3) badge.classList.add('urgent');
+    }, 250);
+  }
+
+  /* ────────────────────────────────
+     Overlay
+  ──────────────────────────────── */
+  function showOverlay() {
+    overlay.classList.add('show');
+    badge.style.display = 'none';
+    frame.style.pointerEvents = 'none';
+  }
+
+})();
+</script>
+</body>
+</html>

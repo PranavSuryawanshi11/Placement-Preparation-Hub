@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Coding Interviews – Placement Prep Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:radial-gradient(circle at top,#0a1b3d,#020617);color:#e2e8f0;min-height:100vh;line-height:1.7;}
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 70px;z-index:100;background:rgba(2,6,23,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(99,102,241,0.3);}
+    .logo a{font-size:26px;font-weight:800;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent;text-decoration:none;}
+    nav a{margin-left:28px;text-decoration:none;color:#bfc6d4;font-size:15px;font-weight:500;transition:0.3s;padding:6px 12px;border-radius:8px;}
+    nav a:hover{color:white;background:rgba(99,102,241,0.2);}
+    .hero{text-align:center;margin-top:140px;padding:0 20px;}
+    .tag{display:inline-block;padding:8px 24px;border-radius:9999px;background:rgba(99,102,241,0.2);font-size:14px;color:#a5b4fc;margin-bottom:20px;border:1px solid rgba(99,102,241,0.4);}
+    .hero h1{font-size:56px;font-weight:800;background:linear-gradient(135deg,#e0e7ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:20px;line-height:1.2;}
+    .hero p{color:#9ca3af;font-size:18px;max-width:800px;margin:0 auto 30px;}
+    .progress-container{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .progress-stats{display:flex;justify-content:space-between;margin-bottom:12px;font-size:14px;color:#94a3b8;}
+    .progress-track{background:rgba(255,255,255,0.1);height:10px;border-radius:10px;overflow:hidden;}
+    .progress-fill{background:linear-gradient(90deg,#6366f1,#a855f7);height:100%;width:0%;transition:width 0.5s ease;border-radius:10px;}
+    .steps-nav{max-width:1100px;margin:30px auto;padding:0 30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+    .step-btn{padding:12px 28px;background:rgba(255,255,255,0.05);border:2px solid rgba(99,102,241,0.3);border-radius:12px;color:#cbd5e1;font-weight:600;cursor:pointer;transition:all 0.3s;font-size:15px;}
+    .step-btn:hover{border-color:#6366f1;background:rgba(99,102,241,0.1);transform:translateY(-2px);}
+    .step-btn.active{background:linear-gradient(135deg,#6366f1,#a855f7);border-color:transparent;color:white;box-shadow:0 4px 15px rgba(99,102,241,0.3);}
+    .step-btn.completed{border-color:#10b981;background:rgba(16,185,129,0.1);color:#10b981;}
+    .content-section{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .step-content{display:none;animation:fadeIn 0.5s ease;}
+    .step-content.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .step-header{margin-bottom:40px;padding-bottom:20px;border-bottom:2px solid rgba(99,102,241,0.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+    .step-header h2{font-size:36px;font-weight:700;color:#e0e7ff;margin-bottom:8px;}
+    .step-header p{color:#9ca3af;font-size:16px;}
+    .topic-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 28px;margin-bottom:20px;transition:all 0.3s;cursor:pointer;}
+    .topic-card:hover{border-color:#6366f1;transform:translateY(-3px);background:rgba(99,102,241,0.05);}
+    .topic-header{display:flex;align-items:center;justify-content:space-between;}
+    .topic-header h3{font-size:22px;font-weight:600;display:flex;align-items:center;gap:12px;}
+    .topic-icon{font-size:28px;}
+    .arrow{font-size:28px;transition:transform 0.3s;}
+    .sub-topics{display:none;margin-top:20px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.2);}
+    .sub-topics.active{display:block;}
+    .sub-topic{padding:14px 22px;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:10px;transition:0.3s;cursor:pointer;border-left:3px solid transparent;display:flex;justify-content:space-between;align-items:center;}
+    .sub-topic:hover{background:rgba(99,102,241,0.15);border-left-color:#6366f1;transform:translateX(5px);}
+    .sub-topic-title{font-weight:500;}
+    .diff-badge{font-size:11px;padding:3px 10px;border-radius:9999px;font-weight:600;}
+    .diff-easy{background:rgba(16,185,129,0.2);color:#10b981;border:1px solid #10b981;}
+    .diff-medium{background:rgba(234,179,8,0.2);color:#eab308;border:1px solid #eab308;}
+    .diff-hard{background:rgba(239,68,68,0.2);color:#ef4444;border:1px solid #ef4444;}
+    .detail-container{margin-top:40px;background:rgba(15,23,42,0.7);border:1px solid rgba(99,102,241,0.3);border-radius:24px;padding:40px;backdrop-filter:blur(8px);}
+    .detail-container h2{font-size:26px;margin-bottom:6px;color:#c4b5fd;}
+    .detail-container h3{font-size:19px;margin:24px 0 12px;color:#a5b4fc;}
+    .detail-container p{margin-bottom:16px;color:#cbd5e1;line-height:1.8;}
+    .detail-container ul,.detail-container ol{margin:14px 0 20px;padding-left:28px;}
+    .detail-container li{margin-bottom:8px;color:#cbd5e1;}
+    .problem-meta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:24px;}
+    .meta-tag{font-size:12px;padding:4px 14px;border-radius:9999px;font-weight:600;}
+    .meta-company{background:rgba(99,102,241,0.2);color:#a5b4fc;border:1px solid rgba(99,102,241,0.4);}
+    .meta-tc{background:rgba(16,185,129,0.15);color:#6ee7b7;border:1px solid rgba(16,185,129,0.3);}
+    .meta-sc{background:rgba(168,85,247,0.15);color:#c4b5fd;border:1px solid rgba(168,85,247,0.3);}
+    .problem-statement{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:24px;margin-bottom:24px;}
+    .problem-statement h3{color:#e0e7ff;font-size:17px;margin:0 0 12px;}
+    .io-example{background:rgba(15,23,42,0.8);border-radius:10px;padding:14px 18px;margin:10px 0;font-family:'Courier New',monospace;font-size:13px;color:#94a3b8;}
+    .io-example strong{color:#a5b4fc;display:block;margin-bottom:4px;}
+    .code-block{background:#0f172a;border:1px solid #1e3a5f;border-radius:16px;padding:24px;margin:20px 0;font-family:'Courier New',monospace;font-size:13.5px;overflow-x:auto;color:#e2e8f0;white-space:pre;line-height:1.7;}
+    .code-block .kw{color:#c084fc;font-weight:600;}
+    .code-block .cm{color:#475569;font-style:italic;}
+    .code-block .fn{color:#60a5fa;}
+    .code-block .str{color:#34d399;}
+    .code-block .num{color:#f59e0b;}
+    .hint-box{background:rgba(234,179,8,0.08);border-left:4px solid #eab308;padding:16px 20px;margin:20px 0;border-radius:10px;}
+    .hint-box summary{cursor:pointer;color:#eab308;font-weight:600;font-size:14px;outline:none;list-style:none;}
+    .hint-box summary::before{content:"💡 ";} 
+    .hint-box p{margin:10px 0 0;color:#d4b483;font-size:14px;}
+    .approach-box{background:rgba(59,130,246,0.08);border-left:4px solid #3b82f6;padding:16px 20px;margin:20px 0;border-radius:10px;}
+    .approach-box h4{color:#60a5fa;font-size:15px;margin-bottom:8px;}
+    .approach-box p{color:#93c5fd;font-size:14px;margin:0;}
+    .complexity-row{display:flex;gap:12px;margin:16px 0;flex-wrap:wrap;}
+    .complexity-pill{padding:8px 18px;border-radius:9999px;font-size:13px;font-weight:600;}
+    .tc-pill{background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.3);}
+    .sc-pill{background:rgba(168,85,247,0.15);color:#a855f7;border:1px solid rgba(168,85,247,0.3);}
+    .solved-btn{background:rgba(16,185,129,0.15);border:2px solid #10b981;color:#10b981;padding:10px 22px;border-radius:10px;font-weight:600;cursor:pointer;transition:0.3s;font-size:13px;margin-top:16px;}
+    .solved-btn:hover{background:#10b981;color:white;}
+    .solved-btn.done{background:#10b981;color:white;cursor:default;}
+    .problems-progress{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 30px;}
+    .prob-dot{width:28px;height:28px;border-radius:50%;border:2px solid rgba(99,102,241,0.4);background:transparent;display:flex;align-items:center;justify-content:center;font-size:11px;color:#64748b;cursor:pointer;transition:0.2s;}
+    .prob-dot.solved{background:#10b981;border-color:#10b981;color:white;}
+    .nav-buttons{display:flex;justify-content:space-between;gap:20px;margin-top:50px;padding:40px 0 60px;}
+    .nav-btn{padding:14px 32px;border-radius:12px;font-weight:600;transition:0.3s;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;border:none;font-size:16px;}
+    .nav-btn.prev{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;}
+    .nav-btn:hover{transform:translateY(-2px);opacity:0.9;}
+    .complete-step-btn{background:rgba(16,185,129,0.2);border:2px solid #10b981;color:#10b981;padding:12px 28px;border-radius:12px;font-weight:600;cursor:pointer;transition:0.3s;font-size:14px;}
+    .complete-step-btn:hover{background:#10b981;color:white;}
+    .completed-badge{color:#10b981;font-weight:600;display:flex;align-items:center;gap:8px;}
+    .pdf-section{max-width:1100px;margin:0 auto 80px;padding:0 30px;}
+    .pdf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+    .pdf-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px;transition:all 0.3s;text-align:center;}
+    .pdf-card:hover{border-color:#6366f1;transform:translateY(-3px);}
+    .pdf-card h4{font-size:17px;font-weight:600;margin:12px 0 8px;color:#e0e7ff;}
+    .pdf-card p{color:#9ca3af;font-size:14px;margin-bottom:16px;}
+    .pdf-btn{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;border:none;padding:10px 24px;border-radius:9999px;font-size:14px;font-weight:600;cursor:pointer;transition:0.3s;text-decoration:none;display:inline-block;}
+    .pdf-btn:hover{opacity:0.85;transform:translateY(-2px);}
+    .section-title{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:24px;}
+    @media(max-width:768px){header{padding:15px 20px;}nav a{margin-left:12px;font-size:12px;}.hero h1{font-size:36px;}}
+</style>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="subjects.html">💻 Coding Prep</a></div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="subjects.html">Subjects</a>
+
+    </nav>
+</header>
+
+<div class="hero">
+    <div class="tag">💡 Coding Interview Mastery • 5 Steps to Crack It</div>
+    <h1>Coding Interviews<br>Complete Preparation Guide</h1>
+    <p>Practice real coding problems from TCS, Infosys, Wipro, Capgemini & top MNCs. Master DSA patterns with full solutions, hints, and complexity analysis.</p>
+</div>
+
+<div class="progress-container">
+    <div class="progress-stats"><span>📊 Overall Progress</span><span id="progressPercent">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="steps-nav">
+    <button class="step-btn active" data-step="1">Step 1: Arrays &amp; Strings</button>
+    <button class="step-btn" data-step="2">Step 2: Linked Lists &amp; Trees</button>
+    <button class="step-btn" data-step="3">Step 3: DP &amp; Recursion</button>
+    <button class="step-btn" data-step="4">Step 4: Graphs &amp; Greedy</button>
+    <button class="step-btn" data-step="5">Step 5: Company Patterns</button>
+</div>
+
+<div class="content-section" id="contentSection"></div>
+
+<div class="pdf-section">
+    <h2 class="section-title">📚 Coding Interview Resources</h2>
+    <div class="pdf-grid">
+        <div class="pdf-card"><div style="font-size:40px">🏢</div><h4>TCS NQT Coding Questions</h4><p>TCS NQT coding questions with solutions and patterns</p><a class="pdf-btn" href="https://prepinsta.com/tcs-coding-questions/" target="_blank">📖 View Online</a></div>
+        <div class="pdf-card"><div style="font-size:40px">💼</div><h4>Infosys InfyTQ Coding</h4><p>Infosys coding round questions with explanations</p><a class="pdf-btn" href="https://prepinsta.com/infosys-sp-and-dse/coding-questions/" target="_blank">📖 View Online</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🎯</div><h4>Wipro NLTH Questions</h4><p>Wipro coding round preparation guide with solutions</p><a class="pdf-btn" href="https://www.ccbp.in/blog/articles/wipro-coding-questions" target="_blank">📖 View Online</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🚀</div><h4>Capgemini Coding Q&amp;A</h4><p>Capgemini PowerProgrammer coding questions</p><a class="pdf-btn" href="https://prepinsta.com/capgemini/coding-questions/" target="_blank">📖 View Online</a></div>
+        <div class="pdf-card"><div style="font-size:40px">📋</div><h4>LeetCode Top 150</h4><p>Most asked coding problems with optimal solutions</p><a class="pdf-btn" href="https://leetcode.com/studyplan/top-interview-150/" target="_blank">📖 LeetCode</a></div>
+        <div class="pdf-card"><div style="font-size:40px">⭐</div><h4>Striver's 450 DSA Sheet</h4><p>Complete DSA interview preparation sheet</p><a class="pdf-btn" href="https://takeuforward.org/interviews/strivers-sde-sheet-top-coding-interview-problems/" target="_blank">📖 View Sheet</a></div>
+    </div>
+</div>
+
+<script>
+// ─── PROBLEMS DATABASE ────────────────────────────────────────────────────────
+const problems = {
+  // STEP 1 ─ Arrays & Strings
+  'two-sum': {
+    title: 'Two Sum',
+    difficulty: 'Easy',
+    companies: ['TCS','Infosys','Amazon'],
+    statement: 'Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two numbers such that they add up to target.',
+    examples: [
+      { input: 'nums = [2,7,11,15], target = 9', output: '[0,1]', explanation: 'nums[0] + nums[1] = 2 + 7 = 9' },
+      { input: 'nums = [3,2,4], target = 6', output: '[1,2]' }
+    ],
+    hint: 'For each number, check if (target - number) already exists in a hash map. This gives O(n) time.',
+    approach: 'Use a HashMap to store each value → index. For every element x, check if (target - x) exists in the map.',
+    code: `function twoSum(nums, target) {
+    const map = {};  // value -> index
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i];
+        if (map[complement] !== undefined)
+            return [map[complement], i];
+        map[nums[i]] = i;
+    }
+}`,
+    tc: 'O(n)', sc: 'O(n)'
+  },
+  'max-subarray': {
+    title: 'Maximum Subarray (Kadane\'s)',
+    difficulty: 'Easy',
+    companies: ['TCS','Wipro','Capgemini'],
+    statement: 'Given an integer array <code>nums</code>, find the subarray with the largest sum and return its sum.',
+    examples: [
+      { input: 'nums = [-2,1,-3,4,-1,2,1,-5,4]', output: '6', explanation: 'Subarray [4,-1,2,1] has the largest sum = 6' },
+      { input: 'nums = [1]', output: '1' }
+    ],
+    hint: 'At each step decide: is it better to extend the current subarray or start fresh from the current element?',
+    approach: 'Kadane\'s Algorithm: Track current running sum. Reset to current element when running sum goes negative.',
+    code: `function maxSubArray(nums) {
+    let maxSum = nums[0];
+    let curr  = nums[0];
+    for (let i = 1; i < nums.length; i++) {
+        curr   = Math.max(nums[i], curr + nums[i]);
+        maxSum = Math.max(maxSum, curr);
+    }
+    return maxSum;
+}`,
+    tc: 'O(n)', sc: 'O(1)'
+  },
+  'rotate-array': {
+    title: 'Rotate Array',
+    difficulty: 'Medium',
+    companies: ['Wipro','Infosys'],
+    statement: 'Given an integer array <code>nums</code>, rotate the array to the right by <code>k</code> steps in-place.',
+    examples: [
+      { input: 'nums = [1,2,3,4,5,6,7], k = 3', output: '[5,6,7,1,2,3,4]' },
+      { input: 'nums = [-1,-100,3,99], k = 2', output: '[3,99,-1,-100]' }
+    ],
+    hint: 'Think of it as three reverses: reverse all → reverse first k → reverse rest.',
+    approach: 'Three-reverse trick. First normalise k = k % n. Then: reverse(0..n-1), reverse(0..k-1), reverse(k..n-1).',
+    code: `function rotate(nums, k) {
+    const n = nums.length;
+    k = k % n;
+    const rev = (l, r) => {
+        while (l < r) { [nums[l], nums[r]] = [nums[r], nums[l]]; l++; r--; }
+    };
+    rev(0, n - 1);
+    rev(0, k - 1);
+    rev(k, n - 1);
+}`,
+    tc: 'O(n)', sc: 'O(1)'
+  },
+  'find-duplicate': {
+    title: 'Find the Duplicate Number',
+    difficulty: 'Medium',
+    companies: ['Amazon','TCS'],
+    statement: 'Given an array <code>nums</code> of n+1 integers where each integer is in [1, n], find the duplicate number without modifying the array and using only O(1) extra space.',
+    examples: [
+      { input: 'nums = [1,3,4,2,2]', output: '2' },
+      { input: 'nums = [3,1,3,4,2]', output: '3' }
+    ],
+    hint: 'Treat the array as a linked list where nums[i] points to index nums[i]. A duplicate creates a cycle.',
+    approach: 'Floyd\'s Tortoise and Hare: Phase 1 finds the intersection inside the cycle. Phase 2 finds the cycle entrance = duplicate.',
+    code: `function findDuplicate(nums) {
+    // Phase 1: detect intersection
+    let slow = nums[0], fast = nums[0];
+    do {
+        slow = nums[slow];
+        fast = nums[nums[fast]];
+    } while (slow !== fast);
+    // Phase 2: find cycle entrance
+    fast = nums[0];
+    while (slow !== fast) {
+        slow = nums[slow];
+        fast = nums[fast];
+    }
+    return slow;
+}`,
+    tc: 'O(n)', sc: 'O(1)'
+  },
+  'longest-substring': {
+    title: 'Longest Substring Without Repeating',
+    difficulty: 'Medium',
+    companies: ['Infosys','Amazon','TCS NQT'],
+    statement: 'Given a string <code>s</code>, find the length of the longest substring without repeating characters.',
+    examples: [
+      { input: 's = "abcabcbb"', output: '3', explanation: '"abc" has length 3' },
+      { input: 's = "bbbbb"', output: '1', explanation: '"b" has length 1' }
+    ],
+    hint: 'Use a sliding window. Expand right; when you see a repeat, shrink left past the previous occurrence.',
+    approach: 'Sliding window + HashMap storing last seen index. For each char, move start to max(start, lastSeen+1).',
+    code: `function lengthOfLongestSubstring(s) {
+    const map = {};  // char -> last seen index
+    let max = 0, start = 0;
+    for (let end = 0; end < s.length; end++) {
+        if (map[s[end]] >= start)
+            start = map[s[end]] + 1;
+        map[s[end]] = end;
+        max = Math.max(max, end - start + 1);
+    }
+    return max;
+}`,
+    tc: 'O(n)', sc: 'O(min(n,m)) — m = charset size'
+  },
+  'anagram': {
+    title: 'Valid Anagram',
+    difficulty: 'Easy',
+    companies: ['Capgemini','Wipro','TCS'],
+    statement: 'Given two strings <code>s</code> and <code>t</code>, return true if <code>t</code> is an anagram of <code>s</code>.',
+    examples: [
+      { input: 's = "anagram", t = "nagaram"', output: 'true' },
+      { input: 's = "rat", t = "car"', output: 'false' }
+    ],
+    hint: 'An anagram has the exact same character frequencies. Count chars in s, then subtract for t.',
+    approach: 'Use a frequency map. Increment for every char in s, decrement for t. If any count ≠ 0, not an anagram.',
+    code: `function isAnagram(s, t) {
+    if (s.length !== t.length) return false;
+    const count = {};
+    for (const c of s) count[c] = (count[c] || 0) + 1;
+    for (const c of t) {
+        if (!count[c]) return false;
+        count[c]--;
+    }
+    return true;
+}`,
+    tc: 'O(n)', sc: 'O(1) — at most 26 keys'
+  },
+
+  // STEP 2 ─ Linked Lists & Trees
+  'reverse-ll': {
+    title: 'Reverse Linked List',
+    difficulty: 'Easy',
+    companies: ['TCS','Wipro','Infosys'],
+    statement: 'Given the head of a singly linked list, reverse the list and return the reversed list.',
+    examples: [
+      { input: 'head = [1,2,3,4,5]', output: '[5,4,3,2,1]' },
+      { input: 'head = [1,2]', output: '[2,1]' }
+    ],
+    hint: 'Walk through the list maintaining a "previous" pointer. At each step, flip the arrow.',
+    approach: 'Iterative three-pointer approach: prev=null, curr=head. Each iteration: save next, point curr→prev, advance both.',
+    code: `function reverseList(head) {
+    let prev = null;
+    let curr = head;
+    while (curr) {
+        const next = curr.next;  // save
+        curr.next = prev;        // flip
+        prev = curr;             // advance
+        curr = next;
+    }
+    return prev;  // new head
+}`,
+    tc: 'O(n)', sc: 'O(1)'
+  },
+  'detect-cycle': {
+    title: 'Detect Cycle in Linked List',
+    difficulty: 'Easy',
+    companies: ['Infosys','Amazon','TCS'],
+    statement: 'Given the head of a linked list, determine if the linked list has a cycle. Return true or false.',
+    examples: [
+      { input: 'head = [3,2,0,-4], pos = 1', output: 'true', explanation: 'Tail connects back to node at index 1' },
+      { input: 'head = [1,2], pos = 0', output: 'true' }
+    ],
+    hint: 'Imagine two runners on a circular track — the fast one always laps the slow one.',
+    approach: 'Floyd\'s Tortoise and Hare: slow moves 1 step, fast moves 2. If they ever meet → cycle exists.',
+    code: `function hasCycle(head) {
+    let slow = head;
+    let fast = head;
+    while (fast && fast.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+        if (slow === fast) return true;
+    }
+    return false;
+}`,
+    tc: 'O(n)', sc: 'O(1)'
+  },
+  'merge-ll': {
+    title: 'Merge Two Sorted Lists',
+    difficulty: 'Easy',
+    companies: ['Capgemini','Wipro'],
+    statement: 'Merge two sorted linked lists. Return the head of the merged linked list (which should also be sorted).',
+    examples: [
+      { input: 'l1 = [1,2,4], l2 = [1,3,4]', output: '[1,1,2,3,4,4]' },
+      { input: 'l1 = [], l2 = [0]', output: '[0]' }
+    ],
+    hint: 'Use a dummy head node to simplify edge cases. Compare the front of each list, attach the smaller one.',
+    approach: 'Iterative with a dummy node. Maintain a tail pointer. Advance whichever list head is smaller.',
+    code: `function mergeTwoLists(l1, l2) {
+    const dummy = { next: null };
+    let tail = dummy;
+    while (l1 && l2) {
+        if (l1.val <= l2.val) { tail.next = l1; l1 = l1.next; }
+        else                  { tail.next = l2; l2 = l2.next; }
+        tail = tail.next;
+    }
+    tail.next = l1 || l2;
+    return dummy.next;
+}`,
+    tc: 'O(n+m)', sc: 'O(1)'
+  },
+  'inorder': {
+    title: 'Binary Tree Inorder Traversal',
+    difficulty: 'Easy',
+    companies: ['TCS','Infosys'],
+    statement: 'Given the root of a binary tree, return the inorder traversal (Left → Root → Right) of its node values.',
+    examples: [
+      { input: 'root = [1,null,2,3]', output: '[1,3,2]' },
+      { input: 'root = [1,2,3,4,5]', output: '[4,2,5,1,3]' }
+    ],
+    hint: 'Inorder = Left subtree first, then current node, then Right subtree. Recursion or stack both work.',
+    approach: 'Recursive: call inorder(left), push root.val, call inorder(right). Iterative uses an explicit stack.',
+    code: `// Recursive
+function inorderTraversal(root) {
+    const result = [];
+    function dfs(node) {
+        if (!node) return;
+        dfs(node.left);
+        result.push(node.val);
+        dfs(node.right);
+    }
+    dfs(root);
+    return result;
+}
+
+// Iterative (stack)
+function inorderIterative(root) {
+    const result = [], stack = [];
+    let curr = root;
+    while (curr || stack.length) {
+        while (curr) { stack.push(curr); curr = curr.left; }
+        curr = stack.pop();
+        result.push(curr.val);
+        curr = curr.right;
+    }
+    return result;
+}`,
+    tc: 'O(n)', sc: 'O(n)'
+  },
+  'height-tree': {
+    title: 'Maximum Depth of Binary Tree',
+    difficulty: 'Easy',
+    companies: ['Wipro','TCS','Capgemini'],
+    statement: 'Given the root of a binary tree, return its maximum depth (number of nodes along the longest root-to-leaf path).',
+    examples: [
+      { input: 'root = [3,9,20,null,null,15,7]', output: '3' },
+      { input: 'root = [1,null,2]', output: '2' }
+    ],
+    hint: 'The height of a tree is 1 + max(height of left child, height of right child).',
+    approach: 'Simple recursion. Base case: null node returns 0. Return 1 + max(left, right).',
+    code: `function maxDepth(root) {
+    if (!root) return 0;
+    return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+}`,
+    tc: 'O(n)', sc: 'O(h) — h = height of tree'
+  },
+  'lca': {
+    title: 'Lowest Common Ancestor',
+    difficulty: 'Medium',
+    companies: ['Amazon','Infosys'],
+    statement: 'Given a binary tree and two nodes p and q, find their lowest common ancestor (LCA). The LCA is the deepest node that has both p and q as descendants.',
+    examples: [
+      { input: 'root = [3,5,1,6,2,0,8], p=5, q=1', output: '3' },
+      { input: 'root = [3,5,1,6,2,0,8], p=5, q=4', output: '5' }
+    ],
+    hint: 'If the current node is p or q, return it. Otherwise recurse left and right — if both return non-null, current is the LCA.',
+    approach: 'Post-order DFS. If left and right both return nodes, current node is LCA. Otherwise return the non-null one.',
+    code: `function lowestCommonAncestor(root, p, q) {
+    if (!root || root === p || root === q) return root;
+    const left  = lowestCommonAncestor(root.left,  p, q);
+    const right = lowestCommonAncestor(root.right, p, q);
+    // If both sides found something, this node is the LCA
+    if (left && right) return root;
+    return left || right;
+}`,
+    tc: 'O(n)', sc: 'O(h)'
+  },
+
+  // STEP 3 ─ DP & Recursion
+  'fibonacci-dp': {
+    title: 'Fibonacci — Memoization vs Tabulation',
+    difficulty: 'Easy',
+    companies: ['TCS','Capgemini'],
+    statement: 'Given n, return the nth Fibonacci number. Implement both memoization (top-down) and tabulation (bottom-up) approaches.',
+    examples: [
+      { input: 'n = 10', output: '55' },
+      { input: 'n = 0', output: '0' }
+    ],
+    hint: 'Naive recursion recalculates the same sub-problems. Store results to avoid re-computation.',
+    approach: 'Top-down: add a memo object. Bottom-up: fill dp[0..n] using dp[i] = dp[i-1] + dp[i-2].',
+    code: `// Top-down Memoization — O(n) time, O(n) space
+function fibMemo(n, memo = {}) {
+    if (n <= 1) return n;
+    if (memo[n] !== undefined) return memo[n];
+    memo[n] = fibMemo(n - 1, memo) + fibMemo(n - 2, memo);
+    return memo[n];
+}
+
+// Bottom-up Tabulation — O(n) time, O(1) space
+function fibTab(n) {
+    if (n <= 1) return n;
+    let prev2 = 0, prev1 = 1;
+    for (let i = 2; i <= n; i++) {
+        const curr = prev1 + prev2;
+        prev2 = prev1;
+        prev1 = curr;
+    }
+    return prev1;
+}`,
+    tc: 'O(n)', sc: 'O(1) for tabulation'
+  },
+  'knapsack': {
+    title: '0/1 Knapsack Problem',
+    difficulty: 'Medium',
+    companies: ['Infosys','Amazon','TCS'],
+    statement: 'Given n items with weights and values, and a knapsack of capacity W, find the maximum value you can carry. Each item can be taken at most once.',
+    examples: [
+      { input: 'weights=[1,3,4,5], values=[1,4,5,7], W=7', output: '9', explanation: 'Take items with weights 3 and 4 (values 4+5=9)' }
+    ],
+    hint: 'For each item you have two choices: include it (if it fits) or skip it. Use a 2D DP table.',
+    approach: 'dp[i][w] = max value using first i items with capacity w. Recurrence: max(skip item i, take item i if fits).',
+    code: `function knapsack(weights, values, W) {
+    const n = weights.length;
+    // dp[i][w] = max value using items 0..i-1 with capacity w
+    const dp = Array.from({length: n+1}, () => new Array(W+1).fill(0));
+    for (let i = 1; i <= n; i++) {
+        for (let w = 0; w <= W; w++) {
+            dp[i][w] = dp[i-1][w];  // skip item i
+            if (weights[i-1] <= w)
+                dp[i][w] = Math.max(dp[i][w],
+                    values[i-1] + dp[i-1][w - weights[i-1]]);  // take item i
+        }
+    }
+    return dp[n][W];
+}`,
+    tc: 'O(n×W)', sc: 'O(n×W)'
+  },
+  'lcs': {
+    title: 'Longest Common Subsequence',
+    difficulty: 'Medium',
+    companies: ['Infosys','Amazon'],
+    statement: 'Given two strings <code>text1</code> and <code>text2</code>, return the length of their longest common subsequence. A subsequence is a sequence derived without changing the relative order.',
+    examples: [
+      { input: 'text1 = "abcde", text2 = "ace"', output: '3', explanation: 'LCS is "ace"' },
+      { input: 'text1 = "abc", text2 = "abc"', output: '3' }
+    ],
+    hint: 'If the last characters match, LCS = 1 + LCS(rest). Otherwise LCS = max of skipping one character from either string.',
+    approach: 'dp[i][j] = LCS of text1[0..i-1] and text2[0..j-1]. If chars match: dp[i-1][j-1]+1. Else max(dp[i-1][j], dp[i][j-1]).',
+    code: `function longestCommonSubsequence(text1, text2) {
+    const m = text1.length, n = text2.length;
+    const dp = Array.from({length: m+1}, () => new Array(n+1).fill(0));
+    for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+            if (text1[i-1] === text2[j-1])
+                dp[i][j] = dp[i-1][j-1] + 1;
+            else
+                dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+        }
+    }
+    return dp[m][n];
+}`,
+    tc: 'O(m×n)', sc: 'O(m×n)'
+  },
+  'coin-change': {
+    title: 'Coin Change',
+    difficulty: 'Medium',
+    companies: ['TCS','Amazon','Capgemini'],
+    statement: 'Given an array of coin denominations and an amount, return the minimum number of coins needed to make up that amount. Return -1 if impossible.',
+    examples: [
+      { input: 'coins = [1,5,6,9], amount = 11', output: '2', explanation: '5 + 6 = 11' },
+      { input: 'coins = [2], amount = 3', output: '-1' }
+    ],
+    hint: 'Build up from amount=0. For each amount, try every coin and keep the minimum.',
+    approach: 'dp[i] = min coins to make amount i. Init dp[0]=0, rest=Infinity. For each coin, update dp[i] = min(dp[i], dp[i-coin]+1).',
+    code: `function coinChange(coins, amount) {
+    const dp = new Array(amount + 1).fill(Infinity);
+    dp[0] = 0;
+    for (let i = 1; i <= amount; i++) {
+        for (const coin of coins) {
+            if (coin <= i)
+                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+        }
+    }
+    return dp[amount] === Infinity ? -1 : dp[amount];
+}`,
+    tc: 'O(amount × coins)', sc: 'O(amount)'
+  },
+  'permutations': {
+    title: 'Generate All Permutations',
+    difficulty: 'Medium',
+    companies: ['TCS','Wipro'],
+    statement: 'Given an array <code>nums</code> of distinct integers, return all possible permutations.',
+    examples: [
+      { input: 'nums = [1,2,3]', output: '[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]' },
+      { input: 'nums = [0,1]', output: '[[0,1],[1,0]]' }
+    ],
+    hint: 'At each position, choose one of the remaining elements (swap it to current position), recurse, then swap back.',
+    approach: 'Backtracking: swap current index with each remaining index, recurse deeper, then undo the swap.',
+    code: `function permute(nums) {
+    const result = [];
+    function backtrack(start) {
+        if (start === nums.length) {
+            result.push([...nums]);
+            return;
+        }
+        for (let i = start; i < nums.length; i++) {
+            [nums[start], nums[i]] = [nums[i], nums[start]];  // choose
+            backtrack(start + 1);                              // explore
+            [nums[start], nums[i]] = [nums[i], nums[start]];  // undo
+        }
+    }
+    backtrack(0);
+    return result;
+}`,
+    tc: 'O(n! × n)', sc: 'O(n)'
+  },
+
+  // STEP 4 ─ Graphs & Greedy
+  'bfs-code': {
+    title: 'BFS — Level Order Traversal',
+    difficulty: 'Easy',
+    companies: ['TCS','Infosys'],
+    statement: 'Given an adjacency list graph and a start node, return the BFS traversal order. Also implement level-order traversal of a binary tree.',
+    examples: [
+      { input: 'graph = {0:[1,2], 1:[3], 2:[3], 3:[]}, start = 0', output: '[0,1,2,3]' }
+    ],
+    hint: 'Use a Queue. Visit a node, add all its unvisited neighbours to the queue.',
+    approach: 'Initialize visited set and queue with start. Dequeue, process, enqueue unvisited neighbours. Repeat.',
+    code: `// BFS on graph
+function bfs(graph, start) {
+    const visited = new Set([start]);
+    const queue   = [start];
+    const order   = [];
+    while (queue.length) {
+        const node = queue.shift();
+        order.push(node);
+        for (const neighbour of graph[node] || []) {
+            if (!visited.has(neighbour)) {
+                visited.add(neighbour);
+                queue.push(neighbour);
+            }
+        }
+    }
+    return order;
+}
+
+// Level-order traversal of binary tree
+function levelOrder(root) {
+    if (!root) return [];
+    const result = [], queue = [root];
+    while (queue.length) {
+        const level = [], size = queue.length;
+        for (let i = 0; i < size; i++) {
+            const node = queue.shift();
+            level.push(node.val);
+            if (node.left)  queue.push(node.left);
+            if (node.right) queue.push(node.right);
+        }
+        result.push(level);
+    }
+    return result;
+}`,
+    tc: 'O(V+E)', sc: 'O(V)'
+  },
+  'dfs-code': {
+    title: 'DFS — Depth First Search',
+    difficulty: 'Easy',
+    companies: ['TCS','Capgemini'],
+    statement: 'Implement DFS on a graph (iterative and recursive). Count the number of connected components in an undirected graph.',
+    examples: [
+      { input: 'graph = {0:[1,2], 1:[0,3], 2:[0], 3:[1], 4:[]}, n = 5', output: '2', explanation: 'Components: {0,1,2,3} and {4}' }
+    ],
+    hint: 'DFS uses a Stack (or recursion). Track visited nodes to avoid cycles.',
+    approach: 'Recursive DFS marks node visited, then calls DFS on each unvisited neighbour. Count times DFS starts from scratch.',
+    code: `// Recursive DFS
+function dfs(graph, node, visited = new Set()) {
+    visited.add(node);
+    for (const neighbour of graph[node] || [])
+        if (!visited.has(neighbour)) dfs(graph, neighbour, visited);
+}
+
+// Count connected components
+function countComponents(n, edges) {
+    const graph = {};
+    for (let i = 0; i < n; i++) graph[i] = [];
+    for (const [a, b] of edges) {
+        graph[a].push(b);
+        graph[b].push(a);
+    }
+    const visited = new Set();
+    let components = 0;
+    for (let i = 0; i < n; i++) {
+        if (!visited.has(i)) {
+            dfs(graph, i, visited);
+            components++;
+        }
+    }
+    return components;
+}`,
+    tc: 'O(V+E)', sc: 'O(V)'
+  },
+  'topological': {
+    title: 'Topological Sort (Kahn\'s BFS)',
+    difficulty: 'Medium',
+    companies: ['Amazon','Infosys'],
+    statement: 'Given a directed acyclic graph (DAG) of n nodes, return a topological ordering of the nodes. (E.g. course prerequisites: given prerequisites list, find a valid course order.)',
+    examples: [
+      { input: 'n=4, edges=[[1,0],[2,0],[3,1],[3,2]]', output: '[3,1,2,0] or [3,2,1,0]' }
+    ],
+    hint: 'Kahn\'s algorithm: nodes with in-degree 0 can be processed first. Remove them and reduce neighbours\' in-degrees.',
+    approach: 'Compute in-degree of all nodes. Enqueue all with in-degree 0. Process queue: add to result, reduce neighbours\' in-degree, enqueue those that reach 0.',
+    code: `function topologicalSort(n, edges) {
+    const inDegree = new Array(n).fill(0);
+    const graph    = Array.from({length: n}, () => []);
+    for (const [u, v] of edges) {
+        graph[u].push(v);
+        inDegree[v]++;
+    }
+    const queue = [];
+    for (let i = 0; i < n; i++)
+        if (inDegree[i] === 0) queue.push(i);
+    const result = [];
+    while (queue.length) {
+        const node = queue.shift();
+        result.push(node);
+        for (const neighbour of graph[node]) {
+            inDegree[neighbour]--;
+            if (inDegree[neighbour] === 0) queue.push(neighbour);
+        }
+    }
+    return result.length === n ? result : [];  // empty = cycle
+}`,
+    tc: 'O(V+E)', sc: 'O(V+E)'
+  },
+  'activity-selection': {
+    title: 'Activity Selection Problem',
+    difficulty: 'Easy',
+    companies: ['TCS','Wipro'],
+    statement: 'Given n activities with start and end times, find the maximum number of activities a single person can perform (they cannot overlap).',
+    examples: [
+      { input: 'start=[1,3,0,5,8,5], end=[2,4,6,7,9,9]', output: '4', explanation: 'Select activities 0,1,3,4' }
+    ],
+    hint: 'Sort by end time. Greedily pick the activity that ends earliest and doesn\'t conflict with the last picked.',
+    approach: 'Sort by finish time. Take first activity. For each subsequent: if start >= last finish time, take it.',
+    code: `function activitySelection(start, end) {
+    const n = start.length;
+    // Pair up and sort by end time
+    const acts = start.map((s, i) => [s, end[i]]).sort((a, b) => a[1] - b[1]);
+    let count   = 1;
+    let lastEnd = acts[0][1];
+    for (let i = 1; i < n; i++) {
+        if (acts[i][0] >= lastEnd) {
+            count++;
+            lastEnd = acts[i][1];
+        }
+    }
+    return count;
+}`,
+    tc: 'O(n log n)', sc: 'O(n)'
+  },
+  'fractional-knapsack': {
+    title: 'Fractional Knapsack',
+    difficulty: 'Easy',
+    companies: ['Capgemini','Wipro'],
+    statement: 'Given items with weights and values, fill a knapsack of capacity W to get maximum value. You can take fractions of items.',
+    examples: [
+      { input: 'weights=[10,20,30], values=[60,100,120], W=50', output: '240.0', explanation: 'Take all of item 1, all of item 2, and 2/3 of item 3' }
+    ],
+    hint: 'Calculate value per unit weight (value/weight) for each item. Always take the highest ratio item first.',
+    approach: 'Sort by value/weight descending. Greedily fill: take full item if it fits, else take a fraction to fill remaining capacity.',
+    code: `function fractionalKnapsack(weights, values, W) {
+    const n = weights.length;
+    const items = weights.map((w, i) => ({
+        weight: w, value: values[i], ratio: values[i] / w
+    })).sort((a, b) => b.ratio - a.ratio);  // sort by ratio desc
+    let totalValue = 0;
+    let remaining  = W;
+    for (const item of items) {
+        if (remaining <= 0) break;
+        if (item.weight <= remaining) {
+            totalValue += item.value;       // take whole item
+            remaining  -= item.weight;
+        } else {
+            totalValue += item.ratio * remaining;  // take fraction
+            remaining   = 0;
+        }
+    }
+    return totalValue;
+}`,
+    tc: 'O(n log n)', sc: 'O(n)'
+  },
+
+  // STEP 5 ─ Company Patterns
+  'tcs-pattern': {
+    title: 'TCS NQT — Number Pattern Print',
+    difficulty: 'Easy',
+    companies: ['TCS NQT'],
+    statement: 'Print a number triangle pattern for n rows. Row i contains numbers 1 to i separated by spaces.',
+    examples: [
+      { input: 'n = 4', output: '1\n1 2\n1 2 3\n1 2 3 4' }
+    ],
+    hint: 'Two nested loops: outer for row number, inner for column (1 to row number).',
+    approach: 'Classic pattern problem. TCS NQT frequently tests number/star pattern printing. Master all basic patterns.',
+    code: `// TCS frequently tests pattern problems
+// Pattern 1: Number Triangle
+function numberTriangle(n) {
+    for (let i = 1; i <= n; i++) {
+        let row = '';
+        for (let j = 1; j <= i; j++)
+            row += j + (j < i ? ' ' : '');
+        console.log(row);
+    }
+}
+
+// Pattern 2: Inverted Star Triangle
+function invertedStar(n) {
+    for (let i = n; i >= 1; i--) {
+        console.log('* '.repeat(i).trim());
+    }
+}
+
+// Pattern 3: Floyd's Triangle
+function floyds(n) {
+    let num = 1;
+    for (let i = 1; i <= n; i++) {
+        let row = '';
+        for (let j = 1; j <= i; j++) row += num++ + ' ';
+        console.log(row.trim());
+    }
+}`,
+    tc: 'O(n²)', sc: 'O(1)'
+  },
+  'wipro-pattern': {
+    title: 'Wipro NLTH — String Compression',
+    difficulty: 'Medium',
+    companies: ['Wipro NLTH'],
+    statement: 'Implement basic string compression: replace consecutive repeated characters with the character followed by its count. If compressed string is not smaller, return original.',
+    examples: [
+      { input: 's = "aabcccdddd"', output: '"a2b1c3d4"' },
+      { input: 's = "abcd"', output: '"abcd"', explanation: 'Compressed "a1b1c1d1" is not smaller' }
+    ],
+    hint: 'Walk through the string counting consecutive same characters. Build the compressed result in parallel.',
+    approach: 'Two pointers or single pass with a counter. Compare lengths at the end and return the shorter one.',
+    code: `function compress(s) {
+    let compressed = '';
+    let i = 0;
+    while (i < s.length) {
+        const ch = s[i];
+        let count = 0;
+        while (i < s.length && s[i] === ch) { count++; i++; }
+        compressed += ch + count;
+    }
+    return compressed.length < s.length ? compressed : s;
+}`,
+    tc: 'O(n)', sc: 'O(n)'
+  },
+  'infosys-pattern': {
+    title: 'Infosys InfyTQ — Second Largest Element',
+    difficulty: 'Easy',
+    companies: ['Infosys InfyTQ'],
+    statement: 'Find the second largest distinct element in an array. Return -1 if it doesn\'t exist.',
+    examples: [
+      { input: 'nums = [12,35,1,10,34,1]', output: '34' },
+      { input: 'nums = [10,10,10]', output: '-1' }
+    ],
+    hint: 'Track two variables: first largest and second largest. Update them as you scan.',
+    approach: 'Single pass. Maintain first and second max. When you find a new max, old max becomes second. When you find something between second and first, update second.',
+    code: `function secondLargest(nums) {
+    let first = -Infinity, second = -Infinity;
+    for (const n of nums) {
+        if (n > first) {
+            second = first;
+            first  = n;
+        } else if (n > second && n !== first) {
+            second = n;
+        }
+    }
+    return second === -Infinity ? -1 : second;
+}`,
+    tc: 'O(n)', sc: 'O(1)'
+  },
+  'capgemini-pattern': {
+    title: 'Capgemini — Check Prime & Count Primes',
+    difficulty: 'Easy',
+    companies: ['Capgemini'],
+    statement: 'Write a function to check if a number is prime. Then use the Sieve of Eratosthenes to count all primes up to n.',
+    examples: [
+      { input: 'n = 17', output: 'true (is prime)' },
+      { input: 'countPrimes(10)', output: '4', explanation: 'Primes: 2, 3, 5, 7' }
+    ],
+    hint: 'For isPrime: only check divisors up to √n. For sieve: mark multiples of each prime as composite.',
+    approach: 'isPrime: trial division up to sqrt(n). Sieve: boolean array, start marking from p² for each prime p.',
+    code: `// Check if a single number is prime
+function isPrime(n) {
+    if (n < 2) return false;
+    if (n === 2) return true;
+    if (n % 2 === 0) return false;
+    for (let i = 3; i * i <= n; i += 2)
+        if (n % i === 0) return false;
+    return true;
+}
+
+// Sieve of Eratosthenes — count primes below n
+function countPrimes(n) {
+    const sieve = new Array(n).fill(true);
+    sieve[0] = sieve[1] = false;
+    for (let p = 2; p * p < n; p++) {
+        if (sieve[p]) {
+            for (let m = p * p; m < n; m += p)
+                sieve[m] = false;
+        }
+    }
+    return sieve.filter(Boolean).length;
+}`,
+    tc: 'O(n log log n) for sieve', sc: 'O(n)'
+  },
+  'number-series': {
+    title: 'Missing Number in Sequence',
+    difficulty: 'Easy',
+    companies: ['TCS NQT','Wipro'],
+    statement: 'Given an array of n-1 numbers taken from the range [1..n] with one number missing, find the missing number.',
+    examples: [
+      { input: 'nums = [3,0,1]', output: '2' },
+      { input: 'nums = [9,6,4,2,3,5,7,0,1]', output: '8' }
+    ],
+    hint: 'Sum of first n natural numbers = n*(n+1)/2. Subtract actual array sum to get the missing number.',
+    approach: 'Math formula: expected = n*(n+1)/2. Missing = expected - sum(nums). Can also use XOR for guaranteed no-overflow.',
+    code: `// Approach 1: Math formula — O(n), O(1)
+function missingNumber(nums) {
+    const n = nums.length;
+    const expected = n * (n + 1) / 2;
+    const actual   = nums.reduce((a, b) => a + b, 0);
+    return expected - actual;
+}
+
+// Approach 2: XOR — no overflow risk
+function missingNumberXOR(nums) {
+    let xor = nums.length;
+    for (let i = 0; i < nums.length; i++)
+        xor ^= i ^ nums[i];
+    return xor;
+}`,
+    tc: 'O(n)', sc: 'O(1)'
+  }
+};
+
+// ─── STEPS STRUCTURE ─────────────────────────────────────────────────────────
+const stepsData = {
+    1: { title: "📊 Arrays & Strings", description: "Core array and string manipulation problems — most asked in every company round.",
+        topics: [
+            { title: "Array Problems", icon: "📋",
+              subs: [
+                { id: "two-sum",           title: "Two Sum",                            diff: "Easy"   },
+                { id: "max-subarray",      title: "Maximum Subarray (Kadane's)",        diff: "Easy"   },
+                { id: "rotate-array",      title: "Rotate Array",                       diff: "Medium" },
+                { id: "find-duplicate",    title: "Find the Duplicate Number",          diff: "Medium" }
+              ]},
+            { title: "String Problems", icon: "🔤",
+              subs: [
+                { id: "longest-substring", title: "Longest Substring Without Repeating", diff: "Medium" },
+                { id: "anagram",           title: "Valid Anagram",                       diff: "Easy"   }
+              ]}
+        ]},
+    2: { title: "🔗 Linked Lists & Trees", description: "Pointer manipulation and tree traversal problems that every interview tests.",
+        topics: [
+            { title: "Linked List Problems", icon: "🔗",
+              subs: [
+                { id: "reverse-ll",   title: "Reverse Linked List",      diff: "Easy"   },
+                { id: "detect-cycle", title: "Detect Cycle in LL",       diff: "Easy"   },
+                { id: "merge-ll",     title: "Merge Two Sorted Lists",   diff: "Easy"   }
+              ]},
+            { title: "Binary Tree Problems", icon: "🌳",
+              subs: [
+                { id: "inorder",      title: "Inorder Traversal",        diff: "Easy"   },
+                { id: "height-tree",  title: "Maximum Depth of Tree",    diff: "Easy"   },
+                { id: "lca",          title: "Lowest Common Ancestor",   diff: "Medium" }
+              ]}
+        ]},
+    3: { title: "🧩 DP & Recursion", description: "Dynamic programming patterns and backtracking — the most valued skill in interviews.",
+        topics: [
+            { title: "Dynamic Programming", icon: "🧮",
+              subs: [
+                { id: "fibonacci-dp", title: "Fibonacci: Memo vs Tabulation", diff: "Easy"   },
+                { id: "knapsack",     title: "0/1 Knapsack Problem",          diff: "Medium" },
+                { id: "lcs",          title: "Longest Common Subsequence",    diff: "Medium" },
+                { id: "coin-change",  title: "Coin Change",                   diff: "Medium" }
+              ]},
+            { title: "Recursion & Backtracking", icon: "🔄",
+              subs: [
+                { id: "permutations", title: "Generate All Permutations", diff: "Medium" }
+              ]}
+        ]},
+    4: { title: "🕸️ Graphs & Greedy", description: "Graph traversals and greedy algorithms — key for senior-level and MNC rounds.",
+        topics: [
+            { title: "Graph Algorithms", icon: "🕸️",
+              subs: [
+                { id: "bfs-code",    title: "BFS — Level Order Traversal",  diff: "Easy"   },
+                { id: "dfs-code",    title: "DFS & Connected Components",   diff: "Easy"   },
+                { id: "topological", title: "Topological Sort (Kahn's)",    diff: "Medium" }
+              ]},
+            { title: "Greedy Algorithms", icon: "🏆",
+              subs: [
+                { id: "activity-selection",   title: "Activity Selection Problem", diff: "Easy"   },
+                { id: "fractional-knapsack",  title: "Fractional Knapsack",        diff: "Easy"   }
+              ]}
+        ]},
+    5: { title: "🏢 Company-Specific Patterns", description: "Exact patterns tested by TCS, Wipro, Infosys & Capgemini with company-specific tips.",
+        topics: [
+            { title: "TCS NQT & Wipro NLTH", icon: "🏢",
+              subs: [
+                { id: "tcs-pattern",    title: "TCS — Number Pattern Print",       diff: "Easy"   },
+                { id: "wipro-pattern",  title: "Wipro — String Compression",       diff: "Medium" },
+                { id: "number-series",  title: "TCS/Wipro — Missing Number",       diff: "Easy"   }
+              ]},
+            { title: "Infosys & Capgemini", icon: "💼",
+              subs: [
+                { id: "infosys-pattern",   title: "Infosys — Second Largest Element", diff: "Easy" },
+                { id: "capgemini-pattern", title: "Capgemini — Prime Number Sieve",   diff: "Easy" }
+              ]}
+        ]}
+};
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let currentStep = 1;
+let completedSteps  = JSON.parse(localStorage.getItem('codingCompletedSteps')  || '[]');
+let solvedProblems  = JSON.parse(localStorage.getItem('codingSolvedProblems') || '[]');
+
+// ─── PROGRESS ────────────────────────────────────────────────────────────────
+function updateProgress() {
+    const p = (completedSteps.length / 5) * 100;
+    document.getElementById('progressFill').style.width = p + '%';
+    document.getElementById('progressPercent').textContent = Math.round(p) + '%';
+    document.querySelectorAll('.step-btn').forEach(b =>
+        b.classList.toggle('completed', completedSteps.includes(parseInt(b.dataset.step))));
+}
+
+function markStepComplete(step) {
+    if (!completedSteps.includes(step)) {
+        completedSteps.push(step);
+        localStorage.setItem('codingCompletedSteps', JSON.stringify(completedSteps));
+        updateProgress();
+        renderStepContent(step);
+    }
+}
+
+function markSolved(id) {
+    if (!solvedProblems.includes(id)) {
+        solvedProblems.push(id);
+        localStorage.setItem('codingSolvedProblems', JSON.stringify(solvedProblems));
+    }
+    const btn = document.getElementById('solveBtn_' + id);
+    if (btn) { btn.textContent = '✓ Solved!'; btn.classList.add('done'); btn.disabled = true; }
+    updateDots();
+}
+
+function updateDots() {
+    document.querySelectorAll('.prob-dot').forEach(d => {
+        d.classList.toggle('solved', solvedProblems.includes(d.dataset.id));
+    });
+}
+
+// ─── RENDER STEP ─────────────────────────────────────────────────────────────
+function renderStepContent(step) {
+    currentStep = step;
+    const sd = stepsData[step];
+    const isC = completedSteps.includes(step);
+
+    // Collect all problem IDs for this step
+    const allIds = [];
+    sd.topics.forEach(t => t.subs.forEach(s => allIds.push(s.id)));
+
+    let html = '<div class="step-content active">';
+    html += '<div class="step-header"><div><h2>' + sd.title + '</h2><p>' + sd.description + '</p></div>';
+    html += !isC
+        ? '<button class="complete-step-btn" onclick="markStepComplete(' + step + ')">✓ Mark Step Complete</button>'
+        : '<div class="completed-badge">✓ Step Completed! 🎉</div>';
+    html += '</div>';
+
+    // Solved dots tracker
+    html += '<div class="problems-progress">';
+    allIds.forEach(id => {
+        const isSolved = solvedProblems.includes(id);
+        const p = problems[id];
+        html += '<div class="prob-dot' + (isSolved ? ' solved' : '') + '" data-id="' + id + '" title="' + (p ? p.title : id) + '" onclick="jumpToProblem(\'' + id + '\')">' + (isSolved ? '✓' : '') + '</div>';
+    });
+    html += '</div>';
+
+    // Topic cards
+    sd.topics.forEach(t => {
+        html += '<div class="topic-card" onclick="toggleSubTopics(this)">';
+        html += '<div class="topic-header"><h3><span class="topic-icon">' + t.icon + '</span> ' + t.title + '</h3><span class="arrow">›</span></div>';
+        html += '<div class="sub-topics">';
+        t.subs.forEach(s => {
+            const diffClass = 'diff-' + s.diff.toLowerCase();
+            html += '<div class="sub-topic" onclick="showProblem(event,\'' + s.id + '\')">';
+            html += '<span class="sub-topic-title">' + s.title + '</span>';
+            html += '<span class="diff-badge ' + diffClass + '">' + s.diff + '</span>';
+            html += '</div>';
+        });
+        html += '</div></div>';
+    });
+
+    // Detail pane
+    html += '<div class="detail-container" id="detailContainer"><p style="color:#94a3b8;text-align:center;padding:20px 0">💻 Click any problem above to view its statement, hints, full solution, and complexity analysis.</p></div>';
+
+    // Nav buttons
+    html += '<div class="nav-buttons">';
+    html += step > 1 ? '<button class="nav-btn prev" onclick="changeStep(' + (step-1) + ')">← Previous</button>' : '<div></div>';
+    html += step < 5
+        ? '<button class="nav-btn next" onclick="changeStep(' + (step+1) + ')">Next →</button>'
+        : '<button class="nav-btn next" onclick="window.location.href=\'subjects.html\'">🏆 Complete Course →</button>';
+    html += '</div></div>';
+
+    document.getElementById('contentSection').innerHTML = html;
+    document.querySelectorAll('.step-btn').forEach(b =>
+        b.classList.toggle('active', parseInt(b.dataset.step) === step));
+    updateDots();
+}
+
+// ─── SHOW PROBLEM ────────────────────────────────────────────────────────────
+function showProblem(e, id) {
+    e.stopPropagation();
+    const p = problems[id];
+    if (!p) return;
+
+    const isSolved = solvedProblems.includes(id);
+    const diffClass = 'diff-' + p.difficulty.toLowerCase();
+
+    let html = '<h2>' + p.title + '</h2>';
+    html += '<div class="problem-meta">';
+    html += '<span class="diff-badge ' + diffClass + '">' + p.difficulty + '</span>';
+    p.companies.forEach(c => { html += '<span class="meta-tag meta-company">🏢 ' + c + '</span>'; });
+    html += '<span class="meta-tag meta-tc">⏱ TC: ' + p.tc + '</span>';
+    html += '<span class="meta-tag meta-sc">🗄 SC: ' + p.sc + '</span>';
+    html += '</div>';
+
+    // Problem statement
+    html += '<div class="problem-statement">';
+    html += '<h3>📋 Problem Statement</h3>';
+    html += '<p>' + p.statement + '</p>';
+    p.examples.forEach((ex, i) => {
+        html += '<div class="io-example">';
+        html += '<strong>Example ' + (i+1) + ':</strong>';
+        html += 'Input:  ' + ex.input + '\n';
+        html += 'Output: ' + ex.output;
+        if (ex.explanation) html += '\nNote:   ' + ex.explanation;
+        html += '</div>';
+    });
+    html += '</div>';
+
+    // Hint (collapsible)
+    html += '<details class="hint-box"><summary>Show Hint</summary><p>' + p.hint + '</p></details>';
+
+    // Approach
+    html += '<div class="approach-box"><h4>🎯 Approach</h4><p>' + p.approach + '</p></div>';
+
+    // Complexity
+    html += '<div class="complexity-row">';
+    html += '<span class="complexity-pill tc-pill">⏱ Time: ' + p.tc + '</span>';
+    html += '<span class="complexity-pill sc-pill">🗄 Space: ' + p.sc + '</span>';
+    html += '</div>';
+
+    // Code
+    html += '<h3>💻 Solution</h3>';
+    html += '<div class="code-block">' + escapeHtml(p.code) + '</div>';
+
+    // Solved button
+    if (isSolved) {
+        html += '<button class="solved-btn done" disabled>✓ Solved!</button>';
+    } else {
+        html += '<button class="solved-btn" id="solveBtn_' + id + '" onclick="markSolved(\'' + id + '\')">✓ Mark as Solved</button>';
+    }
+
+    const dc = document.getElementById('detailContainer');
+    dc.innerHTML = html;
+    dc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function jumpToProblem(id) {
+    // Open the parent card first, then show the problem
+    const allIds = [];
+    const sd = stepsData[currentStep];
+    sd.topics.forEach(t => {
+        const found = t.subs.find(s => s.id === id);
+        if (found) {
+            // open the right topic card
+            document.querySelectorAll('.sub-topics').forEach(el => {
+                const btn = el.querySelector('[onclick*="' + id + '"]');
+                if (btn) { el.classList.add('active'); }
+            });
+        }
+    });
+    // fake event
+    showProblem({ stopPropagation: () => {} }, id);
+}
+
+function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function changeStep(s) {
+    if (s >= 1 && s <= 5) { renderStepContent(s); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+}
+
+function toggleSubTopics(card) {
+    const sub   = card.querySelector('.sub-topics');
+    const arrow = card.querySelector('.arrow');
+    document.querySelectorAll('.sub-topics').forEach(s => { if (s !== sub) s.classList.remove('active'); });
+    sub.classList.toggle('active');
+    if (arrow) arrow.style.transform = sub.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+
+document.querySelectorAll('.step-btn').forEach(b =>
+    b.addEventListener('click', () => changeStep(parseInt(b.dataset.step))));
+
+updateProgress();
+renderStepContent(1);
+</script>
+</body>
+</html>

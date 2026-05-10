@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OS Complete Roadmap – Placement Prep Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+        background: radial-gradient(circle at top, #0a1b3d, #020617);
+        color: #e2e8f0;
+        min-height: 100vh;
+        line-height: 1.7;
+    }
+    
+    /* Header Styles */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 70px;
+        z-index: 100;
+        background: rgba(2, 6, 23, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+    }
+    
+    .logo {
+        font-size: 26px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #818cf8, #c084fc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    
+    .logo a {
+        text-decoration: none;
+        background: linear-gradient(135deg, #818cf8, #c084fc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    
+    nav a {
+        margin-left: 28px;
+        text-decoration: none;
+        color: #bfc6d4;
+        font-size: 15px;
+        font-weight: 500;
+        transition: 0.3s;
+        padding: 6px 12px;
+        border-radius: 8px;
+    }
+    
+    nav a:hover {
+        color: white;
+        background: rgba(99, 102, 241, 0.2);
+    }
+    
+    nav a.active {
+        background: #6366f1;
+        color: white;
+        padding: 6px 20px;
+        border-radius: 9999px;
+    }
+    
+    /* Hero Section */
+    .hero {
+        text-align: center;
+        margin-top: 140px;
+        padding: 0 20px;
+    }
+    
+    .tag {
+        display: inline-block;
+        padding: 8px 24px;
+        border-radius: 9999px;
+        background: rgba(99, 102, 241, 0.2);
+        font-size: 14px;
+        color: #a5b4fc;
+        margin-bottom: 20px;
+        border: 1px solid rgba(99, 102, 241, 0.4);
+    }
+    
+    .hero h1 {
+        font-size: 56px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #e0e7ff, #a78bfa);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+    
+    .hero p {
+        color: #9ca3af;
+        font-size: 18px;
+        max-width: 800px;
+        margin: 0 auto 30px;
+    }
+    
+    /* Progress Bar */
+    .progress-container {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 30px;
+    }
+    
+    .progress-stats {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        font-size: 14px;
+        color: #94a3b8;
+    }
+    
+    .progress-track {
+        background: rgba(255, 255, 255, 0.1);
+        height: 10px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    .progress-fill {
+        background: linear-gradient(90deg, #6366f1, #a855f7);
+        height: 100%;
+        width: 0%;
+        transition: width 0.5s ease;
+        border-radius: 10px;
+    }
+    
+    /* Steps Navigation */
+    .steps-nav {
+        max-width: 1100px;
+        margin: 30px auto;
+        padding: 0 30px;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .step-btn {
+        padding: 12px 28px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(99, 102, 241, 0.3);
+        border-radius: 12px;
+        color: #cbd5e1;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 15px;
+    }
+    
+    .step-btn:hover {
+        border-color: #6366f1;
+        background: rgba(99, 102, 241, 0.1);
+        transform: translateY(-2px);
+    }
+    
+    .step-btn.active {
+        background: linear-gradient(135deg, #6366f1, #a855f7);
+        border-color: transparent;
+        color: white;
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    }
+    
+    .step-btn.completed {
+        border-color: #10b981;
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+    }
+    
+    /* Content Section */
+    .content-section {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 30px;
+    }
+    
+    .step-content {
+        display: none;
+        animation: fadeIn 0.5s ease;
+    }
+    
+    .step-content.active {
+        display: block;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .step-header {
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid rgba(99, 102, 241, 0.3);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .step-header h2 {
+        font-size: 36px;
+        font-weight: 700;
+        color: #e0e7ff;
+        margin-bottom: 12px;
+    }
+    
+    .step-header p {
+        color: #9ca3af;
+        font-size: 16px;
+    }
+    
+    /* Topic Cards */
+    .topic-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 24px 28px;
+        margin-bottom: 20px;
+        transition: all 0.3s;
+        cursor: pointer;
+    }
+    
+    .topic-card:hover {
+        border-color: #6366f1;
+        transform: translateY(-3px);
+        background: rgba(99, 102, 241, 0.05);
+    }
+    
+    .topic-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .topic-header h3 {
+        font-size: 22px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .topic-icon {
+        font-size: 28px;
+    }
+    
+    .arrow {
+        font-size: 28px;
+        transition: transform 0.3s;
+    }
+    
+    .sub-topics {
+        display: none;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+    
+    .sub-topics.active {
+        display: block;
+    }
+    
+    .sub-topic {
+        padding: 14px 22px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        margin-bottom: 10px;
+        transition: 0.3s;
+        cursor: pointer;
+        border-left: 3px solid transparent;
+    }
+    
+    .sub-topic:hover {
+        background: rgba(99, 102, 241, 0.15);
+        border-left-color: #6366f1;
+        transform: translateX(5px);
+    }
+    
+    /* Detailed Content */
+    .detail-container {
+        margin-top: 40px;
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        border-radius: 24px;
+        padding: 40px;
+        backdrop-filter: blur(8px);
+    }
+    
+    .detail-container h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #c4b5fd;
+    }
+    
+    .detail-container h3 {
+        font-size: 22px;
+        margin: 25px 0 15px;
+        color: #a5b4fc;
+    }
+    
+    .detail-container p {
+        margin-bottom: 18px;
+        color: #cbd5e1;
+        line-height: 1.8;
+    }
+    
+    .detail-container ul, .detail-container ol {
+        margin: 18px 0 25px;
+        padding-left: 32px;
+    }
+    
+    .detail-container li {
+        margin-bottom: 10px;
+    }
+    
+    .code-block {
+        background: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 16px;
+        padding: 24px;
+        margin: 25px 0;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        overflow-x: auto;
+        color: #e2e8f0;
+    }
+    
+    .code-block .keyword {
+        color: #c084fc;
+        font-weight: 600;
+    }
+    
+    .code-block .string {
+        color: #86efac;
+    }
+    
+    .code-block .number {
+        color: #fdba74;
+    }
+    
+    .code-block .comment {
+        color: #64748b;
+        font-style: italic;
+    }
+    
+    .example-box {
+        background: rgba(16, 185, 129, 0.1);
+        border-left: 5px solid #10b981;
+        padding: 20px 24px;
+        margin: 25px 0;
+        border-radius: 12px;
+    }
+    
+    .note-box {
+        background: rgba(234, 179, 8, 0.1);
+        border-left: 5px solid #eab308;
+        padding: 20px 24px;
+        margin: 25px 0;
+        border-radius: 12px;
+    }
+    
+    .tip-box {
+        background: rgba(59, 130, 246, 0.1);
+        border-left: 5px solid #3b82f6;
+        padding: 20px 24px;
+        margin: 25px 0;
+        border-radius: 12px;
+    }
+    
+    .warning-box {
+        background: rgba(239, 68, 68, 0.1);
+        border-left: 5px solid #ef4444;
+        padding: 20px 24px;
+        margin: 25px 0;
+        border-radius: 12px;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+    }
+    
+    th, td {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 12px;
+        text-align: left;
+    }
+    
+    th {
+        background: rgba(99, 102, 241, 0.2);
+        color: #a5b4fc;
+    }
+    
+    /* Navigation Buttons */
+    .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin-top: 50px;
+        padding: 40px 0 60px;
+    }
+    
+    .nav-btn {
+        padding: 14px 32px;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: 0.3s;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        border: none;
+        font-size: 16px;
+    }
+    
+    .nav-btn.prev {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .nav-btn.next {
+        background: linear-gradient(135deg, #6366f1, #a855f7);
+        color: white;
+        border: none;
+    }
+    
+    .nav-btn:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+        cursor: pointer;
+    }
+    
+    .complete-step-btn {
+        background: rgba(16, 185, 129, 0.2);
+        border: 2px solid #10b981;
+        color: #10b981;
+        padding: 12px 28px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 14px;
+    }
+    
+    .complete-step-btn:hover {
+        background: #10b981;
+        color: white;
+    }
+    
+    .completed-badge {
+        color: #10b981;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    @media (max-width: 768px) {
+        header {
+            padding: 15px 20px;
+        }
+        nav a {
+            margin-left: 12px;
+            font-size: 12px;
+        }
+        .hero h1 {
+            font-size: 36px;
+        }
+        .step-header h2 {
+            font-size: 28px;
+        }
+        .detail-container {
+            padding: 20px;
+        }
+        .step-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><a href="subjects.html">⚙️ OS Mastery</a></div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="subjects.html">Subjects</a>
+       
+    </nav>
+</header>
+
+<div class="hero">
+    <div class="tag">🎯 Complete OS Roadmap • 6 Steps to Mastery</div>
+    <h1>Operating System<br>Complete Learning Path</h1>
+    <p>Master OS concepts from basics to advanced — processes, scheduling, synchronization, memory management, file systems, and more. Track your progress step by step.</p>
+</div>
+
+<div class="progress-container">
+    <div class="progress-stats">
+        <span>📊 Overall Progress</span>
+        <span id="progressPercent">0%</span>
+    </div>
+    <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+</div>
+
+<div class="steps-nav" id="stepsNav">
+    <button class="step-btn active" data-step="1">Step 1: Introduction & Processes</button>
+    <button class="step-btn" data-step="2">Step 2: CPU Scheduling</button>
+    <button class="step-btn" data-step="3">Step 3: Process Synchronization</button>
+    <button class="step-btn" data-step="4">Step 4: Deadlocks</button>
+    <button class="step-btn" data-step="5">Step 5: Memory Management</button>
+    <button class="step-btn" data-step="6">Step 6: File Systems & I/O</button>
+</div>
+
+<div class="content-section" id="contentSection"></div>
+
+<script>
+    // Step data with comprehensive content
+    const stepsData = {
+        1: {
+            title: "🎯 Introduction to OS & Process Management",
+            description: "Understand what an Operating System is, its functions, and the fundamentals of process management.",
+            topics: [
+                {
+                    title: "Operating System Basics",
+                    icon: "💻",
+                    subs: [
+                        { id: "os-intro", title: "What is an Operating System?" },
+                        { id: "os-functions", title: "Functions of OS" },
+                        { id: "os-types", title: "Types of Operating Systems" }
+                    ]
+                },
+                {
+                    title: "Process Management",
+                    icon: "🔄",
+                    subs: [
+                        { id: "process-concept", title: "Process Concept & States" },
+                        { id: "pcb", title: "Process Control Block (PCB)" },
+                        { id: "process-creation", title: "Process Creation & Termination" },
+                        { id: "context-switch", title: "Context Switching" }
+                    ]
+                },
+                {
+                    title: "Process vs Threads",
+                    icon: "🧵",
+                    subs: [
+                        { id: "threads", title: "Threads & Multithreading" },
+                        { id: "process-thread-diff", title: "Process vs Thread Comparison" }
+                    ]
+                }
+            ]
+        },
+        2: {
+            title: "⚡ CPU Scheduling Algorithms",
+            description: "Learn how the CPU schedules processes for execution with various scheduling algorithms.",
+            topics: [
+                {
+                    title: "Scheduling Basics",
+                    icon: "📊",
+                    subs: [
+                        { id: "scheduling-criteria", title: "Scheduling Criteria" },
+                        { id: "scheduling-queues", title: "Scheduling Queues" }
+                    ]
+                },
+                {
+                    title: "Scheduling Algorithms",
+                    icon: "⚙️",
+                    subs: [
+                        { id: "fcfs", title: "FCFS (First Come First Serve)" },
+                        { id: "sjf", title: "SJF (Shortest Job First)" },
+                        { id: "priority", title: "Priority Scheduling" },
+                        { id: "round-robin", title: "Round Robin Scheduling" },
+                        { id: "multilevel-queue", title: "Multilevel Queue & Feedback" }
+                    ]
+                }
+            ]
+        },
+        3: {
+            title: "🔒 Process Synchronization",
+            description: "Master synchronization techniques to coordinate concurrent processes and avoid race conditions.",
+            topics: [
+                {
+                    title: "Synchronization Basics",
+                    icon: "🔐",
+                    subs: [
+                        { id: "race-condition", title: "Race Condition & Critical Section" },
+                        { id: "synchronization-requirements", title: "Synchronization Requirements" }
+                    ]
+                },
+                {
+                    title: "Synchronization Tools",
+                    icon: "🛠️",
+                    subs: [
+                        { id: "mutex", title: "Mutex Locks" },
+                        { id: "semaphores", title: "Semaphores" },
+                        { id: "classical-problems", title: "Classical Synchronization Problems" }
+                    ]
+                },
+                {
+                    title: "Classical Problems",
+                    icon: "📚",
+                    subs: [
+                        { id: "producer-consumer", title: "Producer-Consumer Problem" },
+                        { id: "readers-writers", title: "Readers-Writers Problem" },
+                        { id: "dining-philosophers", title: "Dining Philosophers Problem" }
+                    ]
+                }
+            ]
+        },
+        4: {
+            title: "💀 Deadlocks",
+            description: "Understand deadlock conditions, prevention, avoidance, detection, and recovery.",
+            topics: [
+                {
+                    title: "Deadlock Fundamentals",
+                    icon: "⚠️",
+                    subs: [
+                        { id: "deadlock-conditions", title: "Necessary Conditions for Deadlock" },
+                        { id: "resource-allocation", title: "Resource Allocation Graph" }
+                    ]
+                },
+                {
+                    title: "Deadlock Handling",
+                    icon: "🛡️",
+                    subs: [
+                        { id: "deadlock-prevention", title: "Deadlock Prevention" },
+                        { id: "deadlock-avoidance", title: "Deadlock Avoidance (Banker's Algorithm)" },
+                        { id: "deadlock-detection", title: "Deadlock Detection" },
+                        { id: "deadlock-recovery", title: "Deadlock Recovery" }
+                    ]
+                }
+            ]
+        },
+        5: {
+            title: "📝 Memory Management",
+            description: "Learn how OS manages memory, from basic allocation to virtual memory techniques.",
+            topics: [
+                {
+                    title: "Memory Management Basics",
+                    icon: "🧠",
+                    subs: [
+                        { id: "memory-hierarchy", title: "Memory Hierarchy" },
+                        { id: "logical-physical", title: "Logical vs Physical Address Space" },
+                        { id: "swapping", title: "Swapping" }
+                    ]
+                },
+                {
+                    title: "Memory Allocation",
+                    icon: "📦",
+                    subs: [
+                        { id: "contiguous-allocation", title: "Contiguous Memory Allocation" },
+                        { id: "fragmentation", title: "Fragmentation (Internal & External)" },
+                        { id: "paging", title: "Paging" },
+                        { id: "segmentation", title: "Segmentation" }
+                    ]
+                },
+                {
+                    title: "Virtual Memory",
+                    icon: "🌐",
+                    subs: [
+                        { id: "virtual-memory-concept", title: "Virtual Memory Concept" },
+                        { id: "page-replacement", title: "Page Replacement Algorithms" },
+                        { id: "thrashing", title: "Thrashing" }
+                    ]
+                }
+            ]
+        },
+        6: {
+            title: "📁 File Systems & I/O Management",
+            description: "Understand file systems, disk scheduling, and I/O management.",
+            topics: [
+                {
+                    title: "File Systems",
+                    icon: "📂",
+                    subs: [
+                        { id: "file-concept", title: "File Concepts & Attributes" },
+                        { id: "file-access", title: "File Access Methods" },
+                        { id: "directory-structure", title: "Directory Structure" },
+                        { id: "file-allocation", title: "File Allocation Methods" }
+                    ]
+                },
+                {
+                    title: "Disk Management",
+                    icon: "💾",
+                    subs: [
+                        { id: "disk-structure", title: "Disk Structure" },
+                        { id: "disk-scheduling", title: "Disk Scheduling Algorithms" },
+                        { id: "disk-management", title: "Disk Management" }
+                    ]
+                },
+                {
+                    title: "I/O Systems",
+                    icon: "🖨️",
+                    subs: [
+                        { id: "io-hardware", title: "I/O Hardware" },
+                        { id: "io-techniques", title: "I/O Techniques (Polling, Interrupt, DMA)" }
+                    ]
+                }
+            ]
+        }
+    };
+
+    // Detailed content for each sub-topic
+    const detailedContent = {
+        // Step 1: OS Introduction & Processes
+        'os-intro': `<h2>What is an Operating System?</h2><p>An Operating System (OS) is system software that acts as an intermediary between the user and computer hardware. It manages hardware resources and provides services for application software.</p><div class="example-box"><strong>Examples:</strong> Windows, Linux, macOS, Android, iOS</div><div class="tip-box">💡 The OS is the most important software that runs on a computer, managing all other programs.</div>`,
+        
+        'os-functions': `<h2>Functions of Operating System</h2><ul><li><strong>Process Management:</strong> Creating, scheduling, and terminating processes</li><li><strong>Memory Management:</strong> Allocating and deallocating memory</li><li><strong>File Management:</strong> Creating, deleting, and managing files</li><li><strong>Device Management:</strong> Managing I/O devices</li><li><strong>Security & Protection:</strong> Preventing unauthorized access</li><li><strong>User Interface:</strong> Providing CLI or GUI</li></ul>`,
+        
+        'os-types': `<h2>Types of Operating Systems</h2><ul><li><strong>Batch OS:</strong> Jobs processed in batches</li><li><strong>Time-Sharing OS:</strong> Multiple users share CPU time</li><li><strong>Real-Time OS:</strong> Guaranteed response times</li><li><strong>Distributed OS:</strong> Multiple computers work together</li><li><strong>Network OS:</strong> Manages network resources</li><li><strong>Mobile OS:</strong> Android, iOS for mobile devices</li></ul>`,
+        
+        'process-concept': `<h2>Process Concept & States</h2><p>A process is a program in execution. It goes through various states:</p><div class="code-block"><span class="comment">// Process States</span><br>New → Ready → Running → Waiting → Terminated</div><ul><li><strong>New:</strong> Process being created</li><li><strong>Ready:</strong> Waiting for CPU allocation</li><li><strong>Running:</strong> Instructions being executed</li><li><strong>Waiting:</strong> Waiting for I/O or event</li><li><strong>Terminated:</strong> Process completed</li></ul>`,
+        
+        'pcb': `<h2>Process Control Block (PCB)</h2><p>PCB is a data structure that contains information about a process:</p><ul><li><strong>Process ID (PID):</strong> Unique identifier</li><li><strong>Program Counter:</strong> Address of next instruction</li><li><strong>CPU Registers:</strong> Saved during context switch</li><li><strong>Memory Limits:</strong> Memory allocated to process</li><li><strong>Open Files:</strong> List of open files</li><li><strong>Process State:</strong> Current state of process</li></ul>`,
+        
+        'process-creation': `<h2>Process Creation & Termination</h2><p><strong>Process Creation:</strong> Using fork() system call creates a child process. Parent and child run concurrently.</p><div class="code-block"><span class="keyword">fork()</span>   <span class="comment">// Creates child process</span><br><span class="keyword">exec()</span>    <span class="comment">// Loads new program into memory</span><br><span class="keyword">wait()</span>    <span class="comment">// Parent waits for child to finish</span><br><span class="keyword">exit()</span>    <span class="comment">// Terminates process</span></div><p><strong>Process Termination:</strong> Process exits voluntarily or forcefully terminated.</p>`,
+        
+        'context-switch': `<h2>Context Switching</h2><p>Context switching is the process of saving the state of a running process and loading another process's state. It allows multiple processes to share the CPU.</p><div class="tip-box">⏱️ Context switch overhead can impact performance; it involves saving PCB and restoring another PCB.</div>`,
+        
+        'threads': `<h2>Threads & Multithreading</h2><p>A thread is the smallest unit of execution within a process. Multiple threads share the same memory space.</p><div class="example-box"><strong>Benefits:</strong><br>• Responsiveness<br>• Resource sharing<br>• Economy<br>• Scalability</div>`,
+        
+        'process-thread-diff': `<h2>Process vs Thread Comparison</h2> <table> <tr><th>Process</th><th>Thread</th></tr> <tr><td>Heavyweight</td><td>Lightweight</td></tr> <tr><td>Separate memory space</td><td>Shared memory space</td></tr> <tr><td>More overhead</td><td>Less overhead</td></tr> <tr><td>Slower context switch</td><td>Faster context switch</td></tr> <tr><td>Independent</td><td>Threads of same process dependent</td></tr> </table>`,
+        
+        // Step 2: CPU Scheduling
+        'scheduling-criteria': `<h2>Scheduling Criteria</h2><ul><li><strong>CPU Utilization:</strong> Keep CPU as busy as possible</li><li><strong>Throughput:</strong> Number of processes completed per time unit</li><li><strong>Turnaround Time:</strong> Total time from submission to completion</li><li><strong>Waiting Time:</strong> Total time spent in ready queue</li><li><strong>Response Time:</strong> Time from submission to first response</li></ul>`,
+        
+        'scheduling-queues': `<h2>Scheduling Queues</h2><ul><li><strong>Job Queue:</strong> All processes in system</li><li><strong>Ready Queue:</strong> Processes ready to execute</li><li><strong>Device Queue:</strong> Processes waiting for I/O</li></ul>`,
+        
+        'fcfs': `<h2>FCFS (First Come First Serve)</h2><p>The simplest scheduling algorithm. Processes are executed in the order they arrive.</p><div class="code-block"><span class="comment">// Example: Processes arriving order: P1, P2, P3</span><br>Gantt Chart: | P1 | P2 | P3 |<br>FCFS is non-preemptive and can cause convoy effect.</div><div class="note-box">⚠️ Disadvantage: Average waiting time can be high (convoy effect).</div>`,
+        
+        'sjf': `<h2>SJF (Shortest Job First)</h2><p>Process with smallest burst time executes first. Can be preemptive (SRTF) or non-preemptive.</p><div class="tip-box">✅ SJF is optimal in terms of average waiting time.</div>`,
+        
+        'priority': `<h2>Priority Scheduling</h2><p>Each process has a priority. Higher priority processes execute first.</p><div class="warning-box">⚠️ Problem: Starvation (lower priority processes may never execute). Solution: Aging (increase priority over time).</div>`,
+        
+        'round-robin': `<h2>Round Robin Scheduling</h2><p>Each process gets a fixed time quantum (time slice). Preemptive and fair algorithm.</p><div class="code-block"><span class="comment">// Time Quantum = 4 units</span><br>Processes: P1(5), P2(4), P3(7)<br>Gantt: P1(4) P2(4) P3(4) P1(1) P3(3)</div><div class="tip-box">💡 Small quantum → more context switches, large quantum → FCFS behavior.</div>`,
+        
+        'multilevel-queue': `<h2>Multilevel Queue & Feedback</h2><p>Processes are divided into multiple queues with different priorities. Feedback allows processes to move between queues.</p><div class="example-box">System processes (highest) → Interactive processes → Batch processes (lowest)</div>`,
+        
+        // Step 3: Process Synchronization
+        'race-condition': `<h2>Race Condition & Critical Section</h2><p>A race condition occurs when multiple processes access shared data concurrently, leading to inconsistent results.</p><div class="code-block"><span class="comment">// Critical Section: Code segment that accesses shared variables</span><br><span class="keyword">do</span> {<br>  <span class="comment">// Entry section</span><br>  <span class="comment">// Critical section</span><br>  <span class="comment">// Exit section</span><br>  <span class="comment">// Remainder section</span><br>} <span class="keyword">while</span>(true);</div>`,
+        
+        'synchronization-requirements': `<h2>Synchronization Requirements</h2><ul><li><strong>Mutual Exclusion:</strong> Only one process in critical section at a time</li><li><strong>Progress:</strong> If no process in CS, one must be able to enter</li><li><strong>Bounded Waiting:</strong> Limit on waiting time</li><li><strong>Portability:</strong> No assumptions about CPU speeds</li></ul>`,
+        
+        'mutex': `<h2>Mutex Locks</h2><p>A mutex (mutual exclusion) lock provides a simple locking mechanism.</p><div class="code-block"><span class="keyword">acquire()</span> {<br>  <span class="keyword">while</span> (!available) <span class="comment">// busy wait</span><br>  available = false;<br>}<br><br><span class="keyword">release()</span> {<br>  available = true;<br>}</div>`,
+        
+        'semaphores': `<h2>Semaphores</h2><p>Semaphores are synchronization tools with wait() and signal() operations.</p><div class="code-block"><span class="comment">// Binary semaphore (mutex)</span><br><span class="comment">// Counting semaphore (multiple resources)</span><br><br>wait(S) {<br>  <span class="keyword">while</span> (S <= 0);<br>  S--;<br>}<br><br>signal(S) {<br>  S++;<br>}</div>`,
+        
+        'classical-problems': `<h2>Classical Synchronization Problems</h2><p>Three classic problems test synchronization concepts: Bounded Buffer, Readers-Writers, and Dining Philosophers.</p>`,
+        
+        'producer-consumer': `<h2>Producer-Consumer Problem</h2><p>Producer produces items into buffer, consumer consumes items. Requires synchronization to avoid buffer overflow/underflow.</p><div class="code-block"><span class="keyword">// Using semaphores</span><br>semaphore mutex = 1, empty = n, full = 0;<br><br><span class="comment">// Producer</span><br>wait(empty); wait(mutex); <span class="comment">// produce</span> signal(mutex); signal(full);<br><br><span class="comment">// Consumer</span><br>wait(full); wait(mutex); <span class="comment">// consume</span> signal(mutex); signal(empty);</div>`,
+        
+        'readers-writers': `<h2>Readers-Writers Problem</h2><p>Multiple readers can read simultaneously, but writers need exclusive access. Ensures data consistency.</p>`,
+        
+        'dining-philosophers': `<h2>Dining Philosophers Problem</h2><p>Five philosophers sit at a round table with chopsticks between them. They need two chopsticks to eat. Classic deadlock example.</p>`,
+        
+        // Step 4: Deadlocks
+        'deadlock-conditions': `<h2>Necessary Conditions for Deadlock</h2><ul><li><strong>Mutual Exclusion:</strong> At least one resource held in non-sharable mode</li><li><strong>Hold and Wait:</strong> Process holds resources while waiting for others</li><li><strong>No Preemption:</strong> Resources cannot be forcibly taken</li><li><strong>Circular Wait:</strong> Cycle of processes waiting for each other</li></ul>`,
+        
+        'resource-allocation': `<h2>Resource Allocation Graph</h2><p>Graph showing processes (circles), resources (squares), assignment edges (resource → process), and request edges (process → resource). Cycle indicates potential deadlock.</p>`,
+        
+        'deadlock-prevention': `<h2>Deadlock Prevention</h2><p>Prevent any of the four necessary conditions:</p><ul><li>Break mutual exclusion (not always possible)</li><li>Break hold and wait (request all resources at once)</li><li>Break no preemption (preempt resources)</li><li>Break circular wait (impose total ordering of resources)</li></ul>`,
+        
+        'deadlock-avoidance': `<h2>Deadlock Avoidance (Banker's Algorithm)</h2><p>Banker's Algorithm checks if resource allocation leads to safe state.</p><div class="code-block"><span class="comment">// Safe sequence exists if resources can be allocated without deadlock</span><br>Available, Max, Allocation, Need matrices<br>Request algorithm checks if request can be granted safely.</div>`,
+        
+        'deadlock-detection': `<h2>Deadlock Detection</h2><p>Regularly check for deadlocks using detection algorithms. Single instance: wait-for graph. Multiple instances: detection algorithm similar to Banker's.</p>`,
+        
+        'deadlock-recovery': `<h2>Deadlock Recovery</h2><ul><li><strong>Process Termination:</strong> Abort one or more processes</li><li><strong>Resource Preemption:</strong> Take resources from processes</li><li><strong>Checkpoint/Restart:</strong> Rollback to safe state</li></ul>`,
+        
+        // Step 5: Memory Management
+        'memory-hierarchy': `<h2>Memory Hierarchy</h2><p>Registers → Cache → Main Memory → Secondary Storage (faster to slower, expensive to cheaper).</p>`,
+        
+        'logical-physical': `<h2>Logical vs Physical Address Space</h2><p><strong>Logical Address:</strong> Generated by CPU, virtual address.<br><strong>Physical Address:</strong> Actual location in memory.<br><strong>MMU (Memory Management Unit):</strong> Maps logical to physical addresses.</p>`,
+        
+        'swapping': `<h2>Swapping</h2><p>Moving processes between main memory and secondary storage to increase multiprogramming.</p>`,
+        
+        'contiguous-allocation': `<h2>Contiguous Memory Allocation</h2><p>Each process gets a single contiguous block of memory. Fixed partitioning or dynamic partitioning.</p>`,
+        
+        'fragmentation': `<h2>Fragmentation</h2><ul><li><strong>Internal Fragmentation:</strong> Wasted space within allocated block</li><li><strong>External Fragmentation:</strong> Small holes between allocations</li></ul><div class="tip-box">💡 Compaction can reduce external fragmentation by moving processes.</div>`,
+        
+        'paging': `<h2>Paging</h2><p>Divides physical memory into fixed-size frames and logical memory into pages. Eliminates external fragmentation.</p><div class="code-block">Page Table: Maps page number to frame number<br>Logical Address: Page Number + Page Offset<br>Physical Address: Frame Number + Page Offset</div>`,
+        
+        'segmentation': `<h2>Segmentation</h2><p>Divides program into variable-sized segments (code, data, stack). Segment table maps segment to physical location.</p>`,
+        
+        'virtual-memory-concept': `<h2>Virtual Memory Concept</h2><p>Separates logical memory from physical memory, allowing processes to run with incomplete loading.</p><div class="example-box"><strong>Benefits:</strong><br>• Efficient memory usage<br>• Larger address space<br>• Process protection<br>• Easier programming</div>`,
+        
+        'page-replacement': `<h2>Page Replacement Algorithms</h2><ul><li><strong>FIFO:</strong> Replace oldest page (Belady's anomaly possible)</li><li><strong>Optimal:</strong> Replace page not used for longest time (theoretical)</li><li><strong>LRU (Least Recently Used):</strong> Replace least recently used page</li><li><strong>Clock/Second Chance:</strong> Circular queue with reference bits</li></ul>`,
+        
+        'thrashing': `<h2>Thrashing</h2><p>Excessive paging due to insufficient memory. Processes constantly page fault, CPU utilization drops.</p><div class="warning-box">⚠️ Solution: Working set model, page fault frequency control, increase memory.</div>`,
+        
+        // Step 6: File Systems & I/O
+        'file-concept': `<h2>File Concepts & Attributes</h2><p>A file is a named collection of related information stored on secondary storage.</p><ul><li><strong>Attributes:</strong> Name, identifier, type, location, size, protection, time stamps</li><li><strong>Operations:</strong> Create, read, write, delete, truncate, append</li></ul>`,
+        
+        'file-access': `<h2>File Access Methods</h2><ul><li><strong>Sequential Access:</strong> Read in order from beginning</li><li><strong>Direct Access:</strong> Random access by block number</li><li><strong>Indexed Access:</strong> Index blocks for random access</li></ul>`,
+        
+        'directory-structure': `<h2>Directory Structure</h2><ul><li><strong>Single-Level:</strong> One directory for all files</li><li><strong>Two-Level:</strong> Separate directories per user</li><li><strong>Tree-Structured:</strong> Hierarchical directories</li><li><strong>Acyclic Graph:</strong> Allows shared subdirectories</li></ul>`,
+        
+        'file-allocation': `<h2>File Allocation Methods</h2><ul><li><strong>Contiguous:</strong> Fast access, external fragmentation</li><li><strong>Linked:</strong> No fragmentation, slow random access</li><li><strong>Indexed:</strong> Fast random access, index overhead</li></ul>`,
+        
+        'disk-structure': `<h2>Disk Structure</h2><p>Disks consist of platters, tracks, sectors, and cylinders. Performance depends on seek time, rotational latency, and transfer time.</p>`,
+        
+        'disk-scheduling': `<h2>Disk Scheduling Algorithms</h2><ul><li><strong>FCFS:</strong> First come first served</li><li><strong>SSTF:</strong> Shortest seek time first</li><li><strong>SCAN/Elevator:</strong> Sweeps across disk</li><li><strong>C-SCAN:</strong> Circular SCAN</li><li><strong>LOOK/C-LOOK:</strong> SCAN with limited movement</li></ul>`,
+        
+        'disk-management': `<h2>Disk Management</h2><ul><li><strong>Low-Level Formatting:</strong> Dividing disk into sectors</li><li><strong>Partitioning:</strong> Dividing disk into logical drives</li><li><strong>Logical Formatting:</strong> Creating file system</li><li><strong>Boot Block:</strong> Stored in boot sector for system startup</li></ul>`,
+        
+        'io-hardware': `<h2>I/O Hardware</h2><p>I/O devices include keyboards, mice, monitors, printers, disks. Ports, buses, controllers manage communication.</p>`,
+        
+        'io-techniques': `<h2>I/O Techniques</h2><ul><li><strong>Polling:</strong> CPU constantly checks device status (busy waiting)</li><li><strong>Interrupt-Driven I/O:</strong> Device interrupts CPU when ready</li><li><strong>DMA (Direct Memory Access):</strong> Transfers data directly to memory without CPU involvement</li></ul>`
+    };
+
+    let currentStep = 1;
+    let completedSteps = JSON.parse(localStorage.getItem('osCompletedSteps') || '[]');
+
+    function updateProgress() {
+        const percent = (completedSteps.length / 6) * 100;
+        document.getElementById('progressFill').style.width = `${percent}%`;
+        document.getElementById('progressPercent').textContent = `${Math.round(percent)}%`;
+        
+        document.querySelectorAll('.step-btn').forEach(btn => {
+            const step = parseInt(btn.dataset.step);
+            if (completedSteps.includes(step)) {
+                btn.classList.add('completed');
+            } else {
+                btn.classList.remove('completed');
+            }
+        });
+    }
+
+    function markStepComplete(step) {
+        if (!completedSteps.includes(step)) {
+            completedSteps.push(step);
+            localStorage.setItem('osCompletedSteps', JSON.stringify(completedSteps));
+            updateProgress();
+            renderStepContent(step);
+        }
+    }
+
+    function renderStepContent(step) {
+        currentStep = step;
+        const stepData = stepsData[step];
+        const isCompleted = completedSteps.includes(step);
+        
+        let html = `
+            <div class="step-content active">
+                <div class="step-header">
+                    <div>
+                        <h2>${stepData.title}</h2>
+                        <p>${stepData.description}</p>
+                    </div>
+                    ${!isCompleted ? `<button class="complete-step-btn" onclick="markStepComplete(${step})">✓ Mark as Complete</button>` : '<div class="completed-badge">✓ Step Completed! 🎉</div>'}
+                </div>
+        `;
+        
+        stepData.topics.forEach(topic => {
+            html += `
+                <div class="topic-card" onclick="toggleSubTopics(this)">
+                    <div class="topic-header">
+                        <h3><span class="topic-icon">${topic.icon}</span> ${topic.title}</h3>
+                        <span class="arrow">›</span>
+                    </div>
+                    <div class="sub-topics">
+            `;
+            
+            topic.subs.forEach(sub => {
+                html += `<div class="sub-topic" onclick="showContent(event, '${sub.id}')">${sub.title}</div>`;
+            });
+            
+            html += `</div></div>`;
+        });
+        
+        html += `
+            <div class="detail-container" id="detailContainer">
+                <p style="color:#94a3b8; text-align:center;">📚 Click on any topic above to view detailed content with examples, code snippets, and comprehensive explanations.</p>
+            </div>
+            <div class="nav-buttons">
+                ${step > 1 ? `<button class="nav-btn prev" onclick="changeStep(${step - 1})">← Previous Step</button>` : '<div></div>'}
+                ${step < 6 ? `<button class="nav-btn next" onclick="changeStep(${step + 1})">Next Step →</button>` : '<button class="nav-btn next" onclick="window.location.href=\'subjects.html\'">🏆 Complete OS Course →</button>'}
+            </div>
+        </div>`;
+        
+        document.getElementById('contentSection').innerHTML = html;
+        
+        document.querySelectorAll('.step-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (parseInt(btn.dataset.step) === step) {
+                btn.classList.add('active');
+            }
+        });
+    }
+    
+    function changeStep(step) {
+        if (step >= 1 && step <= 6) {
+            renderStepContent(step);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+    
+    function toggleSubTopics(card) {
+        const subTopics = card.querySelector('.sub-topics');
+        const arrow = card.querySelector('.arrow');
+        const allSubs = document.querySelectorAll('.sub-topics');
+        
+        allSubs.forEach(sub => {
+            if (sub !== subTopics) sub.classList.remove('active');
+        });
+        
+        subTopics.classList.toggle('active');
+        if (arrow) {
+            arrow.style.transform = subTopics.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+        }
+    }
+    
+    function showContent(event, id) {
+        event.stopPropagation();
+        const detailContainer = document.getElementById('detailContainer');
+        const content = detailedContent[id] || `<p>📖 Content for this topic is being enhanced. Check back soon for detailed explanations with examples!</p>`;
+        detailContainer.innerHTML = content;
+        detailContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    updateProgress();
+    renderStepContent(1);
+</script>
+
+</body>
+</html>

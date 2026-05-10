@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Interview Preparation – Placement Prep Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:radial-gradient(circle at top,#0a1b3d,#020617);color:#e2e8f0;min-height:100vh;line-height:1.7;}
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 70px;z-index:100;background:rgba(2,6,23,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(99,102,241,0.3);}
+    .logo a{font-size:26px;font-weight:800;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent;text-decoration:none;}
+    nav a{margin-left:28px;text-decoration:none;color:#bfc6d4;font-size:15px;font-weight:500;transition:0.3s;padding:6px 12px;border-radius:8px;}
+    nav a:hover{color:white;background:rgba(99,102,241,0.2);}
+    .hero{text-align:center;margin-top:140px;padding:0 20px;}
+    .tag{display:inline-block;padding:8px 24px;border-radius:9999px;background:rgba(99,102,241,0.2);font-size:14px;color:#a5b4fc;margin-bottom:20px;border:1px solid rgba(99,102,241,0.4);}
+    .hero h1{font-size:56px;font-weight:800;background:linear-gradient(135deg,#e0e7ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:20px;line-height:1.2;}
+    .hero p{color:#9ca3af;font-size:18px;max-width:800px;margin:0 auto 30px;}
+    .progress-container{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .progress-stats{display:flex;justify-content:space-between;margin-bottom:12px;font-size:14px;color:#94a3b8;}
+    .progress-track{background:rgba(255,255,255,0.1);height:10px;border-radius:10px;overflow:hidden;}
+    .progress-fill{background:linear-gradient(90deg,#6366f1,#a855f7);height:100%;transition:width 0.5s ease;border-radius:10px;}
+    .steps-nav{max-width:1100px;margin:30px auto;padding:0 30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+    .step-btn{padding:12px 28px;background:rgba(255,255,255,0.05);border:2px solid rgba(99,102,241,0.3);border-radius:12px;color:#cbd5e1;font-weight:600;cursor:pointer;transition:all 0.3s;font-size:15px;}
+    .step-btn:hover{border-color:#6366f1;background:rgba(99,102,241,0.1);transform:translateY(-2px);}
+    .step-btn.active{background:linear-gradient(135deg,#6366f1,#a855f7);border-color:transparent;color:white;box-shadow:0 4px 15px rgba(99,102,241,0.3);}
+    .step-btn.completed{border-color:#10b981;background:rgba(16,185,129,0.1);color:#10b981;}
+    .content-section{max-width:1100px;margin:40px auto;padding:0 30px;}
+    .step-content{display:none;animation:fadeIn 0.5s ease;}
+    .step-content.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .step-header{margin-bottom:40px;padding-bottom:20px;border-bottom:2px solid rgba(99,102,241,0.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+    .step-header h2{font-size:36px;font-weight:700;color:#e0e7ff;margin-bottom:12px;}
+    .step-header p{color:#9ca3af;font-size:16px;}
+    .topic-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 28px;margin-bottom:20px;transition:all 0.3s;cursor:pointer;}
+    .topic-card:hover{border-color:#6366f1;transform:translateY(-3px);background:rgba(99,102,241,0.05);}
+    .topic-header{display:flex;align-items:center;justify-content:space-between;}
+    .topic-header h3{font-size:22px;font-weight:600;display:flex;align-items:center;gap:12px;}
+    .topic-icon{font-size:28px;}.arrow{font-size:28px;transition:transform 0.3s;}
+    .sub-topics{display:none;margin-top:20px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.2);}
+    .sub-topics.active{display:block;}
+    .sub-topic{padding:14px 22px;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:10px;transition:0.3s;cursor:pointer;border-left:3px solid transparent;}
+    .sub-topic:hover{background:rgba(99,102,241,0.15);border-left-color:#6366f1;transform:translateX(5px);}
+    .detail-container{margin-top:40px;background:rgba(15,23,42,0.7);border:1px solid rgba(99,102,241,0.3);border-radius:24px;padding:40px;backdrop-filter:blur(8px);}
+    .detail-container h2{font-size:28px;margin-bottom:20px;color:#c4b5fd;}
+    .detail-container h3{font-size:22px;margin:25px 0 15px;color:#a5b4fc;}
+    .detail-container p{margin-bottom:18px;color:#cbd5e1;line-height:1.8;}
+    .detail-container ul,.detail-container ol{margin:18px 0 25px;padding-left:32px;}
+    .detail-container li{margin-bottom:10px;}
+    .code-block{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:24px;margin:25px 0;font-family:'Courier New',monospace;font-size:14px;overflow-x:auto;color:#e2e8f0;white-space:pre;}
+    .tip-box{background:rgba(59,130,246,0.1);border-left:5px solid #3b82f6;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .example-box{background:rgba(16,185,129,0.1);border-left:5px solid #10b981;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .note-box{background:rgba(234,179,8,0.1);border-left:5px solid #eab308;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    .warning-box{background:rgba(239,68,68,0.1);border-left:5px solid #ef4444;padding:20px 24px;margin:25px 0;border-radius:12px;}
+    table{width:100%;border-collapse:collapse;margin:25px 0;}
+    th,td{border:1px solid rgba(255,255,255,0.2);padding:12px;text-align:left;}
+    th{background:rgba(99,102,241,0.2);color:#a5b4fc;}
+    .nav-buttons{display:flex;justify-content:space-between;gap:20px;margin-top:50px;padding:40px 0 60px;}
+    .nav-btn{padding:14px 32px;border-radius:12px;font-weight:600;transition:0.3s;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;border:none;font-size:16px;}
+    .nav-btn.prev{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;}
+    .nav-btn:hover{transform:translateY(-2px);opacity:0.9;}
+    .complete-step-btn{background:rgba(16,185,129,0.2);border:2px solid #10b981;color:#10b981;padding:12px 28px;border-radius:12px;font-weight:600;cursor:pointer;transition:0.3s;font-size:14px;}
+    .complete-step-btn:hover{background:#10b981;color:white;}
+    .completed-badge{color:#10b981;font-weight:600;display:flex;align-items:center;gap:8px;}
+
+    /* Mock Interview Flash Cards */
+    .flashcard-container{perspective:1000px;margin:20px 0;}
+    .flashcard{background:rgba(255,255,255,0.04);border:1px solid rgba(99,102,241,0.3);border-radius:18px;padding:28px;cursor:pointer;transition:all 0.3s;position:relative;}
+    .flashcard:hover{border-color:#6366f1;background:rgba(99,102,241,0.07);}
+    .fc-question{font-size:17px;font-weight:600;color:#e0e7ff;margin-bottom:10px;}
+    .fc-answer{display:none;color:#cbd5e1;font-size:15px;margin-top:14px;padding-top:14px;border-top:1px dashed rgba(255,255,255,0.2);}
+    .fc-toggle{font-size:12px;color:#6366f1;margin-top:10px;cursor:pointer;font-weight:600;}
+
+    /* ML Recommender */
+    .ml-section{max-width:1100px;margin:0 auto 60px;padding:0 30px;}
+    .ml-box{background:rgba(15,23,42,0.8);border:1px solid rgba(99,102,241,0.4);border-radius:24px;padding:36px;}
+    .ml-box h2{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:8px;}
+    .ml-box p{color:#9ca3af;margin-bottom:24px;}
+    .ml-input-row{display:flex;gap:12px;flex-wrap:wrap;}
+    .ml-input{flex:1;min-width:220px;padding:14px 20px;background:rgba(255,255,255,0.05);border:1px solid rgba(99,102,241,0.3);border-radius:12px;color:#e2e8f0;font-size:15px;font-family:'Poppins',sans-serif;}
+    .ml-input:focus{outline:none;border-color:#6366f1;}
+    .ml-btn{padding:14px 32px;background:linear-gradient(135deg,#6366f1,#a855f7);border:none;border-radius:12px;color:white;font-weight:700;font-size:15px;cursor:pointer;transition:0.3s;font-family:'Poppins',sans-serif;}
+    .ml-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,0.4);}
+    .ml-results{margin-top:28px;display:none;}
+    .ml-results h3{font-size:18px;color:#a5b4fc;margin-bottom:16px;}
+    .ml-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:18px 22px;margin-bottom:12px;display:flex;align-items:center;gap:16px;transition:0.3s;}
+    .ml-card:hover{border-color:#6366f1;background:rgba(99,102,241,0.08);}
+    .ml-score-bar{flex:1;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;}
+    .ml-score-fill{height:100%;background:linear-gradient(90deg,#6366f1,#a855f7);border-radius:4px;}
+    .ml-topic-name{font-weight:600;color:#e0e7ff;min-width:240px;}
+    .ml-pct{color:#a5b4fc;font-size:14px;min-width:45px;text-align:right;}
+    .ml-why{font-size:13px;color:#64748b;margin-top:4px;}
+
+    /* Resources */
+    .pdf-section{max-width:1100px;margin:0 auto 80px;padding:0 30px;}
+    .pdf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+    .pdf-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px;transition:all 0.3s;text-align:center;}
+    .pdf-card:hover{border-color:#6366f1;transform:translateY(-3px);}
+    .pdf-card h4{font-size:17px;font-weight:600;margin:12px 0 8px;color:#e0e7ff;}
+    .pdf-card p{color:#9ca3af;font-size:14px;margin-bottom:16px;}
+    .pdf-btn{background:linear-gradient(135deg,#6366f1,#a855f7);color:white;border:none;padding:10px 24px;border-radius:9999px;font-size:14px;font-weight:600;cursor:pointer;transition:0.3s;text-decoration:none;display:inline-block;}
+    .pdf-btn:hover{opacity:0.85;transform:translateY(-2px);}
+    .section-title{font-size:28px;font-weight:700;color:#e0e7ff;margin-bottom:24px;}
+
+    /* Celebration */
+    .celebration-box{background:linear-gradient(135deg,rgba(99,102,241,0.15),rgba(168,85,247,0.15));border:2px solid rgba(99,102,241,0.4);border-radius:24px;padding:40px;text-align:center;margin:40px 0;}
+    .celebration-box h2{font-size:32px;font-weight:800;background:linear-gradient(135deg,#e0e7ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:12px;}
+    .celebration-box p{color:#9ca3af;font-size:16px;max-width:600px;margin:0 auto;}
+
+    @media(max-width:768px){header{padding:15px 20px;}nav a{margin-left:10px;font-size:12px;}.hero h1{font-size:32px;}.ml-input-row{flex-direction:column;}}
+</style>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="index.html">🚀 Placement Prep</a></div>
+    <nav><a href="index.html">Home</a><a href="subjects.html">Subjects</a></nav>
+</header>
+
+<div class="hero">
+    <div class="tag">🎯 Step 6 of 6 • Interview Preparation</div>
+    <h1>Crack Every<br>Interview</h1>
+    <p>Master HR questions, technical interviews, system design and mock practice — the final step between you and your dream placement.</p>
+</div>
+
+<div class="progress-container">
+    <div class="progress-stats"><span>📊 Your Progress</span><span id="progressPercent">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="steps-nav">
+    <button class="step-btn active" data-step="1">Step 1: HR Interview</button>
+    <button class="step-btn" data-step="2">Step 2: Technical Interview</button>
+    <button class="step-btn" data-step="3">Step 3: System Design</button>
+    <button class="step-btn" data-step="4">Step 4: Mock Interviews</button>
+</div>
+
+<div class="content-section" id="contentSection"></div>
+
+<div class="ml-section">
+    <div class="ml-box">
+        <h2>🤖 AI Interview Topic Recommender <span style="font-size:13px;background:rgba(99,102,241,0.2);padding:3px 10px;border-radius:20px;color:#a5b4fc;font-weight:500;margin-left:8px;">TF-IDF Cosine Similarity</span></h2>
+        <p>Describe your interview anxiety, weak areas, or target company — the ML engine recommends the most relevant interview prep topics using real TF-IDF vector similarity.</p>
+        <div class="ml-input-row">
+            <input class="ml-input" id="mlInput" placeholder="e.g. I freeze up during technical questions and don't know how to answer HR questions..." />
+            <button class="ml-btn" onclick="runMLRecommender()">🔍 Get Recommendations</button>
+        </div>
+        <div class="ml-results" id="mlResults">
+            <h3>📌 Recommended Interview Prep Topics — ranked by relevance</h3>
+            <div id="mlCards"></div>
+            <div style="margin-top:16px;padding:14px 18px;background:rgba(99,102,241,0.08);border-radius:12px;font-size:13px;color:#64748b;">ℹ️ TF-IDF: Each topic is a bag-of-words vector. Your input is vectorised the same way. Cosine similarity measures the angle between vectors — smaller angle = higher relevance.</div>
+        </div>
+    </div>
+</div>
+
+<div class="pdf-section">
+    <h2 class="section-title">📚 Interview Resources</h2>
+    <div class="pdf-grid">
+        <div class="pdf-card"><div style="font-size:40px">💼</div><h4>InterviewBit</h4><p>Structured technical interview preparation with company-specific tracks</p><a class="pdf-btn" href="https://www.interviewbit.com/" target="_blank">🔗 Start Prep</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🏆</div><h4>Pramp — Free Mock Interviews</h4><p>Practice live technical interviews with peers — completely free</p><a class="pdf-btn" href="https://www.pramp.com/" target="_blank">🔗 Book Mock</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🧠</div><h4>Glassdoor Interview Questions</h4><p>Real interview questions asked at TCS, Infosys, Amazon, Google</p><a class="pdf-btn" href="https://www.glassdoor.co.in/Interview/index.htm" target="_blank">🔗 Browse Questions</a></div>
+        <div class="pdf-card"><div style="font-size:40px">📖</div><h4>System Design Primer</h4><p>The most comprehensive system design guide on GitHub — 200k+ stars</p><a class="pdf-btn" href="https://github.com/donnemartin/system-design-primer" target="_blank">🔗 Read Guide</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🎯</div><h4>LeetCode Interview Simulator</h4><p>Time-pressured coding interviews simulating real company formats</p><a class="pdf-btn" href="https://leetcode.com/interview/" target="_blank">🔗 Simulate</a></div>
+        <div class="pdf-card"><div style="font-size:40px">🗣️</div><h4>Big Interview</h4><p>Video-based HR mock interview platform with AI feedback</p><a class="pdf-btn" href="https://biginterview.com/" target="_blank">🔗 Practice HR</a></div>
+    </div>
+</div>
+
+<script>
+const stepsData = {
+    1:{title:"🗣️ HR Interview Mastery",description:"HR round is eliminatory — most candidates fail not because of poor skills but poor storytelling.",topics:[
+        {title:"Tell Me About Yourself",icon:"👤",subs:[
+            {id:"tmay",title:"Perfect 'Tell Me About Yourself' Formula"},
+            {id:"strengths",title:"Strengths & Weaknesses — What to Actually Say"},
+            {id:"goals",title:"Short-Term & Long-Term Career Goals"},
+            {id:"why-company",title:"Why This Company? (Research Framework)"}
+        ]},
+        {title:"Behavioural Questions",icon:"🧠",subs:[
+            {id:"star-method",title:"STAR Method — Situation, Task, Action, Result"},
+            {id:"teamwork",title:"Teamwork & Leadership Stories"},
+            {id:"failure",title:"Handling Failure & Conflict Questions"},
+            {id:"salary",title:"Salary Negotiation & CTC Questions"}
+        ]}
+    ]},
+    2:{title:"💻 Technical Interview",description:"The coding round + technical Q&A — preparation here directly separates placed from not placed.",topics:[
+        {title:"Coding Interview Strategy",icon:"⚡",subs:[
+            {id:"problem-approach",title:"How to Approach Any Coding Problem"},
+            {id:"think-aloud",title:"Thinking Aloud — Communicating Your Approach"},
+            {id:"time-complexity",title:"Explaining Time & Space Complexity"},
+            {id:"edge-cases",title:"Handling Edge Cases & Input Validation"}
+        ]},
+        {title:"Technical Q&A",icon:"❓",subs:[
+            {id:"oops-questions",title:"OOP Questions — Classes, Polymorphism, SOLID"},
+            {id:"dbms-questions",title:"DBMS Interview Questions — SQL & Normalisation"},
+            {id:"os-questions",title:"OS Questions — Processes, Threads, Deadlock"},
+            {id:"cn-questions",title:"Computer Networks — TCP/IP, HTTP, DNS"}
+        ]}
+    ]},
+    3:{title:"🏗️ System Design",description:"Asked in product company interviews — shows you can think at scale beyond just writing code.",topics:[
+        {title:"Design Fundamentals",icon:"⚙️",subs:[
+            {id:"scalability",title:"Scalability — Horizontal vs Vertical Scaling"},
+            {id:"load-balancing",title:"Load Balancing & CDN"},
+            {id:"caching",title:"Caching — Redis, Memcached, Cache Strategies"},
+            {id:"databases-design",title:"SQL vs NoSQL — When to Use Which"}
+        ]},
+        {title:"Classic Design Problems",icon:"🗄️",subs:[
+            {id:"design-url",title:"Design a URL Shortener (like bit.ly)"},
+            {id:"design-twitter",title:"Design Twitter / Instagram Feed"},
+            {id:"design-uber",title:"Design Uber / Ride-Sharing App"},
+            {id:"design-chat",title:"Design WhatsApp / Chat System"}
+        ]}
+    ]},
+    4:{title:"🎭 Mock Interviews",description:"The only way to get good at interviews is to do interviews. Practice here before the real thing.",topics:[
+        {title:"Self-Practice Techniques",icon:"🪞",subs:[
+            {id:"mirror-practice",title:"Mirror Practice — Record & Review Yourself"},
+            {id:"peer-mock",title:"Peer Mock Interview Setup & Tips"},
+            {id:"online-platforms",title:"Online Mock Interview Platforms"},
+            {id:"timed-coding",title:"Timed Coding Practice Routines"}
+        ]},
+        {title:"Company-Specific Prep",icon:"🏢",subs:[
+            {id:"mass-recruiters",title:"TCS, Infosys, Wipro — Mass Recruiter Strategy"},
+            {id:"product-companies",title:"Amazon, Microsoft — Product Company Prep"},
+            {id:"startups",title:"Startup Interviews — What's Different"},
+            {id:"day-of-interview",title:"Day-Of Interview Checklist & Mindset"}
+        ]}
+    ]}
+};
+
+const detailedContent = {
+    'tmay':`<h2>Perfect 'Tell Me About Yourself' Formula</h2>
+<p>This is asked in 100% of interviews. It's not a life story — it's a 90-second highlight reel designed to make the interviewer want to hire you.</p>
+<h3>The Formula: Past → Present → Future</h3>
+<div class="example-box">✅ <strong>Template:</strong><br><br>
+"I'm a final-year B.Tech CSE student at [College]. Over the past few years I've built a strong foundation in [your strongest 2-3 skills]. I've worked on [highlight project — one line with result]. Most recently, I [internship/achievement]. I'm particularly interested in [role/domain] and I'm excited about this opportunity at [Company] because [specific reason]. I'm looking to [your goal] and I believe this role aligns perfectly with that."</div>
+<div class="warning-box">⚠️ <strong>Never say:</strong> "I was born in..." or read your resume aloud. Never exceed 2 minutes. Don't say "I'm a hard worker" — show it with examples.</div>
+<h3>Customise Per Company</h3>
+<table><tr><th>Company Type</th><th>Emphasise</th></tr>
+<tr><td>Service (TCS, Infosys)</td><td>Adaptability, teamwork, communication, learning speed</td></tr>
+<tr><td>Product (Amazon, MS)</td><td>Projects, DSA, problem-solving, impact metrics</td></tr>
+<tr><td>Startup</td><td>Initiative, ownership, full-stack versatility, speed</td></tr></table>`,
+
+    'strengths':`<h2>Strengths & Weaknesses — What to Actually Say</h2>
+<h3>Strengths — The Formula</h3>
+<p>Name the strength → Give a specific example → State the result</p>
+<div class="example-box">✅ <strong>Good answer:</strong> "My strongest skill is problem decomposition. When our team was stuck on optimising a slow API endpoint, I broke it down into database queries, serialisation, and network calls, identified the N+1 query issue, and fixed it — reducing response time from 2.8s to 180ms."</div>
+<h3>Weaknesses — The Formula</h3>
+<p>Name a REAL (but not disqualifying) weakness → What you're doing to fix it → Progress made</p>
+<div class="example-box">✅ <strong>Good weakness:</strong> "I used to struggle with public speaking and presenting technical work clearly. I've been actively working on it — I've given 3 tech talks at our college coding club over the past semester, and I've noticed I'm significantly more confident now."</div>
+<div class="warning-box">⚠️ Never say "I'm a perfectionist" or "I work too hard" — interviewers have heard it 10,000 times. Be genuine.</div>`,
+
+    'goals':`<h2>Short-Term & Long-Term Goals</h2>
+<div class="example-box">✅ <strong>Short-term (1-2 years):</strong> "In the short term, I want to become deeply proficient in [company's core tech stack], contribute meaningfully to real projects, and learn how [company] solves engineering problems at scale."</div>
+<div class="example-box">✅ <strong>Long-term (5 years):</strong> "In 5 years I see myself as a senior engineer who can architect systems and mentor juniors. I'm interested in [relevant domain] and want to build deep expertise there."</div>
+<div class="tip-box">💡 Research the company's tech stack and use their terminology. If they use microservices, mention microservices. Shows you've done your homework.</div>`,
+
+    'why-company':`<h2>Why This Company? — Research Framework</h2>
+<h3>The 3-Point Research Framework</h3>
+<ol>
+<li><strong>Company news:</strong> Recent product launch, acquisition, or expansion (Google news 1 week before interview)</li>
+<li><strong>Culture/values:</strong> Read their engineering blog, About Us, LinkedIn posts</li>
+<li><strong>Role alignment:</strong> Match 2-3 bullet points from the JD to your experience</li>
+</ol>
+<div class="example-box">✅ <strong>Good answer:</strong> "I've been following [Company]'s engineering blog and was particularly impressed by your recent post on [specific article]. The way your team handled [technical challenge] showed exactly the kind of thoughtful engineering culture I want to grow in. The role also directly aligns with my experience in [specific skill from JD]."</div>`,
+
+    'star-method':`<h2>STAR Method — Behavioural Questions</h2>
+<table><tr><th>Letter</th><th>Stands For</th><th>Duration</th></tr>
+<tr><td>S</td><td>Situation — set the context</td><td>10-15 seconds</td></tr>
+<tr><td>T</td><td>Task — your role and responsibility</td><td>10 seconds</td></tr>
+<tr><td>A</td><td>Action — what YOU specifically did (use "I" not "we")</td><td>45-60 seconds</td></tr>
+<tr><td>R</td><td>Result — quantified outcome + what you learned</td><td>15-20 seconds</td></tr></table>
+<div class="example-box">✅ <strong>Example — "Tell me about a challenging project":</strong><br><br>
+"<strong>S:</strong> During our 3rd-year mini project, our team of 4 had 3 weeks to build a real-time collaborative code editor.<br>
+<strong>T:</strong> I was responsible for the backend and real-time sync — the most technically complex part.<br>
+<strong>A:</strong> I researched Operational Transformation vs CRDTs, implemented Socket.io-based conflict resolution, and wrote comprehensive tests covering 20+ edge cases.<br>
+<strong>R:</strong> The editor handled 10 concurrent users with zero sync conflicts, got a 9.2/10 from our panel, and one professor asked if we'd open-source it."</div>`,
+
+    'teamwork':`<h2>Teamwork & Leadership Stories</h2>
+<h3>Common Questions & What They're Really Testing</h3>
+<table><tr><th>Question</th><th>They're Testing</th></tr>
+<tr><td>"Describe a conflict with a teammate"</td><td>Communication, maturity, resolution skills</td></tr>
+<tr><td>"Tell me about leading a team"</td><td>Initiative, ownership, delegation</td></tr>
+<tr><td>"When did you go beyond your role?"</td><td>Work ethic, proactivity, ownership</td></tr>
+<tr><td>"How do you handle disagreements?"</td><td>Empathy, data-driven thinking, collaboration</td></tr></table>
+<div class="tip-box">💡 Prepare 5-6 STAR stories that can be adapted to different questions. Most behavioural questions are variations of 4-5 themes: conflict, leadership, failure, success, initiative.</div>`,
+
+    'failure':`<h2>Handling Failure & Conflict Questions</h2>
+<div class="example-box">✅ <strong>Template for failure questions:</strong><br>"There was a time when [brief situation]. I made the mistake of [specific error — own it, don't blame others]. The result was [consequence]. What I learned was [lesson], and since then I've [specific behaviour change]. For example, after that I [concrete example of applying the lesson]."</div>
+<div class="warning-box">⚠️ Never say you've never failed — it makes you look dishonest or inexperienced. Everyone has failed. The question tests self-awareness, not perfection.</div>`,
+
+    'salary':`<h2>Salary Negotiation & CTC Questions</h2>
+<h3>Key Principle: Anchor High, But Reasonably</h3>
+<ul>
+<li>Research market rate on <strong>Glassdoor, AmbitionBox, LinkedIn Salary</strong> before any discussion</li>
+<li>If asked early: "I'd like to understand the full role first — could you share the budgeted range?"</li>
+<li>If pressured: Give a range where your target is the bottom, e.g. "Based on my research and skill set, I'm looking at ₹X–₹Y LPA"</li>
+<li>After offer: "Thank you for the offer. Based on my [specific skills/projects], I was expecting closer to ₹X. Is there flexibility?"</li>
+</ul>
+<div class="tip-box">💡 In campus placements, salary is often fixed. Focus negotiation on joining date, role, location, or growth track instead.</div>`,
+
+    'problem-approach':`<h2>How to Approach Any Coding Problem</h2>
+<h3>The 5-Step Framework</h3>
+<ol>
+<li><strong>Understand (2 min):</strong> Restate the problem in your own words. Ask clarifying questions.</li>
+<li><strong>Examples (1 min):</strong> Walk through 1-2 examples. Check edge cases (empty input, single element, negatives).</li>
+<li><strong>Brute Force (1 min):</strong> State the simplest O(n²) or O(n³) solution first. Don't code yet.</li>
+<li><strong>Optimise (3 min):</strong> Identify bottleneck. Can you use a hash map? Sort first? Two pointers? Sliding window?</li>
+<li><strong>Code (15 min):</strong> Write clean, readable code. Name variables clearly. Add brief comments.</li>
+</ol>
+<div class="example-box">✅ Always say: "Before I code, let me think through the approach..." — interviewers respect this. Jumping straight to code without thinking is a red flag.</div>`,
+
+    'think-aloud':`<h2>Thinking Aloud — Communicating Your Approach</h2>
+<p>Silent coding is the #1 mistake in technical interviews. Interviewers need to see your thought process — a wrong approach explained well beats a silent correct solution.</p>
+<div class="example-box">✅ <strong>Good narration pattern:</strong><br>
+"So I'm thinking about this problem... my first instinct is a brute force O(n²) approach where I check every pair. That would work, but let me see if I can do better. If I sort the array first, that's O(n log n) plus O(n) for a two-pointer scan — so O(n log n) overall. That's better. Let me think about edge cases... what if there are duplicates? Yes, I'd need to handle that... okay, let me code this up."</div>`,
+
+    'time-complexity':`<h2>Explaining Time & Space Complexity</h2>
+<table><tr><th>Complexity</th><th>Example</th><th>Say It Like</th></tr>
+<tr><td>O(1)</td><td>Array access</td><td>"Constant time — doesn't grow with input"</td></tr>
+<tr><td>O(log n)</td><td>Binary search</td><td>"Logarithmic — halves the search space each time"</td></tr>
+<tr><td>O(n)</td><td>Linear scan</td><td>"Linear — visits each element once"</td></tr>
+<tr><td>O(n log n)</td><td>Merge sort</td><td>"n log n — optimal for comparison-based sort"</td></tr>
+<tr><td>O(n²)</td><td>Nested loops</td><td>"Quadratic — usually worth optimising"</td></tr>
+<tr><td>O(2ⁿ)</td><td>Recursion (naive)</td><td>"Exponential — memoisation needed"</td></tr></table>
+<div class="tip-box">💡 Always analyse both time AND space. Interviewers note if you forget space complexity. Recursive solutions have O(n) stack space by default.</div>`,
+
+    'edge-cases':`<h2>Handling Edge Cases</h2>
+<div class="code-block">// Before every solution, always check:
+// 1. Empty input: arr = [], s = "", n = 0
+// 2. Single element: arr = [x]
+// 3. All same elements: arr = [1,1,1,1]
+// 4. Negative numbers (if applicable)
+// 5. Integer overflow: use long long in C++ when summing
+// 6. Null/nullptr for tree/list problems
+// 7. Cyclic structures (detect before traversal)
+
+// Good habit — state edge cases BEFORE coding:
+"Before I code, edge cases to handle:
+ - Empty array → return -1 (or per problem spec)
+ - Single element → return it directly
+ - All negatives → Kadane's handles this correctly
+ Let me verify with my algorithm..."</div>`,
+
+    'oops-questions':`<h2>OOP Interview Questions</h2>
+<table><tr><th>Question</th><th>Answer in 1 Line</th></tr>
+<tr><td>4 pillars of OOP?</td><td>Encapsulation, Abstraction, Inheritance, Polymorphism</td></tr>
+<tr><td>Abstract class vs Interface?</td><td>Abstract: partial implementation, can have state. Interface: pure contract, no state (Java 8+ has default methods)</td></tr>
+<tr><td>Overloading vs Overriding?</td><td>Overloading: same name, different params (compile-time). Overriding: subclass redefines parent method (runtime)</td></tr>
+<tr><td>What is SOLID?</td><td>5 design principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion</td></tr>
+<tr><td>What is a destructor?</td><td>Special method called when object is destroyed — used to free resources (C++ explicit, Java GC handles it)</td></tr>
+<tr><td>What is a virtual function?</td><td>C++ function that enables runtime polymorphism via vtable lookup</td></tr></table>`,
+
+    'dbms-questions':`<h2>DBMS Interview Questions</h2>
+<table><tr><th>Question</th><th>Answer</th></tr>
+<tr><td>ACID properties?</td><td>Atomicity (all or nothing), Consistency (valid state), Isolation (concurrent = sequential), Durability (persisted)</td></tr>
+<tr><td>Normalisation forms?</td><td>1NF: atomic values. 2NF: no partial dependency. 3NF: no transitive dependency. BCNF: stricter 3NF</td></tr>
+<tr><td>JOIN types?</td><td>INNER: matching rows. LEFT: all left + matching right. RIGHT: opposite. FULL: all rows from both</td></tr>
+<tr><td>Index?</td><td>Data structure (B-Tree/Hash) that speeds up SELECT at cost of INSERT/UPDATE. Always index foreign keys and WHERE columns</td></tr>
+<tr><td>Clustered vs Non-Clustered?</td><td>Clustered: data stored in index order (1 per table). Non-clustered: separate structure pointing to data rows</td></tr></table>
+<div class="code-block">-- Common interview SQL questions:
+-- Find 2nd highest salary
+SELECT MAX(salary) FROM employees WHERE salary < (SELECT MAX(salary) FROM employees);
+-- Or: SELECT salary FROM employees ORDER BY salary DESC LIMIT 1 OFFSET 1;
+
+-- Find duplicate records
+SELECT email, COUNT(*) FROM users GROUP BY email HAVING COUNT(*) > 1;
+
+-- Delete duplicates keeping one
+DELETE FROM users WHERE id NOT IN (SELECT MIN(id) FROM users GROUP BY email);</div>`,
+
+    'os-questions':`<h2>OS Interview Questions</h2>
+<table><tr><th>Question</th><th>Answer</th></tr>
+<tr><td>Process vs Thread?</td><td>Process: independent execution unit with own memory. Thread: lightweight unit within a process, shares memory</td></tr>
+<tr><td>Deadlock conditions?</td><td>Mutual Exclusion + Hold & Wait + No Preemption + Circular Wait — ALL 4 needed simultaneously</td></tr>
+<tr><td>Paging vs Segmentation?</td><td>Paging: fixed-size pages (no external fragmentation). Segmentation: logical segments of variable size (no internal fragmentation)</td></tr>
+<tr><td>Semaphore vs Mutex?</td><td>Mutex: binary, ownership-based, same thread must release. Semaphore: counter, any thread can signal</td></tr>
+<tr><td>Thrashing?</td><td>CPU spends more time page swapping than executing — caused by too many processes for available RAM</td></tr>
+<tr><td>Scheduling algorithms?</td><td>FCFS, SJF, Round Robin, Priority, Multilevel Queue — know average waiting time formula</td></tr></table>`,
+
+    'cn-questions':`<h2>Computer Networks Interview Questions</h2>
+<table><tr><th>Question</th><th>Answer</th></tr>
+<tr><td>TCP vs UDP?</td><td>TCP: reliable, ordered, connection-oriented (HTTP, email). UDP: fast, unreliable, connectionless (video, DNS, gaming)</td></tr>
+<tr><td>What happens when you type google.com?</td><td>DNS lookup → TCP handshake → TLS handshake → HTTP GET → Server processes → HTML response → Browser renders</td></tr>
+<tr><td>HTTP vs HTTPS?</td><td>HTTPS = HTTP + TLS encryption. Port 80 vs 443. All traffic encrypted — prevents MITM attacks</td></tr>
+<tr><td>OSI 7 layers?</td><td>Physical, Data Link, Network, Transport, Session, Presentation, Application (Please Do Not Throw Sausage Pizza Away)</td></tr>
+<tr><td>What is DNS?</td><td>Distributed hierarchical system translating domain names to IP addresses — the "phone book of the internet"</td></tr>
+<tr><td>3-way handshake?</td><td>SYN → SYN-ACK → ACK. Establishes TCP connection before any data transfer</td></tr></table>`,
+
+    'scalability':`<h2>Scalability — Horizontal vs Vertical</h2>
+<table><tr><th></th><th>Vertical Scaling</th><th>Horizontal Scaling</th></tr>
+<tr><td>What</td><td>Bigger machine (more RAM/CPU)</td><td>More machines (distributed)</td></tr>
+<tr><td>Limit</td><td>Hardware limit — finite</td><td>Theoretically unlimited</td></tr>
+<tr><td>Downtime</td><td>Requires restart</td><td>Zero downtime</td></tr>
+<tr><td>Cost</td><td>Expensive, diminishing returns</td><td>Cheaper at scale</td></tr>
+<tr><td>Use case</td><td>Databases (early stage)</td><td>Web servers, APIs</td></tr></table>
+<div class="tip-box">💡 In system design interviews, always mention: stateless services (easy to scale horizontally), session storage in Redis (not server memory), and database read replicas.</div>`,
+
+    'load-balancing':`<h2>Load Balancing & CDN</h2>
+<h3>Load Balancing Algorithms</h3>
+<ul>
+<li><strong>Round Robin:</strong> Requests distributed sequentially — best for equal-capacity servers</li>
+<li><strong>Least Connections:</strong> Route to server with fewest active connections — best for long-lived connections</li>
+<li><strong>IP Hash:</strong> Same client always hits same server — useful for session stickiness</li>
+<li><strong>Weighted Round Robin:</strong> Powerful servers get more traffic</li>
+</ul>
+<h3>CDN (Content Delivery Network)</h3>
+<p>Distribute static assets (images, JS, CSS) to servers geographically close to users. Reduces latency from 300ms to 30ms for users far from origin. Examples: Cloudflare, AWS CloudFront, Akamai.</p>`,
+
+    'caching':`<h2>Caching — Redis & Cache Strategies</h2>
+<table><tr><th>Strategy</th><th>How It Works</th><th>Use Case</th></tr>
+<tr><td>Cache-Aside (Lazy)</td><td>Read cache → miss → read DB → write cache</td><td>General purpose, read-heavy</td></tr>
+<tr><td>Write-Through</td><td>Write to cache AND DB simultaneously</td><td>Write-heavy, no stale data</td></tr>
+<tr><td>Write-Behind</td><td>Write to cache only, async flush to DB</td><td>High write throughput</td></tr>
+<tr><td>Read-Through</td><td>Cache sits in front, fetches from DB on miss</td><td>Transparent caching</td></tr></table>
+<div class="code-block">// Redis cache-aside pattern (Node.js)
+async function getUser(userId) {
+  const cached = await redis.get(\`user:\${userId}\`);
+  if (cached) return JSON.parse(cached);  // cache hit
+  const user = await db.users.findById(userId);  // cache miss
+  await redis.setex(\`user:\${userId}\`, 3600, JSON.stringify(user));  // TTL: 1hr
+  return user;
+}</div>`,
+
+    'databases-design':`<h2>SQL vs NoSQL — When to Use Which</h2>
+<table><tr><th></th><th>SQL (Relational)</th><th>NoSQL</th></tr>
+<tr><td>Schema</td><td>Fixed, predefined</td><td>Flexible, dynamic</td></tr>
+<tr><td>Scaling</td><td>Vertical (mostly)</td><td>Horizontal (sharding)</td></tr>
+<tr><td>Consistency</td><td>ACID guaranteed</td><td>Eventual consistency (mostly)</td></tr>
+<tr><td>Use case</td><td>Financial, ERP, reporting</td><td>Social, real-time, big data</td></tr>
+<tr><td>Examples</td><td>PostgreSQL, MySQL</td><td>MongoDB, Cassandra, Redis</td></tr></table>
+<div class="tip-box">💡 In system design interviews: use SQL for user accounts and transactions (need ACID), NoSQL for posts/feeds/logs (need scale and flexibility).</div>`,
+
+    'design-url':`<h2>Design a URL Shortener (bit.ly)</h2>
+<h3>Requirements Clarification</h3>
+<ul><li>100M URLs created/day, 10B reads/day (read-heavy 100:1 ratio)</li>
+<li>URLs never deleted, expiry optional</li>
+<li>Analytics (click count, geo) optional</li></ul>
+<h3>Design Decisions</h3>
+<table><tr><th>Component</th><th>Choice</th><th>Reason</th></tr>
+<tr><td>Short ID generation</td><td>Base62 encode(counter) or MD5 first 7 chars</td><td>Unique, short, URL-safe</td></tr>
+<tr><td>Database</td><td>NoSQL (Cassandra)</td><td>Write-heavy, key-value, horizontal scale</td></tr>
+<tr><td>Cache</td><td>Redis (80% traffic hits 20% URLs)</td><td>Zipf's law — hot URLs cached</td></tr>
+<tr><td>Cache eviction</td><td>LRU</td><td>Evict least recently used</td></tr>
+<tr><td>Load balancer</td><td>Nginx or AWS ALB</td><td>Distribute across API servers</td></tr></table>`,
+
+    'design-twitter':`<h2>Design Twitter / Instagram Feed</h2>
+<h3>The Hard Problem: Fan-Out on Write vs Read</h3>
+<table><tr><th>Approach</th><th>On Post</th><th>On Read</th><th>Best For</th></tr>
+<tr><td>Push (fan-out on write)</td><td>Write to all followers' feeds</td><td>Read your pre-built feed</td><td>Users with few followers</td></tr>
+<tr><td>Pull (fan-out on read)</td><td>Store post only</td><td>Merge followees' posts</td><td>Celebrities (1M+ followers)</td></tr>
+<tr><td>Hybrid (Twitter's approach)</td><td>Push to most, pull for celebrities</td><td>Merge + inject celebrity tweets</td><td>Production at scale</td></tr></table>
+<div class="tip-box">💡 The celebrity problem (Elon Musk has 150M followers) breaks naive fan-out. Mentioning this in interviews shows you think at real scale.</div>`,
+
+    'design-uber':`<h2>Design Uber / Ride-Sharing App</h2>
+<h3>Core Components</h3>
+<ul>
+<li><strong>Location Service:</strong> Drivers send GPS every 5s → stored in Redis Geo (lat/lng indexed)</li>
+<li><strong>Matching Service:</strong> Find nearest N drivers using geospatial queries, apply matching algorithm</li>
+<li><strong>Trip Service:</strong> Manage trip states (requested → accepted → started → completed)</li>
+<li><strong>Real-Time:</strong> WebSockets for live driver location updates to rider</li>
+<li><strong>ETA:</strong> Map data (Google Maps API or own routing engine like OSRM)</li>
+</ul>
+<div class="code-block">// Redis Geo for driver location
+GEOADD drivers_available lng lat driver_id
+GEORADIUS drivers_available user_lng user_lat 5 km COUNT 10 ASC
+// Returns nearest 10 available drivers within 5km</div>`,
+
+    'design-chat':`<h2>Design WhatsApp / Chat System</h2>
+<h3>Key Design Decisions</h3>
+<table><tr><th>Feature</th><th>Solution</th></tr>
+<tr><td>Real-time messaging</td><td>WebSockets (persistent connection per client)</td></tr>
+<tr><td>Message storage</td><td>Cassandra — append-only, partition by (sender, receiver) + timestamp</td></tr>
+<tr><td>Message delivery</td><td>Store-and-forward: store if offline, push when online</td></tr>
+<tr><td>Online presence</td><td>Redis with TTL — heartbeat every 30s, expire = offline</td></tr>
+<tr><td>E2E encryption</td><td>Signal Protocol — keys stored only on devices, not server</td></tr>
+<tr><td>Media files</td><td>S3 + CDN. Client uploads to S3, sends S3 URL in message</td></tr></table>`,
+
+    'mirror-practice':`<h2>Mirror Practice — Record & Review Yourself</h2>
+<h3>The 3-Day Mirror Protocol</h3>
+<ol>
+<li><strong>Day 1 — HR stories:</strong> Record yourself answering "Tell me about yourself", "Strengths", "Greatest failure". Watch back. Are you speaking clearly? Making eye contact with camera? Using filler words ("um", "like", "you know")?</li>
+<li><strong>Day 2 — Technical explanation:</strong> Explain a data structure or algorithm to camera as if teaching a 12-year-old. If you can't explain it simply, you don't know it well enough.</li>
+<li><strong>Day 3 — Live coding:</strong> Set a 30-minute timer. Pick a medium LeetCode problem. Narrate your approach while coding — out loud, to camera.</li>
+</ol>
+<div class="tip-box">💡 Use Loom (free) to record yourself. Watch at 1.5x speed. The discomfort of watching yourself is the fastest feedback loop available.</div>`,
+
+    'peer-mock':`<h2>Peer Mock Interview Setup</h2>
+<h3>How to Run a Good Mock Interview</h3>
+<ul>
+<li><strong>Find a partner:</strong> LinkedIn connections, college WhatsApp groups, Discord servers (CS Career Hub, Blind)</li>
+<li><strong>Roles:</strong> Alternate interviewer/interviewee every 45 minutes</li>
+<li><strong>Setup:</strong> Use Google Meet. Interviewee shares screen. Interviewer has a problem list ready</li>
+<li><strong>Rules:</strong> No hints unless they've been stuck for 10+ minutes. Take notes on communication, not just correctness</li>
+<li><strong>Debrief:</strong> 15 minutes of feedback — what went well, what was unclear, what could be faster</li>
+</ul>
+<div class="example-box">✅ <strong>Problem sources for mock interviews:</strong> LeetCode company tags, InterviewBit, GFG Must Do Questions, Neetcode 150</div>`,
+
+    'online-platforms':`<h2>Online Mock Interview Platforms</h2>
+<table><tr><th>Platform</th><th>Type</th><th>Cost</th><th>Best For</th></tr>
+<tr><td>Pramp</td><td>Peer-to-peer, live</td><td>Free</td><td>Coding + behavioural</td></tr>
+<tr><td>interviewing.io</td><td>Anonymous with engineers</td><td>Free (limited) / Paid</td><td>FAANG prep</td></tr>
+<tr><td>LeetCode Mock</td><td>Timed, company-specific</td><td>Free / Premium</td><td>Coding practice</td></tr>
+<tr><td>Big Interview</td><td>AI + video HR practice</td><td>Paid</td><td>HR rounds</td></tr>
+<tr><td>Exponent</td><td>System design</td><td>Paid</td><td>PM + SD interviews</td></tr></table>`,
+
+    'timed-coding':`<h2>Timed Coding Practice Routines</h2>
+<h3>The 4-Week Routine (1.5 hrs/day)</h3>
+<table><tr><th>Week</th><th>Focus</th><th>Daily Target</th></tr>
+<tr><td>Week 1</td><td>Arrays, Strings, HashMap</td><td>3 Easy + 1 Medium</td></tr>
+<tr><td>Week 2</td><td>Trees, Linked Lists, Stacks</td><td>2 Easy + 2 Medium</td></tr>
+<tr><td>Week 3</td><td>Graphs, BFS/DFS, DP basics</td><td>1 Easy + 2 Medium + 1 Hard</td></tr>
+<tr><td>Week 4</td><td>Company tag problems (target company)</td><td>3 Medium + 1 Hard</td></tr></table>
+<div class="tip-box">💡 Never spend more than 20 minutes stuck on a problem during practice. Look at the hint, understand the approach, then code it. Understanding > struggling in silence.</div>`,
+
+    'mass-recruiters':`<h2>TCS, Infosys, Wipro — Mass Recruiter Strategy</h2>
+<h3>TCS NQT Structure</h3>
+<ul>
+<li>Numerical Ability (26 questions, 40 min)</li>
+<li>Verbal Ability (24 questions, 30 min)</li>
+<li>Reasoning Ability (30 questions, 50 min)</li>
+<li>Programming Logic (10 questions, 20 min)</li>
+<li>Coding (2 problems, 60 min) — beginner/intermediate level</li>
+</ul>
+<div class="example-box">✅ <strong>Strategy:</strong> TCS gives 80% marks for aptitude. Nail IndiaBIX and PrepInsta's aptitude sections. The coding section is relatively easy — solve both problems cleanly. Cutoff is ~50-60%.</div>
+<div class="tip-box">💡 For Infosys: Hackwithinfy has DSA problems. For Wipro: NLTH (National Level Talent Hunt) — aptitude heavy. Focus: speed > accuracy for MCQs, accuracy > speed for coding.</div>`,
+
+    'product-companies':`<h2>Amazon, Microsoft — Product Company Prep</h2>
+<h3>Amazon's Interview Structure</h3>
+<ul>
+<li>Online Assessment: 2 coding problems (medium-hard), 90 minutes</li>
+<li>Technical Round 1: DSA + past project deep-dive</li>
+<li>Technical Round 2: DSA + system design (for experienced)</li>
+<li>Bar Raiser: Behavioural — Amazon Leadership Principles</li>
+</ul>
+<div class="warning-box">⚠️ Amazon's 16 Leadership Principles (Customer Obsession, Ownership, Invent & Simplify, etc.) are tested in EVERY behavioural question. Prepare 1-2 STAR stories for each principle.</div>
+<h3>Microsoft Structure</h3>
+<ul>
+<li>Technical Screen: DSA (Arrays, Trees, Graph — focus on optimal solutions)</li>
+<li>Loop (4 rounds): Coding + Design + Cultural fit + "As-Appropriate" (hiring manager)</li>
+</ul>`,
+
+    'startups':`<h2>Startup Interviews — What's Different</h2>
+<table><tr><th>Aspect</th><th>Service Company</th><th>Startup</th></tr>
+<tr><td>Coding bar</td><td>Moderate</td><td>High — they need output immediately</td></tr>
+<tr><td>System design</td><td>Rarely asked</td><td>Almost always asked</td></tr>
+<tr><td>HR questions</td><td>Standard</td><td>Focus on motivation, autonomy, ambiguity tolerance</td></tr>
+<tr><td>Take-home</td><td>Rare</td><td>Common — 2-4 hour assignment</td></tr>
+<tr><td>Culture fit</td><td>Generic</td><td>Very important — team size is small</td></tr></table>
+<div class="tip-box">💡 For startup interviews: Research their product deeply. Have an opinion. "I noticed your onboarding flow has [observation] — I'd approach it differently by..." shows initiative they love.</div>`,
+
+    'day-of-interview':`<h2>Day-Of Interview Checklist & Mindset</h2>
+<h3>Night Before</h3>
+<ul>
+<li>✅ Confirm time zone, meeting link, contact number</li>
+<li>✅ Test webcam, mic, and internet (do a Speedtest)</li>
+<li>✅ Have a pen and paper ready for rough work</li>
+<li>✅ Review your resume — know every word on it</li>
+<li>✅ Sleep 8 hours — no last-minute cramming</li>
+</ul>
+<h3>Day Of</h3>
+<ul>
+<li>✅ Join 5 minutes early (shows punctuality)</li>
+<li>✅ Plain, quiet background — or use virtual background</li>
+<li>✅ If you don't know something: "I haven't worked with that specifically, but my approach would be..." — never bluff</li>
+<li>✅ End by asking 2 thoughtful questions (shows interest)</li>
+</ul>
+<div class="example-box">✅ <strong>Good closing questions:</strong><br>"What does the onboarding process look like for new engineers?"<br>"What's the biggest technical challenge the team is currently working on?"<br>"How does the team handle code reviews and knowledge sharing?"</div>`
+};
+
+let currentStep = 1;
+let completedSteps = JSON.parse(localStorage.getItem('interview_completedSteps') || '[]');
+
+function updateProgress() {
+    const p = (completedSteps.length / 4) * 100;
+    document.getElementById('progressFill').style.width = p + '%';
+    document.getElementById('progressPercent').textContent = Math.round(p) + '%';
+    document.querySelectorAll('.step-btn').forEach(b => b.classList.toggle('completed', completedSteps.includes(parseInt(b.dataset.step))));
+}
+
+function markStepComplete(step) {
+    if (!completedSteps.includes(step)) {
+        completedSteps.push(step);
+        localStorage.setItem('interview_completedSteps', JSON.stringify(completedSteps));
+        updateProgress();
+        renderStepContent(step);
+    }
+}
+
+function renderStepContent(step) {
+    currentStep = step;
+    const sd = stepsData[step];
+    const isC = completedSteps.includes(step);
+    let html = `<div class="step-content active"><div class="step-header"><div><h2>${sd.title}</h2><p>${sd.description}</p></div>${!isC ? `<button class="complete-step-btn" onclick="markStepComplete(${step})">✓ Mark as Complete</button>` : '<div class="completed-badge">✓ Step Completed! 🎉</div>'}</div>`;
+    sd.topics.forEach(t => {
+        html += `<div class="topic-card" onclick="toggleSubTopics(this)"><div class="topic-header"><h3><span class="topic-icon">${t.icon}</span> ${t.title}</h3><span class="arrow">›</span></div><div class="sub-topics">`;
+        t.subs.forEach(s => { html += `<div class="sub-topic" onclick="showContent(event,'${s.id}')">${s.title}</div>`; });
+        html += `</div></div>`;
+    });
+
+    const celebrationHTML = step === 4 ? `<div class="celebration-box">
+        <div style="font-size:60px;margin-bottom:16px">🎉</div>
+        <h2>You've Completed All 6 Steps!</h2>
+        <p style="margin-top:12px">You've covered DSA, Core CS, Aptitude, Projects, and Interview Prep. You are ready. Go get that placement! 🚀</p>
+        <div style="margin-top:28px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+            <a href="step2.html" style="padding:12px 28px;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.4);border-radius:12px;color:#a5b4fc;text-decoration:none;font-weight:600;">Review DSA →</a>
+            <a href="Build Projects.html" style="padding:12px 28px;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.4);border-radius:12px;color:#a5b4fc;text-decoration:none;font-weight:600;">Review Projects →</a>
+        </div>
+    </div>` : '';
+
+    html += `<div class="detail-container" id="detailContainer"><p style="color:#94a3b8;text-align:center;">🎯 Click any topic to view detailed interview prep content.</p></div>${celebrationHTML}<div class="nav-buttons">${step > 1 ? `<button class="nav-btn prev" onclick="changeStep(${step - 1})">← Previous</button>` : '<div></div>'}${step < 4 ? `<button class="nav-btn next" onclick="changeStep(${step + 1})">Next →</button>` : `<button class="nav-btn next" style="background:linear-gradient(135deg,#10b981,#059669);" onclick="window.location.href='index.html'">🏠 Back to Home</button>`}</div></div>`;
+    document.getElementById('contentSection').innerHTML = html;
+    document.querySelectorAll('.step-btn').forEach(b => b.classList.toggle('active', parseInt(b.dataset.step) === step));
+}
+
+function changeStep(s) {
+    if (s >= 1 && s <= 4) { renderStepContent(s); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+}
+
+function toggleSubTopics(card) {
+    const sub = card.querySelector('.sub-topics');
+    const arrow = card.querySelector('.arrow');
+    document.querySelectorAll('.sub-topics').forEach(s => { if (s !== sub) s.classList.remove('active'); });
+    sub.classList.toggle('active');
+    if (arrow) arrow.style.transform = sub.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+
+function showContent(e, id) {
+    e.stopPropagation();
+    const dc = document.getElementById('detailContainer');
+    dc.innerHTML = detailedContent[id] || '<p>Content coming soon!</p>';
+    dc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ─── TF-IDF Cosine Similarity ML Recommender ────────────────────────────────
+const interviewDocs = {
+    "Tell Me About Yourself": "introduce yourself personal summary background education skills projects past present future story narrative self introduction",
+    "Strengths & Weaknesses": "strength weakness good bad skills honest self awareness improvement growth positive negative attribute quality",
+    "HR Behavioural Questions": "hr behavioural tell me about conflict failure success teamwork leadership situation task action result star method",
+    "Salary Negotiation": "salary ctc package lpa negotiate offer money compensation stipend hike fresher expectation",
+    "Coding Problem Approach": "coding problem solving approach method brute force optimise two pointer sliding window hash map strategy think aloud",
+    "Time & Space Complexity": "time space complexity big o notation linear logarithmic quadratic n squared analysis explain complexity runtime",
+    "OOP & SOLID Concepts": "oop object oriented programming class object inheritance polymorphism abstraction encapsulation solid interface abstract method overloading overriding",
+    "DBMS SQL Questions": "dbms database sql join normalisation acid transaction index query relational table foreign key primary key",
+    "OS Concepts": "operating system process thread deadlock semaphore mutex scheduling paging segmentation memory management concurrency",
+    "Computer Networks": "network tcp udp http https dns osi layer handshake ip address protocol socket web request response",
+    "System Design Fundamentals": "system design scale scalability load balancer caching redis cdn database sql nosql architecture distributed",
+    "Design Classic Systems": "design url shortener twitter uber whatsapp instagram feed chat messenger ride sharing social media",
+    "Mock Interview Practice": "mock interview practice peer record mirror timed coding platform pramp simulate rehearse feedback",
+    "Company-Specific Prep": "tcs infosys wipro amazon microsoft startup company interview pattern aptitude nqt hackwithinfy product service",
+    "Day-Of Interview Tips": "day interview checklist mindset preparation before join punctual camera mic nervous anxiety confident mindset"
+};
+
+const interviewTips = {
+    "Tell Me About Yourself": "Craft a 90-second Past→Present→Future story — memorise it but make it sound natural",
+    "Strengths & Weaknesses": "Name strength + example + result. Name real weakness + what you're doing to fix it",
+    "HR Behavioural Questions": "Prepare 5-6 STAR stories that can be adapted to different behavioural questions",
+    "Salary Negotiation": "Research AmbitionBox & Glassdoor. Anchor high with a range, not a single number",
+    "Coding Problem Approach": "Always state brute force first, then optimise — never jump straight to code",
+    "Time & Space Complexity": "Analyse BOTH time and space. Don't forget O(n) stack space for recursive solutions",
+    "OOP & SOLID Concepts": "Know the 4 pillars cold + abstract vs interface + overloading vs overriding differences",
+    "DBMS SQL Questions": "Practice the 2nd highest salary query, duplicate removal, and all JOIN types",
+    "OS Concepts": "All 4 deadlock conditions must be present simultaneously — mention this in answers",
+    "Computer Networks": "Be able to explain 'What happens when you type google.com' end-to-end in 2 minutes",
+    "System Design Fundamentals": "Always mention: stateless services, Redis for sessions, DB read replicas, CDN for static assets",
+    "Design Classic Systems": "URL shortener is the best starter system design — master it first",
+    "Mock Interview Practice": "Do at least 5 mock interviews before your first real one — Pramp is free",
+    "Company-Specific Prep": "For TCS NQT, 80% of marks come from aptitude — prioritise that section",
+    "Day-Of Interview Tips": "Join 5 min early, test tech night before, have questions ready to ask interviewer"
+};
+
+function tfidf(docs, query) {
+    const all = [...Object.values(docs), query];
+    const vocab = [...new Set(all.flatMap(d => d.toLowerCase().split(/\s+/)))];
+    function tf(doc, term) { const w = doc.toLowerCase().split(/\s+/); return w.filter(x => x === term).length / w.length; }
+    function idf(term) { const n = all.filter(d => d.toLowerCase().includes(term)).length; return Math.log((all.length + 1) / (n + 1)) + 1; }
+    function vec(doc) { return vocab.map(t => tf(doc, t) * idf(t)); }
+    function cosine(a, b) { const dot = a.reduce((s, v, i) => s + v * b[i], 0); const ma = Math.sqrt(a.reduce((s, v) => s + v * v, 0)); const mb = Math.sqrt(b.reduce((s, v) => s + v * v, 0)); return ma && mb ? dot / (ma * mb) : 0; }
+    const qv = vec(query);
+    return Object.entries(docs).map(([name, doc]) => ({ name, score: cosine(vec(doc), qv) })).sort((a, b) => b.score - a.score);
+}
+
+function runMLRecommender() {
+    const query = document.getElementById('mlInput').value.trim();
+    if (!query) { alert('Please describe your interview concerns or target company!'); return; }
+    const results = tfidf(interviewDocs, query);
+    const maxScore = results[0].score || 1;
+    let html = '';
+    results.slice(0, 6).forEach((r, i) => {
+        const pct = maxScore > 0 ? Math.round((r.score / maxScore) * 100) : 0;
+        const medal = i === 0 ? '🔥' : i === 1 ? '⚡' : i === 2 ? '📌' : '•';
+        html += `<div class="ml-card"><span style="font-size:20px">${medal}</span><div style="flex:1"><div class="ml-topic-name">${r.name}</div><div class="ml-why">${interviewTips[r.name] || 'Focus on this area next'}</div><div class="ml-score-bar" style="margin-top:8px"><div class="ml-score-fill" style="width:${pct}%"></div></div></div><span class="ml-pct">${pct}%</span></div>`;
+    });
+    document.getElementById('mlCards').innerHTML = html;
+    document.getElementById('mlResults').style.display = 'block';
+    document.getElementById('mlResults').scrollIntoView({ behavior: 'smooth' });
+}
+
+document.getElementById('mlInput').addEventListener('keydown', e => { if (e.key === 'Enter') runMLRecommender(); });
+document.querySelectorAll('.step-btn').forEach(b => b.addEventListener('click', () => changeStep(parseInt(b.dataset.step))));
+updateProgress();
+renderStepContent(1);
+</script>
+</body>
+</html>
